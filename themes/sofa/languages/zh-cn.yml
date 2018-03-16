@@ -1,0 +1,62 @@
+menu:
+  index: 主页
+  docs: 文档
+  github: Github
+  news: 新闻
+  plugins: 插件
+  themes: 主题
+  search: 搜索
+
+index:
+  get_started: 开始使用
+
+page:
+  contents: 目录
+  back_to_top: 回到顶部
+  improve: 改进本文
+  prev: 上一页
+  next: 下一页
+  last_updated: 上次更新：%s
+
+sidebar:
+  docs:
+    introduction: 产品介绍
+    overview: 产品概述
+    terminology: 名词解释
+    quick_start: 快速开始
+    ark-plugin-demo: Ark-Plugin 工程演示
+    ark-demo: Ark 工程演示
+    ark_jar: Ark 包
+    ark-directory: 目录结构
+    build-ark: 构建
+    ark_plugin: Ark-Plugin
+    ark-plugin-directory: 目录结构
+    build-ark-plugin: 构建
+    ark_biz: Ark-Biz
+    ark-biz-directory: 目录结构
+    build-ark-biz: 构建
+    develop_doc: 开发文档
+    startup: Ark 容器启动流程
+    plugin: Ark 容器插件机制
+    classloader: Ark 容器类加载机制
+  api:
+    core: 核心
+    overview: 概述
+    events: 事件
+    locals: 本地变量
+    router: 路由
+    box: 盒(Box)
+    rendering: 渲染
+    posts: 文章
+    scaffolds: 模版 (Scaffold)
+    themes: 主题
+    extensions: 扩展
+    console: 控制台 (Console)
+    deployer: 部署器 (Deployer)
+    filter: 过滤器 (Filter)
+    generator: 生成器 (Generator)
+    helper: 辅助函数 (Helper)
+    migrator: 迁移器 (Migrator)
+    processor: 处理器 (Processor)
+    renderer: 渲染引擎 (Renderer)
+    tag: 标签 (Tag)
