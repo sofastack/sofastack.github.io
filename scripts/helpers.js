@@ -41,7 +41,7 @@ hexo.extend.helper.register('doc_sidebar', function (className) {
         _.each(menu, function (link, text) {
             var itemClass = className + '-link';
             if (link === path) itemClass += ' current';
-            result += '<li class="nav-item depth2 "><a href="'+ type+'/'+link +'" class="">' + self.__(prefix + text) + '</a></li>'
+            result += '<li class="nav-item depth2 "><a href="sofastack.github.io/'+ type+'/'+link +'" class="">' + self.__(prefix + text) + '</a></li>'
         });
     });
 

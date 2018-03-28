@@ -1,5 +1,5 @@
 
-> [工程地址](https://github.com/sofastack/sofa-ark/tree/master/sofa-ark-samples/sample-ark-plugin)
+> [工程地址](https://github.com/alipay/sofa-ark/tree/master/sofa-ark-samples/sample-ark-plugin)
 
 ## 简介
 该样例工程演示了如何借助 `maven` 插件将一个普通的 Java 工程打包成标准格式规范的 `Ark-Plugin` 
@@ -10,7 +10,7 @@
 * 导出类：其他插件如果导入了该类，优先从本插件加载；
 
 
-> [详细请参考插件规范](docs/build-ark-plugin.html#%E6%8F%92%E4%BB%B6%E8%A7%84%E8%8C%83)
+> [详细请参考插件规范](sofastack.github.io/docs/build-ark-plugin.html#%E6%8F%92%E4%BB%B6%E8%A7%84%E8%8C%83)
 
 
 ## 工具
@@ -24,7 +24,7 @@
 </plugin>
 ```
 
-> [详细请参考插件使用文档](docs/build-ark-plugin.html#Maven-%E6%8F%92%E4%BB%B6)
+> [详细请参考插件使用文档](sofastack.github.io/docs/build-ark-plugin.html#Maven-%E6%8F%92%E4%BB%B6)
 
 ## 入门
 基于该用例工程，我们一步步描述如何构建一个 `Ark-Plugin` 

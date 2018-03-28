@@ -12,8 +12,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
-root: /
+url: https://alipay.github.io/sofastack.github.io
+root: /sofastack.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -81,6 +81,5 @@ stylesheets:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/sofastack/sofastack.github.io
+  repo: https://github.com/alipay/sofastack.github.io
   branch: master
-

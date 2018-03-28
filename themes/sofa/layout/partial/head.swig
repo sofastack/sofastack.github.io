@@ -5,7 +5,7 @@
     <meta name="base-url" content="/">
     <link type="image/png" href="https://gw.alipayobjects.com/zos/rmsportal/tRXQtrTrncqqhetSGTQP.png" rel="shortcut icon" />
     <base href="/">
-    <link rel="stylesheet" href="/css/sofa.css" rel="stylesheet">
+    <link rel="stylesheet" href="/sofastack.github.io/css/sofa.css" rel="stylesheet">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_18677_3gesaak2gctyb9.css">
     <link href="//a.alipayobjects.com/g/lark/lark-markdown/1.3.18/default.css" rel="stylesheet">
     <link href="https://gw.alipayobjects.com/os/skylark/KIxlVLTkLQVFFoYBWDbT.css" rel="stylesheet">
