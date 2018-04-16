@@ -2,7 +2,7 @@
 title: Ark 包
 ---
 
-本文将介绍如何使用官方插件 `sofa-ark-maven-plugin` 将一个工程打包并发布成 `Ark 包`。
+本小节将介绍标准 `Ark 包` 的目录结构，以及如何使用官方插件 `sofa-ark-maven-plugin` 打包并发布 `Ark 包`。
 
 ## Maven 插件
 官方提供 `Maven` 插件 `sofa-ark-maven-plugin` 可以将普通 Java 工程或者 Spring Boot 工程打包成标准格式 `Ark 包` ；基于 [Fat Jar](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#executable-jar-jar-file-structure) 技术，使用 `java -jar` 命令可以直接启动 `Ark 包` 。 `Maven` 插件坐标为：
@@ -214,27 +214,27 @@ title: Ark 包
                     └── archive
 ```
 
-上述目录结构相关文件和目录解释如下：
+上述目录结构相关文件和目录说明如下：
 
 * `META-INF/MANIFEST.MF` : 记录 `Ark` 包元信息，其中最关键的信息是 `Ark` 包的启动入口类 `Main-Class` ；文件内容类似如下：
 
-```manifest
-Manifest-Version: 1.0
-Implementation-Title: sofa-ark-all
-Implementation-Version: 0.1.0
-Archiver-Version: Plexus Archiver
-Built-By: qilong.zql
-Sofa-Ark-Version: 0.1.0
-Specification-Title: sofa-ark-all
-Implementation-Vendor-Id: com.alipay.sofa
-Main-Class: com.alipay.sofa.ark.bootstrap.ArkLauncher
-Ark-Container-Root: SOFA-ARK/container/
-Created-By: Apache Maven 3.2.5
-Build-Jdk: 1.8.0_101
-Specification-Version: 0.1.0
-ArkVersion: 0.1.0
-Timestamp: 2018-03-13T18:13:06Z
-```
+  ```manifest
+  Manifest-Version: 1.0
+  Implementation-Title: sofa-ark-all
+  Implementation-Version: 0.1.0
+  Archiver-Version: Plexus Archiver
+  Built-By: qilong.zql
+  Sofa-Ark-Version: 0.1.0
+  Specification-Title: sofa-ark-all
+  Implementation-Vendor-Id: com.alipay.sofa
+  Main-Class: com.alipay.sofa.ark.bootstrap.ArkLauncher
+  Ark-Container-Root: SOFA-ARK/container/
+  Created-By: Apache Maven 3.2.5
+  Build-Jdk: 1.8.0_101
+  Specification-Version: 0.1.0
+  ArkVersion: 0.1.0
+  Timestamp: 2018-03-13T18:13:06Z
+  ```
 可以看到，`Ark 包` 启动入口类是 `com.alipay.sofa.ark.bootstrap.ArkLauncher`
 
 * `com/alipay/sofa/ark/*` : 存放使用 `java -jar` 命令启动 `Ark 包`  所必需的引导类；

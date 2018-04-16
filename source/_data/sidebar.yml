@@ -7,13 +7,9 @@ docs:
   user_guide:
     terminology: terminology.html
     ark_jar: ark-jar.html
-    ark_plugin:
-      ark-plugin-directory: ark-plugin-directory.html
-      build-ark-plugin: build-ark-plugin.html
-    ark_biz:
-      ark-biz-directory: ark-biz-directory.html
-      build-ark-biz: build-ark-biz.html
-  develop_doc:
+    ark_plugin: ark-plugin.html
+    ark_biz: ark-biz.html
+  develop_guide:
     startup: startup.html
     plugin:  plugin.html
     classloader: classloader.html
