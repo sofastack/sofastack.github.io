@@ -22,13 +22,12 @@ sidebar:
   docs:
     introduction: 产品介绍
     overview: 产品概述
+    user_guide: 用户文档
     terminology: 名词解释
     quick_start: 快速开始
     ark-plugin-demo: Ark-Plugin 工程演示
     ark-demo: Ark 工程演示
     ark_jar: Ark 包
-    ark-directory: 目录结构
-    build-ark: 构建
     ark_plugin: Ark-Plugin
     ark-plugin-directory: 目录结构
     build-ark-plugin: 构建

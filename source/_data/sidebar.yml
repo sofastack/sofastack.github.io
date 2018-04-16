@@ -1,17 +1,16 @@
 docs:
   introduction:
     overview: index.html
-    terminology: terminology.html
   quick_start:
     ark-plugin-demo: ark-plugin-demo.html
     ark-demo: ark-demo.html
-  ark_jar:
-    ark-directory: ark-directory.html
-    build-ark: build-ark.html
-  ark_plugin:
-    ark-plugin-directory: ark-plugin-directory.html
-    build-ark-plugin: build-ark-plugin.html
-  ark_biz:
+  user_guide:
+    terminology: terminology.html
+    ark_jar: ark-jar.html
+    ark_plugin:
+      ark-plugin-directory: ark-plugin-directory.html
+      build-ark-plugin: build-ark-plugin.html
+    ark_biz:
       ark-biz-directory: ark-biz-directory.html
       build-ark-biz: build-ark-biz.html
   develop_doc:
