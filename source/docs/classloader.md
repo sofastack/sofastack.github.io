@@ -29,6 +29,12 @@ Ark 容器中会管理插件和业务，整体的类加载机制可见如下图�
 
 对于 Ark 业务而言，并没有提供 import 的配置，而是认为默认 import 所有插件 export 出来的类；但为了一些特殊的业务场景，我们提供了 Deny-import 的配置让业务可以排除掉某些插件导出的类
 
-# Ark 插件资源导出机制
-在 Ark 插件中，当一个资源的名字以 `${pluginName}_sofa_ark_export_resource` 为开头时，会认为这个资源会 export 给其他 Ark 插件或者 Ark 业务使用，在加载资源时，会通过资源的名字解析出来 Ark 插件的名字，然后交给相应的 Ark 插件加载
+# Ark 插件资源加载机制
+Ark 插件支持导入导出资源，需要在 `sofa-ark-plugin-maven-plugin` 配置相关的导入导出配置；在使用 ClassLoader 加载资源时，存在两种方式查找资源，`ClassLoader.getResource(String)` 和 `ClassLoader.getResources(String)`；
 
++ `ClassLoader.getResource(String)`: Ark Plugin 在查找单个资源时，会优先委托导出该资源的 Ark Plugin 加载，如果有多个插件同时导出，则优先级高的插件优先导出；如果加载失败或者没有其他 Ark Plugin 导出，则尝试在本 Ark Plugin 查找加载；
+
++ `ClassLoader.getResources(String)`: Ark Plugin 在查找多个资源时，会从所有导出该资源的 Ark Plugin 加载，同时也会从本 Ark Plugin 加载资源；
+
+# Ark 业务资源加载机制
+默认情况下，Ark Biz 会优先加载 Ark Plugin 导出的资源；如果开发者希望只在工程应用内部查找，则可以通过 `sofa-ark-maven-plugin` 配置 `denyImportResources`；如此，Ark Biz 不会从 Ark Plugin 查找该资源，只会在 Ark Biz 内部查找。
