@@ -96,7 +96,7 @@ title: Ark Plugin
                         <!-- 配置需要优先从其他 ark plugin 加载的 package -->
                         <packages>
                             <package>javax.servlet</package>
-                            <package>org.springframework</package>
+                            <package>org.springframework.*</package>
                         </packages>
 
                         <!-- 配置需要优先从其他 ark plugin 加载的 class -->
@@ -163,9 +163,9 @@ title: Ark Plugin
 
 + `pluginName`: 配置插件的名字，务必配置对，运行时，是插件的唯一标识 ID。比如 sofa-rpc 插件，可以配置为 sofa-rpc; 默认为 ${artifactId};
 
-+ `imported`: 配置导入类、资源；
++ `imported`: 配置导入类、资源；需要注意一点，配置 package 级别的导入类时，如果包名末尾带通配符 `*`，则表示满足该 package 前缀的包或者类全部被导入。如果不带通配符 `*`，则表示满足该 package 前缀的类才会被导入，而子包不会被导入。
 
-+ `exported`: 配置导出类、资源；
++ `exported`: 配置导出类、资源；同样需要注意一点，配置 package 级别的导出类时，如果包名末尾带通配符 `*`，则表示满足该 package 前缀的包或者类全部被导出。如果不带通配符 `*`，则表示满足该 package 前缀的类才会被导出，而子包不会被导出。
 
 + `excludes`: 打包插件时，排除指定的包依赖；格式为: ${groupId:artifactId} 或者 ${groupId:artifactId:classifier}；
 

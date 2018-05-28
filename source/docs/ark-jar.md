@@ -98,7 +98,7 @@ title: Ark 包
                     <!--对应 denyImportClasses 配置，可以配置包级别-->
                     <denyImportPackages>
                         <package>com.alipay.sofa</package>
-                        <package>org.springframework</package>
+                        <package>org.springframework.*</package>
                     </denyImportPackages>
                     
                     <!--打包 ark biz 时，配置不从 ark plugin 索引的资源；默认情况下，ark biz 会优先索引所有 ark plugin 的导出资源,
@@ -135,7 +135,7 @@ title: Ark 包
 
 + `denyImportClasses`: 打包 ark biz 时，配置不从 ark plugin 索引的类；默认情况下，ark biz 会优先索引所有 ark plugin 的导出类，添加该配置后，ark biz 将只在ark biz内部加载该类，不再优先委托 ark plugin 加载;
 
-+ `denyImportPackages`: 对应 denyImportClasses 配置，可以配置包级别;
++ `denyImportPackages`: 对应 denyImportClasses 配置，可以配置包级别; 需要注意的是，如果包名末尾带通配符 `*`, 则以该包名为前缀的子包都会被deny。如果包名末尾不带通配符 `*`,则只有以该包名为前缀的类才会被deny。
 
 + `denyImportResources`: 打包 ark biz 时，配置不从 ark plugin 索引的资源；默认情况下，ark biz 会优先索引所有 ark plugin 的导出资源, 添加该配置后，ark biz 将只在ark biz内部寻找该资源，不在从 ark plugin 查找
 
