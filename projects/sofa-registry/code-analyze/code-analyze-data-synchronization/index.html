@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	源码解析｜数据同步 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFARegistry 是一个生产级、高时效、高可用的服务注册中心。">SOFARegistry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="产品介绍"
+					>产品介绍</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="简介"
+						href="/sofastack.tech/projects/sofa-registry/overview/"
+					>简介</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="术语"
+						href="/sofastack.tech/projects/sofa-registry/terminology/"
+					>术语</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="服务端部署"
+						href="/sofastack.tech/projects/sofa-registry/server-quick-start/"
+					>服务端部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="客户端部署"
+						href="/sofastack.tech/projects/sofa-registry/client-quick-start/"
+					>客户端部署</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发手册"
+					>开发手册</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JAVA SDK"
+						href="/sofastack.tech/projects/sofa-registry/java-sdk/"
+					>JAVA SDK</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SlotTable"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/"
+					>SlotTable</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="无损运维"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/"
+					>无损运维</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布订阅推送"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/"
+					>发布订阅推送</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据同步"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/"
+					>数据同步</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送延迟 trace"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/"
+					>推送延迟 trace</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送开关"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/"
+					>推送开关</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据表监听"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/"
+					>数据表监听</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据倒排索引"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/"
+					>数据倒排索引</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="通讯数据压缩"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/"
+					>通讯数据压缩</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="registry meta 选主"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/"
+					>registry meta 选主</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFARegistry | 聊一聊服务发现的数据一致性"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/"
+					>SOFARegistry | 聊一聊服务发现的数据一致性</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="缘起｜蚂蚁应用级服务发现的实践之路"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/"
+					>缘起｜蚂蚁应用级服务发现的实践之路</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			源码解析｜数据同步
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+			·   
+					<a href="https://github.com/glmapper">宋国磊</a> 
+				
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <p>本篇主要对 SOFARegistry 的数据同步模块进行解析，对于注册中心的概念以及 SOFARegistry 的基础架构不做过多阐述，相关介绍可以见<a href="https://www.sofastack.tech/blog/sofa-registry-introduction/">海量数据下的注册中心 - SOFARegistry 架构介绍</a></p>
+
+<p>本文主要写作思路大致分为下面 2 个部分：第一部分借助 SOFARegistry 中的角色分类来说明哪些角色之间会进行数据同步，第二部分对数据同步的具体实现进行解析。</p>
+
+<h2 id="sofaregistry-的角色分类">SOFARegistry 的角色分类</h2>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*fpSxTo2CEpsAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>如上图，SOFARegistry 包含 4 个角色：</p>
+
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Client</td>
+<td>提供应用接入服务注册中心的基本 API 能力，应用系统通过依赖客户端 JAR 包，通过编程方式调用服务注册中心的服务订阅和服务发布能力。</td>
+</tr>
+
+<tr>
+<td>SessionServer</td>
+<td>会话服务器，负责接受 Client 的服务发布和服务订阅请求，并作为一个中间层将写操作转发 DataServer 层。SessionServer 这一层可随业务机器数的规模的增长而扩容。</td>
+</tr>
+
+<tr>
+<td>DataServer</td>
+<td>数据服务器，负责存储具体的服务数据，数据按 dataInfoId 进行一致性 Hash 分片存储，支持多副本备份，保证数据高可用。这一层可随服务数据量的规模的增长而扩容。</td>
+</tr>
+
+<tr>
+<td>MetaServer</td>
+<td>元数据服务器，负责维护集群 SessionServer 和 DataServer 的一致列表，作为 SOFARegistry 集群内部的地址发现服务，在 SessionServer 或 DataServer 节点变更时可以通知到整个集群。</td>
+</tr>
+</tbody>
+</table>
+
+<p>在这 4 个角色中，MetaServer 作为元数据服务器本身不处理实际的业务数据，仅负责维护集群 SessionServer 和 DataServer 的一致列表，不涉及数据同步问题；Client 与 SessionServer 之间的核心动作是订阅和发布，从广义上来说，属于用户侧客户端与 SOFARegistry 集群的数据同步，可以见：<a href="https://github.com/sofastack/sofa-registry/issues/195">https://github.com/sofastack/sofa-registry/issues/195</a>，因此不在本文讨论范畴之内。</p>
+
+<p>SessionServer 作为会话服务，它主要解决海量客户端连接问题，其次是缓存客户端发布的所有 pub 数据；session 本身不持久化服务数据，而是将数据转写到 DataServer。DataServer 存储服务数据是按照 dataInfoId 进行一致性 Hash 分片存储的，支持多副本备份，保证数据高可用。</p>
+
+<p>从 SessionServer 和 DataServer 的功能分析中可以得出：</p>
+
+<ul>
+<li>SessionServer 缓存的服务数据需要与 DataServer 存储的服务数据保持一致</li>
+</ul>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*L9B0QJfHKC4AAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<ul>
+<li>DataServer 支持多副本来保证高可用，因此 DataServer 多副本之间需要保持服务数据一致。</li>
+</ul>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*q140R4JSTSwAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>SOFARegistry 中对于上述两个对于数据一致性保证就是通过数据同步机制来实现的。</p>
+
+<h2 id="数据同步的具体实现">数据同步的具体实现</h2>
+
+<p>下面主要介绍数据同步的实现细节，主要包括 SessionServer 和 DataServer 之间的数据同步 和 DataServer 多副本之间的数据同步两块。</p>
+
+<h3 id="sessionserver-和-dataserver-之间的数据同步">SessionServer 和 DataServer 之间的数据同步</h3>
+
+<p>SessionServer 和 DataServer 之间的数据同步，是基于推拉结合的机制</p>
+
+<ul>
+<li><p>推：DataServer 在数据有变化时，会主动通知 SessionServer，SessionServer 检查确认需要更新（对比 version） 后主动向 DataServer 获取数据。</p></li>
+
+<li><p>拉：除了上述的 DataServer 主动推以外，SessionServer 每隔一定的时间间隔，会主动向 DataServer 查询所有 dataInfoId 的 version 信息，然后再与 SessionServer 内存的 version 作比较，若发现 version 有变化，则主动向 DataServer 获取数据。这个“拉”的逻辑，主要是对“推”的一个补充，若在“推”的过程有错漏的情况可以在这个时候及时弥补。</p></li>
+</ul>
+
+<blockquote>
+<p>关于推和拉两种模式检查的 version 有一些差异，可以详见下面 推模式下的数据同步 和 拉模式下的数据同步 中的具体介绍</p>
+</blockquote>
+
+<h3 id="推模式下的数据同步流程">推模式下的数据同步流程</h3>
+
+<p>推模式是通过 SyncingWatchDog 这个守护线程不断 loop 执行来实现数据变更检查和通知发起的。</p>
+
+<pre><code class="language-java">// 这里遍历所有的 slot
+for (SlotState slotState : slotTableStates.slotStates.values()) {
+    try {
+        sync(slotState, syncSessionIntervalMs, syncLeaderIntervalMs, slotTableEpoch);
+    } catch (Throwable e) {
+        SYNC_ERROR_LOGGER.error(
+                &quot;[syncCommit]failed to do sync slot {}, migrated={}&quot;,
+                slotState.slot,
+                slotState.migrated,
+                e);
+    }
+}
+</code></pre>
+
+<p>按 slot 分组汇总数据版本。data 与每个 session 的连接都对应一个 SyncSessionTask，SyncSessionTask 负责执行同步数据的任务，核心同步逻辑在<code>com.alipay.sofa.registry.server.data.slot.SlotDiffSyncer#sync</code></p>
+
+<p>方法中完成，大致流程如下面时序图所示：</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*oP_ZR4B8f18AAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>这上图圈红部分的逻辑第四步，根据 dataInfoId diff 更新 data 内存数据，这里仅处理了被移除的 dataInfoId，对于新增和更新的没有做任务处理，而是通过后面的第 5 -7 步来完成；这么做的主要原因在于避免产生空推送导致一些危险情况发生。</p>
+
+<p>第 5 步中，比较的是所有变更 dataInfoId  的 pub version，具体比较逻辑参考后面 <a href="https://www.yuque.com/sofatracerlab/kylae1/arip14/edit#LT5Yn">diffPublisher</a> 小节中的介绍。</p>
+
+<h3 id="数据变更的事件通知处理">数据变更的事件通知处理</h3>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*YhqpTJ-meUQAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>数据变更事件会被收集在 DataChangeEventCenter 的 dataCenter2Changes 缓存中，然后由一个守护线程 ChangeMerger 负责从 dataCenter2Changes 缓存中不断的读取，这些被捞到的事件源会被组装成 ChangeNotifier 任务，提交给一个单独的线程池(notifyExecutor)处理，整个过程全部是异步的。</p>
+
+<h3 id="拉模式下的数据同步流程">拉模式下的数据同步流程</h3>
+
+<p>拉模式下，由 SessionServer 负责发起，
+<code>com.alipay.sofa.registry.server.session.registry.SessionRegistry.VersionWatchDog</code></p>
+
+<p>默认情况下每 5 秒扫描一次版本数据，如果版本有发生变更，则主动进行拉取一次，流程大致如下：</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*u2avTJNS9rMAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>需要注意的是，拉模式对推送流程的补充，这里的 version 是每个 sub 的 lastPushedVersion， 而 推模式的version 是 pub 的数据的 version。关于 lastPushedVersion 的获取可以参考 <code>com.alipay.sofa.registry.server.session.store.SessionInterests#selectSubscribers</code></p>
+
+<pre><code class="language-java">store.forEach((String dataInfoId, Map&lt;String, Subscriber&gt; subs) -&gt; {
+   // ...
+  long maxVersion = 0;
+  for (Subscriber sub : subs.values()) {
+    // ...
+    // 获取当前 sub 的 pushVersion
+    final long pushVersion = sub.getPushedVersion(dataCenter);
+    // 如果 pushVersion 比最大(最新)版本大，则将当前  pushVersion 作为最新版本推送版本
+    if (maxVersion &lt; pushVersion) {
+      maxVersion = pushVersion;
+    }
+  }
+  versions.put(dataInfoId, new DatumVersion(maxVersion));
+});
+</code></pre>
+
+<h3 id="dataserver-多副本之间的数据同步">DataServer 多副本之间的数据同步</h3>
+
+<p>主要是 slot对应的 data 的 follower 定期和 leader 进行数据同步，其同步逻辑与 SessionServer 和 DataServer 之间的数据同步逻辑差异不大；发起方式也是一样的；data 判断如果当前节点不是 leader，就会进行与 leader 之间的数据同步。</p>
+
+<pre><code class="language-java">if (localIsLeader(slot)) {
+   // 如果当前是 leader，则执行 session 同步或者 migrating
+} else {
+    // 如果当前不是 leader，则和 leader 同步数据
+    syncLeader(slotState, syncLeaderIntervalMs, slotTableEpoch);
+}
+</code></pre>
+
+<blockquote>
+<p>篇幅原因，这部分不展开讨论。</p>
+</blockquote>
+
+<h3 id="增量同步-diff-计算逻辑分析">增量同步 diff 计算逻辑分析</h3>
+
+<p>不管是 SessionServer 和 DataServer 之间的同步，还是 DataServer 多副本之间的同步，都是基于增量 diff 同步的，不会一次性同步全量数据。本节对增量同步 diff 计算逻辑进行简单分析，核心代码在<code>com.alipay.sofa.registry.common.model.slot.DataSlotDiffUtils</code>（建议阅读这部分代码时直接结合代码中的测试用例来看）；主要包括计算 digest 和 publishers 两个。</p>
+
+<h4 id="diffdigest">diffDigest</h4>
+
+<p>DataSlotDiffUtils#diffDigest 方法接收两个参数</p>
+
+<ul>
+<li>targetDigestMap 可以理解为目标数据</li>
+<li>sourceDigestMap 可以理解为基线数据</li>
+</ul>
+
+<p>核心计算逻辑如下代码分析</p>
+
+<pre><code class="language-java">// 遍历 sourceDigestMap 元素
+for (Map.Entry&lt;String, DatumDigest&gt; e : sourceDigestMap.entrySet()) {
+  // dataInfoId
+  final String dataInfoId = e.getKey();
+  // 从 目标数据 集中根据 dataInfoId 获取数据摘要
+  DatumDigest targetDigest = targetDigestMap.get(dataInfoId);
+  // 如果目标数据集中没有当前 dataInfoId 对应的数据摘要，
+  // 则将当前 dataInfoId 作为新增项
+  if (targetDigest == null) {
+    adds.add(dataInfoId);
+    continue;
+  }
+  // 如果目标数据集中有当前 dataInfoId 对应的数据摘要，
+  // 但是数据摘要不同，则将当前 dataInfoId 作为待更新项
+  if (!targetDigest.equals(e.getValue())) {
+    updates.add(dataInfoId);
+  }
+}
+
+
+// 如果目标数据集中的 dataInfoId 不再基线数据集中时，
+// 则将当前 dataInfoId 作为待移除项。
+List&lt;String&gt; removes = new ArrayList&lt;&gt;();
+for (String dataInfoId : targetDigestMap.keySet()) {
+  if (!sourceDigestMap.containsKey(dataInfoId)) {
+    removes.add(dataInfoId);
+  }
+}
+</code></pre>
+
+<p>那么根据上述 diff 计算逻辑，这里有如下几种场景（假设基线数据集数据中 dataInfoId 为 a 和 b）</p>
+
+<ul>
+<li>目标数据集为空：返回 dataInfoId 为 a 和 b 两项作为新增项</li>
+<li>目标数据集与基线数据集相等，新增项、待更新项与待移除项均为空</li>
+<li>目标数据集中包括 a,b,c 三个 dataInfoId，则返回 c 作为待移除项</li>
+<li>目标数据集中包括 a 和 c 两个 dataInfoId，则返回 c 作为待移除项，b 作为新增项</li>
+</ul>
+
+<h4 id="diffpublisher">diffPublisher</h4>
+
+<p>diffPublisher 与 diffDigest 计算稍有不同，diffPublisher 接收三个参数，除了目标数据集和基线数据集之外，还有一个 publisherMaxNum（默认 400），用于限制每次处理的数据个数；这里同样给出核心代码解释：</p>
+
+<pre><code class="language-java">// 遍历所有目标数据集
+for (DatumSummary summary : targetDatumSummaries) {
+      // 拿到 dataInfoId
+      final String dataInfoId = summary.getDataInfoId();
+      // 看基线数据集中是否包括当前 dataInfoId 对应的 Publisher 数据
+      Map&lt;String, Publisher&gt; publisherMap = sourcePublishers.get(dataInfoId);
+      // 这里表示 dataInfoId 移除被移除了，不需要做任何处理
+      if (publisherMap == null) { continue; }
+      
+      Set&lt;String&gt; registerIds = summary.getPublisherVersions().keySet();
+      // 遍历 registerIds
+      for (String registerId : registerIds) {
+        // 如果基线数据集中不包括此 registerId，则将当前 registerId 加入待移除列表中
+        if (!publisherMap.containsKey(registerId)) {
+          List&lt;String&gt; list = removedPublishers.computeIfAbsent(dataInfoId, k -&gt; new ArrayList&lt;&gt;());
+          list.add(registerId);
+        }
+      }
+      List&lt;Publisher&gt; publishers = new ArrayList&lt;&gt;();
+      Map&lt;String, RegisterVersion&gt; versions = summary.getPublisherVersions();
+      // 遍历版本
+      for (Map.Entry&lt;String, Publisher&gt; p : publisherMap.entrySet()) {
+        final String registerId = p.getKey();
+        // 如果目标数据集当前 dataInfoId 的 registerIds 集中不包括基线的
+        // 则作为更新项
+        if (!versions.containsKey(registerId)) {
+          publishers.add(p.getValue());
+          continue;
+        }
+        // 如果当前 registerId 版本相同，则不做处理
+        if (p.getValue().registerVersion().equals(versions.get(registerId))) {
+          // the same
+          continue;
+        }
+        // 不相等，则作为更新项
+        publishers.add(p.getValue());
+      }
+    }
+</code></pre>
+
+<p>这里同样分析几种场景（下面只的是更新 dataInfoId 对应的 publisher，registerId 与 publisher是 一一对应）：</p>
+
+<ul>
+<li><p>目标数据集与基线数据集相同，且数据没有超过 publisherMaxNum，返回的待更新和待移除均为空，且没有剩余未处理数据</p></li>
+
+<li><p>需要移除的情况：基线中不包括目标数据集 dataInfoId 的 registerId （移除的是 registerId，不是 dataInfoId）</p></li>
+
+<li><p>需要更新的情况：
+○ 目标数据集中存在基线数据集不存在的 registerId
+○ 目标数据集和基线数据集存在的 registerId 的版本不同</p></li>
+</ul>
+
+<h2 id="总结">总结</h2>
+
+<p>本文主要介绍了 SOFARegistry 中数据同步模块；首先从 SOFARegistry 角色分类阐述不同角色之间存在的数据同步问题，针对其中 SessionServer 与 DataServer 数据同步 和 DataServer 多副本之间数据同步进行了展开分析；在 SessionServer 与 DataServer 数据同步分析中，着重分析了推和拉两种场景下数据同步的整体流程；最后对 SOFARegistry 中数据增加的 diff 计算逻辑进行了介绍，并结合相关核心代码描述了具体的场景。</p>
+
+<p>整体来看，SOFARegistry 数据同步上的处理上有一些点值得我们学习：</p>
+
+<ul>
+<li>SOFARegistry 基于 ap，在一致性上是满足最终一致性；在实际的同步逻辑处理上，结合事件机制，基本都是异步化完成的，从而弱化了数据同步对于核心流程的影响。</li>
+<li>在拉模式和数据变更通知两个部分，内部采用了类似生产-消费模型，一方面是对于生产和消费逻辑的解耦，从代码上更独立；再者通过缓存或者队列来消除生产和消费速度不同而相互阻塞的问题。</li>
+<li>拉模式对推模式的补充；我们知道推模式是 server -&gt; client，发生在数据变更时，如果出现一些异常，导致某条 server -&gt; client 链路推送失败，则会导致不同 client 持有的数据不一致的情况；拉模式的补充，使得 client 可以主动去完成对于数据一致性的检查。</li>
+</ul>
+
+<blockquote>
+<p>最后，感谢大家的阅读，文中如有错误，请指出；也欢迎大家关注 SOFAStack 社区。</p>
+</blockquote>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

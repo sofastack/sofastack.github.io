@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>“源码解析” on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</link>
+    <description>Recent content in “源码解析” on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 14 Sep 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFATalk#1 SOFARegistry 源码解析：推送延迟 trace</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-talk-1/</link>
+      <pubDate>Wed, 14 Sep 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-talk-1/</guid>
+      <description>概要 活动主题：SOFATalk#1 SOFARegistry 源码解析：推送延迟 trace 活动时间：09 月 14 日，周三晚 19 点 活动形式：线上直播 直播回放：点击观看 资料下载：戳这里</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜SOFABoot 上下文隔离机制解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-boot-context-isolation-mechanism-explained/</link>
+      <pubDate>Fri, 22 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-boot-context-isolation-mechanism-explained/</guid>
+      <description>前言 SOFABoot的isle模块为Spring Boot应用提供了上下文隔离的能力以更好的支持模块化开发。借助该能力，可以很好的解决不同模块</description>
+    </item>
+    
+    <item>
+      <title>源码解析：SOFABoot 组件协议 binding 机制解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofaboot-component-protocol-binding/</link>
+      <pubDate>Tue, 19 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofaboot-component-protocol-binding/</guid>
+      <description>前言 SOFABoot 提供两种服务通信能力，一种是 JVM 服务，用于同一应用内不同模块间的通信，一种是 RPC 服务，用于不同应用间的通信。SOFABoot 提供三种方式实</description>
+    </item>
+    
+    <item>
+      <title>SOFAArk 源码解析-多 Web 应用合并部署</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-ark-multi-web-component-deploy/</link>
+      <pubDate>Thu, 16 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-ark-multi-web-component-deploy/</guid>
+      <description>背景 原生springboot-web应用部署流程 两种合并部署模式 支持单Host合并部署的关键点 多Biz共用tomcat实例 多Biz接口区分 总</description>
+    </item>
+    
+    <item>
+      <title>源码解析：SOFABoot HealthCheck 机制解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofaboot-healthcheck-mechanism-explained/</link>
+      <pubDate>Wed, 15 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofaboot-healthcheck-mechanism-explained/</guid>
+      <description>前言 spring-boot-starter-actuator模块为 Spring Boot 应用提供了监控能力，内置一系列健康指标，如数据源、磁盘空间等，并且允许</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜registry meta 选主</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/</link>
+      <pubDate>Wed, 11 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/</guid>
+      <description>背景 SOFARgeistry 分为 Session、Data 和 Meta 三个模块。Session 模块用于 client 交互，可以横向扩容，可以承受大量 client 连接请求；Data 是数据存储模块，</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜发布订阅推送</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/</link>
+      <pubDate>Mon, 09 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/</guid>
+      <description>前言 此次源码解析均在 sofa-registry:6.1.4-SNAPSHOT 版本下分析 一、架构流程图 二、订阅流程 以客户端首次订阅，且服务发布方已注册的场景为例，订阅流程主要分为三步， 客户端发起订</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜无损运维</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/</link>
+      <pubDate>Fri, 06 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/</guid>
+      <description>源码解析：无损运维 SOFARegistry 是一个基于内存存储的分布式注册中心，数据是分散存储在各个节点，为了做到注册中心自身运维期间依然能够对外正常提供服务，需要</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜推送开关</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/</link>
+      <pubDate>Fri, 22 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/</guid>
+      <description>前言 某些场景下 SOFARegistry 需要暂时关闭推送功能，这样集群内的业务可以利用 client 的缓存继续工作，比如说 SOFARegistry 需要进行不兼容升级，需要全集群下线，更新版本后再拉起</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜SlotTable</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/</link>
+      <pubDate>Fri, 08 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/</guid>
+      <description>SOFARegistry 对于服务数据是分片进行存储的，因此每一个 data server 只会承担一部分的服务数据，具体哪份数据存储在哪个 data server 是有一个称为 SlotTable 的路由表提供的，sessio</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜数据同步</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/</link>
+      <pubDate>Wed, 06 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/</guid>
+      <description>本篇主要对 SOFARegistry 的数据同步模块进行解析，对于注册中心的概念以及 SOFARegistry 的基础架构不做过多阐述，相关介绍可以见海量数据下的注册中心 - SOFARegistry 架构介绍 本文主要写</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜通讯数据压缩</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/</link>
+      <pubDate>Wed, 30 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/</guid>
+      <description>为了支撑超大规模集群以及大内容传输的支持，增加传输效率，减少网络带宽，考虑对消息进行压缩处理，SOFARegistry的data和sessi</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜推送延迟 trace</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/</link>
+      <pubDate>Wed, 23 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/</guid>
+      <description>大致代码流程 推送延迟的计算方式 首次订阅和后续推送延迟计算的区分 如何统计各个阶段的耗时 前言： 此次源码解析均在 sofa-registry:6.1.4-SNAPSHOT 版本下分析 1、大致代码流转流程 起</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜数据倒排索引</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/</link>
+      <pubDate>Wed, 23 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁集团自主研发的金融级云原生架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜数据表监听</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/</link>
+      <pubDate>Fri, 18 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/</guid>
+      <description>数据表结构要求 以应用级服务发现元数据表为例 param type description data_center String local data center revision String revision app_name String appName client_version String clientVersion base_params String base_params service_params String service_params deleted boolean delete or no gmt_create Date create time gmt_modified Date last update time 写入 写入缓存 cachedExecutor.execute 执行缓存写</description>
+    </item>
+    
+    <item>
+      <title>动态部署</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-ark-dynamic-deploy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-ark-dynamic-deploy/</guid>
+      <description>前言 在实践中，我们通常会使用业务功能模块化的开发模式，部署时将不同模块合并部署，由于团队间技术栈不统一，此时就有可能出现依赖冲突等问题。SO</description>
+    </item>
+    
+  </channel>
+</rss>

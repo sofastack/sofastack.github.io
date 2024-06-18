@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	部署 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+            
+              <a href="/sofastack.tech/en/projects/sofa-registry/deployment/">
+                <span>English</span>
+                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"></use></svg>
+              </a>
+						
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+						
+							<a class="translation" href="/sofastack.tech/en/projects/sofa-registry/deployment/">En</a>
+						
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFARegistry 是一个生产级、高时效、高可用的服务注册中心。">SOFARegistry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="产品介绍"
+					>产品介绍</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="简介"
+						href="/sofastack.tech/projects/sofa-registry/overview/"
+					>简介</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="术语"
+						href="/sofastack.tech/projects/sofa-registry/terminology/"
+					>术语</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="服务端部署"
+						href="/sofastack.tech/projects/sofa-registry/server-quick-start/"
+					>服务端部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="客户端部署"
+						href="/sofastack.tech/projects/sofa-registry/client-quick-start/"
+					>客户端部署</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发手册"
+					>开发手册</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JAVA SDK"
+						href="/sofastack.tech/projects/sofa-registry/java-sdk/"
+					>JAVA SDK</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SlotTable"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/"
+					>SlotTable</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="无损运维"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/"
+					>无损运维</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布订阅推送"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/"
+					>发布订阅推送</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据同步"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/"
+					>数据同步</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送延迟 trace"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/"
+					>推送延迟 trace</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送开关"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/"
+					>推送开关</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据表监听"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/"
+					>数据表监听</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据倒排索引"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/"
+					>数据倒排索引</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="通讯数据压缩"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/"
+					>通讯数据压缩</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="registry meta 选主"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/"
+					>registry meta 选主</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFARegistry | 聊一聊服务发现的数据一致性"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/"
+					>SOFARegistry | 聊一聊服务发现的数据一致性</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="缘起｜蚂蚁应用级服务发现的实践之路"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/"
+					>缘起｜蚂蚁应用级服务发现的实践之路</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			部署
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-registry/deployment/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h2 id="1-环境准备">1. 环境准备</h2>
+
+<p>要使用 SOFARegistry，需要先准备好基础环境，SOFARegistry 依赖以下环境：</p>
+
+<ul>
+<li>Linux/Unix/Mac</li>
+<li>JDK8</li>
+<li>需要采用 Apache Maven 3.2.5 或者以上的版本来编译</li>
+</ul>
+
+<h2 id="2-资源配额">2. 资源配额</h2>
+
+<ul>
+<li>cpu: 4c</li>
+<li>memory: 8G</li>
+<li>disk: 50G</li>
+</ul>
+
+<h2 id="3-两种部署模式">3. 两种部署模式</h2>
+
+<ul>
+<li>集成部署模式
+
+<ul>
+<li>将 meta/data/session 三个角色打包集成在一个 jvm 里运行，可单机或集群部署，部署简单。</li>
+</ul></li>
+<li>独立部署模式
+
+<ul>
+<li>将 meta/data/session 三个角色分开部署，每个角色都可以单机或集群部署，可根据实际情况为每个角色部署不同的数量。</li>
+<li>生产环境建议使用这种部署模式。</li>
+</ul></li>
+</ul>
+
+<h2 id="4-配置参数">4. 配置参数</h2>
+
+<p>SOFARegistry 的部署，依赖于一些公共参数</p>
+
+<table>
+<thead>
+<tr>
+<th>properties</th>
+<th>environment</th>
+<th>默认值</th>
+<th>作用</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>nodes.localDataCenter</td>
+<td>x</td>
+<td>DefaultDataCenter</td>
+<td>集群名，多个注册中心公用同一个数据库用到</td>
+</tr>
+
+<tr>
+<td>nodes.localRegion</td>
+<td>x</td>
+<td>DEFAULT_ZONE</td>
+<td>逻辑 region, 创建多组 session</td>
+</tr>
+
+<tr>
+<td>jdbc.url</td>
+<td>JDBC_URL</td>
+<td>必填</td>
+<td>数据库地址</td>
+</tr>
+
+<tr>
+<td>jdbc.username</td>
+<td>JDBC_USERNAME</td>
+<td>必填</td>
+<td>数据库用户名</td>
+</tr>
+
+<tr>
+<td>jdbc.password</td>
+<td>JDBC_PASSWORD</td>
+<td>必填</td>
+<td>数据库密码</td>
+</tr>
+</tbody>
+</table>
+
+<p>properties 可以写在 registry-all/conf/application.properties 中， kubernetes 下部署也可以使用 configmap 进行文件挂载</p>
+
+<h2 id="5-打包">5. 打包</h2>
+
+<h3 id="jar">jar</h3>
+
+<p><a href="https://github.com/sofastack/sofa-registry/releases">release 页面</a> 下载最新的 registry-all.tgz 包</p>
+
+<pre><code class="language-bash">tar -zxvf registry-all.tgz
+cd registry-all
+</code></pre>
+
+<p>或者从源码打包</p>
+
+<pre><code class="language-bash">git clone https://github.com/sofastack/sofa-registry.git
+cd sofa-registry
+mvn clean package -Pserver-release -Dmaven.test.skip=true
+cp ./server/distribution/all/target/registry-all.tgz &lt;somewhere&gt;
+cd &lt;somewhere&gt;
+tar -zxvf registry-all.tgz
+cd registry-all
+</code></pre>
+
+<h3 id="image">image</h3>
+
+<p>image 托管于 <a href="https://hub.docker.com/r/sofaregistry/sofaregistry">https://hub.docker.com/r/sofaregistry/sofaregistry</a></p>
+
+<p>或者从源码 build:
+修改 Makefile 中 image 的 repository</p>
+
+<pre><code class="language-bash">git clone https://github.com/sofastack/sofa-registry.git
+cd sofa-registry
+mvn clean package -Dmaven.test.skip=true
+make image_build
+make image_push
+</code></pre>
+
+<h2 id="6-集成部署模式">6. 集成部署模式</h2>
+
+<p>集成部署模式，是将 meta/data/session 三个角色打包集成在一个 JVM 里运行，可单机或集群部署, 不建议大规模使用</p>
+
+<h3 id="6-1-jar-单机部署">6.1 jar 单机部署</h3>
+
+<p>集成部署的单机部署模式可以直接参考<a href="../server-quick-start">快速开始-服务端部署</a>部分。</p>
+
+<h3 id="6-2-jar-集群部署">6.2 jar 集群部署</h3>
+
+<ul>
+<li>解压 registry-all.tgz，并修改配置文件</li>
+</ul>
+
+<p>集群部署，即搭建 2 台以上的集群，建议至少使用 3 台（注意：目前不支持在同一台机器部署多个 SOFARegistry，因此您必须有 3 台不同的机器）。在每一台机器上的部署方法同上：</p>
+
+<pre><code class="language-bash">cp ./server/distribution/all/target/registry-all.tgz &lt;somewhere&gt;
+cd &lt;somewhere&gt;
+tar -zxvf registry-all.tgz
+cd registry-all
+</code></pre>
+
+<p>区别是每台机器在部署时需要修改 registry-all/conf/application.properties 配置, 组成同一个注册中心的多台机器需要配置相同的数据库和<code>nodes.localDataCenter</code></p>
+
+<pre><code class="language-bash">nodes.localDataCenter=DefaultDataCenter
+nodes.localRegion=DEFAULT_ZONE
+jdbc.url = jdbc:mysql://127.0.0.1:3306/registrymetadb?useUnicode=true&amp;characterEncoding=utf8
+jdbc.username = root
+jdbc.password = root
+</code></pre>
+
+<ul>
+<li>启动 registry-integration</li>
+</ul>
+
+<p>每台机器都修改以上配置文件后，按照“单机部署”的步骤去启动 registry-integration 即可。
+<code>sh bin/integration/start.sh</code></p>
+
+<h3 id="6-3-docker-集群部署">6.3 docker 集群部署</h3>
+
+<p>客户端和 SOFARegistry 需要同一个三层网络内，因此利用 docker 部署需要使用 host network
+可以通过配置文件挂载的方式进行部署，也可以通过环境变量传递的方式
+同时需要添加 REGISTRY_APP_NAME=integration 进入集成模式，在一个 jvm 里启动 3 个角色</p>
+
+<p>image 中， registry-all.tgz 的解压地址在 <code>registry-distribution/registry-all</code>, 配置需要挂载到正确的目录</p>
+
+<pre><code class="language-bash">docker run -e REGISTRY_APP_NAME=integration \
+  --name=sofa-registry --rm --net=host \
+  -v $PWD/conf/:/registry-distribution/registry-all/conf/ \
+  -e JDBC_URL=jdbc:mysql://172.17.0.1:3306/registrymetadb
+  -e JDBC_USERNAME=root
+  -e JDBC_PASSWORD=root
+  sofaregistry/sofaregistry:6.1.4
+</code></pre>
+
+<h2 id="7-独立部署模式">7. 独立部署模式</h2>
+
+<p>独立部署模式，是将 meta/data/session 三个角色分开部署，每个角色都可以单机或集群部署，可根据实际情况为每个角色部署不同的数量，生产环境推荐使用这种部署模式。</p>
+
+<p>以下介绍 332 模式（即 3 台 meta + 3 台 data + 2 台 session）的部署步骤。</p>
+
+<h3 id="7-1-jar-集群部署">7.1 jar 集群部署</h3>
+
+<ul>
+<li>解压 registry-all.tgz，并修改配置文件
+集群部署，即搭建 2 台以上的集群，建议至少使用 3 台（注意：目前不支持在同一台机器部署多个 SOFARegistry，因此您必须有 3 台不同的机器）。在每一台机器上的部署方法同上：</li>
+</ul>
+
+<pre><code class="language-bash">cp ./server/distribution/all/target/registry-all.tgz &lt;somewhere&gt;
+cd &lt;somewhere&gt;
+tar -zxvf registry-all.tgz
+cd registry-all
+</code></pre>
+
+<p>application.properties 配置, 组成同一个注册中心的多台机器需要配置相同的数据库和<code>nodes.localDataCenter</code></p>
+
+<pre><code class="language-bash">nodes.localDataCenter=DefaultDataCenter
+nodes.localRegion=DEFAULT_ZONE
+jdbc.url = jdbc:mysql://127.0.0.1:3306/registrymetadb?useUnicode=true&amp;characterEncoding=utf8
+jdbc.username = root
+jdbc.password = root
+</code></pre>
+
+<h4 id="7-1-1-meta-部署">7.1.1 meta 部署</h4>
+
+<pre><code class="language-bash">sh bin/meta/start.sh
+</code></pre>
+
+<h4 id="7-1-2-data-部署">7.1.2 data 部署</h4>
+
+<pre><code class="language-bash">sh bin/data/start.sh
+</code></pre>
+
+<h4 id="7-1-3-session-部署">7.1.3 session 部署</h4>
+
+<pre><code class="language-bash">sh bin/session/start.sh
+</code></pre>
+
+<h3 id="7-2-docker-集群部署">7.2 docker 集群部署</h3>
+
+<p>客户端和 SOFARegistry 需要同一个三层网络内，因此利用 docker 部署需要使用 host network
+可以通过配置文件挂载的方式进行部署，也可以通过环境变量传递的方式
+同时需要添加 REGISTRY_APP_NAME=integration 进入集成模式，在一个 jvm 里启动 3 个角色</p>
+
+<p>image 中， registry-all.tgz 的解压地址在 <code>registry-distribution/registry-all</code>, 配置需要挂载到正确的目录</p>
+
+<h4 id="7-2-1-meta-启动">7.2.1 meta 启动</h4>
+
+<pre><code class="language-bash">docker run -e REGISTRY_APP_NAME=meta \
+  --name=sofa-registry --rm --net=host \
+  -v $PWD/conf/:/registry-distribution/registry-all/conf/ \
+  -e JDBC_URL=jdbc:mysql://172.17.0.1:3306/registrymetadb
+  -e JDBC_USERNAME=root
+  -e JDBC_PASSWORD=root
+  sofaregistry/sofaregistry:6.1.4
+</code></pre>
+
+<h4 id="7-2-2-data-启动">7.2.2 data 启动</h4>
+
+<pre><code class="language-bash">docker run -e REGISTRY_APP_NAME=data \
+  --name=sofa-registry --rm --net=host \
+  -v $PWD/conf/:/registry-distribution/registry-all/conf/ \
+  -e JDBC_URL=jdbc:mysql://172.17.0.1:3306/registrymetadb
+  -e JDBC_USERNAME=root
+  -e JDBC_PASSWORD=root
+  sofaregistry/sofaregistry:6.1.4
+</code></pre>
+
+<h4 id="7-2-3-session-启动">7.2.3 session 启动</h4>
+
+<pre><code class="language-bash">docker run -e REGISTRY_APP_NAME=session \
+  --name=sofa-registry --rm --net=host \
+  -v $PWD/conf/:/registry-distribution/registry-all/conf/ \
+  -e JDBC_URL=jdbc:mysql://172.17.0.1:3306/registrymetadb
+  -e JDBC_USERNAME=root
+  -e JDBC_PASSWORD=root
+  sofaregistry/sofaregistry:6.1.4
+</code></pre>
+
+<h3 id="7-3-kubernetes">7.3 kubernetes</h3>
+
+<p>SOFARegistry 使用 kustomize 来进行配置渲染
+下载源码</p>
+
+<pre><code class="language-bash">git clone git@github.com:sofastack/sofa-registry.git
+</code></pre>
+
+<p>configmap-patch.yaml 和 db-secret-patch.yaml 中是传给每个角色的配置
+修改对应配置，使用 kustomize 渲染得到部署用到的 yaml</p>
+
+<pre><code class="language-bash">kustomize build docker/kube/sofa-registry/overlays/standalone-dc2
+</code></pre>
+
+<p>同时需要申请 loadbalancer 挂载 session ip 的 9603 端口</p>
+
+<h2 id="8-状态检查">8. 状态检查</h2>
+
+<p>确认运行状态：对每一台机器，都可访问三个角色提供的健康监测 api，或查看日志 <em>logs/registry-startup.log</em></p>
+
+<pre><code class="language-bash"># 查看meta角色的健康检测接口：(3台机器，有1台是Leader，其他2台是Follower)
+$ curl http://$META_IP:9615/health/check
+{&quot;success&quot;:true,&quot;message&quot;:&quot;...&quot;}
+
+# 查看data角色的健康检测接口：
+$ curl http://$DATA_IP:9622/health/check
+{&quot;success&quot;:true,&quot;message&quot;:&quot;...&quot;}
+
+# 查看session角色的健康检测接口：
+$ curl http://$SESSION_IP:9603/health/check
+{&quot;success&quot;:true,&quot;message&quot;:&quot;...&quot;}
+</code></pre>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

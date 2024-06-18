@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>周年庆 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/categories/%E5%91%A8%E5%B9%B4%E5%BA%86/</link>
+    <description>Recent content in 周年庆 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 16 Apr 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/%E5%91%A8%E5%B9%B4%E5%BA%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFA 四周年，开源正当时！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofastack-four-years-of-open-source/</link>
+      <pubDate>Sat, 16 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofastack-four-years-of-open-source/</guid>
+      <description>概要 活动主题：见证 SOFAStack 社区开源四周年! 活动时间： 2022 年 04 月 16 日 （14:00-17:40） 活动形式：线上直播 B 站直播间地址：http://live</description>
+    </item>
+    
+  </channel>
+</rss>

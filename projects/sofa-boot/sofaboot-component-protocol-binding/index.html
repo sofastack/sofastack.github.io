@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	源码解析：SOFABoot 组件协议 binding 机制解析 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 介绍"
+						href="/sofastack.tech/projects/sofa-boot/overview/"
+					>SOFABoot 介绍</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="快速开始"
+						href="/sofastack.tech/projects/sofa-boot/quick-start/"
+					>快速开始</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="依赖管理"
+						href="/sofastack.tech/projects/sofa-boot/dependency-management/"
+					>依赖管理</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="健康检查"
+						href="/sofastack.tech/projects/sofa-boot/health-check/"
+					>健康检查</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="版本查看"
+						href="/sofastack.tech/projects/sofa-boot/view-versions/"
+					>版本查看</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="启动加速"
+						href="/sofastack.tech/projects/sofa-boot/speed-up-startup/"
+					>启动加速</a>
+				</div>
+			</li>
+		
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="模块隔离"
+					>模块隔离</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块化开发概述"
+						href="/sofastack.tech/projects/sofa-boot/modular-development/"
+					>模块化开发概述</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块配置"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-module/"
+					>模块配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JVM 服务发布与引用"
+						href="/sofastack.tech/projects/sofa-boot/module-service/"
+					>JVM 服务发布与引用</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块并行化启动"
+						href="/sofastack.tech/projects/sofa-boot/parallel-start/"
+					>模块并行化启动</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Spring Bean 异步初始化"
+						href="/sofastack.tech/projects/sofa-boot/bean-async-init/"
+					>Spring Bean 异步初始化</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot Profile"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-profile/"
+					>SOFABoot Profile</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 拓展点"
+						href="/sofastack.tech/projects/sofa-boot/extension/"
+					>SOFABoot 拓展点</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="类隔离和热部署"
+					>类隔离和热部署</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk 介绍"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-readme/"
+					>SOFAArk 介绍</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk2.0 升级"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-migration-guide/"
+					>SOFAArk2.0 升级</a>
+				</div>
+			</li>
+		
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何打包 Ark Plugin"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin-demo/"
+					>如何打包 Ark Plugin</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何打包 Ark 包"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-demo/"
+					>如何打包 Ark 包</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Spring Boot 应用如何结合 SofaArk"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-spring-boot-demo/"
+					>Spring Boot 应用如何结合 SofaArk</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="用户文档"
+					>用户文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="基础术语"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-terminology/"
+					>基础术语</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 包"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-jar/"
+					>Ark 包</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Plugin"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin/"
+					>Ark Plugin</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Biz"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-biz/"
+					>Ark Biz</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk 配置"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-config/"
+					>SOFAArk 配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Biz 生命周期"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-biz-lifecycle/"
+					>Ark Biz 生命周期</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Zookeeper 配置"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-zk-config/"
+					>Zookeeper 配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 服务机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-service/"
+					>Ark 服务机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 事件机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-event/"
+					>Ark 事件机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 扩展机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-extension/"
+					>Ark 扩展机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 服务通信"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-jvm/"
+					>Ark 服务通信</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Telnet 指令"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-telnet/"
+					>Telnet 指令</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 日志"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-log/"
+					>Ark 日志</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 使用类隔离"
+						href="/sofastack.tech/projects/sofa-boot/classloader-isolation/"
+					>SOFABoot 使用类隔离</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发文档"
+					>开发文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器启动流程"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-startup/"
+					>Ark 容器启动流程</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器插件机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-plugin/"
+					>Ark 容器插件机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器类加载机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-classloader/"
+					>Ark 容器类加载机制</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="打包插件"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-build-package-plugin/"
+					>打包插件</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="启动过程"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-startup-process/"
+					>启动过程</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="动态部署"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-dynamic-deploy/"
+					>动态部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="类委托加载"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-class-loader-delegation/"
+					>类委托加载</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="多 Web 模块部署"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-multi-web-component-deploy/"
+					>多 Web 模块部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Benchmark"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-benchmark/"
+					>Benchmark</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布说明"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-release/"
+					>发布说明</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发展路线"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-roadmap/"
+					>发展路线</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="公开分享"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-public-presentation/"
+					>公开分享</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何贡献"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-contribution/"
+					>如何贡献</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot HealthCheck 机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-healthcheck-mechanism-explained/"
+					>SOFABoot HealthCheck 机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link -current">
+					<a
+						title="SOFABoot 组件协议 binding 机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-component-protocol-binding/"
+					>SOFABoot 组件协议 binding 机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 上下文隔离机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofa-boot-context-isolation-mechanism-explained/"
+					>SOFABoot 上下文隔离机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="升级文档"
+					>升级文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 2.5.x 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_2_5_x/"
+					>SOFABoot 2.5.x 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 3.0 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_3_x/"
+					>SOFABoot 3.0 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 4.0 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_4_x/"
+					>SOFABoot 4.0 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="常见问题"
+						href="/sofastack.tech/projects/sofa-boot/faq/"
+					>常见问题</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="版权声明"
+						href="/sofastack.tech/projects/sofa-boot/notice/"
+					>版权声明</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			源码解析：SOFABoot 组件协议 binding 机制解析
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/sofaboot-component-protocol-binding/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+			·   
+					<a href="https://github.com/it-linnan">林楠</a> 
+				
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h2 id="前言">前言</h2>
+
+<p>SOFABoot 提供两种服务通信能力，一种是 JVM 服务，用于同一应用内不同模块间的通信，一种是 RPC 服务，用于不同应用间的通信。SOFABoot 提供三种方式实现服务的发布和引用，分别是XML 配置文件、注解和 API 的方式，本文从源码角度解析从服务的发布和引用到组件协议 binding 机制的实现原理。</p>
+
+<h2 id="服务发布与引用">服务发布与引用</h2>
+
+<p>在了解组件协议 binding 机制之前，我们先简单了解一下服务的发布与引用的源码。</p>
+
+<h3 id="xml">XML</h3>
+
+<p>通过 XML 方式发布或引用服务时，使用 sofa:service 发布服务，使用 sofa:reference 引用服务，示例代码如下：</p>
+
+<pre><code class="language-xml">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:sofa=&quot;http://sofastack.io/schema/sofaboot&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot   http://sofastack.io/schema/sofaboot.xsd&quot;&gt;
+    &lt;sofa:service ref=&quot;sampleJvmService&quot; interface=&quot;com.alipay.sofa.isle.sample.SampleJvmService&quot;&gt;
+        &lt;sofa:binding.jvm/&gt;
+    &lt;/sofa:service&gt;
+  
+    &lt;sofa:reference id=&quot;sampleJvmService&quot; interface=&quot;com.alipay.sofa.isle.sample.SampleJvmService&quot;&gt;
+          &lt;sofa:binding.jvm/&gt;
+    &lt;/sofa:service&gt;
+&lt;/beans&gt;
+</code></pre>
+
+<p>我们可以看到在 xml 中使用 xmlns:sofa，将 sofa 前缀的命名空间定义为 <code>http://sofastack.io/schema/sofaboot</code> ，Spring 在解析 sofa:* 标签时会与该命名空间相关联。对于 xml 的解析，SOFABoot 在 sofa-boot 模块中使用 spring.handlers 配置文件中注册了 sofa 命名空间的 XML 处理器。</p>
+
+<pre><code class="language-xml">http\://sofastack.io/schema/sofaboot=com.alipay.sofa.boot.spring.namespace.handler.SofaBootNamespaceHandler
+</code></pre>
+
+<p>SofaBootNamespaceHandler 在初始化阶段，基于 SPI 机制查找所有标签解析器，调用 registerTagParser 方法注册标签解析器。</p>
+
+<pre><code class="language-java">public void init() {
+    ServiceLoader&lt;SofaBootTagNameSupport&gt; serviceLoaderSofaBoot = ServiceLoader.load(SofaBootTagNameSupport.class);
+    serviceLoaderSofaBoot.forEach(this::registerTagParser);
+}
+</code></pre>
+
+<p>注册标签解析器时，调用解析器的 supportTagName 方法获取标签名，将解析器与标签名关联起来。</p>
+
+<pre><code class="language-java">private void registerTagParser(SofaBootTagNameSupport tagNameSupport) {
+    if (tagNameSupport instanceof BeanDefinitionParser) {
+        registerBeanDefinitionParser(tagNameSupport.supportTagName(),
+                                     (BeanDefinitionParser) tagNameSupport);
+    } else if (tagNameSupport instanceof BeanDefinitionDecorator) {
+        registerBeanDefinitionDecoratorForAttribute(tagNameSupport.supportTagName(),
+                                                    (BeanDefinitionDecorator) tagNameSupport);
+    } else {
+        ...
+    }
+}
+</code></pre>
+
+<p>sofa:service 标签的解析器是 ServiceDefinitionParser，使用 doParseInternal 方法读取 xml 标签属性值，并解析为 bean 定义，根据 getBeanClass 定义的类型，将 sofa:service 标签定义的服务转换为 ServiceFactoryBean，并注册到 Spring 上下文中。</p>
+
+<pre><code class="language-java">public class ServiceDefinitionParser extends AbstractContractDefinitionParser {
+    ...
+    @Override
+    protected void doParseInternal(Element element, ParserContext parserContext,
+                                   BeanDefinitionBuilder builder) {
+        String ref = element.getAttribute(REF);
+        builder.addPropertyReference(REF, ref);
+        if (element.hasAttribute(&quot;id&quot;)) {
+            String id = element.getAttribute(&quot;id&quot;);
+            builder.addPropertyValue(BEAN_ID, id);
+        } else {
+            builder.addPropertyValue(BEAN_ID, ref);
+        }
+    }
+    @Override
+    protected Class getBeanClass(Element element) {
+        return ServiceFactoryBean.class;
+    }
+    @Override
+    public String supportTagName() {
+        return &quot;service&quot;;
+    }
+}
+</code></pre>
+
+<p>根据 Spring 的机制，在注册 bean 时，对 bean 的属性赋值后会调用 bean 的 afterPropertiesSet  方法。而在注册 ServiceFactoryBean 时，会先调用 ServiceFactoryBean 父类 AbstractContractFactoryBean 中的 afterPropertiesSet 方法。</p>
+
+<pre><code class="language-java">public abstract class AbstractContractFactoryBean implements InitializingBean, FactoryBean,
+                                                 ApplicationContextAware {
+    ...
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        ...
+        doAfterPropertiesSet();
+    }
+}
+</code></pre>
+
+<p>在调用 ServiceFactoryBean 中的 doAfterPropertiesSet 方法，将服务配置转换为 ServiceComponent，注册到 SOFA 的 ComponentManager 中</p>
+
+<pre><code class="language-java">public class ServiceFactoryBean extends AbstractContractFactoryBean {
+    ...
+    @Override
+    protected void doAfterPropertiesSet() {
+        ...
+        Implementation implementation = new DefaultImplementation();
+        implementation.setTarget(ref);
+        service = buildService();
+        ...
+        ComponentInfo componentInfo = new ServiceComponent(implementation, service,
+            bindingAdapterFactory, sofaRuntimeContext);
+        componentInfo.setApplicationContext(applicationContext);
+        sofaRuntimeContext.getComponentManager().register(componentInfo);
+    }
+}
+</code></pre>
+
+<p>sofa:reference 标签的解析器是 ReferenceDefinitionParser，使用 doParseInternal 方法读取 xml 标签属性值，并解析为 bean 定义，根据 getBeanClass 定义的类型，将 sofa:reference 标签定义的服务转换为 ReferenceFactoryBean，并注册到 Spring 上下文中。</p>
+
+<pre><code class="language-java">public class ReferenceDefinitionParser extends AbstractContractDefinitionParser {
+    ...
+    @Override
+    protected void doParseInternal(Element element, ParserContext parserContext,
+                                   BeanDefinitionBuilder builder) {
+        String jvmFirstString = element.getAttribute(JVM_FIRST);
+
+        if (StringUtils.hasText(jvmFirstString)) {
+            if (&quot;true&quot;.equalsIgnoreCase(jvmFirstString)) {
+                builder.addPropertyValue(PROPERTY_JVM_FIRST, true);
+            } else if (&quot;false&quot;.equalsIgnoreCase(jvmFirstString)) {
+                builder.addPropertyValue(PROPERTY_JVM_FIRST, false);
+            } else {
+                ...
+            }
+        }
+
+        String loadBalance = element.getAttribute(PROPERTY_LOAD_BALANCE);
+        if (StringUtils.hasText(loadBalance)) {
+            builder.addPropertyValue(PROPERTY_LOAD_BALANCE, loadBalance);
+        }
+    }
+    @Override
+    protected Class getBeanClass(Element element) {
+        return ReferenceFactoryBean.class;
+    }
+    @Override
+    public String supportTagName() {
+        return &quot;reference&quot;;
+    }
+}
+
+</code></pre>
+
+<p>ReferenceFactoryBean 中 doAfterPropertiesSet 方法，将服务配置转换为 ReferenceComponent，注册到 SOFA 的 ComponentManager 中</p>
+
+<pre><code class="language-java">public class ReferenceFactoryBean extends AbstractContractFactoryBean {
+    ...
+    @Override
+    protected void doAfterPropertiesSet() {
+        Reference reference = buildReference();
+        ...
+        proxy = ReferenceRegisterHelper.registerReference(reference, bindingAdapterFactory,
+            sofaRuntimeContext, applicationContext);
+    }
+    protected Reference buildReference() {
+        return new ReferenceImpl(uniqueId, getInterfaceClass(), InterfaceMode.spring, jvmFirst);
+    }
+}
+public class ReferenceRegisterHelper {
+    public static Object registerReference(Reference reference,
+                                           BindingAdapterFactory bindingAdapterFactory,
+                                           SofaRuntimeContext sofaRuntimeContext) {
+        return registerReference(reference, bindingAdapterFactory, sofaRuntimeContext, null);
+    }
+    public static Object registerReference(Reference reference,
+                                           BindingAdapterFactory bindingAdapterFactory,
+                                           SofaRuntimeContext sofaRuntimeContext,
+                                           ApplicationContext applicationContext) {
+        ...
+        ComponentManager componentManager = sofaRuntimeContext.getComponentManager();
+        ReferenceComponent referenceComponent = new ReferenceComponent(reference,
+            new DefaultImplementation(), bindingAdapterFactory, sofaRuntimeContext);
+
+        if (componentManager.isRegistered(referenceComponent.getName())) {
+            return componentManager.getComponentInfo(referenceComponent.getName())
+                .getImplementation().getTarget();
+        }
+
+        ComponentInfo componentInfo = componentManager.registerAndGet(referenceComponent);
+        componentInfo.setApplicationContext(applicationContext);
+        return componentInfo.getImplementation().getTarget();
+    }
+}
+</code></pre>
+
+<h3 id="注解">注解</h3>
+
+<p>通过注解方式发布或引用服务时，使用 @SofaService 发布服务，使用 @SofaReference 引用服务，示例代码如下：</p>
+
+<pre><code class="language-java">@SofaService(uniqueId = &quot;annotationImpl&quot;)
+public class SampleJvmServiceAnnotationImpl implements SampleJvmService {
+    @Override
+    public String message() {
+        return &quot;Hello, jvm service annotation implementation.&quot;;
+    }
+}
+public class JvmServiceConsumer implements ClientFactoryAware {
+    @SofaReference(uniqueId = &quot;annotationImpl&quot;)
+    private SampleJvmService sampleJvmServiceAnnotationImpl;
+}
+</code></pre>
+
+<p>对于 @SofaService 注解的处理，SOFABoot 在 runtime-sofa-boot 模块中提供了相应的处理器 ServiceBeanFactoryPostProcessor。ServiceBeanFactoryPostProcessor 在 postProcessBeanDefinitionRegistry 方法中遍历所有 bean，检查 bean 是否含有 @SofaService 注解，如果有就会解析注解中定义的属性值，将 bean 转换为 SOFA 服务。
+入口是 transformSofaBeanDefinition 方法，先判断 bean 的定义方式，从而决定如何获取 SOFA 注解：如果 bean 是在配置类中定义的，那么就需要从方法上获取注解，也就是调用 generateSofaServiceDefinitionOnMethod 方法；另一种方式是直接在 bean 的类上获取注解，也就是调用 generateSofaServiceDefinitionOnClass 方法。</p>
+
+<pre><code class="language-java">public class ServiceBeanFactoryPostProcessor implements BeanDefinitionRegistryPostProcessor,
+                                            ApplicationContextAware, EnvironmentAware {
+
+    @Override
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        Arrays.stream(registry.getBeanDefinitionNames())
+                .collect(Collectors.toMap(Function.identity(), registry::getBeanDefinition))
+                .forEach((key, value) -&gt; transformSofaBeanDefinition(key, value, registry));
+    }
+    private void transformSofaBeanDefinition(String beanId, BeanDefinition beanDefinition,
+                                             BeanDefinitionRegistry registry) {
+        if (BeanDefinitionUtil.isFromConfigurationSource(beanDefinition)) {
+            generateSofaServiceDefinitionOnMethod(beanId, (AnnotatedBeanDefinition) beanDefinition,
+                registry);
+        } else {
+            Class&lt;?&gt; beanClassType = BeanDefinitionUtil.resolveBeanClassType(beanDefinition);
+            if (beanClassType == null) {
+                SofaLogger.warn(&quot;Bean class type cant be resolved from bean of {}&quot;, beanId);
+                return;
+            }
+            generateSofaServiceDefinitionOnClass(beanId, beanClassType, beanDefinition, registry);
+        }
+    }
+}
+</code></pre>
+
+<p>这里我们看下 generateSofaServiceDefinitionOnClass 方法：先从类定义中获取 @SofaService 注解，调用 generateSofaServiceDefinition 方法，将注解定义转换为 ServiceFactoryBean 。在转换时通过 getSofaServiceBinding 方法将 @SofaService 注解转换为 binding 设置到 ServiceFactoryBean 属性，通过 dependsOn 控制了加载顺序。最后调用 registry.registerBeanDefinition 方法，将 ServiceFactoryBean 注册到 Spring 上下文中。</p>
+
+<pre><code class="language-java">private void generateSofaServiceDefinitionOnClass(String beanId, Class&lt;?&gt; beanClass,
+                                                    BeanDefinition beanDefinition,
+                                                    BeanDefinitionRegistry registry) {
+    SofaService sofaServiceAnnotation = AnnotationUtils.findAnnotation(beanClass, SofaService.class);
+    generateSofaServiceDefinition(beanId, sofaServiceAnnotation, beanClass, beanDefinition, registry);
+}
+private void generateSofaServiceDefinition(String beanId, SofaService sofaServiceAnnotation,
+                                               Class&lt;?&gt; beanClass, BeanDefinition beanDefinition,
+                                               BeanDefinitionRegistry registry) {
+    ...
+    BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
+    String serviceId = SofaBeanNameGenerator.generateSofaServiceBeanName(interfaceType, sofaServiceAnnotation.uniqueId());
+    if (!registry.containsBeanDefinition(serviceId)) {
+        builder.getRawBeanDefinition().setScope(beanDefinition.getScope());
+        builder.setLazyInit(beanDefinition.isLazyInit());
+        builder.getRawBeanDefinition().setBeanClass(ServiceFactoryBean.class);
+        builder.addAutowiredProperty(AbstractContractDefinitionParser.SOFA_RUNTIME_CONTEXT);
+        builder.addAutowiredProperty(AbstractContractDefinitionParser.BINDING_CONVERTER_FACTORY);
+        builder.addAutowiredProperty(AbstractContractDefinitionParser.BINDING_ADAPTER_FACTORY);
+        builder.addPropertyValue(AbstractContractDefinitionParser.INTERFACE_CLASS_PROPERTY, interfaceType);
+        builder.addPropertyValue(AbstractContractDefinitionParser.UNIQUE_ID_PROPERTY, sofaServiceAnnotation.uniqueId());
+        builder.addPropertyValue(AbstractContractDefinitionParser.BINDINGS,
+                                 getSofaServiceBinding(sofaServiceAnnotation, sofaServiceAnnotation.bindings()));
+        builder.addPropertyReference(ServiceDefinitionParser.REF, beanId);
+        builder.addPropertyValue(ServiceDefinitionParser.BEAN_ID, beanId);
+        builder.addPropertyValue(AbstractContractDefinitionParser.DEFINITION_BUILDING_API_TYPE, true);
+        builder.addDependsOn(beanId);
+        registry.registerBeanDefinition(serviceId, builder.getBeanDefinition());
+    } else {
+        SofaLogger.warn(&quot;SofaService was already registered: {}&quot;, serviceId);
+    }
+}
+</code></pre>
+
+<p>对于 @SofaReference 注解的处理，SOFABoot 在 runtime-sofa-boot 模块中提供了相应的处理器 ReferenceAnnotationBeanPostProcessor。在 postProcessBeforeInitialization 方法中调用 processSofaReference 方法，通过 FieldFilter 筛选 bean 类中的含有 @SofaReference 注解的字段。在 doWith 方法中解析字段的 @SofaReference 注解中定义的属性值，调用 createReferenceProxy 方法，根据属性值生成 SOFA 服务引用代理。将 SOFA 服务引用代理设置到类字段中，通过该字段调用服务就相当于调用服务引用代理。</p>
+
+<pre><code class="language-java">public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    processSofaReference(bean);
+    return bean;
+}
+private void processSofaReference(final Object bean) {
+    final Class&lt;?&gt; beanClass = bean.getClass();
+    ReflectionUtils.doWithFields(beanClass, new ReflectionUtils.FieldCallback() {
+        @Override
+        public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
+            AnnotationWrapperBuilder&lt;SofaReference&gt; builder = AnnotationWrapperBuilder.wrap(
+                field.getAnnotation(SofaReference.class)).withBinder(binder);
+            SofaReference sofaReferenceAnnotation = builder.build();
+            ...
+            Object proxy = createReferenceProxy(sofaReferenceAnnotation, interfaceType);
+            ReflectionUtils.makeAccessible(field);
+            ReflectionUtils.setField(field, bean, proxy);
+        }
+    }, new ReflectionUtils.FieldFilter() {
+        @Override
+        public boolean matches(Field field) {
+            if (!field.isAnnotationPresent(SofaReference.class)) {
+                return false;
+            }
+            if (Modifier.isStatic(field.getModifiers())) {
+                SofaLogger.warn(&quot;SofaReference annotation is not supported on static fields: {}&quot;, field);
+                return false;
+            }
+            return true;
+        }
+    });
+}
+</code></pre>
+
+<h3 id="api">API</h3>
+
+<p>通过 API 方式发布或引用服务时，使用 ServiceClient 发布服务，使用 ReferenceClient 引用服务，示例代码如下：</p>
+
+<pre><code class="language-java">ServiceClient serviceClient = clientFactory.getClient(ServiceClient.class);
+ServiceParam serviceParam = new ServiceParam();
+serviceParam.setInstance(new SampleJvmServiceImpl(&quot;Hello, jvm service service client implementation.&quot;));
+serviceParam.setInterfaceType(SampleJvmService.class);
+serviceParam.setUniqueId(&quot;serviceClientImpl&quot;);
+serviceClient.service(serviceParam);
+
+ReferenceClient referenceClient = clientFactory.getClient(ReferenceClient.class);
+ReferenceParam&lt;SampleJvmService&gt; referenceParam = new ReferenceParam&lt;&gt;();
+referenceParam.setInterfaceType(SampleJvmService.class);
+referenceParam.setUniqueId(&quot;serviceClientImpl&quot;);
+SampleJvmService sampleJvmServiceClientImpl = referenceClient.reference(referenceParam);
+sampleJvmServiceClientImpl.message();
+</code></pre>
+
+<p>API 方式发布服务，是通过 ServiceClientImpl 的 service 方法实现的，将服务配置转换为 ServiceComponent ，注册到 SOFA 的 ComponentManager 中，但没有向 Spring 上下文中注册 bean。</p>
+
+<pre><code class="language-java">public class ServiceClientImpl implements ServiceClient {
+    
+    ...
+    public void service(ServiceParam serviceParam) {
+        Implementation implementation = new DefaultImplementation();
+        implementation.setTarget(serviceParam.getInstance());
+        ...
+        Service service = new ServiceImpl(serviceParam.getUniqueId(),
+            serviceParam.getInterfaceType(), InterfaceMode.api, serviceParam.getInstance(), null);
+        ...
+        ComponentInfo componentInfo = new ServiceComponent(implementation, service,
+            bindingAdapterFactory, sofaRuntimeContext);
+        sofaRuntimeContext.getComponentManager().register(componentInfo);
+    }
+}
+</code></pre>
+
+<p>API 方式引用服务，是通过 ReferenceClientImpl 的 reference 方法实现的，将服务配置转换为 ReferenceComponent，注册到 SOFA 的 ComponentManager 中。与发布服务相同，也没有向 Spring 上下文中注册 bean。</p>
+
+<pre><code class="language-java">public class ReferenceClientImpl implements ReferenceClient {
+    public &lt;T&gt; T reference(ReferenceParam&lt;T&gt; referenceParam) {
+        return (T) ReferenceRegisterHelper.registerReference(
+            getReferenceFromReferenceParam(referenceParam), bindingAdapterFactory,
+            sofaRuntimeContext);
+    }
+}
+</code></pre>
+
+<h3 id="服务发布与引用总结">服务发布与引用总结</h3>
+
+<p>以上篇幅介绍了服务发布与引用的大致流程，XML 方式是向 Spring 上下文中注册了一个新的 bean，服务发布注册的是 ServiceFactoryBean，通过 ServiceFactoryBean 的注册流程向 ComponentManager 中注册 ServiceComponent；引用服务注册的是 ReferenceFactoryBean，通过 ReferenceFactoryBean 的注册流程向 ComponentManager 中注册 ReferenceComponent。注解方式的服务发布注册的是 ServiceFactoryBean，通过 ServiceFactoryBean 的注册流程向 ComponentManager 中注册 ServiceComponent；引用服务则是根据字段上的 @SofaReference 注解生成服务引用代理对象，将字段值设置为代理对象。API 方式的服务发布则是通过 ServiceClientImpl 直接向 ComponentManager 中注册 ServiceComponent ，引用服务是通过 ReferenceClientImpl 直接向 ComponentManager 中注册 ReferenceComponent。
+在前面的给出的代码中我们略过了一部分代码，这部分代码实际上就是组件协议 binding 的机制，接下来，我们进入正题。</p>
+
+<h2 id="组件协议-binding">组件协议 binding</h2>
+
+<p>在介绍组件协议 binding 机制之前，先看一下binding机制中的一些重要接口</p>
+
+<table>
+<thead>
+<tr>
+<th>接口类</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>com.alipay.sofa.runtime.spi.binding.Binding</td>
+<td>SOFA 组件协议接口，表示服务绑定了哪些协议，对外提供哪些协议的服务调用方式。SOFABoot 内置 JVM协议、RPC协议（bolt、dubbo等）</td>
+</tr>
+
+<tr>
+<td>com.alipay.sofa.runtime.api.client.param.BindingParam</td>
+<td>SOFA 组件协议参数接口，每种服务协议都需要配置一些参数，比如RPC协议通常需要配置超时时间、负载均衡算法等</td>
+</tr>
+
+<tr>
+<td>com.alipay.sofa.runtime.spi.service.BindingConverter</td>
+<td>Binding转换器接口，用于将服务协议配置转换为具体的Binding</td>
+</tr>
+
+<tr>
+<td>com.alipay.sofa.runtime.spi.service.BindingConverterFactory</td>
+<td>Binding转换器工厂，能够通过协议名获取Binding转换器</td>
+</tr>
+
+<tr>
+<td>com.alipay.sofa.runtime.spi.binding.BindingAdapter</td>
+<td>Binding适配器，用于将Binding服务发布出去或生成服务引用</td>
+</tr>
+
+<tr>
+<td>com.alipay.sofa.runtime.spi.binding.BindingAdapterFactory</td>
+<td>Binding适配器工厂，能够通过协议名获取Binding适配器</td>
+</tr>
+</tbody>
+</table>
+
+<p>组件协议 binding 是服务发布和引用流程的一部分，因此我们从这两个角度分别看一下实现方式。</p>
+
+<h3 id="服务发布">服务发布</h3>
+
+<h4 id="servicefactorybean">ServiceFactoryBean</h4>
+
+<p>先看一下 ServiceFactoryBean 的父类 AbstractContractFactoryBean，通过 parseBindings 方法解析服务协议配置，从而获取服务支持的组件协议 bindings。</p>
+
+<pre><code class="language-java">public abstract class AbstractContractFactoryBean implements InitializingBean, FactoryBean,
+                                                 ApplicationContextAware {
+    ...
+    protected List&lt;Binding&gt; bindings = new ArrayList&lt;&gt;(2);
+    ...
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List&lt;Element&gt; tempElements = new ArrayList&lt;&gt;();
+        ...
+        if (!apiType) {
+            this.bindings = parseBindings(tempElements, applicationContext, isInBinding());
+        }
+        doAfterPropertiesSet();
+    }
+}
+</code></pre>
+
+<p>通过 BindingConverter 工厂获取组件协议的 BindingConverter，调用 convert 方法将配置转换为组件协议 Binding。</p>
+
+<pre><code class="language-java">protected List&lt;Binding&gt; parseBindings(List&lt;Element&gt; parseElements,
+                                      ApplicationContext appContext, boolean isInBinding) {
+    List&lt;Binding&gt; result = new ArrayList&lt;&gt;();
+
+    if (parseElements != null) {
+        for (Element element : parseElements) {
+            String tagName = element.getLocalName();
+            BindingConverter bindingConverter = bindingConverterFactory
+                .getBindingConverterByTagName(tagName);
+            ...
+            Binding binding = bindingConverter.convert(element, bindingConverterContext);
+            result.add(binding);
+        }
+    }
+
+    return result;
+}
+</code></pre>
+
+<p>再看 ServiceFactoryBean 的 doAfterPropertiesSet 方法：如果服务未配置任何组件协议，会默认绑定 JVM 协议。调用 ComponentManager 的 register 方法，注册 ServiceComponent。</p>
+
+<pre><code class="language-java">protected void doAfterPropertiesSet() {
+    ...
+    if (bindings.size() == 0) {
+        JvmBindingParam jvmBindingParam = new JvmBindingParam().setSerialize(true);
+        bindings.add(new JvmBinding().setJvmBindingParam(jvmBindingParam));
+    }
+
+    for (Binding binding : bindings) {
+        service.addBinding(binding);
+    }
+
+    ComponentInfo componentInfo = new ServiceComponent(implementation, service,
+                                                       bindingAdapterFactory, sofaRuntimeContext);
+    componentInfo.setApplicationContext(applicationContext);
+    sofaRuntimeContext.getComponentManager().register(componentInfo);
+}
+</code></pre>
+
+<p>ComponentManager 的注册方法中：调用 ServiceComponent 的 register 方法，将组件状态更新为 REGISTERED。调用 resolve 方法，解析组件的绑定协议，并将组件状态更新为 RESOLVED。调用 activate 方法，激活组件，将服务发布出去，并将组件状态更新为 ACTIVATED。</p>
+
+<pre><code class="language-java">public void register(ComponentInfo componentInfo) {
+    doRegister(componentInfo);
+}
+private ComponentInfo doRegister(ComponentInfo ci) {
+    ...
+    try {
+        ci.register();
+    } catch (Throwable t) {
+        ...
+        return null;
+    }
+    try {
+        ...
+        if (ci.resolve()) {
+            typeRegistry(ci);
+            ci.activate();
+        }
+    } catch (Throwable t) {
+        ...
+    }
+
+    return ci;
+}
+</code></pre>
+
+<p>ServiceComponent 的 resolve 方法中，根据组件绑定协议获取对应的 BindingAdapter，调用 preOutBinding 方法，进行服务预发布。</p>
+
+<pre><code class="language-java">public boolean resolve() {
+    resolveBinding();
+    return super.resolve();
+}
+private void resolveBinding() {
+    ...
+    if (service.hasBinding()) {
+        Set&lt;Binding&gt; bindings = service.getBindings();
+        ...boolean allPassed = true;
+        for (Binding binding : bindings) {
+            BindingAdapter&lt;Binding&gt; bindingAdapter = this.bindingAdapterFactory
+                .getBindingAdapter(binding.getBindingType());
+            ...
+            try {
+                bindingAdapter.preOutBinding(service, binding, target, getContext());
+            } catch (Throwable t) {
+                ...
+            }
+            ...
+        }
+        ...
+    }
+}
+</code></pre>
+
+<p>BindingAdapter 的 preOutBinding 方法有两个实现，一个是 JVM 协议的 JvmBindingAdapter，但方法中没有具体实现代码，也就是说预发布 JVM 协议的服务不需要做特殊处理；另外一个是 RPC 协议的 RpcBindingAdapter，将 Binding 转换为服务提供者信息ProviderConfig，并将 ProviderConfig 添加到ProviderConfigContainer。</p>
+
+<pre><code class="language-java">public void preOutBinding(Object contract, RpcBinding binding, Object target,
+                              SofaRuntimeContext sofaRuntimeContext) {
+    ApplicationContext applicationContext = sofaRuntimeContext.getSofaRuntimeManager()
+        .getRootApplicationContext();
+    ProviderConfigContainer providerConfigContainer = applicationContext
+        .getBean(ProviderConfigContainer.class);
+    String uniqueName = providerConfigContainer.createUniqueName((Contract) contract, binding);
+    ProviderConfigHelper providerConfigHelper = applicationContext.getBean(ProviderConfigHelper.class);
+    ProviderConfig providerConfig = providerConfigHelper.getProviderConfig((Contract) contract, binding, target);
+    try {
+        providerConfigContainer.addProviderConfig(uniqueName, providerConfig);
+    } catch (Exception e) {
+        ...
+    }
+}
+</code></pre>
+
+<p>ServiceComponent 的 activate 方法中，根据组件绑定协议获取对应的 BindingAdapter，调用 outBinding 方法，进行服务发布。</p>
+
+<pre><code class="language-java">public void activate() throws ServiceRuntimeException {
+    activateBinding();
+    super.activate();
+}
+private void activateBinding() {
+    ...
+    if (service.hasBinding()) {
+        ...
+        Set&lt;Binding&gt; bindings = service.getBindings();
+        for (Binding binding : bindings) {
+            BindingAdapter&lt;Binding&gt; bindingAdapter = this.bindingAdapterFactory
+                .getBindingAdapter(binding.getBindingType());
+            ...
+            Object outBindingResult;
+            ...
+            try {
+                outBindingResult = bindingAdapter.outBinding(service, binding, target,
+                                                             getContext());
+            } catch (Throwable t) {
+                ...
+            }
+            ...
+        }
+        ...
+    }
+    ...
+}
+</code></pre>
+
+<p>BindingAdapter 的 outBinding 方法作用是服务发布，outBinding 方法有两个实现，一个是 JVM 协议的 JvmBindingAdapter，但方法中没有具体实现代码，也就是说发布 JVM 协议的服务不需要做特殊处理；另外一个是 RPC 协议的 RpcBindingAdapter，从 ProviderConfigContainer 中取出 ProviderConfig，调用 export 方法，将服务发布出去，并将服务提供者信息注册到注册中心上。</p>
+
+<pre><code class="language-java">public Object outBinding(Object contract, RpcBinding binding, Object target,
+                         SofaRuntimeContext sofaRuntimeContext) {
+    ApplicationContext applicationContext = sofaRuntimeContext.getSofaRuntimeManager()
+        .getRootApplicationContext();
+    ProviderConfigContainer providerConfigContainer = applicationContext
+        .getBean(ProviderConfigContainer.class);
+    ProcessorContainer processorContainer = applicationContext
+        .getBean(ProcessorContainer.class);
+
+    String uniqueName = providerConfigContainer.createUniqueName((Contract) contract, binding);
+    ProviderConfig providerConfig = providerConfigContainer.getProviderConfig(uniqueName);
+    processorContainer.processorProvider(providerConfig);
+
+    ...
+
+    try {
+        providerConfig.export();
+    } catch (Exception e) {
+        ...
+    }
+
+    if (providerConfigContainer.isAllowPublish()) {
+        providerConfig.setRegister(true);
+        List&lt;RegistryConfig&gt; registrys = providerConfig.getRegistry();
+        for (RegistryConfig registryConfig : registrys) {
+            Registry registry = RegistryFactory.getRegistry(registryConfig);
+            registry.init();
+            registry.start();
+            registry.register(providerConfig);
+        }
+    }
+    return Boolean.TRUE;
+}
+</code></pre>
+
+<h4 id="serviceclient">ServiceClient</h4>
+
+<p>在分析过 ServiceFactoryBean 之后，再来看 ServiceClient的源码，binding 的实现是相似的：通过 BindingConverter 工厂获取组件协议的 BindingConverter，调用 convert 方法将配置转换为组件协议 Binding。与 ServiceFactoryBean 不同的是，不管是否绑定了其他组件协议都会默认绑定 JVM 协议。调用 ComponentManager 的 register 方法，注册 ServiceComponent，从而实现服务的发布。</p>
+
+<pre><code class="language-java">public void service(ServiceParam serviceParam) {
+    ...
+    Service service = new ServiceImpl(serviceParam.getUniqueId(),
+        serviceParam.getInterfaceType(), InterfaceMode.api, serviceParam.getInstance(), null);
+
+    for (BindingParam bindingParam : serviceParam.getBindingParams()) {
+        BindingConverter bindingConverter = bindingConverterFactory
+            .getBindingConverter(bindingParam.getBindingType());
+        ...
+        Binding binding = bindingConverter.convert(bindingParam, bindingConverterContext);
+        service.addBinding(binding);
+    }
+
+    boolean hasJvmBinding = false;
+    for (Binding binding : service.getBindings()) {
+        if (binding.getBindingType().equals(JvmBinding.JVM_BINDING_TYPE)) {
+            hasJvmBinding = true;
+            break;
+        }
+    }
+
+    if (!hasJvmBinding) {
+        service.addBinding(new JvmBinding());
+    }
+
+    ComponentInfo componentInfo = new ServiceComponent(implementation, service,
+        bindingAdapterFactory, sofaRuntimeContext);
+    sofaRuntimeContext.getComponentManager().register(componentInfo);
+}
+</code></pre>
+
+<h3 id="服务引用">服务引用</h3>
+
+<h4 id="referencefactorybean">ReferenceFactoryBean</h4>
+
+<p>ReferenceFactoryBean 的父类同样是 AbstractContractFactoryBean，通过 parseBindings 方法解析服务协议配置，从而获取服务支持的组件协议 bindings。</p>
+
+<pre><code class="language-java">public abstract class AbstractContractFactoryBean implements InitializingBean, FactoryBean,
+                                                 ApplicationContextAware {
+    ...
+    protected List&lt;Binding&gt; bindings = new ArrayList&lt;&gt;(2);
+    ...
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List&lt;Element&gt; tempElements = new ArrayList&lt;&gt;();
+        ...
+        if (!apiType) {
+            this.bindings = parseBindings(tempElements, applicationContext, isInBinding());
+        }
+        doAfterPropertiesSet();
+    }
+}
+</code></pre>
+
+<p>再看 ReferenceFactoryBean 的 doAfterPropertiesSet 方法：如果服务未配置任何组件协议，会默认绑定 JVM 协议。这里需要注意的一个细节，一个服务引用客户端只能绑定一种组件协议，因此就按顺序取配置协议中的第一个，绑定到服务引用客户端上。再调用 ReferenceRegisterHelper 的 registerReference 方法，注册 ReferenceComponent。</p>
+
+<pre><code class="language-java">protected void doAfterPropertiesSet() {
+    ...
+    Reference reference = buildReference();
+    ...
+    if (bindings.size() == 0) {
+        // default reference prefer to ignore serialize
+        JvmBindingParam jvmBindingParam = new JvmBindingParam();
+        jvmBindingParam.setSerialize(false);
+        bindings.add(new JvmBinding().setJvmBindingParam(jvmBindingParam));
+    }
+
+    reference.addBinding(bindings.get(0));
+    proxy = ReferenceRegisterHelper.registerReference(reference, bindingAdapterFactory,
+        sofaRuntimeContext, applicationContext);
+}
+</code></pre>
+
+<p>在 ReferenceRegisterHelper 的 registerReference 方法中，如果服务引用绑定协议是 JVM 以外的协议，且配置了 JVM 调用优先，那么就在绑定协议中再追加一个 JVM协议。再调用 ComponentManager 的 registerAndGet 方法，注册 ReferenceComponent。</p>
+
+<pre><code class="language-java">public class ReferenceRegisterHelper {
+    ...
+    public static Object registerReference(Reference reference,
+                                           BindingAdapterFactory bindingAdapterFactory,
+                                           SofaRuntimeContext sofaRuntimeContext,
+                                           ApplicationContext applicationContext) {
+        Binding binding = (Binding) reference.getBindings().toArray()[0];
+
+        if (!binding.getBindingType().equals(JvmBinding.JVM_BINDING_TYPE)
+            &amp;&amp; !SofaRuntimeProperties.isDisableJvmFirst(sofaRuntimeContext)
+            &amp;&amp; reference.isJvmFirst()) {
+            // as rpc invocation would be serialized, so here would Not ignore serialized
+            reference.addBinding(new JvmBinding());
+        }
+
+        ComponentManager componentManager = sofaRuntimeContext.getComponentManager();
+        ReferenceComponent referenceComponent = new ReferenceComponent(reference,
+            new DefaultImplementation(), bindingAdapterFactory, sofaRuntimeContext);
+
+        if (componentManager.isRegistered(referenceComponent.getName())) {
+            return componentManager.getComponentInfo(referenceComponent.getName())
+                .getImplementation().getTarget();
+        }
+
+        ComponentInfo componentInfo = componentManager.registerAndGet(referenceComponent);
+        componentInfo.setApplicationContext(applicationContext);
+        return componentInfo.getImplementation().getTarget();
+
+    }
+}
+</code></pre>
+
+<p>这里与服务发布的流程一样，在ComponentManager 的注册方法中：调用 ReferenceComponent 的 register 方法，将组件状态更新为 REGISTERED。调用resolve 方法，将组件状态更新为 RESOLVED。调用 activate 方法，激活组件，创建服务引用客户端代理，并将组件状态更新为 ACTIVATED。</p>
+
+<pre><code class="language-java">public ComponentInfo registerAndGet(ComponentInfo componentInfo) {
+    return doRegister(componentInfo);
+}
+private ComponentInfo doRegister(ComponentInfo ci) {
+    ...
+    try {
+        ci.register();
+    } catch (Throwable t) {
+        ...
+        return null;
+    }
+    try {
+        ...
+        if (ci.resolve()) {
+            typeRegistry(ci);
+            ci.activate();
+        }
+    } catch (Throwable t) {
+        ...
+    }
+
+    return ci;
+}
+</code></pre>
+
+<p>ReferenceComponent 的 activate 方法中，如果只绑定了一种组件协议，就直接生成服务引用客户端代理；如果绑定了多种服务协议，这种情况是服务引用绑定的是 RPC 协议，且配置了 JVM 调用优先，会生成一种特殊的服务引用客户端代理，会先使用 JVM 协议调用服务，如果找不到 JVM 服务会降级使用 RPC 服务引用。</p>
+
+<pre><code class="language-java">public void activate() throws ServiceRuntimeException {
+    if (reference.hasBinding()) {
+        Binding candidate = null;
+        Set&lt;Binding&gt; bindings = reference.getBindings();
+        if (bindings.size() == 1) {
+            candidate = bindings.iterator().next();
+        } else if (bindings.size() &gt; 1) {
+            Object backupProxy = null;
+            for (Binding binding : bindings) {
+                if (JvmBinding.JVM_BINDING_TYPE.getType().equals(binding.getName())) {
+                    candidate = binding;
+                } else {
+                    // Under normal RPC reference (local-first/jvm-first is not set to false) binding,
+                    // backup proxy is the RPC proxy, which will be invoked if Jvm service is not found
+                    backupProxy = createProxy(reference, binding);
+                }
+            }
+            if (candidate != null) {
+                ((JvmBinding) candidate).setBackupProxy(backupProxy);
+            }
+        }
+
+        Object proxy = null;
+        if (candidate != null) {
+            proxy = createProxy(reference, candidate);
+        }
+
+        this.implementation = new DefaultImplementation();
+        implementation.setTarget(proxy);
+    }
+
+    super.activate();
+    ...
+}
+</code></pre>
+
+<p>服务引用客户端代理是通过 createProxy 方法创建的，核心在于调用 inBinding 方法来生成代理。</p>
+
+<pre><code class="language-java">private Object createProxy(Reference reference, Binding binding) {
+    BindingAdapter&lt;Binding&gt; bindingAdapter = bindingAdapterFactory.getBindingAdapter(binding.getBindingType());
+    ...
+    Object proxy;
+    try {
+        proxy = bindingAdapter.inBinding(reference, binding, sofaRuntimeContext);
+    } finally {
+        ...
+    }
+    return proxy;
+}
+</code></pre>
+
+<p>BindingAdapter 的 inBinding 方法作用是服务引用，inBinding 方法有两个实现，先看一下 JVM 协议的 JvmBindingAdapter，创建一个 AOP 代理，实际调用会委托给 JvmServiceInvoker。</p>
+
+<pre><code class="language-java">public class JvmBindingAdapter implements BindingAdapter&lt;JvmBinding&gt; {
+    public Object inBinding(Object contract, JvmBinding binding,
+                            SofaRuntimeContext sofaRuntimeContext) {
+        return createServiceProxy((Contract) contract, binding, sofaRuntimeContext);
+    }
+    private Object createServiceProxy(Contract contract, JvmBinding binding,
+                                      SofaRuntimeContext sofaRuntimeContext) {
+        ...
+        try {
+            ...
+            ServiceProxy handler = new JvmServiceInvoker(contract, binding, sofaRuntimeContext);
+            ProxyFactory factory = new ProxyFactory();
+            if (javaClass.isInterface()) {
+                factory.addInterface(javaClass);
+                factory.addInterface(JvmBindingInterface.class);
+            } else {
+                factory.setTargetClass(javaClass);
+                factory.setProxyTargetClass(true);
+            }
+            factory.addAdvice(handler);
+            return factory.getProxy(newClassLoader);
+        } finally {
+            Thread.currentThread().setContextClassLoader(oldClassLoader);
+        }
+    }
+}
+</code></pre>
+
+<p>另外一个是 RPC 协议的 RpcBindingAdapter，根据组件协议生成 ConsumerConfig，调用 refer 方法，生成服务引用。</p>
+
+<pre><code class="language-java">public abstract class RpcBindingAdapter implements BindingAdapter&lt;RpcBinding&gt; {
+    public Object inBinding(Object contract, RpcBinding binding,
+                            SofaRuntimeContext sofaRuntimeContext) {
+        ...
+        ConsumerConfig consumerConfig = consumerConfigHelper.getConsumerConfig((Contract) contract, binding);
+        ...
+        try {
+            Object result = consumerConfig.refer();
+            binding.setConsumerConfig(consumerConfig);
+            return result;
+        } catch (Exception e) {
+            ...
+        }
+    }
+}
+</code></pre>
+
+<h4 id="referenceclient">ReferenceClient</h4>
+
+<p>ReferenceClient 引用服务实现是通过 ReferenceRegisterHelper 的 registerReference 方法，与 ReferenceFactoryBean 是一致的。</p>
+
+<pre><code class="language-java">public &lt;T&gt; T reference(ReferenceParam&lt;T&gt; referenceParam) {
+    return (T) ReferenceRegisterHelper.registerReference(
+        getReferenceFromReferenceParam(referenceParam), bindingAdapterFactory,
+        sofaRuntimeContext);
+}
+</code></pre>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Java SDK · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "en"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/en/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="Search">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/en/projects/">
+              <span>
+                Projects
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/en/guides/">
+              <span>
+                Guides
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/en/blog/">
+              <span>
+                Blog
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/en/activities/">
+              <span>
+                Activity
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+            
+              <a href="/sofastack.tech/projects/sofa-registry/java-sdk/">
+                <span>中文</span>
+                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"></use></svg>
+              </a>
+						
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/en/projects/">Projects</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/en/guides/">Guides</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/en/blog/">Blog</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/en/activities/">Activity</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="Search">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+						
+							<a class="translation" href="/sofastack.tech/projects/sofa-registry/java-sdk/">中</a>
+						
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFARegistry is a production-level, low-latency, and highly available service registry powered by Ant Financial.">SOFARegistry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">Main Projects</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">Incubating Projects</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">Tool Projects</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/en/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/en/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">Ecosystem Projects</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/en/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="Introduction"
+					>Introduction</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Overview"
+						href="/sofastack.tech/en/projects/sofa-registry/overview/"
+					>Overview</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Terminology"
+						href="/sofastack.tech/en/projects/sofa-registry/terminology/"
+					>Terminology</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="Quick start"
+					>Quick start</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Server deployment"
+						href="/sofastack.tech/en/projects/sofa-registry/server-quick-start/"
+					>Server deployment</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Client usage"
+						href="/sofastack.tech/en/projects/sofa-registry/client-quick-start/"
+					>Client usage</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="Developer guide"
+					>Developer guide</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link -current">
+					<a
+						title="JAVA SDK"
+						href="/sofastack.tech/en/projects/sofa-registry/java-sdk/"
+					>JAVA SDK</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			Java SDK
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/en/projects/sofa-registry/java-sdk/index.md"
+		>Edit</a>
+	</div>
+	<div class="meta">
+		Update time: 2024-06-18 
+		
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h2 id="1-create-a-maven-project-and-import-the-dependency">1. Create a Maven project and import the dependency</h2>
+
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;registry-client-all&lt;/artifactId&gt;
+    &lt;version&gt;${registry.client.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h2 id="2-create-the-sofaregistry-client-instance">2. Create the SOFARegistry client instance</h2>
+
+<p>The key code for creating the SOFARegistry client instance is as follows:</p>
+
+<pre><code class="language-java">RegistryClientConfig config =  DefaultRegistryClientConfigBuilder.start().setRegistryEndpoint(&quot;127.0.0.1&quot;).setRegistryEndpointPort(9603).build();
+DefaultRegistryClient registryClient = new DefaultRegistryClient(config);
+registryClient.init();
+</code></pre>
+
+<p>Properties related to SOFARegistry are specified by the DefaultRegistryClientConfigBuilder class, which provides the following key properties:</p>
+
+<pre><code class="language-java">public class DefaultRegistryClientConfigBuilder {
+    private String  instanceId;
+    private String  zone                      = DEFAULT_ZONE;
+    private String  registryEndpoint;
+    private int     registryEndpointPort      = 9603;
+    private String  dataCenter                = DEFAULT_DATA_CENTER;
+    private String  appName;
+    private int     connectTimeout            = 3000;
+    private int     socketTimeout             = 3000;
+    private int     invokeTimeout             = 1000;
+    private int     recheckInterval           = 500;
+    private int     observerThreadCoreSize    = 5;
+    private int     observerThreadMaxSize     = 10;
+    private int     observerThreadQueueLength = 1000;
+    private int     syncConfigRetryInterval   = 30000;
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>instanceId</td>
+<td>String</td>
+<td>The ID of the instance. Default value: DEFAULT_INSTANCE_ID. The same instance ID must be used for data publishing and subscription. The unique data identifier consists of dataId+group+instanceId.</td>
+</tr>
+
+<tr>
+<td>zone</td>
+<td>String</td>
+<td>The zone where the instance is located. Default value: DEFAULT_ZONE.</td>
+</tr>
+
+<tr>
+<td>registryEndpoint</td>
+<td>String</td>
+<td>The endpoint of any session node of the servers.</td>
+</tr>
+
+<tr>
+<td>registryEndpointPort</td>
+<td>Integer</td>
+<td>The session.server.httpServerPort configured for a session node. Default value: 9603.</td>
+</tr>
+
+<tr>
+<td>dataCenter</td>
+<td>String</td>
+<td>The data center of SOFARegistry. Default value: DefaultDataCenter.</td>
+</tr>
+
+<tr>
+<td>appName</td>
+<td>String</td>
+<td>The name of the app that accesses SOFARegistry.</td>
+</tr>
+
+<tr>
+<td>connectTimeout</td>
+<td>Integer</td>
+<td>Specifies the timeout for establishing a connection with a server. Default value: 3000 ms.</td>
+</tr>
+
+<tr>
+<td>socketTimeout</td>
+<td>Integer</td>
+<td>Specifies the timeout for accessing the servers&rsquo; REST API. Default value: 3000 ms.</td>
+</tr>
+
+<tr>
+<td>invokeTimeout</td>
+<td>Integer</td>
+<td>Specifies the timeout for calling services on the servers. Default value: 1000 ms.</td>
+</tr>
+
+<tr>
+<td>recheckInterval</td>
+<td>Integer</td>
+<td>Specifies the interval for checking the task queue. Default value: 500 ms.</td>
+</tr>
+
+<tr>
+<td>observerThreadCoreSize</td>
+<td>Integer</td>
+<td>Specifies the number of core threads in the thread pool that process data pushed from the servers. Default value: 5.</td>
+</tr>
+
+<tr>
+<td>observerThreadMaxSize</td>
+<td>Integer</td>
+<td>Specifies the maximum number of threads in the thread pool that process data pushed from the servers. Default value: 10.</td>
+</tr>
+
+<tr>
+<td>observerThreadQueueLength</td>
+<td>Integer</td>
+<td>Specifies the maximum thread queue length of the thread pool that processes data pushed from the servers. Default value: 1000.</td>
+</tr>
+
+<tr>
+<td>syncConfigRetryInterval</td>
+<td>Integer</td>
+<td>Specifies the retry interval to synchronize the registry server. Default value: 30000 ms.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="3-publish-data">3. Publish data</h2>
+
+<p>The key code for publishing data is as follows:</p>
+
+<pre><code class="language-java">// Create a publisher registry.
+PublisherRegistration registration = new PublisherRegistration(&quot;com.alipay.test.demo.service:1.0@DEFAULT&quot;);
+registration.setGroup(&quot;TEST_GROUP&quot;);
+registration.setAppName(&quot;TEST_APP&quot;);
+
+// Register the registry with the client and publish data.
+Publisher publisher = registryClient.register(registration, &quot;10.10.1.1:12200?xx=yy&quot;);
+
+// If you need to overwrite data published previously, you can use the publisher model to republish the data.
+publisher.republish(&quot;10.10.1.1:12200?xx=zz&quot;);
+</code></pre>
+
+<p>The key for publishing data is to create the PublisherRegistration class, which provides three properties:</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>dataId</td>
+<td>String</td>
+<td>The data ID. Use the same data ID for data publishing and subscription. A unique data identifier comprises dataId+group+instanceId.</td>
+</tr>
+
+<tr>
+<td>group</td>
+<td>String</td>
+<td>The data group. Default value: DEFAULT_GROUP. Use the same data group for data publishing and subscription. A unique data identifier comprises dataId+group+instanceId.</td>
+</tr>
+
+<tr>
+<td>appName</td>
+<td>String</td>
+<td>The name of the app that accesses SOFARegistry.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="4-subscribe-to-the-data">4. Subscribe to the data</h2>
+
+<p>The key code for data subscription is as follows:</p>
+
+<pre><code class="language-java">// Create SubscriberDataObserver. 
+SubscriberDataObserver subscriberDataObserver = new SubscriberDataObserver() {
+    @Override
+    public void handleData(String dataId, UserData userData) {
+        System.out.println(&quot;receive data success, dataId: &quot; + dataId + &quot;, data: &quot; + userData);
+    }
+};
+
+// Create a subscriber registry and specify the subscription level. ScopeEnum covers three subscription levels: zone, dataCenter, and global.
+String dataId = &quot;com.alipay.test.demo.service:1.0@DEFAULT&quot;;
+SubscriberRegistration registration = new SubscriberRegistration(dataId, subscriberDataObserver);
+registration.setGroup(&quot;TEST_GROUP&quot;);
+registration.setAppName(&quot;TEST_APP&quot;);
+registration.setScopeEnum(ScopeEnum.global);
+
+// Register the registry with the client and subscribe to the data. &lt;Register the registry with the client and subscribe to the data. The subscribed data will be sent to SubscriberDataObserver in the form of a callback.
+Subscriber subscriber = registryClient.register(registration);
+</code></pre>
+
+<p>To subscribe to data, you need to create two key classes: SubscriberDataObserver and SubscriberRegistration. The former is the callback interface that will be executed after the client receives data from the servers, and the latter is the subscriber registration class that registers subscription information with the servers.</p>
+
+<h3 id="4-1-subscriberdataobserver">4.1 SubscriberDataObserver</h3>
+
+<p>The SubscriberDataObserver only provides one method:</p>
+
+<pre><code class="language-java">void handleData(String dataId, UserData data);
+</code></pre>
+
+<p>Parameter description</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">dataId</td>
+<td align="left">String</td>
+<td>The data ID.</td>
+</tr>
+
+<tr>
+<td align="left">data</td>
+<td align="left">UserData</td>
+<td>The content of the data.</td>
+</tr>
+</tbody>
+</table>
+
+<p>The UserData class wraps the content of the data and provides the following methods:</p>
+
+<pre><code class="language-java">public interface UserData {
+    Map&lt;String, List&lt;String&gt;&gt; getZoneData();
+    String getLocalZone();
+}
+</code></pre>
+
+<ul>
+<li>getLocalZone: returns the current zone.</li>
+<li>getZoneData: returns data by taking zone as the key, and data of each zone as the value.</li>
+</ul>
+
+<h3 id="4-2-subscriberregistration">4.2 SubscriberRegistration</h3>
+
+<p>SubscriberRegistration provides the following properties:</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>dataId</td>
+<td>String</td>
+<td>The data ID. Use the same data ID for data publishing and subscription. A unique data identifier comprises dataId+group+instanceId.</td>
+</tr>
+
+<tr>
+<td>group</td>
+<td>String</td>
+<td>The data group. Default value: DEFAULT_GROUP. Use the same data group for data publishing and subscription. A unique data identifier comprises dataId+group+instanceId.</td>
+</tr>
+
+<tr>
+<td>appName</td>
+<td>String</td>
+<td>The name of the app that accesses SOFARegistry.</td>
+</tr>
+
+<tr>
+<td>ScopeEnum</td>
+<td>ScopeEnum</td>
+<td>The enumeration value of any of the three subscription scope types: zone, dataCenter, and global.</td>
+</tr>
+
+<tr>
+<td>subscriberDataObserver</td>
+<td>SubscriberDataObserver</td>
+<td>The callback interface to be executed after Client receives the subscribed data.</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="5-unregistration-and-unsubscription">5. Unregistration and unsubscription</h2>
+
+<p>The interface for unregistration and unsubscription is as follows:</p>
+
+<pre><code class="language-java">int unregister(String dataId, String group, RegistryType registryType);
+</code></pre>
+
+<p>Request parameters</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>dataId</td>
+<td>String</td>
+<td>The data ID.</td>
+</tr>
+
+<tr>
+<td>group</td>
+<td>String</td>
+<td>The data group.</td>
+</tr>
+
+<tr>
+<td>registryType</td>
+<td>RegistryType</td>
+<td>The enumeration value of any of the three types: PUBLISHER, SUBSCRIBER, and CONFIGURATOR.</td>
+</tr>
+</tbody>
+</table>
+
+<p>The Integer values returned by the method show the numbers of unregistered and unsubscribed users.</p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">Resources</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">Samples</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">Social Media</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">Zhihu</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">Weibo</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">Get Involved</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues">Feedback</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">Community</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">Ant Financial Open Source</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg</a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">More</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">Wechat Official Account</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_2.png" />
+					<p class="qrcode-desc">DingTalk Group</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

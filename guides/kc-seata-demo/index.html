@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	使用 Seata 保障支付一致性 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+            
+              <a href="/sofastack.tech/en/guides/kc-seata-demo/">
+                <span>English</span>
+                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"></use></svg>
+              </a>
+						
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+						
+							<a class="translation" href="/sofastack.tech/en/guides/kc-seata-demo/">En</a>
+						
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		使用 Seata 保障支付一致性
+	</h1>
+	<div class="meta"></div>
+</div>
+		<article class="typo">
+  <h1 id="使用-seata-保障支付一致性">使用 Seata 保障支付一致性</h1>
+
+<p><strong>注意：您需要自行部署后端环境依赖，并修改示例中的服务依赖地址即可使用。</strong></p>
+
+<p>在开始该 demo 之前先完成《<a href="https://github.com/sofastack-guides/kc-sofastack-demo">使用 SOFAStack 快速构建微服务</a>》，如果没有完成，可以基于仓库里的 kc-sofastack-demo 工程为基线完成下面的 demo，该 demo 是在它基础上加上 Seata 分布式事务。但该 demo 不是只能应用于 SOFA，可以适用于任何 java 技术栈应用。</p>
+
+<h2 id="at-模式">AT 模式</h2>
+
+<h3 id="1-引入-maven-依赖">1、引入 maven 依赖</h3>
+
+<p>将下面的依赖引入到父工程的 pom 文件中（kc-sofastack-demo/pom.xml）:</p>
+
+<pre><code class="language-html">
+&lt;properties&gt;
+    &lt;seata.version&gt;0.6.1&lt;/seata.version&gt;
+    &lt;netty4.version&gt;4.1.24.Final&lt;/netty4.version&gt;
+&lt;/properties&gt;
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+            &lt;version&gt;${seata.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-server&lt;/artifactId&gt;
+            &lt;version&gt;${seata.version}&lt;/version&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+                    &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+            &lt;version&gt;${netty4.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+
+</code></pre>
+
+<p>将下面的依赖引入到 stock-mng 工程的 pom 文件中（kc-sofastack-demo/stock-mng/pom.xml）:</p>
+
+<pre><code class="language-html">
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.netty&lt;/groupId&gt;
+        &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;dependencies&gt;
+
+</code></pre>
+
+<p>将下面的依赖引入到 balance-mng-impl 工程的 pom 文件中（kc-sofastack-demo/balance-mng/balance-mng-impl/pom.xml）:</p>
+
+<pre><code class="language-html">
+&lt;dependencies&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-server&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.netty&lt;/groupId&gt;
+        &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;dependencies&gt;
+
+</code></pre>
+
+<h4 id="2-使用-seata-的-datasourceproxy-代理实际的数据源-并配置-globaltransactionscanner-扫描-globaltransaction-注解">2、使用 Seata 的 DataSourceProxy 代理实际的数据源，并配置 GlobalTransactionScanner 扫描@GlobalTransaction 注解</h4>
+
+<p>将下面的 java 代码段加到 BalanceMngApplication 和 StockMngApplication 类的 main 方法下面:</p>
+
+<pre><code class="language-java">
+import io.seata.rm.datasource.DataSourceProxy;
+import io.seata.spring.annotation.GlobalTransactionScanner;
+
+
+
+public static void main(String[] args) {
+    SpringApplication.run(BalanceMngApplication.class, args);
+}
+
+@Configuration
+public static class DataSourceConfig {
+
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = &quot;spring.datasource.hikari&quot;)
+    public DataSource dataSource(DataSourceProperties properties) {
+        HikariDataSource dataSource = createDataSource(properties, HikariDataSource.class);
+        if (properties.getName()!=null &amp;&amp; properties.getName().length() &gt; 0) {
+            dataSource.setPoolName(properties.getName());
+        }
+        return new DataSourceProxy(dataSource);
+    }
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    protected static &lt;T&gt; T createDataSource(DataSourceProperties properties,
+                                            Class&lt;? extends DataSource&gt; type) {
+        return (T) properties.initializeDataSourceBuilder().type(type).build();
+    }
+
+    @Bean
+    @Primary
+    public GlobalTransactionScanner globalTransactionScanner(){
+        return new GlobalTransactionScanner(&quot;kc-balance-mng&quot;, &quot;my_test_tx_group&quot;);
+    }
+}
+
+</code></pre>
+
+<p>注意上面的 dataSource 方法返回的是 DataSourceProxy 代理的数据源</p>
+
+<h4 id="3-配置-globaltransactional-注解使分布式事务生效">3、配置@GlobalTransactional 注解使分布式事务生效</h4>
+
+<p>在 BookStoreControllerImpl 类的 purchase 方法上加入@GlobalTransactional 注解:</p>
+
+<pre><code class="language-java">
+import io.seata.spring.annotation.GlobalTransactional;
+
+
+@Override
+@GlobalTransactional(timeoutMills = 300000, name = &quot;kc-book-store-tx&quot;)
+public Success purchase(String body) {
+  
+}
+</code></pre>
+
+<h4 id="4-配置-seata-server">4、配置 Seata server</h4>
+
+<p>简单起见，将 Seata server 和 BalanceMngApplication 一起启动，在 BalanceMngApplication 类中加入启动 Seata server 的代码:</p>
+
+<pre><code class="language-java">
+public static void main(String[] args) {
+
+    startSeatServer();
+
+    SpringApplication.run(BalanceMngApplication.class, args);
+}
+
+/**
+ * The seata server.
+ */
+static Server server = null;
+
+private static void startSeatServer(){
+
+    new Thread(new Runnable() {
+
+        public void run() {
+            server = new Server();
+            try {
+                server.main(new String[] {&quot;8091&quot;, StoreMode.FILE.name(), &quot;127.0.0.1&quot;});
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }).start();
+
+}
+
+</code></pre>
+
+<p>演示的 Seata server 使用本地文件作为存储，将下面两个文件复制到 balance-mng-bootstrap 和 stock-mng 工程的/src/main/resources 目录下:
+<br>文件名：file.conf
+<br>文件内容：</p>
+
+<pre><code class="language-yaml">
+transport {
+  # tcp udt unix-domain-socket
+  type = &quot;TCP&quot;
+  #NIO NATIVE
+  server = &quot;NIO&quot;
+  #enable heartbeat
+  heartbeat = true
+  #thread factory for netty
+  thread-factory {
+    boss-thread-prefix = &quot;NettyBoss&quot;
+    worker-thread-prefix = &quot;NettyServerNIOWorker&quot;
+    server-executor-thread-prefix = &quot;NettyServerBizHandler&quot;
+    share-boss-worker = false
+    client-selector-thread-prefix = &quot;NettyClientSelector&quot;
+    client-selector-thread-size = 1
+    client-worker-thread-prefix = &quot;NettyClientWorkerThread&quot;
+    # netty boss thread size,will not be used for UDT
+    boss-thread-size = 1
+    #auto default pin or 8
+    worker-thread-size = 8
+  }
+}
+service {
+  #vgroup-&gt;rgroup
+  vgroup_mapping.my_test_tx_group = &quot;default&quot;
+  #only support single node
+  default.grouplist = &quot;127.0.0.1:8091&quot;
+  #degrade current not support
+  enableDegrade = false
+  #disable
+  disable = false
+}
+client {
+  async.commit.buffer.limit = 10000
+  lock {
+    retry.internal = 10
+    retry.times = 30
+  }
+}
+
+## transaction log store
+store {
+  ## store mode: file、db
+  mode = &quot;file&quot;
+
+  ## file store
+  file {
+    dir = &quot;file_store/seata&quot;
+  }
+}
+
+</code></pre>
+
+<p><br>文件名：registry.conf
+<br>文件内容：</p>
+
+<pre><code class="language-yaml">
+registry {
+  # file 、nacos 、eureka、redis、zk
+  type = &quot;file&quot;
+
+  nacos {
+    serverAddr = &quot;localhost&quot;
+    namespace = &quot;public&quot;
+    cluster = &quot;default&quot;
+  }
+  eureka {
+    serviceUrl = &quot;http://localhost:1001/eureka&quot;
+    application = &quot;default&quot;
+    weight = &quot;1&quot;
+  }
+  redis {
+    serverAddr = &quot;localhost:6379&quot;
+    db = &quot;0&quot;
+  }
+  zk {
+    cluster = &quot;default&quot;
+    serverAddr = &quot;127.0.0.1:2181&quot;
+    session.timeout = 6000
+    connect.timeout = 2000
+  }
+  file {
+    name = &quot;file.conf&quot;
+  }
+}
+
+config {
+  # file、nacos 、apollo、zk
+  type = &quot;file&quot;
+
+  nacos {
+    serverAddr = &quot;localhost&quot;
+    namespace = &quot;public&quot;
+    cluster = &quot;default&quot;
+  }
+  apollo {
+    app.id = &quot;fescar-server&quot;
+    apollo.meta = &quot;http://192.168.1.204:8801&quot;
+  }
+  zk {
+    serverAddr = &quot;127.0.0.1:2181&quot;
+    session.timeout = 6000
+    connect.timeout = 2000
+  }
+  file {
+    name = &quot;file.conf&quot;
+  }
+}
+
+</code></pre>
+
+<h4 id="5-创建-undo-log-表">5、创建 undo_log 表</h4>
+
+<p>在 balance_db 和 stock_db 两个数据库中都创建 undo_log 表:</p>
+
+<pre><code class="language-sql">
+CREATE TABLE `undo_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `branch_id` bigint(20) NOT NULL,
+  `xid` varchar(100) NOT NULL,
+  `rollback_info` longblob NOT NULL,
+  `log_status` int(11) NOT NULL,
+  `log_created` datetime NOT NULL,
+  `log_modified` datetime NOT NULL,
+  `ext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+</code></pre>
+
+<h4 id="6-启动-seata-server-和-stock-mng-balance-mng-应用">6、启动 Seata server 和 stock-mng、balance-mng 应用</h4>
+
+<ol>
+<li>运行 BalanceMngApplication 类的 main 方法(包含启动 Seata server)</li>
+<li>运行 StockMngApplication 类的 main 方法</li>
+<li>浏览器打开 <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a></li>
+</ol>
+
+<h2 id="tcc-模式">TCC 模式</h2>
+
+<h3 id="1-引入-maven依赖">1、引入 maven依赖</h3>
+
+<p>见上文 AT 模式的 1、引入 maven 依赖</p>
+
+<h4 id="2-实现-tcc-模式要求的三个接口-prepare-commit-rollback">2、实现 TCC 模式要求的三个接口: prepare、commit、rollback</h4>
+
+<ol>
+<li>在 balance-mng-facade 工程的 pom 文件引入依赖(kc-sofastack-demo/balance-mng/balance-mng-facade/pom.xml):</li>
+</ol>
+
+<pre><code class="language-html">
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<ol>
+<li>在 BalanceMngFacade 接口增加三个方法:</li>
+</ol>
+
+<pre><code class="language-java">
+@TwoPhaseBusinessAction(name = &quot;minusBalancePrepare&quot;, commitMethod = &quot;minusBalanceCommit&quot;, rollbackMethod = &quot;minusBalanceRollback&quot;)
+boolean minusBalancePrepare(BusinessActionContext context,
+                            @BusinessActionContextParameter(paramName = &quot;userName&quot;) String userName,
+                            @BusinessActionContextParameter(paramName = &quot;amount&quot;) BigDecimal amount);
+
+boolean minusBalanceCommit(BusinessActionContext context);
+
+boolean minusBalanceRollback(BusinessActionContext context);
+</code></pre>
+
+<ol>
+<li>在 BalanceMngMapper 接口中实现上面三个接口需要用的 sql:</li>
+</ol>
+
+<pre><code class="language-java">
+@Update(&quot;update balance_tb set balance = balance - #{amount}, freezed = freezed +  #{amount} where user_name = #{userName}&quot;)
+int minusBalancePrepare(@Param(&quot;userName&quot;) String userName, @Param(&quot;amount&quot;) BigDecimal amount);
+
+@Update(&quot;update balance_tb set freezed = freezed - #{amount} where user_name = #{userName}&quot;)
+int minusBalanceCommit(@Param(&quot;userName&quot;) String userName, @Param(&quot;amount&quot;) BigDecimal amount);
+
+@Update(&quot;update balance_tb set balance = balance + #{amount}, freezed = freezed - #{amount} where user_name = #{userName}&quot;)
+int minusBalanceRollback(@Param(&quot;userName&quot;) String userName, @Param(&quot;amount&quot;) BigDecimal amount);
+</code></pre>
+
+<ol>
+<li>修改 balance_tb 的表结构，增加 freezed（冻结金额）字段:</li>
+</ol>
+
+<pre><code class="language-sql">
+ALTER TABLE balance_tb add column freezed decimal(10,2) default 0.00;
+
+</code></pre>
+
+<ol>
+<li>在 BalanceMngImpl 类中实现 BalanceMngFacade 接口中增加的三个方法:</li>
+</ol>
+
+<pre><code class="language-java">
+private static final Logger LOGGER = LoggerFactory.getLogger(BalanceMngImpl.class);
+
+@Override
+public boolean minusBalancePrepare(BusinessActionContext context, String userName, BigDecimal amount) {
+    LOGGER.info(&quot;minus balance prepare begin &quot;);
+    LOGGER.info(&quot;minus balance prepare SQL: update balance_tb set balance = balance - {}, freezed = freezed + {}  where user_name = {}&quot;, amount, amount, userName);
+
+    int effect = balanceMngMapper.minusBalancePrepare(userName, amount);
+    LOGGER.info(&quot;minus balance prepare end&quot;);
+    return (effect &gt; 0);
+}
+
+@Override
+public boolean minusBalanceCommit(BusinessActionContext context) {
+
+    //分布式事务ID
+    final String xid = context.getXid();
+
+    final String userName = String.valueOf(context.getActionContext(&quot;userName&quot;));
+
+    final BigDecimal amount = new BigDecimal(String.valueOf(context.getActionContext(&quot;amount&quot;)));
+
+    LOGGER.info(&quot;minus balance commit begin  xid: &quot; + xid);
+    LOGGER.info(&quot;minus balance commit SQL: update balance_tb set freezed = freezed - {}  where user_name = {}&quot;, amount, userName);
+
+    int effect = balanceMngMapper.minusBalanceCommit(userName, amount);
+    LOGGER.info(&quot;minus balance commit end&quot;);
+    return (effect &gt; 0);
+}
+
+@Override
+public boolean minusBalanceRollback(BusinessActionContext context) {
+    //分布式事务ID
+    final String xid = context.getXid();
+
+    final String userName = String.valueOf(context.getActionContext(&quot;userName&quot;));
+
+    final BigDecimal amount = new BigDecimal(String.valueOf(context.getActionContext(&quot;amount&quot;)));
+
+    LOGGER.info(&quot;minus balance rollback begin  xid: &quot; + xid);
+    LOGGER.info(&quot;minus balance rollback SQL: update balance_tb set balance = balance + {}, freezed = freezed - {}  where user_name = {}&quot;, amount, amount, userName);
+
+    int effect = balanceMngMapper.minusBalanceRollback(userName, amount);
+    LOGGER.info(&quot;minus balance rollback end&quot;);
+    return (effect &gt; 0);
+}
+
+</code></pre>
+
+<h4 id="3-取消使用-at-模式的-datasourceproxy">3、取消使用 AT 模式的 DataSourceProxy</h4>
+
+<p>TCC 模式不需要代理数据源，因为不需要解析 sql，生成 undo log，在 BalanceMngApplication 类中注释掉 dataSource 和 createDataSource 方法:</p>
+
+<pre><code class="language-java">
+@Configuration
+public static class DataSourceConfig {
+
+    //@Bean
+    //@Primary
+    //@ConfigurationProperties(prefix = &quot;spring.datasource.hikari&quot;)
+    //public DataSource dataSource(DataSourceProperties properties) {
+    //    HikariDataSource dataSource = createDataSource(properties, HikariDataSource.class);
+    //    if (StringUtils.hasText(properties.getName())) {
+    //        dataSource.setPoolName(properties.getName());
+    //    }
+    //    return new DataSourceProxy(dataSource);
+    //}
+    //
+    //@SuppressWarnings(&quot;unchecked&quot;)
+    //protected static &lt;T&gt; T createDataSource(DataSourceProperties properties,
+    //                                        Class&lt;? extends DataSource&gt; type) {
+    //    return (T) properties.initializeDataSourceBuilder().type(type).build();
+    //}
+
+    @Bean
+    @Primary
+    public GlobalTransactionScanner globalTransactionScanner(){
+        return new GlobalTransactionScanner(&quot;kc-balance-mng&quot;, &quot;my_test_tx_group&quot;);
+    }
+}
+
+</code></pre>
+
+<h4 id="4-bookstorecontrollerimpl-的-purchase-方法改成调用-balancemngfacade-minusbalanceprepare-方法">4、BookStoreControllerImpl 的 purchase 方法改成调用 BalanceMngFacade.minusBalancePrepare 方法</h4>
+
+<pre><code class="language-java">
+@Override
+@GlobalTransactional(timeoutMills = 300000, name = &quot;kc-book-store-tx&quot;)
+public Success purchase(String body) {
+
+    JSONObject obj = JSON.parseObject(body);
+    String userName = obj.getString(&quot;userName&quot;);
+    String productCode = obj.getString(&quot;productCode&quot;);
+    int count = obj.getInteger(&quot;count&quot;);
+
+    BigDecimal productPrice = stockMngFacade.queryProductPrice(productCode, userName);
+    if (productPrice == null) {
+        throw new RuntimeException(&quot;product code does not exist&quot;);
+    }
+    if (count &lt;= 0) {
+        throw new RuntimeException(&quot;purchase count should not be negative&quot;);
+    }
+    LOGGER.info(&quot;purchase begin  XID:&quot; + RootContext.getXID());
+    stockMngFacade.createOrder(userName, productCode, count);
+    stockMngFacade.minusStockCount(userName, productCode, count);
+
+
+    /* == 这里改成调minusBalancePrepare方法 == */
+    balanceMngFacade.minusBalancePrepare(null, userName, productPrice.multiply(new BigDecimal(count)));
+    /* ==== */
+
+    LOGGER.info(&quot;purchase end&quot;);
+    Success success = new Success();
+    success.setSuccess(&quot;true&quot;);
+    return success;
+}
+
+</code></pre>
+
+<h4 id="5-stockmngimpl-依赖的-balancemngfacade-接口改成使用-xml-方式引入">5、StockMngImpl 依赖的 BalanceMngFacade 接口改成使用 xml 方式引入</h4>
+
+<p>BalanceMngFacade 是一个 rpc 接口，之前的例子我们是用@SofaReference 注解方式引入，目前 TCC 模式不支持注解的方式拦截（一下个版本修复），所以需要改成用 xml 的方法引入:</p>
+
+<ol>
+<li>在 stock-mng 工程的 src/main/resources 目录下创建 spring 目录，并创建 seata-sofarpc-reference.xml:</li>
+</ol>
+
+<pre><code class="language-html">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:sofa=&quot;http://sofastack.io/schema/sofaboot&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd&quot;
+       default-autowire=&quot;byName&quot;&gt;
+
+    &lt;sofa:reference id=&quot;balanceMngFacade&quot; interface=&quot;io.sofastack.balance.manage.facade.BalanceMngFacade&quot; unique-id=&quot;${service.unique.id}&quot;&gt;
+        &lt;sofa:binding.bolt /&gt;
+    &lt;/sofa:reference&gt;
+
+&lt;/beans&gt;
+
+</code></pre>
+
+<ol>
+<li>在 StockMngApplication 类上加入@ImportResource 注解加载上面的 spring 配置文件</li>
+</ol>
+
+<pre><code class="language-java">
+@SpringBootApplication
+@ImportResource(&quot;classpath*:spring/*.xml&quot;)
+public class StockMngApplication {
+
+</code></pre>
+
+<ol>
+<li>将 BookStoreControllerImpl 类中引用 balanceMngFacade 接口的注解换成@Autowared:</li>
+</ol>
+
+<pre><code class="language-java">
+//@SofaReference(interfaceType = BalanceMngFacade.class, uniqueId = &quot;${service.unique.id}&quot;, binding = @SofaReferenceBinding(bindingType = &quot;bolt&quot;))
+@Autowired
+private BalanceMngFacade balanceMngFacade;
+
+</code></pre>
+
+<h4 id="6-启动-seata-server-和-stock-mng-balance-mng-应用-1">6、启动 Seata server 和 stock-mng、balance-mng 应用：</h4>
+
+<ol>
+<li>运行 BalanceMngApplication 类的 main 方法(包含启动 Seata server)</li>
+<li>运行 StockMngApplication 类的 main 方法</li>
+<li>浏览器打开 <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a></li>
+</ol>
+
+<h2 id="更多">更多</h2>
+
+<ul>
+<li><a href="https://gw.alipayobjects.com/os/basement_prod/04ed66e1-b962-4593-8924-ba2b0c096fe4.pdf">下载本次 Demo 幻灯片</a></li>
+</ul>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/guides/kc-serverless-demo/">
+		<span class="text">上一篇: </span>
+		<span class="text">基于 Serverless 轻松构建云上应用</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/guides/sofastack-quick-start/">
+		<span class="text">下一篇: </span>
+		<span class="text">使用 SOFAStack 快速构建微服务</span>
+	</a>
+</nav>
+
+	</main>
+
+	<aside class="ss-layout-aside">
+		<div class="ss-card">
+	<h2 class="card-title">
+		获取代码
+	</h2>
+	<div id="js-code" class="ss-aside-code">
+		<div class="button-group">
+			<button class="button">HTTPS</button>
+			<button class="button">SSH</button>
+		</div>
+		<div class="input-group">
+			<input class="input" value="https://github.com/sofastack-guides/kc-seata-demo" spellcheck="false" />
+			<span class="addon">
+				<svg class="icon copy" aria-hidden="true"><use xlink:href="#icon-copy"></use></svg>
+				<svg class="icon tick" aria-hidden="true"><use xlink:href="#icon-ictick"></use></svg>
+			</span>
+		</div>
+		<a class="button download"
+			href="https://github.com/sofastack-guides/kc-seata-demo/archive/master.zip"
+		>下载 ZIP</a>
+	</div>
+</div>
+		
+	<div class="ss-card">
+		<h2 class="card-title">
+			项目
+		</h2>
+		<div class="ss-aside-project">
+			
+				<a class="link" href="https://github.com/seata/seata/">Seata</a>
+			
+		</div>
+	</div>
+
+
+		
+
+
+<div class="ss-card ss-aside-toc">
+	<h2 class="card-title">
+		目录
+	</h2>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#使用-seata-保障支付一致性">使用 Seata 保障支付一致性</a>
+<ul>
+<li><a href="#at-模式">AT 模式</a>
+<ul>
+<li><a href="#1-引入-maven-依赖">1、引入 maven 依赖</a>
+<ul>
+<li><a href="#2-使用-seata-的-datasourceproxy-代理实际的数据源-并配置-globaltransactionscanner-扫描-globaltransaction-注解">2、使用 Seata 的 DataSourceProxy 代理实际的数据源，并配置 GlobalTransactionScanner 扫描@GlobalTransaction 注解</a></li>
+<li><a href="#3-配置-globaltransactional-注解使分布式事务生效">3、配置@GlobalTransactional 注解使分布式事务生效</a></li>
+<li><a href="#4-配置-seata-server">4、配置 Seata server</a></li>
+<li><a href="#5-创建-undo-log-表">5、创建 undo_log 表</a></li>
+<li><a href="#6-启动-seata-server-和-stock-mng-balance-mng-应用">6、启动 Seata server 和 stock-mng、balance-mng 应用</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#tcc-模式">TCC 模式</a>
+<ul>
+<li><a href="#1-引入-maven依赖">1、引入 maven依赖</a>
+<ul>
+<li><a href="#2-实现-tcc-模式要求的三个接口-prepare-commit-rollback">2、实现 TCC 模式要求的三个接口: prepare、commit、rollback</a></li>
+<li><a href="#3-取消使用-at-模式的-datasourceproxy">3、取消使用 AT 模式的 DataSourceProxy</a></li>
+<li><a href="#4-bookstorecontrollerimpl-的-purchase-方法改成调用-balancemngfacade-minusbalanceprepare-方法">4、BookStoreControllerImpl 的 purchase 方法改成调用 BalanceMngFacade.minusBalancePrepare 方法</a></li>
+<li><a href="#5-stockmngimpl-依赖的-balancemngfacade-接口改成使用-xml-方式引入">5、StockMngImpl 依赖的 BalanceMngFacade 接口改成使用 xml 方式引入</a></li>
+<li><a href="#6-启动-seata-server-和-stock-mng-balance-mng-应用-1">6、启动 Seata server 和 stock-mng、balance-mng 应用：</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#更多">更多</a></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+
+
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	类委托加载 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 介绍"
+						href="/sofastack.tech/projects/sofa-boot/overview/"
+					>SOFABoot 介绍</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="快速开始"
+						href="/sofastack.tech/projects/sofa-boot/quick-start/"
+					>快速开始</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="依赖管理"
+						href="/sofastack.tech/projects/sofa-boot/dependency-management/"
+					>依赖管理</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="健康检查"
+						href="/sofastack.tech/projects/sofa-boot/health-check/"
+					>健康检查</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="版本查看"
+						href="/sofastack.tech/projects/sofa-boot/view-versions/"
+					>版本查看</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="启动加速"
+						href="/sofastack.tech/projects/sofa-boot/speed-up-startup/"
+					>启动加速</a>
+				</div>
+			</li>
+		
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="模块隔离"
+					>模块隔离</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块化开发概述"
+						href="/sofastack.tech/projects/sofa-boot/modular-development/"
+					>模块化开发概述</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块配置"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-module/"
+					>模块配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JVM 服务发布与引用"
+						href="/sofastack.tech/projects/sofa-boot/module-service/"
+					>JVM 服务发布与引用</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块并行化启动"
+						href="/sofastack.tech/projects/sofa-boot/parallel-start/"
+					>模块并行化启动</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Spring Bean 异步初始化"
+						href="/sofastack.tech/projects/sofa-boot/bean-async-init/"
+					>Spring Bean 异步初始化</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot Profile"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-profile/"
+					>SOFABoot Profile</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 拓展点"
+						href="/sofastack.tech/projects/sofa-boot/extension/"
+					>SOFABoot 拓展点</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="类隔离和热部署"
+					>类隔离和热部署</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk 介绍"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-readme/"
+					>SOFAArk 介绍</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk2.0 升级"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-migration-guide/"
+					>SOFAArk2.0 升级</a>
+				</div>
+			</li>
+		
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何打包 Ark Plugin"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin-demo/"
+					>如何打包 Ark Plugin</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何打包 Ark 包"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-demo/"
+					>如何打包 Ark 包</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Spring Boot 应用如何结合 SofaArk"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-spring-boot-demo/"
+					>Spring Boot 应用如何结合 SofaArk</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="用户文档"
+					>用户文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="基础术语"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-terminology/"
+					>基础术语</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 包"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-jar/"
+					>Ark 包</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Plugin"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin/"
+					>Ark Plugin</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Biz"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-biz/"
+					>Ark Biz</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk 配置"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-config/"
+					>SOFAArk 配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Biz 生命周期"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-biz-lifecycle/"
+					>Ark Biz 生命周期</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Zookeeper 配置"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-zk-config/"
+					>Zookeeper 配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 服务机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-service/"
+					>Ark 服务机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 事件机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-event/"
+					>Ark 事件机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 扩展机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-extension/"
+					>Ark 扩展机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 服务通信"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-jvm/"
+					>Ark 服务通信</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Telnet 指令"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-telnet/"
+					>Telnet 指令</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 日志"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-log/"
+					>Ark 日志</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 使用类隔离"
+						href="/sofastack.tech/projects/sofa-boot/classloader-isolation/"
+					>SOFABoot 使用类隔离</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发文档"
+					>开发文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器启动流程"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-startup/"
+					>Ark 容器启动流程</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器插件机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-plugin/"
+					>Ark 容器插件机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器类加载机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-classloader/"
+					>Ark 容器类加载机制</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="打包插件"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-build-package-plugin/"
+					>打包插件</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="启动过程"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-startup-process/"
+					>启动过程</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="动态部署"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-dynamic-deploy/"
+					>动态部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link -current">
+					<a
+						title="类委托加载"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-class-loader-delegation/"
+					>类委托加载</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="多 Web 模块部署"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-multi-web-component-deploy/"
+					>多 Web 模块部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Benchmark"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-benchmark/"
+					>Benchmark</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布说明"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-release/"
+					>发布说明</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发展路线"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-roadmap/"
+					>发展路线</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="公开分享"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-public-presentation/"
+					>公开分享</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何贡献"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-contribution/"
+					>如何贡献</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot HealthCheck 机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-healthcheck-mechanism-explained/"
+					>SOFABoot HealthCheck 机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 组件协议 binding 机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-component-protocol-binding/"
+					>SOFABoot 组件协议 binding 机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 上下文隔离机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofa-boot-context-isolation-mechanism-explained/"
+					>SOFABoot 上下文隔离机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="升级文档"
+					>升级文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 2.5.x 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_2_5_x/"
+					>SOFABoot 2.5.x 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 3.0 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_3_x/"
+					>SOFABoot 3.0 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 4.0 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_4_x/"
+					>SOFABoot 4.0 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="常见问题"
+						href="/sofastack.tech/projects/sofa-boot/faq/"
+					>常见问题</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="版权声明"
+						href="/sofastack.tech/projects/sofa-boot/notice/"
+					>版权声明</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			类委托加载
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/sofa-ark-class-loader-delegation/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h2 id="类委托加载">类委托加载</h2>
+
+<p>注：这里委托加载不止包含类委托，还包含资源委托加载。</p>
+
+<p>SOFAArk 通过多 ClassLoader 的方式提供类隔离的能力，并在此基础上具备多版本隔离和热部署的能力。当然类如果纯粹隔离还不够，还需要考虑ClassLoader之间的类共享。SOFAArk 通过类委托机制，提供了一套丰富的委托加载能力。定义了PluginClassLoader 和 BizClassLoader，不同类型具备不同的类查找逻辑，同时提供ClassLoaderHook能力，允许自定义模块间的类委托加载。SOFAArk 框架本身的类委托加载是非常灵活的，但是在实际落地时，需要有一套类委托加载的最佳实践。</p>
+
+<p>SOFAArk 支持的场景主要分为两类：
+1. 多Plugin的类隔离：考虑如何相同类不同版本不会相互冲突
+2. 合并部署/热部署：原应用如何拆分，或多个应用如何合并</p>
+
+<p>这里我们主要考虑第2种，多 ClassLoader 如何布局，在内部探索出的最佳实践多 ClassLoader 布局为
+ <img src="https://user-images.githubusercontent.com/3754074/169092647-ba4047b5-cce5-4151-a696-e05ae62c2e81.png" alt="image" /></p>
+
+<p>模块里的类和资源查找优先从模块里查找列，查找不到从再基座里查找。</p>
+
+<p>最佳实践
+类委托加载的准则是中间件相关的依赖需要放在同一个的 ClassLoader 里进行加载执行，达到这种方式的最佳实践有两种：</p>
+
+<h3 id="强制委托加载">强制委托加载</h3>
+
+<p>由于中间件相关的依赖一般需要在同一个ClassLoader里加载运行，所以可以制定一个中间件依赖的白名单，强制这些依赖委托给基座加载。SOFAArk 已经提供白名单能力，详细查看与 <code>sofa.ark.plugin.export.class.enable</code> 有关源码。</p>
+
+<h4 id="强制加载优缺点">强制加载优缺点</h4>
+
+<ul>
+<li>优点</li>
+</ul>
+
+<p>模块开发者不需要感知哪些依赖属于需要强制加载由同一个 ClassLoader 加载的依赖</p>
+
+<ul>
+<li>缺点</li>
+</ul>
+
+<p>白名单里要强制加载的依赖列表需要维护，列表的缺失需要更新基座，较为重要的升级需要推所有的基座升级。</p>
+
+<h3 id="自定义委托加载">自定义委托加载</h3>
+
+<p>模块里pom通过设置依赖的 scope 为 provided主动指定哪些要委托给基座加载。通过模块瘦身工具自动把与基座重复的依赖委托给基座加载，基座通过预置中间件的依赖（可选，虽然模块暂时不会用到，但可以提前引入，以备后续模块需要引入的时候不需再发布基座即可引入）</p>
+
+<h4 id="1-基座预置依赖">1. 基座预置依赖</h4>
+
+<p>基座可以提前预置一些依赖</p>
+
+<h4 id="2-通过两种方式委托给基座加载">2. 通过两种方式委托给基座加载</h4>
+
+<ul>
+<li>模块pom里依赖 scope 设置为 provided</li>
+<li>biz 打包插件sofa-ark-maven-plugin里设置 excludeGroupIds 或 excludeArtifactIds</li>
+</ul>
+
+<h4 id="3-只有模块声明过的依赖才可以委托给基座加载">3. 只有模块声明过的依赖才可以委托给基座加载</h4>
+
+<p>模块启动的时候，框架会有一些扫描逻辑，这些扫描如果不做限制会查找到模块和基座的所有类、资源，导致一些模块明明不需要的功能尝试去初始化，从而报错。SOFAArk 2.0.3之后新增了模块的 declaredMode, 来限制只有模块里声明过的依赖才可以委托给基座加载。只需在模块的 sofa-ark-maven-plugin 打包插件的 Configurations 里增加  <declaredMode>true</declaredMode>即可。</p>
+
+<h4 id="自定义委托加载优缺点">自定义委托加载优缺点</h4>
+
+<ul>
+<li>优点</li>
+</ul>
+
+<p>不需要维护强制加载列表，当部分需要由同一 ClassLoader 加载的依赖没有设置为统一加载时，可以修改模块就可以修复，不需要发布基座（除非基座确实依赖）。</p>
+
+<ul>
+<li>缺点</li>
+</ul>
+
+<p>对模块自动瘦身的依赖较强</p>
+
+<h3 id="对比与总结">对比与总结</h3>
+
+<p>||依赖缺失排查成本|修复成本|模块改造成本|维护成本|
+|-|-|-|-|-|
+|强制加载|类转换失败或类查找失败，成本中|更新 plugin，发布基座，高|低|高|
+|自定义委托加载 |类转换失败或类查找失败，成本中|更新模块依赖，如果基座依赖不足，需要更新基座并发布，中|高|低|
+|自定义委托加载 + 基座预置依赖 + 模块自动瘦身|类转换失败或类查找失败，成本中|更新模块依赖，设置为provided，低|低|低|</p>
+
+<h3 id="推荐自定义委托加载方式">推荐自定义委托加载方式</h3>
+
+<ol>
+<li>模块自定义委托加载 + 模块自动瘦身</li>
+<li>模块开启 declaredMode</li>
+<li>基座预置依赖</li>
+</ol>
+
+<h4 id="开启后的副作用">开启后的副作用</h4>
+
+<ol>
+<li>由于基座提前启动，模块再次启动的时候，如果依赖了基座的依赖里有发布服务，那么模块在启动的时候还会再次发布，如果该问题有一定影响可以模块pom里exclude掉对应的依赖。</li>
+</ol>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

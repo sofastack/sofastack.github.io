@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	告别复杂性！用正确的工具轻松应对 K8s 管理挑战 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		告别复杂性！用正确的工具轻松应对 K8s 管理挑战
+	</h1>
+	<div class="meta">
+		
+			2023-11-14 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>文｜王连平（花名：烨川)</p>
+
+<p>蚂蚁集团容器团队专家</p>
+
+<p>本文 3441 字  阅读 9 分钟</p>
+
+<h2 id="技术背景">技术背景</h2>
+
+<p>Kubernetes 是容器编排的标杆平台，其标准化、插件化特性促使其拥有巨大的生态体系。众所周知，Kubernetes 是由其众多管控组件共同驱动容器交付的，但这种特性可会给开发人员和 SRE 在开发和运维过程中带来更高复杂性。</p>
+
+<p>当容器在交付过程出现错误，通常会使用 Kubectl 命令行工具查看 Pod 相关的事件，进而查看相关组件的日志定位具体的错误。这种方式存在效率低、信息少的缺点，导致问题排查耗时耗力。另外，容器在交付过程中会经历诸多阶段，比如调度、IP 分配、挂卷、容器创建和启动等，当此过程变得很慢时，需要精准定位到哪里是瓶颈点，最直接的方法是在所有管控组件做埋点，然后逐阶段分析问题。这种埋点方式带来了巨大的工作量，不易推进实施。</p>
+
+<p>针对这些问题，蚂蚁集团围绕 Kubernetes 平台构建了一套综合的容器观测服务——Lunettes。它利用 Kubernetes 多维度的交付信息（例如 API Server 请求、Audit 审计）构建了一套容器交付全生命周期观测服务，可以跟踪和诊断容器交付过程，并且基于诊断能力提供容器交付 SLI/SLO 服务，实现了数字化方式监控和管理 Kubernetes 容器服务。</p>
+
+<h2 id="整体方案">整体方案</h2>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw0ibTsDorhwvuic1GGFrcEDsKNFyNLPFyW2HJ61eK5npPXCSGic8sK70kAQoyQlzqvJTz3LvHWEusY6vg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img" /></p>
+
+<p>在 Kubernetes 系统中，大量的管控组件在容器交付的过程中分工协作，为交付出来一个正常运行的容器不断的重试调和，过程中会产出大量的中间请求动作、日志等信息，Kubernetes 系统这种异步终态特性是容器交付可观测服务的一个关键挑战。那么在此类系统中观测容器交付过程，应该具备哪些特性呢？</p>
+
+<p>我们希望 Lunettes 应该具备：</p>
+
+<ul>
+<li><p>提供多维度的容器交付信息，并且能优雅处理面向终态的机制</p></li>
+
+<li><p>提供便捷的组件接入方式，尽可能小的侵入组件代码</p></li>
+
+<li><p>提供较灵活的定制化或者配置方式</p></li>
+
+<li><p>给用户提供简单易用的交互接口</p></li>
+</ul>
+
+<p>Lunettes 基于上述特性的考虑，整体采用旁路数据采集、数据分析和数据服务思路，围绕 Kubernetes 的审计日志做容器交付相关业务的分析，包括 Pod 基本信息、Pod 交付关键生命周期、Pod 交付诊断、Pod 交付跟踪和 Pod 交付 SLO 共 5 部分的交付数据。在数据分析链路上抽象出多个通用的模型，让用户灵活定制容器交付 Trace 及 SLO 诊断能力。同时，向上提供了 OpenAPI 和 Grafana UI 两种用户交互接口，便于用户信息消费。</p>
+
+<h2 id="系统架构">系统架构</h2>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw0ibTsDorhwvuic1GGFrcEDsKNicDzLNKav27ptw4KKXv7FR3ExFMN2mdK9CBAg1Xv4gMUI5LcucbMOWw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1" /></p>
+
+<p>上图示意了 Lunettes 系统的系统架构和数据链路，除了 Kubernetes API Server 审计数据源、数据采集和数据存储组件外，Lunettes 整体包括用户接口层和数据处理层两部分，其中数据处理层是 Lunettes 的核心业务逻辑所在。其处理流程如下：</p>
+
+<ol>
+<li><p>从数据流向看，Filebeat 从 Kubernetes API Server 采集审计日志后，存储到 Elastic Search 中，在审计采集过程中使用 Filebeat Processor 进行冗余信息过滤，在数据存储 Elastic Search 时使用 Pipeline 增加必要时间序列，如此使得存储到 ES 中的数据量小而丰富。</p></li>
+
+<li><p>Lunettes 会近实时从 ES 拉取审计数据，审计进入 Lunettes 后首先会被 Share Processor 处理，这里处理主要分为 Pod 元数据信息提取、超事件（HyperEvent）抽象、以及并发反序列化审计请求中的 Raw Data，前置反序列化是为了减少后续  SLO、Trace 等业务处理时重复处理，提升性能。</p></li>
+
+<li><p>数据经过 Share Processor之后，进入核心的交付分析模块，核心包括交付生命周期 Trace、交付 SLO 分析、交付原因分析及容器基础信息搜集，数据在模块之前按照需求做依赖 DAG，最终将产出 OTel、ES Table、Metrics 三种数据写入相关的数据服务。</p></li>
+
+<li><p>存储到 ES、jaeger 和 prometheus 的数据，会被 Lunettes Rest API 和 Grafana di 处理，转换为 OpenAPI 数据接口和 Grafana Portal 上的数据进行展示。Grafana Portal 中一站式集成了 Lunettes 所有的功能，用户使用更便捷。</p></li>
+</ol>
+
+<h2 id="lunettes-核心能力">Lunettes 核心能力</h2>
+
+<h3 id="交付-slo">交付 SLO</h3>
+
+<p>交付 SLO 目的是基于 Kubernetes 交付链路能力对用户承诺交付保障。那么“交付 SLO”是什么呢？可以概括为：在一定时间内保障用户的容器可以成功交付。这个时间就是给用户的承诺，自然地 SLO 时间如何来定是非常关键的。Lunettes 主要从 Pod Spec 中获取资源规格、资源亲和配置等属性，计算出 Pod 的 SLO 时间。另外，Lunettes 也会根据 Pod 选择的不同交付链路（可以简单的理解为高速交付链路和普通低速链路）来给出保障时间。</p>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw0ibTsDorhwvuic1GGFrcEDsKNPxWXGxTIcEKicw1cPoq12w7Pof3VXWJthgibqCuaV0KibF6gMt3P6EvRA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1" /></p>
+
+<p>有了 SLO 超时计算标准，另一个挑战是如何计算 SLO 时间。如前文所述，容器交付链路中包含了多个阶段，Lunettes 将其区分为 Kubernetes 平台自身耗时和用户耗时两大类，通过 overlay 时间轴，去除用户时间后作为整体 SLO 时间保障。如此，对外承诺的 SLO 时间不会因为用户错误行为（配置、代码 bug 等）导致承诺失败。</p>
+
+<h3 id="交付诊断">交付诊断</h3>
+
+<p>交付过程中出错是必然的，从庞大的 Kubernetes 系统快速定位容器交付过程中的问题是用户非常关心的。Lunettes 另一个重要的能力是从大量的容器交付行为信息中分析出容器交付的错误原因，用户通过 Portal 或者 OpenAPI 可以轻松获取容器交付的结果，如下图所示，Lunettes 在诊断结果中积累沉淀了 30 余种错误类型，帮用户快速定位问题。</p>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw0ibTsDorhwvuic1GGFrcEDsKNj3T69RFIZjiaiaKocMeO5lTrSqoQlC82YmAdTiaWLzECZnFtTAO0HAyRw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1" /></p>
+
+<p>诊断过程中，Lunettes 采用回放审计日志技术，通过模拟容器交付过程抽象定义出原因分析 DAG 框架。审计日志回放输入 DAG 诊断框架后，各模块将分析自己阶段的交付是否完成，如果出错则抛出异常。最终，经过回放分析给出 Pod 出错位置，当然各分析模块是面向终态的分析过程。DAG 的框架既保证了分析过程行为的正确性，也提升了诊断流程的可扩展性。</p>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw0ibTsDorhwvuic1GGFrcEDsKNwlAYoSqUFDtcfSkQiatZYw4PNDDwsFM5gs4IhLtaPZO3RuN5qX2k2vQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1" /></p>
+
+<h3 id="交付-trace">交付 Trace</h3>
+
+<p>交付 Trace 核心目的是跟踪每个 Pod 的交付过程，记录 Pod 交付过程中各阶段的耗时，以及对出错的阶段进行日志记录。一般地，在微服务系统中面向请求的 Trace 都是打桩，正如前文所述 Kubernetes 这种终态异步系统中，打桩每个管控组件是非常大的一个工程量，而且在组件之间异步分布式传递 Trace Context 很有挑战性。Lunettes 另辟蹊径，基于审计日志，抽象出 HyperEvent 概念，其包含了 Pod 交付过程中发生在 Pod 身上所有的 Verb 和 Event 两类信息，比如 Patch 一个 Condition 表示某个交付阶段完成，透出一个 Event 表示某个阶段结束。这两种信息被进一步用于定义交付 Trace 过程中每个阶段的开始和结束标志，Lunettes 根据每个阶段的开始和结束标志在 Pod 交付过程中实时跟踪交付过程。当然 HyperEvent 也会用于 Trace 整体的开始和结束识别。</p>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw0ibTsDorhwvuic1GGFrcEDsKNhfKTX21t3oiaAq6tWZQ1Fo1sRlpDLHpVdXZkK7CtmnO7RHz7qdMJiauA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="1" /></p>
+
+<p>Lunettes 交付 Trace 定义是开放给用户灵活定义的，用户可根据自身 Kubernetes 集群的实际情况定义符合自己的 Trace 过程。Trace 过程中，遇到的中间态错误，Lunettes 将自动识别并透出，同时也会规避大量冗余信息和错误的跟踪发生。</p>
+
+<h2 id="总结-未来计划">总结&amp;未来计划</h2>
+
+<p>Lunettes 目前已在蚂蚁容器平台大规模使用，每天在为业务用户、SRE 及研发提供日均 K 次级别交付诊断支持，是一线运营支持人员核心工具。另外，基于 Lunettes，推动了诸多交付链路性能优化、故障 RCA 能力建设，我们希望通过 Lunettes 开源能够帮助更多同行一起推动容器交付运营领域向前迈进，提高公司的运营效率降低运营成本。</p>
+
+<p>当前 Lunettes 在诸多方面还在进行着探索，比如在零侵入 Trace 方面，如何将 Trace 过程传递到 Kubernetes 平台下游，如何做到 Controller 函数级的 Trace。我们希望 Lunettes 开源后，更多有想法的伙伴参与进来，在容器可观测技术领域进行更多有价值的探索。</p>
+
+<h2 id="欢迎加入">欢迎加入</h2>
+
+<p>当前 Lunettes 已经开源，欢迎大家共享共建！</p>
+
+<p>Lunettes 社区：<a href="https://github.com/alipay/container-observability-service">https://github.com/alipay/container-observability-service</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/">
+		<span class="text">上一篇: </span>
+		<span class="text">开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/open-source-together-seata-enters-apache-incubator/">
+		<span class="text">下一篇: </span>
+		<span class="text">携手开源，共同见证｜Seata 进入 Apache 孵化器</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/">开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力</a></li>
+		
+			<li><a href="/sofastack.tech/blog/lunettes-makes-kubernetes-service-operations-easier/">Lunettes - 让 Kubernetes 服务运营更简单</a></li>
+		
+			<li><a href="/sofastack.tech/blog/vldb2023-fanglue-an-interactive-rule-development-system/">VLDB2023｜方略：一个交互式的规则研发系统</a></li>
+		
+			<li><a href="/sofastack.tech/blog/cncf-foundation-announced-kcl-as-a-sandbox-project/">喜报！CNCF 基金会宣布 KCL 成为沙盒项目！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/dragonfly-based-kubernetes-multi-cluster-image-distribution-for-docker-environments/">Docker 环境基于 Dragonfly 的 Kubernetes 多集群镜像分发实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

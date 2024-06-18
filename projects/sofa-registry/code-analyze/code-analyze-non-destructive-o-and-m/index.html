@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	源码解析｜无损运维 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFARegistry 是一个生产级、高时效、高可用的服务注册中心。">SOFARegistry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="产品介绍"
+					>产品介绍</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="简介"
+						href="/sofastack.tech/projects/sofa-registry/overview/"
+					>简介</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="术语"
+						href="/sofastack.tech/projects/sofa-registry/terminology/"
+					>术语</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="服务端部署"
+						href="/sofastack.tech/projects/sofa-registry/server-quick-start/"
+					>服务端部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="客户端部署"
+						href="/sofastack.tech/projects/sofa-registry/client-quick-start/"
+					>客户端部署</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发手册"
+					>开发手册</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JAVA SDK"
+						href="/sofastack.tech/projects/sofa-registry/java-sdk/"
+					>JAVA SDK</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SlotTable"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/"
+					>SlotTable</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="无损运维"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/"
+					>无损运维</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布订阅推送"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/"
+					>发布订阅推送</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据同步"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/"
+					>数据同步</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送延迟 trace"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/"
+					>推送延迟 trace</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送开关"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/"
+					>推送开关</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据表监听"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/"
+					>数据表监听</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据倒排索引"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/"
+					>数据倒排索引</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="通讯数据压缩"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/"
+					>通讯数据压缩</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="registry meta 选主"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/"
+					>registry meta 选主</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFARegistry | 聊一聊服务发现的数据一致性"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/"
+					>SOFARegistry | 聊一聊服务发现的数据一致性</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="缘起｜蚂蚁应用级服务发现的实践之路"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/"
+					>缘起｜蚂蚁应用级服务发现的实践之路</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			源码解析｜无损运维
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+			·   
+					<a href="https://github.com/zswaaa">周书伟</a> 
+				
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h2 id="源码解析-无损运维">源码解析：无损运维</h2>
+
+<blockquote>
+<p>SOFARegistry 是一个基于内存存储的分布式注册中心，数据是分散存储在各个节点，为了做到注册中心自身运维期间依然能够对外正常提供服务，需要进行节点下线快速感知和数据迁移。</p>
+
+<ul>
+<li><p>session 存储 client 发送的发布和订阅数据，由于 client 断连重放的特性，session 单机下线后 client 会重放数据到其他节点。</p></li>
+
+<li><p>data 会接收 session 发送的发布数据，data 单机下线后，meta 会通过 SlotTable 的变更把对应 Slot 的所有权移交其他 data，data 启动后会进行数据同步到达数据完整可对外提供服务的状态。</p></li>
+</ul>
+</blockquote>
+
+<h3 id="session-data下线的过程-如何避免下线期间数据丢失和抖动">session、data下线的过程，如何避免下线期间数据丢失和抖动</h3>
+
+<p>SessionServer 和 DataServer 下线的相关代码都位于各自 bootstrap 类的 dostop 方法中。</p>
+
+<p>首先讨论 SessionServer 的下线过程：</p>
+
+<pre><code class="language-java">private void doStop() {
+  try {
+    LOGGER.info(&quot;{} Shutting down Session Server..&quot;, new Date().toString());
+    stopHttpServer();
+    clientNodeConnectionHandler.stop(); // stop process disconnect event
+    stopServer();
+    // stop http server and client bolt server before add blacklist
+    // make sure client reconnect to other sessions and data
+    gracefulShutdown();
+    stopDataSyncServer();
+    stopConsoleServer();
+    executorManager.stopScheduler();
+  } catch (Throwable e) {
+    LOGGER.error(&quot;Shutting down Session Server error!&quot;, e);
+  }
+  LOGGER.info(&quot;{} Session server is now shutdown...&quot;, new Date().toString());
+}
+</code></pre>
+
+<p>从代码中可以看出，SessionServer 服务在下线时，首先会停掉 HttpServer，HttpServer 提供一系列 REST 接口，用于 dashboard 管理、数据查询等；然后停掉 clientNodeConnectionHandler，clientNodeConnectionHandler 是 Exchange 设置的一系列 ChannelHandler 之一，Exchange 作为 Client / Server 连接的抽象，负责节点之间的连接。gracefulShutdown 方法则是通知 Meta（元数据服务器）将本节点加入 Meta 的黑名单中。HttpServer 和客户端的 bolt Server 是在本节点加入黑名单前关停，以保证 client 已经重连到了其他 session 节点上。这样就保证了运维的 session 节点下线期间，client 的数据不会因为 session 节点的不可用，导致数据丢失和抖动。接下来又依次关停了 DataSyncServer，ConsoleServer。</p>
+
+<p>DataServer 下线过程的代码如下：</p>
+
+<pre><code class="language-java">private void doStop() {
+  try {
+    LOGGER.info(&quot;{} Shutting down Data Server..&quot;, new Date().toString());
+
+    gracefulShutdown();
+
+    stopHttpServer();
+    stopServer();
+    stopDataSyncServer();
+    stopNotifyServer();
+  } catch (Throwable e) {
+    LOGGER.error(&quot;Shutting down Data Server error!&quot;, e);
+  }
+  LOGGER.info(&quot;{} Data server is now shutdown...&quot;, new Date().toString());
+}
+</code></pre>
+
+<p>DataServer 的下线则和 Session 的下线有些区别，由于 DataServer 数据服务器，负责存储具体的服务数据，而且 Slot 均匀地分配给每个节点上，所以下线前需要检测 DataServer 上的插槽状态，所以 doStop 的方法中，首先调用了如下的优雅下线的方法，其中代码中的主要内容如下：</p>
+
+<pre><code class="language-java">addBlacklistRetryer.call(
+    () -&gt; {
+      LOGGER.info(&quot;[GracefulShutdown] add self to blacklist&quot;);
+      metaServerService.addSelfToMetaBlacklist();
+      return true;
+    });
+addBlacklistRetryer.call(
+    () -&gt; {
+      if (fetchStopPushService.isStopPushSwitch()) {
+        return true;
+      }
+      SlotTableStatusResponse statusResponse = metaServerService.getSlotTableStatus();
+      if (statusResponse.isProtectionMode()) {
+        return true;
+      }
+      LOGGER.info(&quot;[GracefulShutdown] wait no slot&quot;);
+      if (slotManager.hasSlot()) {
+        throw new RuntimeException(&quot;current data server still own slot, waiting...&quot;);
+      }
+      return true;
+    });
+LOGGER.info(&quot;add data self to blacklist successfully&quot;);
+</code></pre>
+
+<p>首先节点通知 Meta 加入黑名单，stopmetaServerService.getSlotTableStatus() 获取节点上 SlotTable 的状态，当 Slot 重新分配给其他节点后，该 Data 节点才会成功加入黑名单，并进行接下来 HttpServer、DataSyncServer、NotifyServer 的下线动作。</p>
+
+<p>整体流程是 Data 上的 Slot 逐步迁移，期间仍然对外提供服务。</p>
+
+<p>迁移完成后主动从列表中剔除并设置节点黑名单并下线。</p>
+
+<p>以下图为例，假设要下线的节点是 DataServer-1：将 Data-server 添加到注册中心迁移名单中；再将 Slot-2 对应的 follower（DataServer-2）提升为 Leader；等待 Data 节点达到稳定；继续将 Slot-3 对应的 follower（DataServer-3) 提升为 Leader；按照以上步骤分配掉剩余的 follower Slots；Slot 迁移完毕，Data-server 从 Data 列表中剔除，同时添加为黑名单；从迁移名单中设置为 succeed。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*YPGYTbeqg3IAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*iCZhSLsRoVUAAAAAAAAAAAAAARQnAQ" alt="img.png" /></p>
+
+<p>Session 和 Data下线中的优雅关闭和数据迁移保证了下线期间数据丢失和抖动，期间仍然对外提供服务。</p>
+
+<h3 id="meta-如何处理-session-data-主动下线的请求通知">Meta 如何处理 Session、Data 主动下线的请求通知</h3>
+
+<p>Meta 集群服务于 SOFARegistry 内部的 Session 集群和 Data 集群，Meta 层能够感知到 Session 节点和 Data 节点的变化，并通知集群的其它节点。RegistryForbiddenServerHandler 注册在sessionServerHandlers、dataServerHandlers ：</p>
+
+<pre><code class="language-java">@Bean(name = &quot;sessionServerHandlers&quot;)
+public Collection&lt;AbstractServerHandler&gt; sessionServerHandlers() {
+  Collection&lt;AbstractServerHandler&gt; list = new ArrayList&lt;&gt;();
+  list.add(heartbeatRequestHandler());
+  list.add(fetchProvideDataRequestHandler());
+  list.add(fetchSystemPropertyRequestHandler());
+  list.add(registryForbiddenServerHandler());
+  list.add(getSlotTableStatusRequestHandler());
+  return list;
+}
+
+@Bean(name = &quot;dataServerHandlers&quot;)
+public Collection&lt;AbstractServerHandler&gt; dataServerHandlers() {
+  Collection&lt;AbstractServerHandler&gt; list = new ArrayList&lt;&gt;();
+  list.add(heartbeatRequestHandler());
+  list.add(fetchProvideDataRequestHandler());
+  list.add(registryForbiddenServerHandler());
+  list.add(fetchSystemPropertyRequestHandler());
+  list.add(getSlotTableStatusRequestHandler());
+  return list;
+}
+</code></pre>
+
+<p>当有 Data 和 Session 上下线时，会触发 registryForbiddenServerHandler，具体的 doHandle 方法将下线的节点添加到黑名单中：</p>
+
+<pre><code class="language-java">boolean success = false;
+switch (operation) {
+  case ADD:
+    success = registryForbiddenServerManager.addToBlacklist(ip);
+    break;
+  case REMOVE:
+    success = registryForbiddenServerManager.removeFromBlacklist(ip);
+    break;
+  default:
+    break;
+}
+</code></pre>
+
+<p>Meta 的心跳检测 HeartbeatRequestHandler 会在心跳检测时，获取 Session 的状态，</p>
+
+<pre><code class="language-java">@Override
+public VersionedList&lt;SessionNode&gt; getSessionServerMetaInfo() {
+  VersionedList&lt;Lease&lt;SessionNode&gt;&gt; leaseMetaInfo = getLeaseMeta();
+  List&lt;SessionNode&gt; sessionNodes = Lists.newArrayList();
+  leaseMetaInfo
+      .getClusterMembers()
+      .forEach(
+          lease -&gt; {
+            sessionNodes.add(lease.getRenewal());
+          });
+  return new VersionedList&lt;&gt;(leaseMetaInfo.getEpoch(), sessionNodes);
+}
+</code></pre>
+
+<p>获取 Meta 租约中最新的 Session 节点的信息，更新 Session 节点的信息。</p>
+
+<p>Data 的节点信息也会通过类似的过程更新到 Meta 中，MetaServerManager 会根据节点类型，同步节点的在线信息：</p>
+
+<pre><code class="language-java">@Override
+public VersionedList&lt;DataNode&gt; getDataServerMetaInfo() {
+  VersionedList&lt;Lease&lt;DataNode&gt;&gt; leaseMetaInfo = getLeaseMeta();
+  List&lt;DataNode&gt; dataNodes = Lists.newArrayList();
+  leaseMetaInfo
+      .getClusterMembers()
+      .forEach(
+          lease -&gt; {
+            dataNodes.add(lease.getRenewal());
+          });
+  return new VersionedList&lt;&gt;(leaseMetaInfo.getEpoch(), dataNodes);
+}
+</code></pre>
+
+<h3 id="client-重连回放机制">client 重连回放机制</h3>
+
+<pre><code class="language-java">public void ensureConnected() throws InterruptedException {
+  if (isConnected()) {
+    return;
+  }
+  while (!connect()) {
+    Thread.sleep(ClientConnection.RECONNECTING_DELAY);
+  }
+}
+</code></pre>
+
+<p>在 client 的工作线程中，会通过上述代码以 5s 为间隔时间，反复检查链接状态，client 的检查函数位于工作线程的一个无限循环的检查语句中:</p>
+
+<pre><code class="language-java">/** Handle. */
+@Override
+public void handle() {
+  //noinspection InfiniteLoopStatement
+  while (true) {
+    try {
+      // check connection status, try to reconnect to the server when connection lose
+      client.ensureConnected();
+
+      if (requestQueue.isEmpty()) {
+        await(config.getRecheckInterval());
+        continue;
+      }
+
+      Iterator&lt;TaskEvent&gt; lt = requestQueue.iterator();
+
+      while (lt.hasNext()) {
+        client.ensureConnected();
+        TaskEvent ev = lt.next();
+        lt.remove();
+/**.........**/
+</code></pre>
+
+<h3 id="data-启动期以及-data-的启动过程的状态转化-如何确保新分配的-slot-的数据完整性">Data 启动期以及 Data 的启动过程的状态转化，如何确保新分配的 Slot 的数据完整性</h3>
+
+<h5 id="u-启动入口-u"><strong><em><u>启动入口</u></em></strong></h5>
+
+<p>Data 启动的过程代码位于com.alipay.sofa.registry.server.data.bootstrap.DataServerBootstrap#start</p>
+
+<pre><code class="language-java">/** start dataserver */
+public void start() {
+  try {
+    LOGGER.info(&quot;begin start server&quot;);
+    LOGGER.info(&quot;release properties: {}&quot;, ServerEnv.getReleaseProps());
+    LOGGER.info(&quot;the configuration items are as follows: &quot; + dataServerConfig.toString());
+
+    ReporterUtils.enablePrometheusDefaultExports();
+
+    openDataServer();
+
+    openDataSyncServer();
+
+    openHttpServer();
+
+    renewNode();
+    fetchProviderData();
+
+    systemPropertyProcessorManager.startFetchMetaSystemProperty();
+
+    startScheduler();
+
+    TaskMetrics.getInstance().registerBolt();
+
+    postStart();
+    Runtime.getRuntime().addShutdownHook(new Thread(this::doStop));
+
+    LOGGER.info(&quot;start server success&quot;);
+  } catch (Throwable e) {
+    throw new RuntimeException(&quot;start server error&quot;, e);
+  }
+}
+</code></pre>
+
+<p>DataServer 模块的各个 bean 在 JavaConfig 中统一配置，JavaConfig 类为 DataServerBeanConfiguration， 启动入口类为 DataServerInitializer，该类不由 JavaConfig 管理配置，而是继承了 SmartLifecycle 接口，在启动时由 Spring 框架调用其 start 方法。</p>
+
+<p>该方法中调用了 DataServerBootstrap#start 方法（如上述代码所示），用于启动一系列的初始化服务。</p>
+
+<p>sofaRegistry V6 版本引入了“路由表”（SlotTabel）的概念，“路由表”负责存放每个节点和 N 个 Slot 的映射关系，并保证尽量把所有 Slot 均匀地分配给每个节点。这样，当节点上下线时，只需要修改路由表内容即可。</p>
+
+<p>从代码中可以看出，DataServer 服务在启动时，会启动 DataServer、DataSyncServer、HttpServer 三个 bolt 服务。在启动这些 Server 之时，DataServer 注册了一系列 Handler 来处理各类消息。启动这些 Server 后，调用了renewNode（）方法，renewNode 调用 metaServerService的 renewNode，通过获取在心跳请求中将返回 SlotTable 路由表信息、Data 节点将路由表 SlotTable 保存在本地中，具体代码可以参考com.alipay.sofa.registry.server.meta.remoting.meta.MetaServerRenewService#renewNode，下一步又刷新了 Session 的信息，并创建了一个 renew meta 的守护进程，用来持续刷新节点上存储的集群信息：</p>
+
+<pre><code class="language-java">  private void renewNode() {
+    metaServerService.renewNode();
+    // init session lease with first renew
+    for (ProcessId processId : metaServerService.getSessionProcessIds()) {
+      sessionLeaseManager.renewSession(processId);
+    }
+    metaServerService.startRenewer();
+  }
+</code></pre>
+
+<p>slotManagerImpl 是 DataServer 的一个单例 ConditionalOnMissingBean 对象。当 Data 启动时，SlotManage 负责 Slot 数据的更新和迁移（com.alipay.sofa.registry.server.data.slot.SlotManagerImpl#syncMigrating）：</p>
+
+<pre><code class="language-java">private void syncMigrating(
+    SlotState slotState,
+    Collection&lt;String&gt; sessions,
+    int syncSessionIntervalMs,
+    long slotTableEpoch) {
+  final Slot slot = slotState.slot;
+  if (slotState.migratingStartTime == 0) {
+    slotState.migratingStartTime = System.currentTimeMillis();
+    slotState.migratingTasks.clear();
+    observeLeaderMigratingStart(slot.getId());
+    LOGGER.info(
+        &quot;start migrating, slotId={}, sessionSize={}, sessions={}&quot;,
+        slotState.slotId,
+        sessions.size(),
+        sessions);
+  }
+  final int notSyncedCount = sessions.size() - slotState.countSyncSuccess(sessions);
+  for (String sessionIp : sessions) {
+    MigratingTask mtask = slotState.migratingTasks.get(sessionIp);
+    if (mtask == null) {
+      KeyedTask&lt;SyncSessionTask&gt; ktask =
+          commitSyncSessionTask(slot, slotTableEpoch, sessionIp, null, true);
+      mtask = new MigratingTask(sessionIp, ktask);
+      slotState.migratingTasks.put(sessionIp, mtask);
+      LOGGER.info(&quot;migrating start,slotId={},session={}&quot;, slot.getId(), sessionIp);
+      continue;
+    }
+
+    if (mtask.task.isFailed() &amp;&amp; !mtask.forceSuccess) {
+      // failed and not force Success, try to trigger emergency
+      if (triggerEmergencyMigrating(slotState, sessions, mtask, notSyncedCount)) {
+        LOGGER.info(&quot;[emergency]{},session={}&quot;, slotState.slotId, mtask.sessionIp);
+      } else {
+        KeyedTask&lt;SyncSessionTask&gt; ktask =
+            commitSyncSessionTask(slot, slotTableEpoch, sessionIp, null, true);
+        mtask.task = ktask;
+        mtask.tryCount++;
+        LOGGER.error(
+            &quot;migrating retry,slotId={},try={},session={},create={}/{}&quot;,
+            slot.getId(),
+            mtask.tryCount,
+            sessionIp,
+            mtask.createTimestamp,
+            System.currentTimeMillis() - mtask.createTimestamp);
+        continue;
+      }
+    }
+    // force success or migrating finish. try to sync session
+    // avoid the time of migrating is too long and block the syncing of session
+    if (mtask.task.isOverAfter(syncSessionIntervalMs)) {
+      if (syncSession(slotState, sessionIp, null, syncSessionIntervalMs, slotTableEpoch)) {
+        LOGGER.info(&quot;slotId={}, sync session in migrating, session={}&quot;, slot.getId(), sessionIp);
+      }
+    }
+  }
+}
+</code></pre>
+
+<p>Slot 的数据的同步是一个 watchDog 的模式，获取 slotTabel 的变化，会自动同步节点上的 Slot 数据：</p>
+
+<pre><code class="language-java">  void syncWatch() {
+    final int syncSessionIntervalMs =
+        dataServerConfig.getSlotLeaderSyncSessionIntervalSecs() * 1000;
+    final int syncLeaderIntervalMs =
+        dataServerConfig.getSlotFollowerSyncLeaderIntervalSecs() * 1000;
+    final long slotTableEpoch = slotTableStates.table.getEpoch();
+    for (SlotState slotState : slotTableStates.slotStates.values()) {
+      try {
+        sync(slotState, syncSessionIntervalMs, syncLeaderIntervalMs, slotTableEpoch);
+      } catch (Throwable e) {
+        SYNC_ERROR_LOGGER.error(
+            &quot;[syncCommit]failed to do sync slot {}, migrated={}&quot;,
+            slotState.slot,
+            slotState.migrated,
+            e);
+      }
+    }
+  }
+</code></pre>
+
+<p>由于节点上线后，Meta 会感知并获取最新的 DataServer 节点，leader Meta 对路由表进行了刷新，因为重新分配 SlotTable 本质上是 对 DataServer 节点和 Slot 槽位之间的映射关系进行重新分配。获取到当前存活的 DataServer 节点信息，从而方便的对之进行 Slot 分配。接下来对 Server 节点的 Slot 数据进行了同步。</p>
+
+<p>上面的两部分代码总体可以概括为以下两个层次：</p>
+
+<ul>
+<li><p>Data 和 Session 通过心跳的机制在 Meta 上进行续约，当 Data 发生节点变更的时候，Meta 此时会重新进行分配，生成新的 SlotTable，并通过广播和心跳的方式返回所有的节点，Session 就会用这份 SlotTable 寻址新的 Data 节点。存在一个时刻，集群中存在两份 SlotTable，分裂时间最大(1s)。</p></li>
+
+<li><p>Session 上会缓存 Client 的 Pub 和 Sub 数据作为基准数据，在增量发送给 Data 的同时，Slot 的 leader 节点会定时和 Session 进行数据比对，Slot 的 follower 和 leader 也会定时进行数据对比，这样做到整个集群数据能快速达到最终一致，减少异常场景的不可服务时间。</p></li>
+</ul>
+
+<p>Slot 数据完整度校验的作用在于当一个 Slot 数据所有副本所在节点全部宕机，数据发生丢失时，只能通过 Session 上的缓存数据进行数据回放。但在完全回放完成时，Slot 是不可对外提供读取服务的，以此避免推空或者推错，从而保证了数据的完整性。</p>
+
+<p>流程如下图：</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*RlJOTpAqdGgAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>server 启动的最后一步，是通知 Meta 将上线的 Data 节点从 blacklist 移除：</p>
+
+<pre><code class="language-java">private void postStart() throws Throwable {
+  startupRetryer.call(
+      () -&gt; {
+        LOGGER.info(&quot;successful start data server, remove self from blacklist&quot;);
+        metaServerService.removeSelfFromMetaBlacklist();
+        return true;
+      });
+}
+</code></pre>
+
+<p>至此，Server 的启动完成，Data 节点的 Slot 数据也根据变更后的 slotTable 同步完成，Data 节点开始在集群内工作。</p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

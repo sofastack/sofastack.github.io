@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	缘起｜蚂蚁应用级服务发现的实践之路 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFARegistry 是一个生产级、高时效、高可用的服务注册中心。">SOFARegistry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="产品介绍"
+					>产品介绍</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="简介"
+						href="/sofastack.tech/projects/sofa-registry/overview/"
+					>简介</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="术语"
+						href="/sofastack.tech/projects/sofa-registry/terminology/"
+					>术语</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="服务端部署"
+						href="/sofastack.tech/projects/sofa-registry/server-quick-start/"
+					>服务端部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="客户端部署"
+						href="/sofastack.tech/projects/sofa-registry/client-quick-start/"
+					>客户端部署</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发手册"
+					>开发手册</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JAVA SDK"
+						href="/sofastack.tech/projects/sofa-registry/java-sdk/"
+					>JAVA SDK</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SlotTable"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/"
+					>SlotTable</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="无损运维"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/"
+					>无损运维</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布订阅推送"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/"
+					>发布订阅推送</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据同步"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/"
+					>数据同步</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送延迟 trace"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/"
+					>推送延迟 trace</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送开关"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/"
+					>推送开关</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据表监听"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/"
+					>数据表监听</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据倒排索引"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/"
+					>数据倒排索引</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="通讯数据压缩"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/"
+					>通讯数据压缩</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="registry meta 选主"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/"
+					>registry meta 选主</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFARegistry | 聊一聊服务发现的数据一致性"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/"
+					>SOFARegistry | 聊一聊服务发现的数据一致性</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="缘起｜蚂蚁应用级服务发现的实践之路"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/"
+					>缘起｜蚂蚁应用级服务发现的实践之路</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			缘起｜蚂蚁应用级服务发现的实践之路
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+			·   
+					<a href="https://github.com/sofastack">肖健</a> 
+				
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2becde79b9c42a281a6513dd70d4f65~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜肖健（花名：昱恒）</p>
+
+<p>蚂蚁集团技术专家、SOFARegistry Maintainer<br />
+<em>专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 的设计和研发工作。</em></p>
+
+<p><strong><em>本文 8339 字阅读 15分钟</em></strong></p>
+
+<p><strong>PART. 1</strong></p>
+
+<h3 id="前言">前言</h3>
+
+<h4 id="什么是服务发现">什么是服务发现？</h4>
+
+<p>我们今天主要聊的话题是“应用级服务发现”的实践，聊这个话题之前，我们先简单介绍一下什么是“服务发现”，然后再聊聊，为什么需要“应用级服务发现”。</p>
+
+<p>在微服务的体系中，多个应用程序之间将以 RPC 方式进行相互通信，而这些应用程序的服务实例是动态变化的，我们需要知道这些实例的准确列表，才能让应用程序之间按预期进行 RPC 通信。这就是服务发现在微服务体系中的核心作用。<br />
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/796857ed9f374cd59297b0e8844e41e3~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /><em>图 1</em></p>
+
+<p>SOFARegistry 是蚂蚁集团在生产大规模使用的服务注册中心，经历了多年大促的考验，支撑了蚂蚁庞大的服务集群，具有分布式可支撑海量数据、可云原生部署、推送延迟低、高可用等特点。</p>
+
+<p><strong>PART. 2</strong></p>
+
+<h3 id="应用级服务发现的设想">应用级服务发现的设想</h3>
+
+<p>介绍完什么是服务发现之后，我们来看看什么是“<strong>接口级服务发现</strong>”，以及与之相对应的“<strong>应用级服务发现</strong>”。</p>
+
+<h4 id="从-rpc-框架说起">从 RPC 框架说起</h4>
+
+<p>根据上述描述，我们先看看业界常用的 RPC 框架，是如何进行服务的发布和订阅的。以 SOFARPC 编程界面[1]为例：</p>
+
+<h5 id="服务发布">服务发布</h5>
+
+<pre><code class="language-java">package com.alipay.rpc.sample;
+
+@SofaService(interfaceType = FooService.class, bindings = {@SofaServiceBinding(bindingType = &quot;bolt&quot;) })
+
+@Service
+public class FooServiceImpl implements FooService {    
+    @Override
+    public String foo(String string) {
+        return string;    
+    }
+}
+
+@SofaService(interfaceType = BarService.class, bindings = { @SofaServiceBinding(bindingType = &quot;bolt&quot;) })
+@Service
+public class BarServiceImpl implements BarService {
+    @Override    
+    public String bar(String string) {
+        return string;    
+    }
+}
+</code></pre>
+
+<h5 id="服务使用">服务使用</h5>
+
+<pre><code class="language-java">@Service
+public class SampleClientImpl {
+
+    @SofaReference(interfaceType = FooService.class, jvmFirst = false, 
+            binding = @SofaReferenceBinding(bindingType = &quot;bolt&quot;))
+    private FooService fooService;
+
+    @SofaReference(interfaceType = BarService.class, jvmFirst = false, 
+            binding = @SofaReferenceBinding(bindingType = &quot;bolt&quot;))
+    private BarService barService;
+    
+    public String foo(String str) {
+        return fooService.foo(str);
+    }
+
+    public String bar(String str) {
+        return barService.bar(str);
+    }
+}
+</code></pre>
+
+<p>上述两个编程界面，完成了两个服务 FooService 和 BarService 的发布、订阅、调用。</p>
+
+<h4 id="微服务面临的挑战">微服务面临的挑战</h4>
+
+<p>上述的服务发布、订阅、调用功能，离不开注册中心的服务发现提供准确的服务地址。将图 1 的服务发现场景进一步展开，此时的工作原理如下图：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/364040f2e7dd46e1a9dd38cb0ec910d3~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><em>图 2（点击图片查看大图）</em></p>
+
+<p>服务发布者：</p>
+
+<p><strong>-</strong> 集群内部署了 100 个 pod，IP 分别为：1.1.1.1 ~ 1.1.1.100；</p>
+
+<p><strong>-</strong> 服务发布者的 URL：1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0，12200 端口为 sofarpc-bolt 协议默认的端口。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6bcada60e6564a1c82943a37f6d672db~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>服务订阅者：集群内部署了 100 个 pod，IP 分别为：2.1.1.1 ~ 2.1.1.100。</p>
+
+<p>基于上述的集群部署情况，我们来看看微服务的场景面临的挑战。</p>
+
+<h5 id="挑战-1-注册中心-publisher-存储的挑战">挑战 1：注册中心 publisher 存储的挑战</h5>
+
+<p>在上面的集群部署中，可以看到注册中心的数据存储模型，集群内部署了 100 个 provider pod，每个 provider 发布了 2 个服务，即每个 pod 有 2 个 publisher，以 provider1 为例：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d8eae66e597641f1bb8f0052168ea593~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>如果在每个 provider 提供更多服务的情况下呢？比如每个 provider 提供了 50 个服务，这样的量级在微服务场景中并不少见，那么此时注册中心对于 provider1，就需要存储 50 个 publisher，分别是：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d618dc602bea4d81a3a8dec72dc68f2c~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>可以看到，随着 provider 的扩容，注册中心存储的 publisher 数据量是以 50 倍于 provider 的速度在增长。</p>
+
+<p>如果您对 SOFARegistry 有过了解，就会知道 SOFARegistry 是支持数据存储分片，可以存储海量数据的。</p>
+
+<p>但是数据量上涨带来的是 SOFARegistry 本身的服务器数量增涨，如果我们有办法可以降低 SOFARegistry 的数据存储量，那么就能节约 SOFARegistry 本身的服务器成本，同时 SOFARegistry 整个集群的稳定性也会得到提升。</p>
+
+<h5 id="挑战-2-注册中心-subscriber-存储的挑战">挑战 2：注册中心 subscriber 存储的挑战</h5>
+
+<p>在上述的集群部署中，集群内部署了 100 个 consumer pod，每个 consumer 订阅了 2 个服务，即每个 pod 有 2 个 subscriber，同理于 publisher 的存储挑战，随着 consumer 订阅的接口持续增加，例如 consumer 订阅了 provider 的 10 个 service，此时注册中心存储 consumer1 的 10 个 subscriber 如下：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a8e268b7c7114658a10e89eab7c35d00~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>随着 consumer 的扩容，注册中心内的 subscriber 存储同样面临着挑战。</p>
+
+<h5 id="挑战-3-服务变更通知的挑战">挑战 3：服务变更通知的挑战</h5>
+
+<p>随着 publisher 和 subscriber 数量增长，除了对存储的挑战以外，对于数据变更通知同样面临着极大的挑战，让我们来看看如下的场景：provider 下线了 1 台，从 100 台减少到了 99 台，次数集群内发生了哪些变化呢？</p>
+
+<p>1、首先是在注册中心存储方面，需要将 provide 50 个 service 中的 publishers 列表都减少 1 个，每个 service 剩余 99 个 publisher；</p>
+
+<p>2、然后注册中心需要将这 50 个 service 的变更，都通知给相应的 subscriber；我们上述假设是 consumer 订阅了 10 个 service，分别是：[&ldquo;com.alipay.sample.FooService&rdquo;, &ldquo;com.alipay.sample.BarService&rdquo;, &ldquo;com.alipay.sample.Service00&rdquo;, &hellip;, &ldquo;com.alipay.sample.Service07&rdquo;]；</p>
+
+<p>3、那么对于 consumer1，我们需要将如下的数据推送给 consumer1：</p>
+
+<pre><code class="language-yaml">com.alipay.sample.FooService:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.99:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+com.alipay.sample.BarService:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.99:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+//...中间省略
+
+com.alipay.sample.Service07:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.99:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+</code></pre>
+
+<p>可以看到一台 provider 的扩缩容，就需要对 consumer1 进行如此大量的数据推送，如果 com.alipay.sample.FooService 的 publisher 的数量更大，达到 1 千个、1 万个呢？此时注册中心的服务变更通知，也面临着网络通信数据量大的挑战。</p>
+
+<p><strong>是否有方式在 provider 的变更时，降低需要通知的数据量呢？</strong></p>
+
+<h5 id="挑战-4-consumer-的内存挑战">挑战 4：consumer 的内存挑战</h5>
+
+<p>介绍完注册中心面临的挑战后，我们再从图 1 来看看 consumer 存储服务列表时，内存面临的挑战，对于注册中心推送下来的数据，consumer 也需要进行存储，然后再发起 RPC 服务调用的时候，就可以直接从 consumer 内存中获取到服务地址进行调用，consumer 中存储的数据，简化来看是如下的数据：</p>
+
+<pre><code class="language-yaml">com.alipay.sample.FooService:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.99:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+com.alipay.sample.BarService:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.99:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+//...中间省略
+
+com.alipay.sample.Service07:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.99:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+</code></pre>
+
+<p>此时 privoder 只有 99 个 IP，但是因为订阅了 10 个 service，所以在 consumer 中存储了 99 * 10 = 990 个 publisher 列表；如果订阅的 service 更多，provider 的数量更大呢 <em>（比如达到 10 万）</em> ？此时 consumer 内存中存储了近 100 万个 publisher，内存将面临着极大的挑战。</p>
+
+<h4 id="微光-应用级服务发现的提出">微光：应用级服务发现的提出</h4>
+
+<h5 id="应用级服务发布">应用级服务发布</h5>
+
+<p>经过上一个章节的描述，对于一次简单的 RPC 调用背后，服务发现面临的挑战相信各位读者已经有所感受，那么可能得突破方向到底在哪里呢？</p>
+
+<p>初步看，我们不难发现的是，对于一个 provider1，在注册中心存储的 publisher 数据如下：</p>
+
+<pre><code class="language-yaml">com.alipay.sample.FooService:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+com.alipay.sample.BarService:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+//...中间省略
+
+com.alipay.sample.Service100:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+</code></pre>
+
+<p>每个 publisher 中，除了 serviceName 不相同，url 存储了相同的 100 份，这里是否可以简化为存储 1 份？这是应用级服务发布最初的想法。</p>
+
+<p>按照这个模型我们继续推演，可以得到如下演进模型：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ce71dd18b6c1408880bd580ad4e1b358~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><em>图 3（点击图片查看大图）</em></p>
+
+<p>对比图 2 和图 3，我们设想：</p>
+
+<p>1、prodiver 不再以 service=com.alipay.sample.FooService 向注册中心发布服务，而是以 service=applicationB 进行服务发布，那么注册中心对于 provide1，此时 publisher 存储的数据量从 50 个下降到 1 个，注册中心的整个集群的 publisher 存数量，也将下降 50 倍，这将使得注册中心 SOFARegistry 的服务器成本极大降低，同时注册中心的稳定性也将得到大幅度提升。</p>
+
+<p>2、对于 prodiver 发布了哪些服务，这个关系维护在 metadataMap 中，供后续的应用级服务订阅使用。</p>
+
+<h5 id="应用级服务订阅">应用级服务订阅</h5>
+
+<p>在上一节中我们将服务发现，演进到了应用级服务发布，那么此时的服务订阅与服务调用，应该怎样进行呢？我们继续从图 3 中展开：</p>
+
+<p>1、对于 comsumer1，启动时先根据接口进行一次 metadata fetch 的元数据获取，根据 metadataMap 中的数据，可以知道此时 service=com.alipay.sample.FooService 映射的 app=applicationB；同理其他 9 个 service 映射的 app 也是 applicationB；</p>
+
+<p>2、然后以 applicationB 为 dataid，向注册中心发起订阅，注册中心此时不再是存储 consumer1 的 10 个 subscriber，而是存储一个 dataid=applicationB 的 subscriber；注册中心的 subscriber 数量也降低了 10 倍；</p>
+
+<p>3、consumer1 发起服务订阅后，注册中心进行数据推送，此时注册中心推送的数据为：</p>
+
+<pre><code class="language-yaml">applicationB:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.100:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+</code></pre>
+
+<p>4、可以看到，此时注册中心给 consumer1 的数据推送量，相比于 <strong>【Part.2 挑战 3】</strong> 中推送的数据，网络的数据量交互也下降了 10 倍。</p>
+
+<h5 id="应用级路由">应用级路由</h5>
+
+<p>经过上述的“应用级服务发布”和“应用级服务订阅”，我们解决了注册中心的数据量存储瓶颈，注册中心的变更通知网络瓶颈，最后我们来看看 consumer1 中的内存瓶颈如何解决。</p>
+
+<p>通过上面的步骤，consumer1 中拿到了一些数据，分别是：metadataMap 和 publishMap：</p>
+
+<pre><code class="language-yaml">applicationB:
+        - com.alipay.sample.FooService
+  - com.alipay.sample.BarService
+  - ...
+        - com.alipay.sample.Service50
+
+applicationB:
+        - 1.1.1.1:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+        - ...
+        - 1.1.1.100:12200?app=applicationB&amp;_SERIALIZETYPE=hessian2&amp;_TIMEOUT=3000&amp;zone=zone1&amp;version=1&amp;_WARMUPTIME=0
+
+</code></pre>
+
+<p>此时我们可以在 consumer1 进行“应用级路由”的信息封装，如下图：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74d246becccf44209b0976632519c1b9~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" />
+<em>图 4（点击图片查看大图）</em></p>
+
+<p>如图 4 所示，此时 consumer 中只需要保存 applicationB 的 100 个 publisher，而不再是保存 10（假设订阅了 10 个 service）* 100 = 1000 个 publisher，consumer1 中的服务路由表的内存使用，也降低了 10 倍。</p>
+
+<p><strong>PART. 3</strong></p>
+
+<h3 id="长路漫漫">长路漫漫</h3>
+
+<p>在上述的微服务模型中，经过上面的应用级服务发现方案推演，我们做到了：</p>
+
+<p><strong>-</strong> 注册中心存储的 publisher 数据量下降了 <strong>50</strong> 倍；</p>
+
+<p><strong>-</strong> 注册中心存储的 subscriber 数据量下降了 <strong>10</strong> 倍；</p>
+
+<p><strong>-</strong> 注册中心服务变更通知，网络通信数据量下降了 <strong>10</strong> 倍；</p>
+
+<p><strong>-</strong> 服务订阅端 consumer 中，服务路由表的内存 insue 使用降低了 <strong>10</strong> 倍；</p>
+
+<p>这个推演结果是令人激动的，然而实际的场景要比上述这个数据更复杂。这个推演模型，要进行真正线上实施，并且进行大规模落地，仍然是长路漫漫。这里先抛出几个问题：</p>
+
+<p>1、如果不同的接口之间，参数并不是完全相同的，我们要如何处理？例如 FooService 的 _TIMEOUT=3000，BarService的_TIMEOUT=1000，Service100的_TIMEOUT=5000；</p>
+
+<p>2、provider 的不同 pod 之间，发布的服务列表有差异，要如何处理？例如 provider1 发布的服务列表是[&ldquo;com.alipay.sample.FooService&rdquo;,&ldquo;com.alipay.sample.BarService&rdquo;, &hellip;, &ldquo;com.alipay.sample.Service50&rdquo;]；provider2
+发布的服务列表是 [&ldquo;com.alipay.sample.FooService&rdquo;,&ldquo;com.alipay.sample.BarService&rdquo;, &hellip;, &ldquo;com.alipay.sample.Service51&rdquo;]；</p>
+
+<p>3、无论是上述的 provider 还是 consumer，都需要进行 SDK 的代码改造，如何保证线上从“接口级服务发现”，平滑过渡到“应用级服务发现”；</p>
+
+<p>4、如果部分应用无法升级 SDK，方案如何继续演进，拿到期望的效果收益；</p>
+
+<p>5、两个方案过度期间，如何确保注册中心服务的一致性。</p>
+
+<p>这些问题，我们将在下一篇文章《技术内幕｜蚂蚁的应用级服务发现实践之路》中详细解答，敬请期待。</p>
+
+<h4 id="参考链接">参考链接</h4>
+
+<p>[1]SOFARPC 编程界面：<a href="https://www.sofastack.tech/projects/sofa-rpc/programing-sofa-boot-xml/">https://www.sofastack.tech/projects/sofa-rpc/programing-sofa-boot-xml/</a></p>
+
+<p>[2]Dubbo 迈向云原生的里程碑 | 应用级服务发现：<a href="https://lexburner.github.io/dubbo-app-pubsub/">https://lexburner.github.io/dubbo-app-pubsub/</a></p>
+
+<p><strong>了解更多&hellip;</strong></p>
+
+<p><strong>SOFARegistry Star 一下✨：</strong><br />
+<a href="https://github.com/sofastack/sofa-registry/">https://github.com/sofastack/sofa-registry/</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

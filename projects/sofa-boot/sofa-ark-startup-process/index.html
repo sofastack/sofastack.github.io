@@ -1,0 +1,2856 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	启动过程 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 介绍"
+						href="/sofastack.tech/projects/sofa-boot/overview/"
+					>SOFABoot 介绍</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="快速开始"
+						href="/sofastack.tech/projects/sofa-boot/quick-start/"
+					>快速开始</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="依赖管理"
+						href="/sofastack.tech/projects/sofa-boot/dependency-management/"
+					>依赖管理</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="健康检查"
+						href="/sofastack.tech/projects/sofa-boot/health-check/"
+					>健康检查</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="版本查看"
+						href="/sofastack.tech/projects/sofa-boot/view-versions/"
+					>版本查看</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="启动加速"
+						href="/sofastack.tech/projects/sofa-boot/speed-up-startup/"
+					>启动加速</a>
+				</div>
+			</li>
+		
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="模块隔离"
+					>模块隔离</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块化开发概述"
+						href="/sofastack.tech/projects/sofa-boot/modular-development/"
+					>模块化开发概述</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块配置"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-module/"
+					>模块配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JVM 服务发布与引用"
+						href="/sofastack.tech/projects/sofa-boot/module-service/"
+					>JVM 服务发布与引用</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="模块并行化启动"
+						href="/sofastack.tech/projects/sofa-boot/parallel-start/"
+					>模块并行化启动</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Spring Bean 异步初始化"
+						href="/sofastack.tech/projects/sofa-boot/bean-async-init/"
+					>Spring Bean 异步初始化</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot Profile"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-profile/"
+					>SOFABoot Profile</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 拓展点"
+						href="/sofastack.tech/projects/sofa-boot/extension/"
+					>SOFABoot 拓展点</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="类隔离和热部署"
+					>类隔离和热部署</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk 介绍"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-readme/"
+					>SOFAArk 介绍</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk2.0 升级"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-migration-guide/"
+					>SOFAArk2.0 升级</a>
+				</div>
+			</li>
+		
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何打包 Ark Plugin"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin-demo/"
+					>如何打包 Ark Plugin</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何打包 Ark 包"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-demo/"
+					>如何打包 Ark 包</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Spring Boot 应用如何结合 SofaArk"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-spring-boot-demo/"
+					>Spring Boot 应用如何结合 SofaArk</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="用户文档"
+					>用户文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="基础术语"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-terminology/"
+					>基础术语</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 包"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-jar/"
+					>Ark 包</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Plugin"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin/"
+					>Ark Plugin</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Biz"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-biz/"
+					>Ark Biz</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFAArk 配置"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-config/"
+					>SOFAArk 配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark Biz 生命周期"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-biz-lifecycle/"
+					>Ark Biz 生命周期</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Zookeeper 配置"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-zk-config/"
+					>Zookeeper 配置</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 服务机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-service/"
+					>Ark 服务机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 事件机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-event/"
+					>Ark 事件机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 扩展机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-extension/"
+					>Ark 扩展机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 服务通信"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-jvm/"
+					>Ark 服务通信</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Telnet 指令"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-telnet/"
+					>Telnet 指令</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 日志"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-ark-log/"
+					>Ark 日志</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 使用类隔离"
+						href="/sofastack.tech/projects/sofa-boot/classloader-isolation/"
+					>SOFABoot 使用类隔离</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发文档"
+					>开发文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器启动流程"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-startup/"
+					>Ark 容器启动流程</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器插件机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-plugin/"
+					>Ark 容器插件机制</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Ark 容器类加载机制"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-classloader/"
+					>Ark 容器类加载机制</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="打包插件"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-build-package-plugin/"
+					>打包插件</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link -current">
+					<a
+						title="启动过程"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-startup-process/"
+					>启动过程</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="动态部署"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-dynamic-deploy/"
+					>动态部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="类委托加载"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-class-loader-delegation/"
+					>类委托加载</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="多 Web 模块部署"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-multi-web-component-deploy/"
+					>多 Web 模块部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="Benchmark"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-benchmark/"
+					>Benchmark</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布说明"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-release/"
+					>发布说明</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发展路线"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-roadmap/"
+					>发展路线</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="公开分享"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-public-presentation/"
+					>公开分享</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="如何贡献"
+						href="/sofastack.tech/projects/sofa-boot/sofa-ark-contribution/"
+					>如何贡献</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot HealthCheck 机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-healthcheck-mechanism-explained/"
+					>SOFABoot HealthCheck 机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 组件协议 binding 机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofaboot-component-protocol-binding/"
+					>SOFABoot 组件协议 binding 机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 上下文隔离机制解析"
+						href="/sofastack.tech/projects/sofa-boot/sofa-boot-context-isolation-mechanism-explained/"
+					>SOFABoot 上下文隔离机制解析</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="升级文档"
+					>升级文档</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 2.5.x 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_2_5_x/"
+					>SOFABoot 2.5.x 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 3.0 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_3_x/"
+					>SOFABoot 3.0 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFABoot 4.0 升级注意事项"
+						href="/sofastack.tech/projects/sofa-boot/upgrade_4_x/"
+					>SOFABoot 4.0 升级注意事项</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="常见问题"
+						href="/sofastack.tech/projects/sofa-boot/faq/"
+					>常见问题</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="版权声明"
+						href="/sofastack.tech/projects/sofa-boot/notice/"
+					>版权声明</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			启动过程
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/sofa-ark-startup-process/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h1 id="启动过程">启动过程</h1>
+
+<h2 id="ark-1-0-非内嵌模式">Ark 1.0 非内嵌模式</h2>
+
+<h3 id="section-1-3-1">打包方式</h3>
+
+<p>在 SOFAArk 1.0 中使用 sofa-ark-maven-plugin 打包</p>
+
+<pre><code class="language-xml">&lt;build&gt;
+     &lt;plugins&gt;
+       &lt;plugin&gt;
+         &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+         &lt;artifactId&gt;sofa-ark-maven-plugin&lt;/artifactId&gt;
+         &lt;version&gt;${sofa.ark.version}&lt;/version&gt;
+         &lt;executions&gt;
+           &lt;execution&gt;
+             &lt;id&gt;default-cli&lt;/id&gt;
+             
+             &lt;!--goal executed to generate executable-ark-jar --&gt;
+             &lt;goals&gt;
+               &lt;goal&gt;repackage&lt;/goal&gt;
+             &lt;/goals&gt;
+             
+             &lt;configuration&gt;
+               &lt;outputDirectory&gt;./target&lt;/outputDirectory&gt;
+               
+               &lt;!--default none--&gt;
+               &lt;arkClassifier&gt;executable-ark&lt;/arkClassifier&gt;
+             &lt;/configuration&gt;
+           &lt;/execution&gt;
+         &lt;/executions&gt;
+       &lt;/plugin&gt;
+     &lt;/plugins&gt;
+   &lt;/build&gt;
+</code></pre>
+
+<h3 id="section-1-3-2">启动流程图</h3>
+
+<p>Ark 1.0 应用的整体启动流程如下图所述：
+<img src="./1.jpg" alt="启动流程图" /></p>
+
+<h3 id="section-1-3-3">启动方式</h3>
+
+<h4 id="section-1-3-3-1">方式一、IDEA 启动</h4>
+
+<p>使用 idea 启动 SpringBoot Application 即可</p>
+
+<h4 id="section-1-3-3-2">方式二、命令行启动</h4>
+
+<p>Ark 包是可执行 Jar，可直接使用 java -jar 的方式启动，先使用 mvn clean package 进行打包，打包得到 ${bizName}-${bizVersion}-executable-ark.jar，命令行启动</p>
+
+<pre><code class="language-bash">java -jar ${bizName}-${bizVersion}-executable-ark.jar
+</code></pre>
+
+<h3 id="section-1-3-4">启动原理分析</h3>
+
+<p>Springboot 应用，ArkApplicationStartListener 实现了 ApplicationListener 接口，监听 Spring 的启动事件，调用<code>SofaArkBootstrap.launch(args)</code>启动 Ark。</p>
+
+<pre><code class="language-java">public class ArkApplicationStartListener implements ApplicationListener&lt;SpringApplicationEvent&gt; {
+
+    @Override
+    public void onApplicationEvent(SpringApplicationEvent event) {
+        try {
+            if (isSpringBoot2()
+                &amp;&amp; APPLICATION_STARTING_EVENT.equals(event.getClass().getCanonicalName())) {
+                startUpArk(event);
+            }
+
+            if (isSpringBoot1()
+                &amp;&amp; APPLICATION_STARTED_EVENT.equals(event.getClass().getCanonicalName())) {
+                startUpArk(event);
+            }
+        } catch (Throwable e) {
+            throw new RuntimeException(&quot;Meet exception when determine whether to start SOFAArk!&quot;, e);
+        }
+    }
+
+    public void startUpArk(SpringApplicationEvent event) {
+        if (LAUNCH_CLASSLOADER_NAME.equals(this.getClass().getClassLoader().getClass().getName())) {
+            // Ark 启动入口，非 Springboot 应用需要手动调用该方法
+            SofaArkBootstrap.launch(event.getArgs());
+        }
+    }
+
+    public boolean isSpringBoot1() {
+        return SpringBootVersion.getVersion().startsWith(&quot;1&quot;);
+    }
+
+    public boolean isSpringBoot2() {
+        return SpringBootVersion.getVersion().startsWith(&quot;2&quot;);
+    }
+}
+</code></pre>
+
+<p>SofaArkBootstrap launch 方法里面启了一个线程执行<code>SofaArkBootstrap.remain</code>方法，remain 里面调<code>ClasspathLauncher.launch</code>方法。</p>
+
+<pre><code class="language-java">public class SofaArkBootstrap {
+
+    private static final String BIZ_CLASSLOADER = &quot;com.alipay.sofa.ark.container.service.classloader.BizClassLoader&quot;;
+    private static final String MAIN_ENTRY_NAME = &quot;remain&quot;;
+    private static EntryMethod  entryMethod;
+
+    public static void launch(String[] args) {
+        try {
+            if (!isSofaArkStarted()) {
+                entryMethod = new EntryMethod(Thread.currentThread());
+                IsolatedThreadGroup threadGroup = new IsolatedThreadGroup(
+                    entryMethod.getDeclaringClassName());
+                // 参数中指定当前类的remain方法，LaunchRunner.run 里面会用反射调用remain方法
+                LaunchRunner launchRunner = new LaunchRunner(SofaArkBootstrap.class.getName(),
+                    MAIN_ENTRY_NAME, args);
+                Thread launchThread = new Thread(threadGroup, launchRunner,
+                    entryMethod.getMethodName());
+                launchThread.start();
+                // 等待前面的线程执行完成
+                LaunchRunner.join(threadGroup);
+                threadGroup.rethrowUncaughtException();
+                System.exit(0);
+            }
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void remain(String[] args) throws Exception {// NOPMD
+        // 在一个新的线程里面执行该方法
+        AssertUtils.assertNotNull(entryMethod, &quot;No Entry Method Found.&quot;);
+        URL[] urls = getURLClassPath();
+        new ClasspathLauncher(new ClassPathArchive(entryMethod.getDeclaringClassName(),
+            entryMethod.getMethodName(), urls)).launch(args, getClasspath(urls),
+            entryMethod.getMethod());
+    }
+
+}
+</code></pre>
+
+<p>ClasspathLauncher launch 方法在基类 AbstractLauncher 里面，会先创建 ContainerClassLoader，然后修改当前线程的 classLoader，通过 ContainerClassLoader 加载 com.alipay.sofa.ark.container.ArkContainer，然后使用反射执行 com.alipay.sofa.ark.container.ArkContainer.main 方法。</p>
+
+<pre><code class="language-java">public abstract class AbstractLauncher {
+
+    /**
+     * Launch the ark container. This method is the initial entry point when execute an fat jar.
+     * @throws Exception if the ark container fails to launch.
+     */
+    public Object launch(String[] args) throws Exception {
+        JarFile.registerUrlProtocolHandler();
+        // 创建 ContainerClassLoader
+        ClassLoader classLoader = createContainerClassLoader(getContainerArchive());
+        List&lt;String&gt; attachArgs = new ArrayList&lt;&gt;();
+        attachArgs
+            .add(String.format(&quot;%s%s=%s&quot;, CommandArgument.ARK_CONTAINER_ARGUMENTS_MARK,
+                CommandArgument.FAT_JAR_ARGUMENT_KEY, getExecutableArchive().getUrl()
+                    .toExternalForm()));
+        attachArgs.addAll(Arrays.asList(args));
+        return launch(attachArgs.toArray(new String[attachArgs.size()]), getMainClass(),
+            classLoader);
+    }
+
+    protected Object launch(String[] args, String mainClass, ClassLoader classLoader)
+                                                                                     throws Exception {
+        ClassLoader old = Thread.currentThread().getContextClassLoader();
+        try {
+            // 修改线程的classLoader
+            Thread.currentThread().setContextClassLoader(classLoader);
+            // 通过反射执行 com.alipay.sofa.ark.container.ArkContainer.main 
+            return createMainMethodRunner(mainClass, args).run();
+        } finally {
+            Thread.currentThread().setContextClassLoader(old);
+        }
+    }
+
+    // ......
+}
+</code></pre>
+
+<p>ArkContainer main 方法里面，会创建一个 ArkContainer 实例，然后执行 start 方法，start 方法中会获取 Pipeline，然后执行 StandardPipeline。</p>
+
+<pre><code class="language-java">public class ArkContainer {
+    // ......
+
+    public Object start() throws ArkRuntimeException {
+        AssertUtils.assertNotNull(arkServiceContainer, &quot;arkServiceContainer is null !&quot;);
+        if (started.compareAndSet(false, true)) {
+            Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    stop();
+                }
+            }));
+            prepareArkConfig();
+            reInitializeArkLogger();
+            arkServiceContainer.start();
+            // 获取 Pipeline
+            Pipeline pipeline = arkServiceContainer.getService(Pipeline.class);
+            // 执行 Pipeline
+            pipeline.process(pipelineContext);
+
+            // Pipeline 执行完成之后 Ark 启动成功
+            System.out.println(&quot;Ark container started in &quot; + (System.currentTimeMillis() - start) //NOPMD
+                               + &quot; ms.&quot;);
+        }
+        return this;
+    }
+    // ......
+}
+</code></pre>
+
+<p>StandardPipeline 里面内置了 6 个 Stage，会按顺序执行。</p>
+
+<pre><code class="language-java">public class StandardPipeline implements Pipeline {
+
+    private static final ArkLogger LOGGER = ArkLoggerFactory.getDefaultLogger();
+    private List&lt;PipelineStage&gt;    stages = new ArrayList&lt;&gt;();
+
+    public StandardPipeline() {
+        initializePipeline();
+    }
+
+    private void initializePipeline() {
+        // 初始化 Stage
+        addPipelineStage(
+            ArkServiceContainerHolder.getContainer().getService(HandleArchiveStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(RegisterServiceStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(ExtensionLoaderStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(DeployPluginStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(DeployBizStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(FinishStartupStage.class));
+    }
+
+    @Override
+    public Pipeline addPipelineStage(PipelineStage pipelineStage) {
+        stages.add(pipelineStage);
+        return this;
+    }
+
+    @Override
+    public void process(PipelineContext pipelineContext) throws ArkRuntimeException {
+        for (PipelineStage pipelineStage : stages) {
+            try {
+                LOGGER.info(String.format(&quot;Start to process pipeline stage: %s&quot;, pipelineStage
+                    .getClass().getName()));
+               // 按顺序执行 Stage，有一个 Stage 执行报错都会终止 ark 启动
+                pipelineStage.process(pipelineContext);
+                LOGGER.info(String.format(&quot;Finish to process pipeline stage: %s&quot;, pipelineStage
+                    .getClass().getName()));
+            } catch (Throwable e) {
+                LOGGER.error(String.format(&quot;Process pipeline stage fail: %s&quot;, pipelineStage
+                    .getClass().getName()), e);
+                throw new ArkRuntimeException(e);
+            }
+        }
+    }
+}
+</code></pre>
+
+<h2 id="ark-2-0-内嵌模式">Ark 2.0 内嵌模式</h2>
+
+<h3 id="section-2-3-1">打包方式</h3>
+
+<p>在 SOFAArk 2.0 中基座是采用 spring-boot 原生打包插件 spring-boot-maven-plugin 打包</p>
+
+<pre><code class="language-xml">&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.6.6&lt;/version&gt;
+      
+      &lt;configuration&gt;
+        &lt;outputDirectory&gt;target&lt;/outputDirectory&gt;
+        &lt;classifier&gt;ark-biz&lt;/classifier&gt;
+      &lt;/configuration&gt;
+      &lt;executions&gt;
+        &lt;execution&gt;
+          &lt;id&gt;package&lt;/id&gt;
+          &lt;goals&gt;
+            &lt;goal&gt;repackage&lt;/goal&gt;
+          &lt;/goals&gt;
+        &lt;/execution&gt;
+      &lt;/executions&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+
+<h3 id="section-2-3-2">启动流程图</h3>
+
+<p><img src="./2.jpg" alt="启动流程图" /></p>
+
+<h3 id="section-2-3-3">启动方式</h3>
+
+<h4 id="section-2-3-3-1">方式一、IDEA 启动</h4>
+
+<p>本地启动需要加上启动参数</p>
+
+<pre><code class="language-bash">-Dsofa.ark.embed.enable=true -Dcom.alipay.sofa.ark.master.biz=${bizName}
+</code></pre>
+
+<h4 id="section-2-2-3-2">方式二、命令行启动</h4>
+
+<p>Ark包是可执行Jar，可直接使用Java -jar的方式启动，先使用 mvn clean package 进行打包，打包得到 ${bizName}-${bizVersion}-ark-biz.jar，命令行启动</p>
+
+<pre><code class="language-bash">java -jar -Dsofa.ark.embed.enable=true -Dcom.alipay.sofa.ark.master.biz=${bizName} ${bizName}-${bizVersion}-ark-biz.jar
+</code></pre>
+
+<h3 id="section-2-3-4">启动原理分析</h3>
+
+<h4 id="section-2-3-4-1">启动入口</h4>
+
+<p>入口和 1.0 一样，使用 ArkApplicationStartListener 监听 Spring 的启动事件，调用<code>EmbedSofaArkBootstrap.launch</code>启动 Ark。</p>
+
+<pre><code class="language-java">public class ArkApplicationStartListener implements ApplicationListener&lt;SpringApplicationEvent&gt; {
+
+    @Override
+    public void onApplicationEvent(SpringApplicationEvent event) {
+        try {
+            if (ArkConfigs.isEmbedEnable()
+                || LaunchedURLClassLoader.class.isAssignableFrom(this.getClass().getClassLoader()
+                    .getClass())) {
+                ArkConfigs.setEmbedEnable(true);
+                // Ark 2.0 内嵌模式
+                startUpArkEmbed(event);
+                return;
+            }
+            if (isSpringBoot2()
+                &amp;&amp; APPLICATION_STARTING_EVENT.equals(event.getClass().getCanonicalName())) {
+                startUpArk(event);
+            }
+
+            if (isSpringBoot1()
+                &amp;&amp; APPLICATION_STARTED_EVENT.equals(event.getClass().getCanonicalName())) {
+                startUpArk(event);
+            }
+        } catch (Throwable e) {
+            throw new RuntimeException(&quot;Meet exception when determine whether to start SOFAArk!&quot;, e);
+        }
+    }
+    // ......
+    protected void startUpArkEmbed(SpringApplicationEvent event) {
+        if (this.getClass().getClassLoader() != Thread.currentThread().getContextClassLoader()) {
+            return;
+        }
+        if (event instanceof ApplicationEnvironmentPreparedEvent) {
+            ApplicationEnvironmentPreparedEvent preparedEvent = (ApplicationEnvironmentPreparedEvent) event;
+            // Ark 启动入口
+            EmbedSofaArkBootstrap.launch(preparedEvent.getEnvironment());
+        }
+        if (event instanceof ApplicationReadyEvent) {
+            if (ArkClient.getEventAdminService() != null &amp;&amp; ArkClient.getMasterBiz() != null) {
+                ArkClient.getEventAdminService().sendEvent(
+                    new AfterBizStartupEvent(ArkClient.getMasterBiz()));
+                ArkClient.getEventAdminService().sendEvent(new AfterFinishDeployEvent());
+                ArkClient.getEventAdminService().sendEvent(new AfterFinishStartupEvent());
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>EmbedSofaArkBootstrap launch 方法里面直接调<code>ClasspathLauncher.launch</code>，此处和 1.0 的处理有些差异。</p>
+
+<pre><code class="language-java">public class EmbedSofaArkBootstrap {
+    private static AtomicBoolean started = new AtomicBoolean(false);
+
+    public static void launch(Environment environment) {
+        if (started.compareAndSet(false, true)) {
+            EntryMethod entryMethod = new EntryMethod(Thread.currentThread());
+
+            getOrSetDefault(
+                Constants.MASTER_BIZ,
+                environment.getProperty(Constants.MASTER_BIZ,
+                    environment.getProperty(&quot;spring.application.name&quot;)));
+            getOrSetDefault(Constants.BIZ_CLASS_LOADER_HOOK_DIR,
+                environment.getProperty(Constants.BIZ_CLASS_LOADER_HOOK_DIR));
+            getOrSetDefault(Constants.PLUGIN_EXPORT_CLASS_ENABLE,
+                environment.getProperty(Constants.PLUGIN_EXPORT_CLASS_ENABLE, &quot;false&quot;));
+            getOrSetDefault(Constants.BIZ_CLASS_LOADER_HOOK_DIR,
+                DelegateToMasterBizClassLoaderHook.class.getName());
+            try {
+                URL[] urls = getURLClassPath();
+                ClasspathLauncher launcher = new ClasspathLauncher(new EmbedClassPathArchive(
+                    entryMethod.getDeclaringClassName(), entryMethod.getMethod().getName(), urls));
+                // 调 ClasspathLauncher.launch
+                launcher.launch(new String[] {}, getClasspath(urls), entryMethod.getMethod());
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    // ......
+}
+</code></pre>
+
+<p>ClasspathLauncher launch 方法内容和 Ark 1.0 类似，会先创建 ContainerClassLoader，然后修改当前线程的 classLoader，通过 ContainerClassLoader 加载 com.alipay.sofa.ark.container.ArkContainer，然后使用反射执行 com.alipay.sofa.ark.container.ArkContainer.main 方法。</p>
+
+<p><img src="./3.jpg" alt="ArkContainer" /></p>
+
+<p>ArkContainer main 方法里面，会创建一个 ArkContainer 实例，然后执行 start 方法，开始启动容器服务。</p>
+
+<pre><code class="language-java">public class ArkContainer {
+
+    // .....
+
+    public static Object main(String[] args) throws ArkRuntimeException {
+        if (args.length &lt; MINIMUM_ARGS_SIZE) {
+            throw new ArkRuntimeException(&quot;Please provide suitable arguments to continue !&quot;);
+        }
+
+        try {
+            LaunchCommand launchCommand = LaunchCommand.parse(args);
+            if (launchCommand.isExecutedByCommandLine()) {
+                ExecutableArkBizJar executableArchive;
+                File rootFile = new File(URLDecoder.decode(launchCommand.getExecutableArkBizJar()
+                    .getFile()));
+                if (rootFile.isDirectory()) {
+                    executableArchive = new ExecutableArkBizJar(new ExplodedArchive(rootFile));
+                } else {
+                    executableArchive = new ExecutableArkBizJar(new JarFileArchive(rootFile,
+                        launchCommand.getExecutableArkBizJar()));
+                }
+                return new ArkContainer(executableArchive, launchCommand).start();
+            } else {
+                ClassPathArchive classPathArchive;
+                if (ArkConfigs.isEmbedEnable()) {
+                    // Ark 2.0 内嵌模式
+                    classPathArchive = new EmbedClassPathArchive(launchCommand.getEntryClassName(),
+                        launchCommand.getEntryMethodName(), launchCommand.getClasspath());
+                } else {
+                    classPathArchive = new ClassPathArchive(launchCommand.getEntryClassName(),
+                        launchCommand.getEntryMethodName(), launchCommand.getClasspath());
+                }
+                return new ArkContainer(classPathArchive, launchCommand).start();
+            }
+        } catch (IOException e) {
+            throw new ArkRuntimeException(String.format(&quot;SOFAArk startup failed, commandline=%s&quot;,
+                LaunchCommand.toString(args)), e);
+        }
+    }
+    // ......
+    public Object start() throws ArkRuntimeException {
+        AssertUtils.assertNotNull(arkServiceContainer, &quot;arkServiceContainer is null !&quot;);
+        if (started.compareAndSet(false, true)) {
+            Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    stop();
+                }
+            }));
+            prepareArkConfig();
+            reInitializeArkLogger();
+            // 启动容器服务
+            arkServiceContainer.start();
+            // 从容器服务中获取 Pipeline 实例，底层是从 Guice 中获取实例
+            Pipeline pipeline = arkServiceContainer.getService(Pipeline.class);
+           //  执行流水线
+            pipeline.process(pipelineContext);
+
+            // Ark 启动完成
+            System.out.println(&quot;Ark container started in &quot; + (System.currentTimeMillis() - start) //NOPMD
+                               + &quot; ms.&quot;);
+        }
+        return this;
+    }
+}
+</code></pre>
+
+<h4 id="section-2-3-4-2">启动容器服务</h4>
+
+<p>ArkServiceContainer 是基于 Guice 实现的容器服务，<a href="https://github.com/google/guice">Guice</a> 是 Google开发的, 一个轻量级的依赖注入框架。类似Spring 的依赖注入。通过 Guice 管理 Ark 容器服务相关的 bean。</p>
+
+<pre><code class="language-java">public class ArkServiceContainer {
+
+    private Injector               injector;
+
+    private List&lt;ArkService&gt;       arkServiceList = new ArrayList&lt;&gt;();
+
+    private AtomicBoolean          started        = new AtomicBoolean(false);
+    private AtomicBoolean          stopped        = new AtomicBoolean(false);
+
+    private final String[]         arguments;
+
+    private static final ArkLogger LOGGER         = ArkLoggerFactory.getDefaultLogger();
+
+    public ArkServiceContainer(String[] arguments) {
+        this.arguments = arguments;
+    }
+
+    /**
+     * Start Ark Service Container
+     * @throws ArkRuntimeException
+     * @since 0.1.0
+     */
+    public void start() throws ArkRuntimeException {
+        if (started.compareAndSet(false, true)) {
+            ClassLoader oldClassLoader = ClassLoaderUtils.pushContextClassLoader(getClass()
+                .getClassLoader());
+            try {
+                LOGGER.info(&quot;Begin to start ArkServiceContainer&quot;);
+
+                // Guice 是 Google开发的, 一个轻量级的依赖注入框架
+                injector = Guice.createInjector(findServiceModules());
+                // 从 guice 中查询所有 ArkService 实例
+                for (Binding&lt;ArkService&gt; binding : injector
+                    .findBindingsByType(new TypeLiteral&lt;ArkService&gt;() {
+                    })) {
+                    arkServiceList.add(binding.getProvider().get());
+                }
+                Collections.sort(arkServiceList, new OrderComparator());
+
+                for (ArkService arkService : arkServiceList) {
+                    LOGGER.info(String.format(&quot;Init Service: %s&quot;, arkService.getClass().getName()));
+                    // 初始化 arkService，一共有 4 个 ArkService，分别是：
+                    // PluginDeployService：部署 plugin 的服务
+                    // BizDeployService:  部署 biz 包的服务
+                    // ClassLoaderService:  ClassLoader 服务
+                    // StandardTelnetServer: Telnet 工具服务
+                    arkService.init();
+                }
+
+                ArkServiceContainerHolder.setContainer(this);
+                ArkClient.setBizFactoryService(getService(BizFactoryService.class));
+                ArkClient.setBizManagerService(getService(BizManagerService.class));
+                ArkClient.setInjectionService(getService(InjectionService.class));
+                ArkClient.setEventAdminService(getService(EventAdminService.class));
+                ArkClient.setArguments(arguments);
+                LOGGER.info(&quot;Finish to start ArkServiceContainer&quot;);
+            } finally {
+                ClassLoaderUtils.popContextClassLoader(oldClassLoader);
+            }
+        }
+    }
+  
+    private List&lt;AbstractArkGuiceModule&gt; findServiceModules() throws ArkRuntimeException {
+        try {
+            List&lt;AbstractArkGuiceModule&gt; modules = new ArrayList&lt;&gt;();
+            // 通过 java spi 加载 Module
+            for (AbstractArkGuiceModule module : ServiceLoader.load(AbstractArkGuiceModule.class)) {
+                modules.add(module);
+            }
+            return modules;
+        } catch (Throwable e) {
+            throw new ArkRuntimeException(e);
+        }
+    }
+   // ......
+
+}
+````
+
+com.alipay.sofa.ark.common.guice.AbstractArkGuiceModule 文件中配置了 spi 实现 com.alipay.sofa.ark.container.guice.ContainerModule, ContainerModule 里配置了所有 ark 用到的实例，这些实例通过 @Inject 即可自动注入：
+
+```java
+public class ContainerModule extends AbstractArkGuiceModule {
+
+    @Override
+    protected void configure() {
+        // 当需要 Pipeline 的实例时，我们注入 StandardPipeline 的实例作为依赖
+        binder().bind(Pipeline.class).to(StandardPipeline.class);
+
+        Multibinder&lt;ArkService&gt; arkServiceMultibinder = Multibinder.newSetBinder(binder(),
+            ArkService.class);
+        // ArkService 有4个类型的实例
+        arkServiceMultibinder.addBinding().to(PluginDeployServiceImpl.class);
+        arkServiceMultibinder.addBinding().to(BizDeployServiceImpl.class);
+        arkServiceMultibinder.addBinding().to(ClassLoaderServiceImpl.class);
+        arkServiceMultibinder.addBinding().to(StandardTelnetServerImpl.class);
+
+        // 当需要 PluginManagerService 的实例时，我们注入 PluginManagerServiceImpl 的实例作为依赖
+        binder().bind(PluginManagerService.class).to(PluginManagerServiceImpl.class);
+        // 下面是一样的道理
+        binder().bind(BizManagerService.class).to(BizManagerServiceImpl.class);
+        binder().bind(ClassLoaderService.class).to(ClassLoaderServiceImpl.class);
+        binder().bind(PluginDeployService.class).to(PluginDeployServiceImpl.class);
+        binder().bind(BizDeployService.class).to(BizDeployServiceImpl.class);
+        binder().bind(RegistryService.class).to(RegistryServiceImpl.class);
+        binder().bind(InjectionService.class).to(InjectionServiceImpl.class);
+        binder().bind(TelnetServerService.class).to(StandardTelnetServerImpl.class);
+        binder().bind(BizFactoryService.class).to(BizFactoryServiceImpl.class);
+        binder().bind(PluginFactoryService.class).to(PluginFactoryServiceImpl.class);
+        binder().bind(ExtensionLoaderService.class).to(ExtensionLoaderServiceImpl.class);
+        binder().bind(EventAdminService.class).to(EventAdminServiceImpl.class);
+    }
+}
+</code></pre>
+
+<h4 id="section-2-3-4-3">执行流水线</h4>
+
+<p>容器服务 arkServiceContainer 启动完成之后，就容器服务中获取 Pipeline 实例，执行流水线，下面看一下 StandardPipeline 的源码：</p>
+
+<pre><code class="language-java">// 在容器中是单例对象
+@Singleton
+public class StandardPipeline implements Pipeline {
+
+    private static final ArkLogger LOGGER = ArkLoggerFactory.getDefaultLogger();
+    private List&lt;PipelineStage&gt;    stages = new ArrayList&lt;&gt;();
+
+    public StandardPipeline() {
+        initializePipeline();
+    }
+
+    private void initializePipeline() {
+        // 一共有 6 个步骤
+        addPipelineStage(
+            ArkServiceContainerHolder.getContainer().getService(HandleArchiveStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(RegisterServiceStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(ExtensionLoaderStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(DeployPluginStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(DeployBizStage.class))
+            .addPipelineStage(
+                ArkServiceContainerHolder.getContainer().getService(FinishStartupStage.class));
+    }
+
+    @Override
+    public Pipeline addPipelineStage(PipelineStage pipelineStage) {
+        stages.add(pipelineStage);
+        return this;
+    }
+
+    @Override
+    public void process(PipelineContext pipelineContext) throws ArkRuntimeException {
+        for (PipelineStage pipelineStage : stages) {
+            try {
+                LOGGER.info(String.format(&quot;Start to process pipeline stage: %s&quot;, pipelineStage
+                    .getClass().getName()));
+                // 执行每个步骤
+                pipelineStage.process(pipelineContext);
+                LOGGER.info(String.format(&quot;Finish to process pipeline stage: %s&quot;, pipelineStage
+                    .getClass().getName()));
+            } catch (Throwable e) {
+                LOGGER.error(String.format(&quot;Process pipeline stage fail: %s&quot;, pipelineStage
+                    .getClass().getName()), e);
+                throw new ArkRuntimeException(e);
+            }
+        }
+    }
+}
+</code></pre>
+
+<h5 id="section-2-3-4-3-1">Archive 解析</h5>
+
+<p>Ark 2.0 模式下，在这个步骤里会创建 master biz，创建 master biz 的过程见 processEmbed 方法和 BizFactoryServiceImpl 里面的 createEmbedMasterBiz，并且 master biz 是使用 LaunchedURLClassLoader 加载的（本地启动是用 AppClassLoader） 。创建完 master biz 之后进行安装 plugin。</p>
+
+<pre><code class="language-java">    // HandleArchiveStage 类
+    protected void processEmbed(PipelineContext pipelineContext) throws Exception {
+        // 获取到 Launcher$AppClassLoader
+        ClassLoader masterBizClassLoader = pipelineContext.getClass().getClassLoader();
+        // 创建 master biz
+        Biz masterBiz = bizFactoryService.createEmbedMasterBiz(masterBizClassLoader);
+        bizManagerService.registerBiz(masterBiz);
+        ArkClient.setMasterBiz(masterBiz);
+        ArkConfigs.putStringValue(Constants.MASTER_BIZ, masterBiz.getBizName());
+        ExecutableArchive executableArchive = pipelineContext.getExecutableArchive();
+        // 获取 plugin 包
+        List&lt;PluginArchive&gt; pluginArchives = executableArchive.getPluginArchives();
+        for (PluginArchive pluginArchive : pluginArchives) {
+            // jar 包里面带有 com/alipay/sofa/ark/plugin/mark 文件的都是 plugin 
+            Plugin plugin = pluginFactoryService.createEmbedPlugin(pluginArchive,
+                masterBizClassLoader);
+            if (!isPluginExcluded(plugin)) {
+                pluginManagerService.registerPlugin(plugin);
+            } else {
+                LOGGER.warn(String.format(&quot;The plugin of %s is excluded.&quot;, plugin.getPluginName()));
+            }
+        }
+        return;
+    }
+    
+    // BizFactoryServiceImpl 类
+    public Biz createEmbedMasterBiz(ClassLoader masterClassLoader) {
+        BizModel bizModel = new BizModel();
+        bizModel.setBizState(BizState.RESOLVED).setBizName(ArkConfigs.getStringValue(MASTER_BIZ))
+            .setBizVersion(&quot;1.0.0&quot;).setMainClass(&quot;embed main&quot;).setPriority(&quot;100&quot;)
+            .setWebContextPath(&quot;/&quot;).setDenyImportPackages(null).setDenyImportClasses(null)
+            .setDenyImportResources(null).setInjectPluginDependencies(new HashSet&lt;&gt;())
+            .setInjectExportPackages(null)
+            .setClassPath(((URLClassLoader) masterClassLoader).getURLs())
+            .setClassLoader(masterClassLoader);
+        return bizModel;
+    }
+
+    // EmbedClassPathArchive 类
+    @Override
+    public List&lt;PluginArchive&gt; getPluginArchives() throws Exception {
+        // 扫描 plugin 包，ARK_PLUGIN_MARK_ENTRY=&quot;com/alipay/sofa/ark/container/mark&quot;
+        List&lt;URL&gt; urlList = filterUrls(Constants.ARK_PLUGIN_MARK_ENTRY);
+
+        List&lt;PluginArchive&gt; pluginArchives = new ArrayList&lt;&gt;();
+        for (URL url : urlList) {
+            pluginArchives.add(new JarPluginArchive(getUrlJarFileArchive(url)));
+        }
+        return pluginArchives;
+    }
+</code></pre>
+
+<h5 id="section-2-3-4-3-2">注册容器服务</h5>
+
+<p><code>RegisterServiceStage</code>这一步是将所有 Ark 相关的服务注册到 com.alipay.sofa.ark.container.service.registry.RegistryServiceImpl#services 里去，并扫描服务中的 @ArkInject 注解，进行自动注入 Ark 服务。为什么要引入 @ArkInject？主要是为了方便开发高级特性，使用注解 @ArkInject 引用服务。SOFAArk 容器默认将内部功能组件发布成了服务，包括 Biz 管理，Plugin 管理，事件管理，服务注册管理。</p>
+
+<pre><code class="language-java">    // RegisterServiceStage 类
+    private void registryDefaultService() {
+        /**
+         * some basic container service is not allowed to be override,  they are only published
+         * to be referenced by plugin and biz, even depended by other container service.
+         */
+        registryService.publishService(BizManagerService.class, ArkServiceContainerHolder
+            .getContainer().getService(BizManagerService.class), new ContainerServiceProvider(
+            PriorityOrdered.HIGHEST_PRECEDENCE));
+        registryService.publishService(BizFactoryService.class, ArkServiceContainerHolder
+            .getContainer().getService(BizFactoryService.class), new ContainerServiceProvider(
+            PriorityOrdered.HIGHEST_PRECEDENCE));
+        registryService.publishService(PluginManagerService.class, ArkServiceContainerHolder
+            .getContainer().getService(PluginManagerService.class), new ContainerServiceProvider(
+            PriorityOrdered.HIGHEST_PRECEDENCE));
+        registryService.publishService(PluginFactoryService.class, ArkServiceContainerHolder
+            .getContainer().getService(PluginFactoryService.class), new ContainerServiceProvider(
+            PriorityOrdered.HIGHEST_PRECEDENCE));
+        registryService.publishService(EventAdminService.class, ArkServiceContainerHolder
+            .getContainer().getService(EventAdminService.class), new ContainerServiceProvider(
+            PriorityOrdered.HIGHEST_PRECEDENCE));
+        registryService.publishService(RegistryService.class, ArkServiceContainerHolder
+            .getContainer().getService(RegistryService.class), new ContainerServiceProvider(
+            PriorityOrdered.HIGHEST_PRECEDENCE));
+
+        /**
+         * some container service which may depends on other basic container service.
+         */
+        registryService.publishService(BizDeployer.class, new DefaultBizDeployer(),
+            new ContainerServiceProvider());
+        registryService.publishService(CommandProvider.class, new PluginCommandProvider(),
+            PLUGIN_COMMAND_UNIQUE_ID, new ContainerServiceProvider());
+        registryService.publishService(CommandProvider.class, new BizCommandProvider(),
+            BIZ_COMMAND_UNIQUE_ID, new ContainerServiceProvider());
+    }
+
+    // RegistryServiceImpl 类
+    public &lt;T&gt; ServiceReference&lt;T&gt; publishService(Class&lt;T&gt; ifClass, T implObject, String uniqueId,
+                                                  ServiceProvider serviceProvider) {
+        AssertUtils.assertNotNull(ifClass, &quot;Service interface should not be null.&quot;);
+        AssertUtils.assertNotNull(implObject, &quot;Service implementation should not be null.&quot;);
+        AssertUtils.assertNotNull(uniqueId, &quot;Service uniqueId should not be null.&quot;);
+        AssertUtils.assertNotNull(serviceProvider, &quot;ServiceProvider should not be null.&quot;);
+
+        ServiceMetadata serviceMetadata = new ServiceMetadataImpl(ifClass, uniqueId,
+            serviceProvider);
+        for (ServiceReference&lt;?&gt; serviceReference : services) {
+            // services 中已经存在这个服务，不重复注册
+            if (serviceMetadata.equals(serviceReference.getServiceMetadata())) {
+                LOGGER.warn(String.format(&quot;Service: %s publish by: %s already exist&quot;,
+                    serviceMetadata.getServiceName(), serviceProvider));
+                return (ServiceReference&lt;T&gt;) serviceReference;
+            }
+        }
+
+        ServiceReference&lt;T&gt; serviceReference = new ServiceReferenceImpl&lt;&gt;(serviceMetadata,
+            implObject);
+        // 处理服务中的 @ArkInject ，自动注入依赖
+        injectionService.inject(serviceReference);
+
+        LOGGER.info(String.format(&quot;Service: %s publish by: %s succeed&quot;,
+            serviceMetadata.getServiceName(), serviceProvider));
+
+        services.add(serviceReference);
+
+        return serviceReference;
+    }
+
+    // InjectionServiceImpl 类
+    private void inject(final Object instance, final String type) {
+        ReflectionUtils.doWithFields(instance.getClass(), new FieldCallback() {
+            @Override
+            public void doWith(Field field) throws ArkRuntimeException {
+                // 查找 @ArkInject 注解
+                ArkInject arkInject = field.getAnnotation(ArkInject.class);
+                if (arkInject == null) {
+                    return;
+                }
+
+                Class&lt;?&gt; serviceType = arkInject.interfaceType() == void.class ? field.getType()
+                    : arkInject.interfaceType();
+                Object value = getService(serviceType, arkInject.uniqueId());
+
+                if (value == null) {
+                    LOGGER.warn(String.format(&quot;Inject {field= %s} of {service= %s} fail!&quot;,
+                        field.getName(), type));
+                    return;
+                }
+                ReflectionUtils.makeAccessible(field);
+                try {
+                    // 自动注入
+                    field.set(instance, value);
+                    LOGGER.info(String.format(&quot;Inject {field= %s} of {service= %s} success!&quot;,
+                        field.getName(), type));
+                } catch (Throwable throwable) {
+                    throw new ArkRuntimeException(throwable);
+                }
+            }
+        });
+    }
+    private Object getService(Class serviceType, String uniqueId) {
+        ServiceReference serviceReference = registryService.referenceService(serviceType, uniqueId);
+        return serviceReference == null ? null : serviceReference.getService();
+    }
+</code></pre>
+
+<h5 id="section-2-3-4-3-3">初始化环境</h5>
+
+<p><code>ExtensionLoaderStage</code> 这一步做的事情比较简单，将 ExtensionLoaderService 实例设置到 ArkServiceLoader 的静态属性上，方便使用静态方法就能获取到 ExtensionLoaderService 实例。</p>
+
+<pre><code class="language-java">    // ExtensionLoaderStage 类
+    public void process(PipelineContext pipelineContext) throws ArkRuntimeException {
+        ArkServiceLoader.setExtensionLoaderService(extensionLoaderService);
+    }
+</code></pre>
+
+<h5 id="section-2-3-4-3-4">部署 Ark 插件</h5>
+
+<p><code>DeployPluginStage</code> 这一步主要是部署 plugin。从 PluginManagerService 中获取到所有的 Ark 插件，并按照插件优先级顺序：
+* ClassloaderService 准备插件 export 类的 map 映射
+* PluginDeployService 启动插件的 com.alipay.sofa.ark.spi.service.PluginActivator。</p>
+
+<pre><code class="language-java">    // PluginDeployServiceImpl 类
+    public void deploy() throws ArkRuntimeException {
+        for (Plugin plugin : pluginManagerService.getPluginsInOrder()) {
+            try {
+                deployPlugin(plugin);
+            } catch (ArkRuntimeException e) {
+                LOGGER.error(String.format(&quot;Deploy plugin: %s meet error&quot;, plugin.getPluginName()),
+                    e);
+                throw e;
+            }
+        }
+    }
+
+    // PluginModel 类
+    public void start() throws ArkRuntimeException {
+        if (activator == null || activator.isEmpty()) {
+            return;
+        }
+
+        EventAdminService eventAdminService = ArkServiceContainerHolder.getContainer().getService(
+            EventAdminService.class);
+
+        ClassLoader oldClassLoader = ClassLoaderUtils
+            .pushContextClassLoader(this.pluginClassLoader);
+        try {
+            eventAdminService.sendEvent(new BeforePluginStartupEvent(this));
+            pluginActivator = (PluginActivator) pluginClassLoader.loadClass(activator)
+                .newInstance();
+            pluginActivator.start(pluginContext);
+        } catch (Throwable ex) {
+            throw new ArkRuntimeException(ex.getMessage(), ex);
+        } finally {
+            eventAdminService.sendEvent(new AfterPluginStartupEvent(this));
+            ClassLoaderUtils.popContextClassLoader(oldClassLoader);
+
+        }
+    }
+</code></pre>
+
+<h5 id="section-2-3-4-3-5">启动 Ark 业务</h5>
+
+<p><code>DeployBizStage</code>这一步主要是部署 biz。从 BizManagerService 中获取到所有的 Ark 业务，并执行业务配置在 MANIFEST.MF 属性 Main-Class 中提供的入口 main 函数</p>
+
+<pre><code class="language-java">    // BizDeployServiceImpl 类
+    public void deploy(String[] args) throws ArkRuntimeException {
+        ServiceReference&lt;BizDeployer&gt; serviceReference = registryService
+            .referenceService(BizDeployer.class);
+        bizDeployer = serviceReference.getService();
+
+        LOGGER.info(String.format(&quot;BizDeployer=\'%s\' is starting.&quot;, bizDeployer.getDesc()));
+
+        bizDeployer.init(args);
+        bizDeployer.deploy();
+    }
+
+    // DefaultBizDeployer 类
+    public void deploy() {
+        for (Biz biz : bizManagerService.getBizInOrder()) {
+            try {
+                LOGGER.info(String.format(&quot;Begin to start biz: %s&quot;, biz.getBizName()));
+                biz.start(arguments);
+                LOGGER.info(String.format(&quot;Finish to start biz: %s&quot;, biz.getBizName()));
+            } catch (Throwable e) {
+                LOGGER.error(String.format(&quot;Start biz: %s meet error&quot;, biz.getBizName()), e);
+                throw new ArkRuntimeException(e);
+            }
+        }
+    }
+</code></pre>
+
+<h5 id="section-2-3-4-3-6">完成启动</h5>
+
+<p><code>FinishStartupStage</code>Ark 2.0 这一步什么事情都不会做，1.0 会发送一个 AfterFinishStartupEvent 事件。</p>
+
+<pre><code class="language-java">@Singleton
+public class FinishStartupStage implements PipelineStage {
+    @Inject
+    private EventAdminService eventAdminService;
+
+    @Override
+    public void process(PipelineContext pipelineContext) throws ArkRuntimeException {
+        if (ArkConfigs.isEmbedEnable()) {
+            // 2.0 直接返回
+            return;
+        }
+        eventAdminService.sendEvent(new AfterFinishStartupEvent());
+    }
+}
+</code></pre>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

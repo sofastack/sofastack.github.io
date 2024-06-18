@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	携手开源，共同见证｜Seata 进入 Apache 孵化器 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		携手开源，共同见证｜Seata 进入 Apache 孵化器
+	</h1>
+	<div class="meta">
+		
+			2023-11-16 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>北京时间 2023 年 10 月 29 日，分布式事务开源项目 Seata 通过 Apache 基金会的投票决议，以全票通过的优秀表现正式成为 Apache 孵化器项目！</p>
+
+<p>根据 Apache基金会邮件列表显示，包含 13 个约束性投票（binding votes）和 6 个无约束性投票（non-binding votes）的投票全部持赞同意见，无弃权票和反对票，投票顺利通过。</p>
+
+<p>“Welcome Seata to the ASF incubator.”</p>
+
+<h2 id="项目历史">项目历史</h2>
+
+<p><font color=#1E90FF>早在 2007 年</font></p>
+
+<p>蚂蚁集团和阿里巴巴就在内部开发了分布式事务中间件，用于解决电商、支付、物流等业务场景中应用数据的一致性问题。内部项目分别被称为 XTS（eXtended Transaction Service）/TXC（Taobao Transaction Constructor），该项目几乎在每笔订单的交易支付链路几乎都有使用。</p>
+
+<p><font color=#1E90FF>自 2013 年以来</font></p>
+
+<p>蚂蚁集团在金融云上向企业客户发布了分布式事务云服务产品 DTX（Distributed Transaction-eXtended），阿里巴巴在阿里云上发布 GTS（global transaction service），两者均在各个行业领域积累了大量用户。</p>
+
+<p><font color=#1E90FF>2019 年 1 月</font></p>
+
+<p>阿里巴巴集团正式开源了该项目，项目命名为 Fescar（Fast &amp; Easy Commit and Rollback）。项目开源以来，它受到了众多开发人员的热烈欢迎和赞扬，开源一周收获了超 3k star，曾一度蝉联 GitHub Trending 排行榜第一。</p>
+
+<p><font color=#1E90FF>2019 年 4 月</font></p>
+
+<p>蚂蚁集团数据中间件团队加入了 Fescar 社区。为了创建一个更加开放和中立的社区，Fescar 改名为 Seata（Simple Extensible Autonomous Transaction Architecture），代码仓库从 Alibaba organization 迁移到其独立的 Seata organization。</p>
+
+<p><font color=#1E90FF>2019 年 12 月</font></p>
+
+<p>Seata 开源项目正式发布 1.0.0 GA 版本，标志着项目已基本可生产使用。</p>
+
+<p><font color=#1E90FF>2023 年 10 月</font></p>
+
+<p>为了更好地通过社区驱动技术的演进，蚂蚁集团和阿里巴巴携手，正式将 Seata 捐赠给 Apache 基金会，提案通过了 Apache 基金会的投票决议。</p>
+
+<h2 id="项目现状">项目现状</h2>
+
+<ul>
+<li><p>Seata 开源 4 年来，主项目在 GitHub 累计收获 star 超 24k，累计发布版本超 40 次，参与代码贡献人数超 300 人。</p></li>
+
+<li><p>Seata 被各领域企业/组织广泛应用于解决分布式事务问题，在 GitHub「Used by」拥有超过 3.1k 的仓库依赖，金融领域企业纷纷试点使用。</p></li>
+
+<li><p>Seata 对于市面上主流的关系数据库、RPC 框架做了广泛的支持，同时被许多第三方社区做了主动和被动集成。</p></li>
+</ul>
+
+<h2 id="项目特性">项目特性</h2>
+
+<ul>
+<li><p>提供 AT、TCC、Saga 和 XA 事务模式，支持事务模式的混用，以满足不同业务场景的数据一致性需求。</p></li>
+
+<li><p>提供 Java、Golang 等多语言 SDK 支持。</p></li>
+
+<li><p>支持了 Apache Dubbo、Spring Cloud Alibaba、gRPC、Motan、SOFARPC、HttpClient 等服务调用框架。</p></li>
+
+<li><p>提供了 MySQL、MariaDB、Oracle、PostgreSQL、OceanBase、TiDB、SQLServer、PolarDB、Dameng 等关系数据库无侵入 AT 事务模式的支持。</p></li>
+
+<li><p>支持基于多种关系数据库、Redis 存储的存算分离的集群模式，支持基于 Raft 的存算不分离集群模式，满足不同运维场景下的集群高可用需求。</p></li>
+
+<li><p>支持了市面上主流的注册中心和配置中心。</p></li>
+
+<li><p>提供了丰富的插件化扩展机制，支持用户自定义 SDK 侧 30 多个扩展点。</p></li>
+</ul>
+
+<h2 id="致谢">致谢</h2>
+
+<p>感谢所有曾经参与到社区建设中来的贡献者。</p>
+
+<p>特别感谢愿意为 Seata 提供指导的 Champion 和 Mentors:</p>
+
+<p>Champion：</p>
+
+<p>Sheng Wu（wusheng @apache.org）</p>
+
+<p>Mentors：</p>
+
+<p>Sheng Wu(wusheng @apache.org）</p>
+
+<p>Justin Mclean(justin @classsoftware.com）</p>
+
+<p>Huxing Zhang(huxing @apache.org）</p>
+
+<p>Heng Du(duhengforever @apache.org）</p>
+
+<p>我们坚信，将 Seata 引入 ASF 可以推动开源社区向着更强大、更多元化发展。我们将努力践行 Apache Way，同时欢迎更多的公司和个人加入到开发队伍中来，让 Seata 社区更加健康、茁壮地成长，让更多人享受开源带来的技术红利！</p>
+
+<h2 id="项目寄语">项目寄语</h2>
+
+<p>四年前，我们秉持开源开放的理念，在社区写下了第一行代码。回顾过去四年，Seata 开源社区的技术演进和社区运营就像一次创业旅程。这四年我们取得了不菲的成绩，Seata 的出现快速占领了开发者的心智，成为了分布式事务领域的事实标准，在理论实践中我们牵头推动了行业标准的建立。Seata 捐赠给 ASF 是我们迈向更多元化社区治理和全球化发展的重要里程碑。</p>
+
+<p>&ndash; 季敏（Seata 开源社区创始人）</p>
+
+<p>恭喜 Seata 全票通过进入 Apache 孵化器！2019 年，蚂蚁集团和阿里集团携手一起开源了分布式事务框架 Seata，各自贡献了内部分布式事务的最佳实践。经过了四年的发展，Seata 早已成为一个被社区广泛认可的分布式事务项目，大量的贡献者在 Seata 里面贡献代码，丰富了 Seata 的各种功能，很多用户在自己的环境中使用 Seata，给 Seata 带来了大量的实践落地案例。Seata 进入 Apache 孵化器不是终点，而是新的起点，期待 Seata 后面能够持续按照 The Apache Way 的方式运作，以更加中立的姿态，吸引更多的贡献者和用户，走向更加宽阔的未来。</p>
+
+<p>&ndash; 黄挺（蚂蚁集团中间件负责人）</p>
+
+<p>非常高兴 Seata 这个阿里和蚂蚁合作多年的开源项目进入 Apache 基金会进行孵化，相信 Apache Way 会帮助项目更加社区化、服务更多人，也期待 Apache 的 Seata 能为社区带来更多微小而美好的改变。对于蚂蚁开源来说，Seata 进入 Apache 孵化也是一个重要的里程碑，希望未来有更多蚂蚁团队发起的项目能走上 Apache 之路。</p>
+
+<p>&ndash; 王旭（蚂蚁开源技术委员会副主席）</p>
+
+<p>分布式事务是微服务架构最复杂，技术水位最深的部分。阿里&amp;蚂蚁在开源捐献之前申请了数十个专利，开源之后在社区推动下高速发展，吸收 70%+外部开发者，大幅降低分布式的复杂度，扩展了分布式事务的生态；未来随着微服务高速发展，随着数据一致性要求越来越高，相信分布式事务会发挥越来越大的作用！</p>
+
+<p>&ndash;李艳林（阿里云微服务团队负责人）</p>
+
+<p>Seata 是一款由阿里巴巴和蚂蚁集团共同参与开发的分布式事务解决方案，广泛应用于两家公司的内部系统。它的突出特点在于高性能和简单易用，为微服务架构下的分布式事务处理提供了高效且可靠的解决方案。我们坚信将 Seata 捐赠给 ASF，社区将会得到更好的发展，能为更多的开发者提供更优质的服务。同时，我们也期待更多的开发者能够加入到 Seata 的开发中来，共同推动分布式事务解决方案的进步和发展。</p>
+
+<p>&ndash; 谢吉宝（阿里云云原生中间件负责人）</p>
+
+<p>很高兴能够作为 Champion 和 Mentor ，帮助 Seata 社区进入到 Apache 孵化器。Seata 项目在过去的 4 年，在分布式事务领域取得了长足的进度，并以开放的心态面向社区，并一步步的做好走进 Apache 孵化器的各项准备工作。希望在未来的一到两年的实践中，项目成员能够很好的学习以及融入 ASF 的文化中，并进一步增加社区的多元化和国际化。进入孵化器是一个里程碑，更是一个新的开始，祝贺 Seata 项目。</p>
+
+<p>&ndash; 吴晟（Apache 软件基金会会员、Apache 软件基金会首位中国董事、Apache 软件基金会孵化器 PMC 成员和项目导师）</p>
+
+<p>我关注 Seata 这个项目关注很长时间，从 Fescar 到 Seata，该项目从诞生之初就保持了旺盛的生命力，在近几年社区和逐步壮大，逐步成长为分布式事务这个领域杰出的一个开源项目，很高兴看到 Seata 加入 Apache 基金会进行孵化，相信 Seata 今后会以更加中立的身份，吸引更多的贡献者，一群人一起走可以走得更稳更远。很荣幸以导师的身份陪伴 Seata 的孵化之旅，预祝 Seata 一切顺利！</p>
+
+<p>&ndash; 张乎兴（Apache 基金会成员、Apache Tomcat、Apache Dubbo 社区 PMC 成员、Apache Seata(incubating) 导师）</p>
+
+<p>Seata 作为在阿里跟蚂蚁久经验证的分布式事务框架，不仅经历了历年海量流量的验证，而且在开源之后迅速成长为国内分布式事务领域的事实标准。很高兴看到 Seata 成为 Apache 基金会孵化项目，作为一个新的开始，希望 Seata 能够吸引更多的开发者，打磨更多的场景，行稳致远，相信在众多开发者的共同努力下，Seata 一定能够成为数据与应用之间的坚实桥梁。</p>
+
+<p>&ndash;杜恒（ASF member、Apache RocketMQ PMC member）</p>
+
+<p>Seata 作为分布式事务协调器，是微服务架构中最重要的独立组件之一，也是整个阿里巴巴微服务领域最精华的部分之一。Seata 项目从开源以来就受到了广泛的开发者支持，而现在它将进入 Apache 基金会孵化，我相信会在 Apache Way 开放的文化帮助下，Seata 项目将继续成为微服务架构中的一颗明星，为我们带来更多便利和创新。</p>
+
+<p>&ndash; 王小瑞（AutoMQ 联合创始人 &amp; CEO、Apache RocketMQ 作者、PMC Chair）</p>
+
+<p>在分布式、微服务领域，Seata 绝对占得重要的一席，它开创性的创造了多种事务模式。Dubbo &amp; Spring Cloud Alibaba 一直和 Seata 有深度的集成与合作，我本人也与作者季敏、社区核心成员有过多次深入交流，这是一个有技术追求、有责任心、充满活力的开源社区。非常高兴见证 Seata 加入 ASF 大家庭，开启新的旅程，祝一切顺利。</p>
+
+<p>&ndash; 刘军（Apache Dubbo PMC Chair、Spring Cloud Alibaba 负责人）</p>
+
+<p>分布式事务一直是一个被大众敬而远之，视而不见却实际存在的问题,四年前 Seata 将业界对待分布式事务的“鸵鸟心态”转为轻松面对，将一个业界最难攻克的问题，以一种标准化、无侵入、低成本的方式引进，目前登记在册已有数百家企业，覆盖各式各样的业务场景。如果说四年前 Seata 是一粒种在这个领域的种子，那么目前已经枝繁叶茂了，相信捐赠给 ASF 后更加的中立与开放,吸引更多开发者共同建设，共同演进分布式事务领域的未来技术架构，将这棵已经枝繁叶茂的大树做到硕果累累。</p>
+
+<p>&ndash; 陈健斌 （Apache Seata（incubating）PPMC 成员）</p>
+
+<p>作为分布式事务领域的重要项目，Seata 自诞生以来，一直致力于解决微服务架构下的数据一致性问题，帮助开发者构建高性能、易扩展、易使用的分布式应用。现在，Seata 即将踏上新的征程。我们相信 Seata 在捐赠给 ASF 这个大家庭后，将会得到更广泛的关注和使用，也相信在未来的日子里，Seata 将会为更多的开发者解决分布式事务的难题。</p>
+
+<p>&ndash; 王良（Apache Seata（incubating）PPMC 成员）</p>
+
+<p>Seata 作为一个强大而稳定的开源分布式事务解决方案，为广大开发者在分布式事务的场景下，提供了极大的帮助和便利。贡献给 Apache 将进一步推动项目发展和全球社区的参与度。祝愿在 Apache 的托管下，能够不断发展，更加中立化，标准化，助力全球更多的开发者构建可靠的分布式事务业务。</p>
+
+<p>&ndash; 雷志远（Apache Seata（incubating）PPMC 成员）</p>
+
+<p>作为一名中间件老兵，有幸见证：微服务浪潮下，源自国内的分布式事务中间件从阿里、蚂蚁内部创新孵化，到商业化，再到开源，一步步走向更广阔的天地，产生更大的价值。相信，捐赠给 ASF 将让 SEATA 成为世界上更多“苦分布式事务久矣”的开发者们的解药！</p>
+
+<p>&ndash; 申海强（Apache Seata（incubating）PPMC 成员、前阿里分布式事务中间件核心成员）</p>
+
+<p>有幸跟随着这个项目从 Fescar 到 Seata 再到现在捐献给 Apache 基金会，见证了在这四年时间里一间又一间的企业因为 Seata 而解决了分布式事务的难题。现在 Seata 站在了全新的起点上将以开放、包容的姿态去面对每一个用户，悉心聆听每一个声音，开拓出这条能够通往全球的道路。</p>
+
+<p>&ndash; 张嘉伟（Apache Seata(incubating) PPMC 成员）</p>
+
+<p>非常高兴看到 Seata 成为 Apache 孵化项目，这定会是分布式事务领域的标杆解决方案。从最初的 Fescar 到 Seata，我与你一路相伴，让我们一起努力，期待 Seata 蜕变成 Apache Seata。</p>
+
+<p>&ndash; 吴江坷（Apache Seata（incubating)PPMC 成员）</p>
+
+<p>在微服务开发模式下，分布式系统的数据一致性常常成为系统的难题。Seata 开源以来，社区积累了各种事务模式解决方案和丰富的用户使用案例。非常高兴 Seata 项目能加入 Apache 基金会，社区将更加开放和多元化，将吸引更多的提交者，帮助更多的用户，项目成为分布式事务的事实标准。</p>
+
+<p>&ndash;  王欣（Apache Dubbo 社区 PMC 成员、Apache Seata（incubating）PPMC 成员）</p>
+
+<h2 id="写到最后">写到最后</h2>
+
+<p>为促进分布式事务技术的普及和实践，增进 Apache Seata（incubating）使用者的交流与学习，我们将定期邀请业内资深的技术专家，分享实战经验。</p>
+
+<p>欢迎订阅 dev-subscribe@seata.apache.org 邮件组，关注 Apache Seata（incubating）社区技术发展。</p>
+
+<p>欢迎持续关注 Seata！</p>
+
+<p>官网地址：<a href="https://seata.io/zh-cn/">https://seata.io/zh-cn/</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/say-goodbye-to-complexity-easily-tackle-k8s-management-challenges-with-the-right-tools/">
+		<span class="text">上一篇: </span>
+		<span class="text">告别复杂性！用正确的工具轻松应对 K8s 管理挑战</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/ospp-exprience-sharing-keep-enthusiastic-and-all-in/">
+		<span class="text">下一篇: </span>
+		<span class="text">开源之夏经验分享｜Layotto 社区 陈亦昺：保持热情、全力以赴！</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/say-goodbye-to-complexity-easily-tackle-k8s-management-challenges-with-the-right-tools/">告别复杂性！用正确的工具轻松应对 K8s 管理挑战</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/">开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力</a></li>
+		
+			<li><a href="/sofastack.tech/blog/lunettes-makes-kubernetes-service-operations-easier/">Lunettes - 让 Kubernetes 服务运营更简单</a></li>
+		
+			<li><a href="/sofastack.tech/blog/vldb2023-fanglue-an-interactive-rule-development-system/">VLDB2023｜方略：一个交互式的规则研发系统</a></li>
+		
+			<li><a href="/sofastack.tech/blog/cncf-foundation-announced-kcl-as-a-sandbox-project/">喜报！CNCF 基金会宣布 KCL 成为沙盒项目！</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

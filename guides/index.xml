@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/guides/</link>
+    <description>Recent content on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/guides/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFABoot 动态模块实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/guides/kc-sofastack-dynamic-demo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/guides/kc-sofastack-dynamic-demo/</guid>
+      <description>SOFABoot 动态模块实践 注意：您需要自行部署后端环境依赖，并修改示例中的服务依赖地址即可使用。 实验背景 实验内容 任务 任务准备 将 SOFABoot 应用打包成 ark 包 修改动态模</description>
+    </item>
+    
+    <item>
+      <title>SOFAStack Demos</title>
+      <link>https://sofastack.github.io/sofastack.tech/guides/sofastack-demos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/guides/sofastack-demos/</guid>
+      <description>SOFAStack-Demos 分布式链路组件 SOFATracer 埋点机制 Demo Demo 地址：https://github.com/glmapper/tracers-guides 相关文章：https</description>
+    </item>
+    
+    <item>
+      <title>使用 CloudMesh 轻松实践 Service Mesh</title>
+      <link>https://sofastack.github.io/sofastack.tech/guides/kc-cloud-mesh-demo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/guides/kc-cloud-mesh-demo/</guid>
+      <description>使用 CloudMesh 轻松实践 Service Mesh Demo 内容介绍 注意：使用该指南需要开通蚂蚁金融科技账号，请访问 蚂蚁金服科技官网。 Demo内容介绍 Service Mesh 将服务间通信能力下沉到基础</description>
+    </item>
+    
+    <item>
+      <title>使用 SOFAStack 快速构建微服务</title>
+      <link>https://sofastack.github.io/sofastack.tech/guides/sofastack-quick-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/guides/sofastack-quick-start/</guid>
+      <description>使用 SOFAStack 快速构建微服务 前置条件 注意：您需要自行部署后端环境依赖，并修改示例中的服务依赖地址即可使用。 [必选]部署注册中心：https://ww</description>
+    </item>
+    
+    <item>
+      <title>使用 Seata 保障支付一致性</title>
+      <link>https://sofastack.github.io/sofastack.tech/guides/kc-seata-demo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/guides/kc-seata-demo/</guid>
+      <description>使用 Seata 保障支付一致性 注意：您需要自行部署后端环境依赖，并修改示例中的服务依赖地址即可使用。 在开始该 demo 之前先完成《使用 SOFAStack 快速构建微服务》，如果</description>
+    </item>
+    
+    <item>
+      <title>基于 Serverless 轻松构建云上应用</title>
+      <link>https://sofastack.github.io/sofastack.tech/guides/kc-serverless-demo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/guides/kc-serverless-demo/</guid>
+      <description>基于 Serverless 轻松构建云上应用 注意：使用该指南需要开通蚂蚁金融科技账号，请访问 蚂蚁金服科技官网。 作为云原生技术前进方向之一，Serverless 架构</description>
+    </item>
+    
+  </channel>
+</rss>

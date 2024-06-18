@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	SOFAStack Demos · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		SOFAStack Demos
+	</h1>
+	<div class="meta"></div>
+</div>
+		<article class="typo">
+  <h1 id="sofastack-demos">SOFAStack-Demos</h1>
+
+<h2 id="分布式链路组件-sofatracer-埋点机制-demo">分布式链路组件 SOFATracer 埋点机制 Demo</h2>
+
+<ul>
+<li>Demo 地址：<a href="https://github.com/glmapper/tracers-guides">https://github.com/glmapper/tracers-guides</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-15-retrospect/">https://www.sofastack.tech/blog/sofa-channel-15-retrospect/</a></li>
+</ul>
+
+<h3 id="云原生网络代理-mosn-扩展机制-mosn-stream-filter-操作-demo">云原生网络代理 MOSN <strong>扩展机制</strong>：MOSN Stream Filter 操作 Demo</h3>
+
+<ul>
+<li>Demo：<a href="https://github.com/mosn/mosn/tree/master/examples/codes/mosn-extensions">https://github.com/mosn/mosn/tree/master/examples/codes/mosn-extensions</a></li>
+<li>Demo Readme：<a href="https://github.com/mosn/mosn/tree/master/examples/cn_readme/mosn-extensions">https://github.com/mosn/mosn/tree/master/examples/cn_readme/mosn-extensions</a></li>
+<li>操作视频：<a href="https://www.bilibili.com/video/BV1SQ4y1K7iw">https://www.bilibili.com/video/BV1SQ4y1K7iw</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-14-retrospect/">https://www.sofastack.tech/blog/sofa-channel-14-retrospect/</a></li>
+</ul>
+
+<h3 id="云原生网络代理-mosn-多协议机制-接入-sofabolt-操作-demo">云原生网络代理 MOSN <strong>多协议机制：</strong>接入 SOFABolt 操作 Demo</h3>
+
+<ul>
+<li>Demo 地址：<a href="https://github.com/mosn/mosn/tree/master/examples/codes/sofarpc-with-xprotocol-sample">https://github.com/mosn/mosn/tree/master/examples/codes/sofarpc-with-xprotocol-sample</a></li>
+<li>操作视频：<a href="https://www.bilibili.com/video/BV1UZ4y1x7Sj">https://www.bilibili.com/video/BV1UZ4y1x7Sj</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-13-retrospect/">https://www.sofastack.tech/blog/sofa-channel-13-retrospect/</a></li>
+</ul>
+
+<h3 id="轻量级类隔离容器-sofaark-动态模块操作-demo">轻量级类隔离容器 SOFAArk 动态模块操作 Demo</h3>
+
+<ul>
+<li>Demo：<a href="https://github.com/caojie09/sofachannel-demo">https://github.com/caojie09/sofachannel-demo</a></li>
+<li>操作视频：<a href="https://www.bilibili.com/video/BV1wQ4y1T7rt">https://www.bilibili.com/video/BV1wQ4y1T7rt</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-11-retrospect/">https://www.sofastack.tech/blog/sofa-channel-11-retrospect/</a></li>
+</ul>
+
+<h3 id="分布式事务-seata-长事务解决方案-saga-模式可视化状态机">分布式事务 Seata 长事务解决方案 Saga 模式可视化状态机</h3>
+
+<ul>
+<li>Seata Saga 可视化状态机设计器演示地址：
+<a href="http://seata.io/saga_designer/index.html">http://seata.io/saga_designer/index.html</a></li>
+<li>Seata Saga 可视化状态机设计器代码以及运行指南：
+<a href="https://github.com/seata/seata/tree/develop/saga/seata-saga-statemachine-designer">https://github.com/seata/seata/tree/develop/saga/seata-saga-statemachine-designer</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-10-retrospect/">https://www.sofastack.tech/blog/sofa-channel-10-retrospect/</a></li>
+</ul>
+
+<h3 id="sofajraft-的-counter-例子-demo">SOFAJRaft 的 Counter 例子 Demo</h3>
+
+<ul>
+<li>Demo 地址：<a href="https://www.sofastack.tech/projects/sofa-jraft/counter-example/">https://www.sofastack.tech/projects/sofa-jraft/counter-example/</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-8-retrospect/">https://www.sofastack.tech/blog/sofa-channel-8-retrospect/</a></li>
+</ul>
+
+<h3 id="轻量级监控分析系统-sofalookout-客户端的相关演示操作-demo">轻量级监控分析系统 SOFALookout 客户端的相关演示操作 Demo</h3>
+
+<ul>
+<li>Demo 地址：<a href="https://github.com/sofastack/sofa-lookout/tree/master/samples/metrics/client">https://github.com/sofastack/sofa-lookout/tree/master/samples/metrics/client</a></li>
+<li>相关文章<a href="https://www.sofastack.tech/blog/sofa-channel-6-retrospect/">https://www.sofastack.tech/blog/sofa-channel-6-retrospect/</a></li>
+</ul>
+
+<h3 id="sofarpc-内存优化操作-demo">SOFARPC 内存优化操作 Demo</h3>
+
+<ul>
+<li>Demo 地址：<a href="https://github.com/leizhiyuan/rpcchannel">https://github.com/leizhiyuan/rpcchannel</a></li>
+<li>相关文章：<a href="https://www.sofastack.tech/blog/sofa-channel-3-retrospect/">https://www.sofastack.tech/blog/sofa-channel-3-retrospect/</a></li>
+</ul>
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/guides/kc-cloud-mesh-demo/">
+		<span class="text">上一篇: </span>
+		<span class="text">使用 CloudMesh 轻松实践 Service Mesh</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/guides/kc-sofastack-dynamic-demo/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFABoot 动态模块实践</span>
+	</a>
+</nav>
+
+	</main>
+
+	<aside class="ss-layout-aside">
+		<div class="ss-card">
+	<h2 class="card-title">
+		获取代码
+	</h2>
+	<div id="js-code" class="ss-aside-code">
+		<div class="button-group">
+			<button class="button">HTTPS</button>
+			<button class="button">SSH</button>
+		</div>
+		<div class="input-group">
+			<input class="input" value="https://github.com/sofastack-guides/sofastack-demos" spellcheck="false" />
+			<span class="addon">
+				<svg class="icon copy" aria-hidden="true"><use xlink:href="#icon-copy"></use></svg>
+				<svg class="icon tick" aria-hidden="true"><use xlink:href="#icon-ictick"></use></svg>
+			</span>
+		</div>
+		<a class="button download"
+			href="https://github.com/sofastack-guides/sofastack-demos/archive/master.zip"
+		>下载 ZIP</a>
+	</div>
+</div>
+		
+	<div class="ss-card">
+		<h2 class="card-title">
+			项目
+		</h2>
+		<div class="ss-aside-project">
+			
+				<a class="link" href="https://github.com/sofastack/sofa-tracer//">SOFATracer</a>
+			
+				<a class="link" href="https://github.com/mosn/mosn//">MOSN</a>
+			
+				<a class="link" href="https://github.com/sofastack/sofa-ark//">SOFAArk</a>
+			
+				<a class="link" href="https://github.com/seata/seata//">Seata</a>
+			
+				<a class="link" href="https://github.com/sofastack/sofa-jraft//">SOFAJRaft</a>
+			
+				<a class="link" href="https://github.com/sofastack/sofa-lookout//">SOFALookout</a>
+			
+				<a class="link" href="https://github.com/sofastack/sofa-rpc//">SOFARPC</a>
+			
+		</div>
+	</div>
+
+
+		
+
+
+<div class="ss-card ss-aside-toc">
+	<h2 class="card-title">
+		目录
+	</h2>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#sofastack-demos">SOFAStack-Demos</a>
+<ul>
+<li><a href="#分布式链路组件-sofatracer-埋点机制-demo">分布式链路组件 SOFATracer 埋点机制 Demo</a>
+<ul>
+<li><a href="#云原生网络代理-mosn-扩展机制-mosn-stream-filter-操作-demo">云原生网络代理 MOSN <strong>扩展机制</strong>：MOSN Stream Filter 操作 Demo</a></li>
+<li><a href="#云原生网络代理-mosn-多协议机制-接入-sofabolt-操作-demo">云原生网络代理 MOSN <strong>多协议机制：</strong>接入 SOFABolt 操作 Demo</a></li>
+<li><a href="#轻量级类隔离容器-sofaark-动态模块操作-demo">轻量级类隔离容器 SOFAArk 动态模块操作 Demo</a></li>
+<li><a href="#分布式事务-seata-长事务解决方案-saga-模式可视化状态机">分布式事务 Seata 长事务解决方案 Saga 模式可视化状态机</a></li>
+<li><a href="#sofajraft-的-counter-例子-demo">SOFAJRaft 的 Counter 例子 Demo</a></li>
+<li><a href="#轻量级监控分析系统-sofalookout-客户端的相关演示操作-demo">轻量级监控分析系统 SOFALookout 客户端的相关演示操作 Demo</a></li>
+<li><a href="#sofarpc-内存优化操作-demo">SOFARPC 内存优化操作 Demo</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+
+
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

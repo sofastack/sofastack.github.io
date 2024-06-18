@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	社区文章｜MOSN 构建 Subset 优化思路分享 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		社区文章｜MOSN 构建 Subset 优化思路分享
+	</h1>
+	<div class="meta">
+		
+			2022-06-20 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4a312d5f9df484881263af287d71bef~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜李旭东（花名：向旭 )</p>
+
+<p>蚂蚁集团技术专家</p>
+
+<p>蚂蚁中间件研发，专注于 SOFARegistry 及其周边基础设施的开发与优化</p>
+
+<p>本文 <strong>2098</strong> 字 阅读 <strong>8</strong> 分钟</p>
+
+<h2 id="前言">｜前言｜</h2>
+
+<p>MOSN 使用了 Subset 算法作为其标签匹配路由负载均衡的方式。本文主要介绍 Subset 的原理，包括了在超大规模集群下 MOSN 的 Subset 所遇到的一些性能瓶颈与采用的优化算法。</p>
+
+<p>首先，<strong>为什么要优化 Subset 呢？</strong></p>
+
+<p>总体而言，性能瓶颈往往会由于集群规模的增大逐渐暴露出来。在蚂蚁的超大规模的集群上，注册中心推送地址列表会对应用造成一定的开销。</p>
+
+<p>在我所参与过的某一次大规模压测中，核心应用的机器数目非常庞大，当进行发布或者运维的时候，它的地址列表会被推送给所有调用它的应用。</p>
+
+<p>而 MOSN 会接收这份地址列表重新构建自己的路由。当地址列表非常庞大的时候，MOSN 更新 cluster 的性能瓶颈逐渐地暴露出来，出现了较高的 CPU 毛刺，内存在短时间内出现了上涨，gc 频率也大幅度增加。</p>
+
+<p>通过下方的火焰图，我们可以看到这次压测期间对某应用的 MOSN 的 pprof：</p>
+
+<p><strong>-</strong> Alloc：</p>
+
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ed16bcb36a14a118c79afd52feba324~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<p><strong>-</strong> CPU：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00101ccbc7764819825a241846b7033d~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>从 pprof 可以看到，无论是 CPU 还是 alloc 的开销， 构建 SubsetLoadBalancer 都明显占了大头，所以优化这部分的构建是亟待去做的一件事。</p>
+
+<p>最终通过探索优化，<strong>我们可以减少 SubsetLoadBalancer 构建过程中 95% 的 CPU 开销和 75% 的 alloc 开销。</strong></p>
+
+<p>下面让我们一起回顾下本次优化的过程与思路。</p>
+
+<h2 id="part-1-subset-基本原理介绍">PART. 1&ndash;Subset 基本原理介绍</h2>
+
+<p>在一个集群里，通常机器会有不同的标签，那么如何将一个请求路由到指定标签的一组机器呢？</p>
+
+<p>MOSN 的做法是把一个服务下的机器按照机标签组合进行预先分组，形成多个子集。在请求的时候，根据请求中的 metadata 信息可以快速查询到这个请求对应应该匹配到的子集。</p>
+
+<p>如下图所示，可以看到当前有 4 个节点：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/888975908d98464b874e7ed04cee3fad~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>标签匹配规则会根据 zone 、mosn_aig 、mosn_version 这 3 个字段进行匹配路由，根据这 3 个 key 的排序进行组合得到以下匹配路径：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/01a6c126c2584b89a717f33ddcb5506f~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>相对应的匹配树如下：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aeff6aaeb78245528ea803650833018e~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>假设需要访问 {zone: zone1, mosn_aig: aig1}，那么经过排序后查找顺序为 mosn_aig:aig1 -&gt; zone:zone1，查找到 [h1, h2]。</p>
+
+<p>以上就是 Subset 的基本原理介绍。</p>
+
+<h2 id="part-2-mosn-对-subset-的构建">PART. 2&ndash;MOSN 对 Subset 的构建</h2>
+
+<p>首先需要输入的参数有两个：</p>
+
+<p><strong>-</strong> 带标签的机器列表 hosts，比如 [h1, h2, h3, h4]；</p>
+
+<p><strong>-</strong> 用于匹配的 subSetKeys, 如下图：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/011da7067c114d2d8348af0cad1f5c7b~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>接着我们先带上思路，然后阅读源码来看一下 MOSN 的 SubsetLoadBalancer 是如何构建这棵树的。</p>
+
+<p>核心思路如下：</p>
+
+<p><strong>-</strong> 遍历每一个 host 的 labels 和 subSetKeys 递归去创建一棵树；</p>
+
+<p><strong>-</strong> 对于树的每一个节点，都会遍历一次 hosts 列表，过滤出匹配这个节点的 kvs 的 subHosts，每个节点创建一个子 load balancer。</p>
+
+<p>我们来看源码图：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/daf7f0828400464ba31e15b1fec12375~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>整体的构建复杂度是 O *(M*N<em>K)</em> <em>(M: Subset 树节点个数，N: Hosts 个数, K: 匹配的 Keys）</em></p>
+
+<h2 id="part-3-构建性能瓶颈分析">PART. 3&ndash;构建性能瓶颈分析</h2>
+
+<p>通过对生产的 profile 分析，我们发现 SubsetLoadBalancer 的 createSubsets 在 CPU 和 alloc 的火焰图中的占比都较高。所以下面我们开始编写 benchmark，来优化这一部分的性能。</p>
+
+<p>我们的输入参数为：</p>
+
+<p><strong>-</strong> subSetKeys：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/033d8c9c22b3409482121d0a30c37637~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><strong>-</strong> 8000 个 hosts <em>（每个 hosts 都有 4 个 label, 每个 label 对应 3 种 value）</em> ：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/951642a014e84d04984981ee4539a850~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>接着，我们来看 CPU 和 alloc_space 的占用情况。</p>
+
+<p><strong>-</strong> CPU：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8aacff3a03de4d94a15ae32df5c1d15e~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><strong>-</strong> alloc_space：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6be9c3afa894dbcbe9d25caf3c2fa05~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>从上面两张火焰图中，我们可以看出 HostMatches 和 setFinalHost 占用了较多的 CPU_time  和 alloc_space。我们首先来看下 HostMatches：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0acf58a3931a4e2a9dd05cc1de4cce9d~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c05bb64f9674f92b72ac2f094006149~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>它的作用是判断一个 host 是不是完全匹配给定的键值对，且判断这个 host 是否匹配这个匹配树节点。</p>
+
+<p>它的开销主要在于执行次数过多：treeNodes * len(hosts) ，所以在集群变大时，这边的运行开销会大幅度上升。</p>
+
+<p>然后我们再来看一下 setFinalHost：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8db3478219ca4afabf33cdb83e3a95ae~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4882e756701a40a7957674076360c708~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>他的主要逻辑是按 IP 进行去重，同时会附带 copy。如果我们在 SubsetLoadBalancer 的顶层进行去重，那么它的任意 Subset 都不需要再次去重。因此，这边可以把它改成不去重。</p>
+
+<h2 id="part-4-倒排索引优化构建">PART. 4&ndash;倒排索引优化构建</h2>
+
+<p>在 HostMatches 的这么多次匹配中，实际上有很多的重复操作，比如对 host label 中某个 kv 判断 equals，在构建过程中重复的次数相当之多。</p>
+
+<p>所以优化的思路可以基于避免这部分重复的开销，从预先构建倒排索引出发。具体步骤展开如下：</p>
+
+<p><strong>1.</strong> 输入两项参数:</p>
+
+<p><strong>-</strong> subSetKeys：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7656810e31784a0c9441d2346e5d91f3~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><strong>-</strong> hosts：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/754c6dc7e5ff4e978174945b3477b6a1~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><strong>2.</strong> 遍历一次 hosts，针对每个 kv 我们用 bitmap 构建倒排索引：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9f9c44c1f9c243b2bb08bee494b3b3ba~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><strong>3.</strong> 根据 subSetKeys 和倒排索引中的 kvs，构建出匹配树，因为索引中是去重的与 hosts 数目无关，这个操作开销占比很低；</p>
+
+<p><strong>4.</strong> 对于树的每个节点，利用倒排索引中的 bitmap 做交集快速得到匹配全部 kv 的 hosts 的索引 bitmap；</p>
+
+<p><strong>5.</strong> 使用 bitmap 中存储的 index 从 hosts 中取出对应 subHosts 构建子 load balancer，同时注意此处不需要使用 setFinalHosts 进行去重。</p>
+
+<p>基于上述思路过程开发新的 Subset preIndex 构建算法，可以在 MOSN 的对应 Pull Request 页面查看详情：</p>
+
+<p><em><a href="https://github.com/mosn/mosn/pull/2010">https://github.com/mosn/mosn/pull/2010</a></em></p>
+
+<p>再分享下添加 benchmark 进行测试的地址：</p>
+
+<p><em><a href="https://github.com/mosn/mosn/blob/b0da8a69137cea3a60cdc6dfc0784d29c4c2e25a/pkg/upstream/cluster/subset_loadbalancer_test.go#L891">https://github.com/mosn/mosn/blob/b0da8a69137cea3a60cdc6dfc0784d29c4c2e25a/pkg/upstream/cluster/subset_loadbalancer_test.go#L891</a></em></p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55e86e99c8154325b51d499d85796c65~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eedadd7ce0bf46928d7bb40641b7b623~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>可以看到相对之前的构建方式，构建速度快了 <strong>20</strong> 倍，alloc_space 减小了 <strong>75%</strong> 。同时，alloc 次数出现了少量的上升，这是因为需要额外的构建一次倒排索引所致。</p>
+
+<p>下面观察一下 gc：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/03bd8c2e8d744e009aaacf01fe1112cb~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>我们可以发现，相较于之前的构建方式，运行期间的内存更小了，而且 CPU 回收的内存也变少了，同时 gc 并行扫描的时长小幅上涨，STW 时间变的更短。</p>
+
+<p>最后，测试一下在不同 hosts 数目下的优化程度，可以看到在 hosts 数目较多时 <em>（&gt;100)</em> ， 新的构建算法都会大幅的优于旧的构建算法。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/da5fcaa8f03849b68a391795a61a1831~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<h2 id="part-5-总结">PART. 5&ndash;总结</h2>
+
+<p>我们看到在大规模生产环境中，一些以前不会注意到的性能瓶颈往往会暴露出来，但通过压测，我们能提前发现并优化这些问题。</p>
+
+<p><strong>目前，该构建算法已经合并到 MOSN master，作为 MOSN 默认的 SubsetLoadBalancer 构建方式。</strong></p>
+
+<p>在这次优化过程中，我们用到了一些常见的优化手段，如：倒排索引、bitmap。不难看出，这些优化手段虽然基础常见， 但也取得了理想的优化效果，希望能对大家有所帮助。</p>
+
+<h2 id="了解更多">了解更多</h2>
+
+<p><strong>MOSN Star 一下✨：</strong></p>
+
+<p><em><a href="https://github.com/mosn/mosn">https://github.com/mosn/mosn</a></em></p>
+
+<h3 id="本周推荐阅读">本周推荐阅读</h3>
+
+<p>MOSN 文档使用指南</p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247507103&amp;idx=1&amp;sn=e8da41af0ceaa18ae13f31ca2905da8e&amp;chksm=faa33345cdd4ba5397a43adfe8cabdc85321d3f9f14066c470885b41e2f704ec505a9f086cec&amp;scene=21"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f22ffc4d6f7434da79c9c02c0c80c69~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></a></p>
+
+<p>MOSN 1.0 发布，开启新架构演进</p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247506881&amp;idx=1&amp;sn=b61b931c11c83d3aceea93a90bbe8c5d&amp;chksm=faa3341bcdd4bd0d1fb1348c99e7d38be2597dcb6767a68c69149d954eae02bd39bc447e521f&amp;scene=21"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/451396778e004948979a2bb72e5842c5~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></a></p>
+
+<p>MOSN Contributor 采访｜开源可以是做力所能及的事</p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247508985&amp;idx=1&amp;sn=6cae1ea0e17720f38a7687f74b833c50&amp;chksm=faa34c23cdd4c535c32debf5053cfa8d82e07aae46b24efcbb18b2f863044d7e80dc8b780dbf&amp;scene=21"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba2f4ce730aa4991a1c639b678da48f0~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></a></p>
+
+<p>【2022 开源之夏】SOFAStack 和 MOSN 社区项目中选结果</p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247511279&amp;idx=1&amp;sn=4d831229eee252064b4d940b2080d424&amp;chksm=faa34335cdd4ca233573b12f5fc7e8b22a4e14a5ad003856fe246f7f6991645f774c590becb5&amp;scene=21"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f267ed1c24e4e9085e637412313faed~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></a></p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14c2d6b24f0d47828f9280d83a540d09~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220617/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | C 位大咖说、本周 QA、本周 Contributor</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220624/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | 开源人-于雨、本周 QA、本周 Contributor</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/nydus-exploratory-practice-of-next-generation-container-images/">Nydus —— 下一代容器镜像的探索实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/the-two-years-that-broke-the-kusionstack-open-source-dilemma/">KusionStack 开源有感｜历时两年，打破“隔行如隔山”困境</a></li>
+		
+			<li><a href="/sofastack.tech/blog/how-to-think-about-multiple-runtime-architectures-like-dapr-layotto/">如何看待 Dapr、Layotto 这种多运行时架构</a></li>
+		
+			<li><a href="/sofastack.tech/blog/deeperinto-http-3-2-the-not-so-boring-ssl/">深入 HTTP/3（2）｜不那么 Boring 的 SSL</a></li>
+		
+			<li><a href="/sofastack.tech/blog/review-and-prospect-of-service-mesh-progress-in-antgroup-2022/">蚂蚁集团 Service Mesh 进展回顾与展望</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

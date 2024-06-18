@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFAMeetup on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/sofameetup/</link>
+    <description>Recent content in SOFAMeetup on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 13 Aug 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/sofameetup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFA Meetup 合肥站-云原生技术沙龙</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-17/</link>
+      <pubDate>Sat, 13 Aug 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-17/</guid>
+      <description>概要 活动主题：SOFA Meetup 合肥站-云原生技术沙龙 活动时间：2022 年 08 月 13 日（周六）13:30-17:00 活动地点：合肥市高新区创新创业园 D8 栋</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup 广州站-云原生技术交流</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-16/</link>
+      <pubDate>Sat, 06 Aug 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-16/</guid>
+      <description>概要 活动主题：SOFA Meetup 广州站-云原生技术交流 活动时间：2022 年 08 月 06 日（周六）14:00-18:00 活动地点：广州市海珠区阅江西路 88 号阿</description>
+    </item>
+    
+    <item>
+      <title>【活动回顾】SOFAMeetup#9 上海站 云原生开放日（Cloud Native Open Day）</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-12/</link>
+      <pubDate>Sat, 23 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-12/</guid>
+      <description>概要 活动主题：SOFAMeetup#9 上海站 云原生开放日（Cloud Native Open Day） 活动时间：2021 年 10 月 23 日（周六）13:30-17:30 活</description>
+    </item>
+    
+    <item>
+      <title>【活动回顾】SOFAMeetup#8 成都站 云原生基础设施建设的现在及未来</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-10/</link>
+      <pubDate>Sat, 11 Sep 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-10/</guid>
+      <description>概要 活动主题：SOFA x Erda Meetup#8 成都站，云原生基础设施建设的现在及未来 活动时间：2021 年 09 月 11 日（周六）13:30-17:00 活动地点：四川省</description>
+    </item>
+    
+    <item>
+      <title>SOFAStack Meetup#7 合肥站-SOFA 微服务架构技术生态与实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-8/</link>
+      <pubDate>Sat, 24 Jul 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-8/</guid>
+      <description>概要 活动主题：SOFAStack Meetup#7 合肥站-SOFA 微服务架构技术生态与实践 活动时间：2021 年 07 月 24 日（周六）13:30-17:30 活动地点</description>
+    </item>
+    
+    <item>
+      <title>SOFAStack Meetup#5 上海站 容器沙箱专场</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-6/</link>
+      <pubDate>Fri, 07 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-6/</guid>
+      <description>概要 活动主题：SOFAStack Meetup#5 上海站 容器沙箱专场 活动时间：2021 年 05 月 22 日（周六）14:00-17:00 活动地点：上海市浦东新区蚂蚁 S</description>
+    </item>
+    
+    <item>
+      <title>SOFA 开源三周年，Let&#39;s have fun together！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-5/</link>
+      <pubDate>Mon, 12 Apr 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-5/</guid>
+      <description>概要 活动主题：SOFA开源三周年，Let&amp;rsquo;s have fun together 活动时间：2021 年 04 月 24 日（周六）14:00-17:00 活动地点：北京海淀中</description>
+    </item>
+    
+    <item>
+      <title>SOFAMeetup#4 杭州站 Service Mesh 领域的最新生产实践和未来展望</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-4/</link>
+      <pubDate>Tue, 09 Mar 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-4/</guid>
+      <description>概要 活动主题：SOFAMeetup#4 杭州站 Service Mesh 领域的最新生产实践和未来展望 活动时间：2021 年 03 月 21 日（周日）14:00-17:00 活动地</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服在云原生架构下的可观察性的探索和实践 | Meetup#3 回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-3-cloud-original-retrospect/</link>
+      <pubDate>Wed, 21 Aug 2019 18:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-3-cloud-original-retrospect/</guid>
+      <description>作者：苟利（陈自欣），蚂蚁金服中间件产品专家， 负责蚂蚁金服分布式链路跟踪系统的产品化工作，在日志分析、监控领域有多年工作经验。 本文根据 8 月 11</description>
+    </item>
+    
+    <item>
+      <title>分布式事务 Seata Saga 模式首秀以及三种模式详解 |  Meetup#3 回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-3-seata-retrospect/</link>
+      <pubDate>Wed, 14 Aug 2019 18:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-3-seata-retrospect/</guid>
+      <description>作者：屹远（陈龙），蚂蚁金服分布式事务核心研发 。 本文根据 8月11日 SOFA Meetup#3 广州站 《分布式事务 Seata 及其三种模式详解》主题分享整理，着重分享分布式事务</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup#3 广州站-从开源技术到产品能力</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-3/</link>
+      <pubDate>Thu, 25 Jul 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-3/</guid>
+      <description>概要 活动主题：SOFA Meetup#3 广州站-从开源技术到产品能力 活动时间：8 月 11 日周日下午 13 点 活动地点：广州市广电平云 B 塔 15F 活动形式：线下活动 报名方式：</description>
+    </item>
+    
+    <item>
+      <title>基于 SOFAArk 和 SOFADashboard 实现动态模块管控 | Meetup#2 回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-2-2-retrospect/</link>
+      <pubDate>Fri, 31 May 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-2-2-retrospect/</guid>
+      <description>作者：卫恒（宋国磊），SOFATracer 以及 SOFADashboard 开源负责人。 本文根据 5月26日 SOFA Meetup#2上海站 《使用 SOFAStack 快速构建微服务》主题分享整理，</description>
+    </item>
+    
+    <item>
+      <title>当 Spring Cloud 遇上 SOFAStack | Meetup#2 回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-2-1-retrospect/</link>
+      <pubDate>Wed, 29 May 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-2-1-retrospect/</guid>
+      <description>本文作者：玄北（曹杰），蚂蚁金服 SOFAStack 开源组核心成员。 本文根据 5月26日 SOFA Meetup#2 上海站 《当 Spring Cloud 遇上 SOFAStack》主题分享整理，主要来聊聊 spring-cloud-antfin 包含</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup#2 上海站——使用 SOFAStack 快速构建微服务</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-2/</link>
+      <pubDate>Tue, 21 May 2019 11:20:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-2/</guid>
+      <description>概要 活动主题：SOFA Meetup#2 上海站-使用 SOFAStack 快速构建微服务 活动时间：5 月 26 日周日下午 13 点 活动地点：上海市徐汇区田林路200号A7栋一楼 活动形式：线</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服分布式事务开源以及实践 | SOFA 开源一周年献礼</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-seata/</link>
+      <pubDate>Mon, 08 Apr 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-seata/</guid>
+      <description>上周，分布式事务 Fescar 宣布进行品牌升级： Thanks, Fescar ❤️， Hello, Seata 🚀。 Seata 意为：Simple Extensible Autonomous Transaction Architecture，是一套一站式分布式事务解决方案。 项</description>
+    </item>
+    
+    <item>
+      <title>详解蚂蚁金服 SOFAJRaft | 生产级高性能 Java 实现</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-jraft/</link>
+      <pubDate>Tue, 02 Apr 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-jraft/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 本文根据 SOFA Meetup#1 北</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服开源服务注册中心 SOFARegistry | SOFA 开源一周年献礼</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-deep-dive/</link>
+      <pubDate>Wed, 27 Mar 2019 14:30:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-deep-dive/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 本文根据 SOFA Meetup#1 北</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服开源服务注册中心 SOFARegistry | SOFA 开源一周年献礼</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-registry/</link>
+      <pubDate>Wed, 27 Mar 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-registry/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 本文根据 SOFA Meetup#1 北</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup#1 北京站——服务注册中心、分布式事务重磅发布</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-1/</link>
+      <pubDate>Mon, 11 Mar 2019 12:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-1/</guid>
+      <description>概要 活动主题：SOFA Meetup#1 北京站——服务注册中心、分布式事务重磅发布 活动时间：3 月 24 日周日下午 13 点 活动地点：北京中关村创业大街 氪空间 活动形式：</description>
+    </item>
+    
+  </channel>
+</rss>

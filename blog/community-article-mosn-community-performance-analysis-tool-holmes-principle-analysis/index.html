@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	社区文章｜MOSN 社区性能分析利器——Holmes 原理浅析 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		社区文章｜MOSN 社区性能分析利器——Holmes 原理浅析
+	</h1>
+	<div class="meta">
+		
+			2022-04-05 ·
+			
+				<a href="https://github.com/sofastack">Junlong Liu</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>文｜Junlong Liu</p>
+
+<p>Shopee Digital Purchase &amp; Local Services Engineering</p>
+
+<p>本文1743字 阅读 6分钟</p>
+
+<h2 id="贡献者前言">贡献者前言</h2>
+
+<p>我是在开发工作过程中了解到 Holmes 的，为了保障系统稳定性需要一个性能排查工具，因此也需要一个保留现场的性能监控工具。当我在网上查询该方面的开源库时，发现可用的并不多。后续找到 MOSN 社区的 Holmes ，发现这个开源库功能基本齐全、扩展性也高，特别是 GCHeapDump 这个业界领先的功能，对解决内存升高的问题十分有用。</p>
+
+<p>2021 年年末了解到的 Holmes 组件，然后开始了解 Holmes 所在的 MOSN 社区。Holmes 作为性能排查工具，核心功能是及时发现性能指标异常，并对系统进行 Profiling。</p>
+
+<p>由于 Holmes 还处于萌芽期，除了 Readme 之外的文档资料并不多。还有一些 Holmes 当时不支持的功能，比如动态配置调整与上报。Holmes 当时也还没发布第一个版本，但是自己对这方面也有兴趣和理解，于是在 GitHub 上提了几个 Issue 讨论，社区回复的速度十分快。后续在社区前辈们的指导下提了 PR，也因此通过 Holmes 的代码设计学习到了很多关于开源组件的设计理念。</p>
+
+<p>因此我决定参与开源社区并贡献代码，以解决实际需求。有了一定的了解和经验之后，通过和人德前辈讨论，总结这样一篇分享文章。</p>
+
+<p>本文将介绍 Holmes 的使用场景、快速开始案例、多个监控类型、设计原理、扩展功能与如何借助 Holmes 搭建起一套简单的性能排查系统，欢迎大家留言指导。</p>
+
+<h2 id="holmes-使用场景">Holmes 使用场景</h2>
+
+<p>对于系统的性能尖刺问题，我们通常使用 Go 官方内置的 pprof 包进行分析，但是难点是对于一闪而过的“尖刺”，开发人员很难及时保存现场：当你收到告警信息，从被窝中爬起来，打开电脑链接 VPN，系统说不定都已经重启三四趟了。</p>
+
+<p>MOSN 社区的 Holmes 是一个基于 Golang 实现的轻量级性能监控系统，当应用的性能指标发生了异常波动时，Holmes 会在第一时间保留现场，让你第二天上班可以一边从容地喝着枸杞茶，一边追查问题的根因。</p>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<p>使用 Holmes 的方式十分简单，只需要在您的系统初始化逻辑内添加以下代码：</p>
+
+<pre><code class="language-java">
+ // 配置规则
+    h, _ := holmes.New(
+        holmes.WithCollectInterval(&quot;5s&quot;), // 指标采集时间间隔
+        holmes.WithDumpPath(&quot;/tmp&quot;),      // profile保存路径
+    
+        holmes.WithCPUDump(10, 25, 80, 2 * time.Minute),  // 配置CPU的性能监控规则
+        holmes.WithMemDump(30, 25, 80, 2 * time.Minute),// 配置Heap Memory 性能监控规则
+        holmes.WithGCHeapDump(10, 20, 40, 2 * time.Minute), // 配置基于GC周期的Heap Memory 性能监控规则
+        holmes.WithGoroutineDump(500, 25, 20000, 100*1000, 2 * time.Minute),    //配置Goroutine数量的监控规则
+    )
+
+    // enable all
+    h.EnableCPUDump().
+    EnableGoroutineDump().
+  EnableMemDump().
+  EnableGCHeapDump().Start()
+</code></pre>
+
+<p>类似于 holmes.WithGoroutineDump(min, diff, abs,max,2 * time.Minute) 的 API 含义为:</p>
+
+<p>当 Goroutine 指标满足以下条件时，将会触发 Dump 操作。</p>
+
+<p>当 Goroutine 数大于 Max 时，Holmes 会跳过本次 Dump 操作，因为当 Goroutine 数过大时，Goroutine Dump 操作成本很高。</p>
+
+<p>2 * time.Minute 是两次 Dump 操作之间最小时间间隔，避免频繁 Profiling 对性能产生的影响。</p>
+
+<p>更多使用案例见文末的 Holmes 使用案例文档。</p>
+
+<h2 id="profile-types">Profile Types</h2>
+
+<p>Holmes 支持以下五种 Profile 类型，用户可以按需配置。</p>
+
+<p>Mem: 内存分配</p>
+
+<p>CPU: CPU 使用率</p>
+
+<p>Thread: 线程数</p>
+
+<p>Goroutine: 协程数</p>
+
+<p>GCHeap: 基于 GC 周期监控的内存分配</p>
+
+<h2 id="指标采集">指标采集</h2>
+
+<p>Mem、CPU、Thread、Goroutine 这四种类型是根据用户配置的 CollectInterval，每隔一段时间采集一次应用当前的性能指标，而 gcHeap 时基于 GC 周期采集性能指标。</p>
+
+<p>本小节会分析一下两种指标。</p>
+
+<h3 id="根据-collectinterval-周期采集">根据 CollectInterval 周期采集</h3>
+
+<p>Holmes 每隔一段时间采集应用各项指标，并使用一个固定大小的循环链表来存储它们。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*oqHLQ4ukZEYAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<h3 id="根据-gc-周期采集">根据 GC 周期采集</h3>
+
+<p>在一些场景下，我们无法通过定时的 memory dump 保留到现场。比如应用在一个 CollectInterval 周期内分配了大量内存，又快速回收了它们。此时 Holmes 在周期前后的采集到内存使用率没有产生过大波动，与实际情况不符。</p>
+
+<p>为了解决这种情况，Holmes 开发了基于 GC 周期的 Profile 类型，它会在堆内存使用率飙高的前后两个 GC 周期内各 Dump 一次 Profile，然后开发人员可以使用 pprof &ndash;base 命令去对比两个时刻堆内存之间的差异。</p>
+
+<p>根据 GC 周期采集到的数据也会放在循环列表中。</p>
+
+<h2 id="规则判断">规则判断</h2>
+
+<p>本小节介绍 Holmes 是如何根据规则判断系统出现异常的。</p>
+
+<h3 id="阈值含义">阈值含义</h3>
+
+<p>每个 Profile 都可以配置 min、diff、abs、coolDown 四个指标，含义如下:</p>
+
+<p>当前指标小于 min 时，不视为异常。</p>
+
+<p>当前指标大于 (100+diff)100% 历史指标，说明系统此时产生了波动，视为异常。</p>
+
+<p>当前指标大于 abs (绝对值)时，视为异常。</p>
+
+<p>CPU 和 Goroutine 这两个 Profile 类型提供 Max 参数配置，基于以下考虑：</p>
+
+<p>CPU 的 Profiling 操作大约会有 5% 的性能损耗，所以当在 CPU 过高时，不应当进行 Profiling 操作，否则会拖垮系统。</p>
+
+<p>当 Goroutine 数过大时，Goroutine Dump 操作成本很高，会进行 STW 操作，从而拖垮系统。（详情见文末参考文章）</p>
+
+<h3 id="warming-up">Warming up</h3>
+
+<p>当 Holmes 启动时，会根据 CollectInterval 周期采集十次各项指标，在这期间内采集到的指标只会存入循环链表中，不会进行规则判断。</p>
+
+<h2 id="扩展功能">扩展功能</h2>
+
+<p>除了基本的监控之外，Holmes 还提供了一些扩展功能：</p>
+
+<h3 id="事件上报">事件上报</h3>
+
+<p>您可以通过实现 Reporter 来实现以下功能：</p>
+
+<p>发送告警信息，当 Holmes 触发 Dump 操作时。</p>
+
+<p>将 Profiles 上传到其他地方，以防实例被销毁，从而导致 Profile 丢失，或进行分析。</p>
+
+<pre><code class="language-java">  type ReporterImpl struct{}
+        func (r *ReporterImple) Report(pType string, buf []byte, reason string, eventID string) error{
+            // do something  
+        }
+        ......
+        r := &amp;ReporterImpl{} // a implement of holmes.ProfileReporter Interface.
+      h, _ := holmes.New(
+            holmes.WithProfileReporter(reporter),
+            holmes.WithDumpPath(&quot;/tmp&quot;),
+            holmes.WithLogger(holmes.NewFileLog(&quot;/tmp/holmes.log&quot;, mlog.INFO)),
+            holmes.WithBinaryDump(),
+            holmes.WithMemoryLimit(100*1024*1024), // 100MB
+            holmes.WithGCHeapDump(10, 20, 40, time.Minute),
+)
+</code></pre>
+
+<h3 id="动态配置">动态配置</h3>
+
+<p>您可以通过 Set 方法在应用运行时更新 Holmes 的配置。它的使用十分简单，和初始化时的 New 方法一样。</p>
+
+<p>有些配置时不支持动态更改的，比如 Core 数。如果在系统运行期间更改这个参数，会导致 CPU 使用率产生巨大波动，从而触发 Dump 操作。</p>
+
+<pre><code class="language-java">h.Set(
+        WithCollectInterval(&quot;2s&quot;),
+        WithGoroutineDump(10, 10, 50, 90, time.Minute))
+</code></pre>
+
+<h2 id="落地案例">落地案例</h2>
+
+<p>利用 Holmes 的 Set 方法，可以轻松地对接自己公司的配置中心，比如，将 Holmes 作为数据面，配置中心作为控制面。并对接告警系统(邮件/短信等)搭建一套简单的监控系统。</p>
+
+<p>具体架构如下:</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*9l3sTKA3wJ4AAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<h2 id="holmes-v1-0-版本发布">Holmes V1.0 版本发布</h2>
+
+<p>本文简单地介绍了 Holmes 的使用方法与原理。希望 Holmes 能在您提高应用的稳定性时帮助到你。</p>
+
+<p>Holmes V1.0 在几周前正式发布了，作为贡献者和使用者，我十分推荐大家试用这个小巧的工具库，有任何问题和疑问欢迎大家来社区提问～</p>
+
+<p>Holmes 是 MOSN 社区开源的 GO 语言 Continous Profiling 组件，可以自动发现 CPU、 Memory、Goroutine 等资源的异常，并自动 Dump 异常现场 Profile，用于事后分析定位。也支持上传 Profile 到自动分析平台，实现自动问题诊断、报警。</p>
+
+<p>「发布报告」：<a href="https://github.com/mosn/holmes/releases/tag/v1.0.0">https://github.com/mosn/holmes/releases/tag/v1.0.0</a></p>
+
+<p>「Holmes 原理介绍」：<a href="https://mosn.io/blog/posts/mosn-holmes-design/">https://mosn.io/blog/posts/mosn-holmes-design/</a></p>
+
+<p>本文简单地介绍了 Holmes 的使用方法与原理。希望 Holmes 能在您提高应用的稳定性时帮助到你。</p>
+
+<p>「参考资料」</p>
+
+<p>[1]《Holmes 文档》<a href="https://github.com/mosn/holmes">https://github.com/mosn/holmes</a></p>
+
+<p>[2]《无人值守的自动 dump(一)》<a href="https://xargin.com/autodumper-for-go/">https://xargin.com/autodumper-for-go/</a></p>
+
+<p>[3]《无人值守的自动 dump(二)》<a href="https://xargin.com/autodumper-for-go-ii/">https://xargin.com/autodumper-for-go-ii/</a></p>
+
+<p>[4]《go 语言 pprof heap profile 实现机制》<a href="https://uncledou.site/2022/go-pprof-heap/">https://uncledou.site/2022/go-pprof-heap/</a></p>
+
+<p>[5]《goroutines pprofiling STW》<a href="https://github.com/golang/go/issues/33250">https://github.com/golang/go/issues/33250</a></p>
+
+<p>[6]《Holmes 使用案例文档》<a href="https://github.com/mosn/holmes/tree/master/example">https://github.com/mosn/holmes/tree/master/example</a></p>
+
+<p>[7]《go pprof 性能损耗》<a href="https://medium.com/google-cloud/continuous-profiling-of-go-programs-96d4416af77b">https://medium.com/google-cloud/continuous-profiling-of-go-programs-96d4416af77b</a></p>
+
+<h3 id="本周推荐阅读">本周推荐阅读</h3>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247504959&amp;idx=1&amp;sn=bbcedc8e4b0cda7938eccf5288482e47&amp;chksm=faa33be5cdd4b2f3fd003540f263f318b554a3fdc830a163f00709e37831f2d366e10dd8985f&amp;scene=21">邀请函｜SOFA 四周年，开源正当时！</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247504035&amp;idx=1&amp;sn=320b77bf5f3c6cf0da309f7527b98e64&amp;chksm=faa33f79cdd4b66f184d273a2d7460c41320711eab47af849e386c359e71eeebc6c7f21c1e0f&amp;scene=21">Nydus 镜像加速插件迁入 Containerd 旗下</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247504244&amp;idx=1&amp;sn=59e32e2d4be5bbf6789da040eaaa1d4d&amp;chksm=faa33eaecdd4b7b8a2f630944d6c7fd679bd1ecfef2c512111a61c02320dc78bb0ee560053f9&amp;scene=21">异构注册中心机制在中国工商银行的探索实践</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247503819&amp;idx=1&amp;sn=8dfd99fac47b7c9c6e4f507db5d7a11f&amp;chksm=faa32011cdd4a9070e80c69d21fbab7a16047d307907b61ed7c3bdf588d7d57af2cd41fffa26&amp;scene=21">SOFAArk Committer 专访｜看它不爽，就直接动手改！</a></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*8G5NRZ7UEToAAAAAAAAAAAAAARQnAQ" alt="img" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220401/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | 开源新知、本周 QA、新手任务</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220408/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly |开源新知、本周 QA、Layotto Java-sdk 本周发布</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/exploratory-practice-of-heterogeneous-registration-centre-mechanism-in-icbc/">异构注册中心机制在中国工商银行的探索实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/nydus-mirror-acceleration-plugin-moves-to-containerd/">Nydus 镜像加速插件迁入 Containerd 旗下</a></li>
+		
+			<li><a href="/sofastack.tech/blog/community-article-mosn-routing-framework-explained/">社区文章｜MOSN 路由框架详解</a></li>
+		
+			<li><a href="/sofastack.tech/blog/babassl-support-for-semi-homomorphic-encryption-algorithm-ec-elgamal/">BabaSSL：支持半同态加密算法 EC-ElGamal</a></li>
+		
+			<li><a href="/sofastack.tech/blog/occlum-named-to-2021-sci-tech-china-open-source-innovation-list/">Occlum 入选 2021“科创中国”开源创新榜</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

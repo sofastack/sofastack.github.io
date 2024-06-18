@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	源码解析｜推送开关 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<aside class="ss-layout-aside -left ss-card -soft-hidden">
+		
+
+
+
+
+
+
+	<div id="js-drawer" class="ss-toc">
+		<div id="js-drawer-handle" class="drawer-handle">
+			<svg class="icon icon-menu" aria-hidden="true">
+				<use xlink:href="#icon-menu"></use>
+			</svg>
+			<svg class="icon icon-close" aria-hidden="true">
+				<use xlink:href="#icon-close"></use>
+			</svg>
+		</div>
+		<div class="drawer-body">
+			<div class="header" title="SOFARegistry 是一个生产级、高时效、高可用的服务注册中心。">SOFARegistry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ss-toc-list-card -hidden-mobile">
+	<svg class="icon -hidden-mobile" aria-hidden="true">
+		<use xlink:href="#icon-menu1"></use>
+	</svg>
+	<div class="ss-tooltip">
+		
+		
+		<div class="toc-list">
+			<h4 class="title">主要项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-boot/overview/>
+						SOFABoot
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-rpc/overview/>
+						SOFARPC
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-tracer/overview/>
+						SOFATracer
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-lookout/overview/>
+						SOFALookout
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-registry/overview/>
+						SOFARegistry
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">孵化项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-mesh/overview/>
+						SOFAMesh
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-dashboard/overview/>
+						SOFADashboard
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">工具项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-bolt/overview/>
+						SOFABolt
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-jraft/overview/>
+						SOFAJRaft
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					<a href=/sofastack.tech/projects/sofa-acts/overview/>
+						SOFAActs
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme//>
+						SOFAArk
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+		
+		<div class="toc-list">
+			<h4 class="title">生态项目</h4>
+			<ul class="list">
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/>
+						MOSN
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://occlum.io/>
+						Occlum
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://seata.io/>
+						Seata
+					</a>
+				</li>
+				
+				<li class="item">
+					
+					
+					
+					
+					
+					
+					<a href=https://mosn.io/layotto/>
+						Layotto
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+		
+		
+	</div>
+</div>
+
+			</div>
+			<div class="body">
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="产品介绍"
+					>产品介绍</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="简介"
+						href="/sofastack.tech/projects/sofa-registry/overview/"
+					>简介</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="术语"
+						href="/sofastack.tech/projects/sofa-registry/terminology/"
+					>术语</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="快速开始"
+					>快速开始</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="服务端部署"
+						href="/sofastack.tech/projects/sofa-registry/server-quick-start/"
+					>服务端部署</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="客户端部署"
+						href="/sofastack.tech/projects/sofa-registry/client-quick-start/"
+					>客户端部署</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="开发手册"
+					>开发手册</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="JAVA SDK"
+						href="/sofastack.tech/projects/sofa-registry/java-sdk/"
+					>JAVA SDK</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+		
+		
+			<li class="item">
+				<div class="link">
+					<svg class="icon arrow" aria-hidden="true">
+						<use xlink:href="#icon-arrow"></use>
+					</svg>
+					<a
+						title="源码解析"
+					>源码解析</a>
+				</div>
+				
+
+
+
+<ul class="leaf-section">
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SlotTable"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/"
+					>SlotTable</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="无损运维"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/"
+					>无损运维</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="发布订阅推送"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/"
+					>发布订阅推送</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据同步"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/"
+					>数据同步</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送延迟 trace"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/"
+					>推送延迟 trace</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="推送开关"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/"
+					>推送开关</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据表监听"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/"
+					>数据表监听</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="数据倒排索引"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/"
+					>数据倒排索引</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="通讯数据压缩"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/"
+					>通讯数据压缩</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="registry meta 选主"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/"
+					>registry meta 选主</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="SOFARegistry | 聊一聊服务发现的数据一致性"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/"
+					>SOFARegistry | 聊一聊服务发现的数据一致性</a>
+				</div>
+			</li>
+		
+		
+	
+		
+			<li class="item">
+				<div class="link">
+					<a
+						title="缘起｜蚂蚁应用级服务发现的实践之路"
+						href="/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/"
+					>缘起｜蚂蚁应用级服务发现的实践之路</a>
+				</div>
+			</li>
+		
+		
+	
+</ul>
+			</li>
+		
+	
+</ul>
+			</div>
+		</div>
+	</div>
+
+	</aside>
+
+	<main class="ss-layout-main -card">
+		
+
+
+
+
+<div class="ss-meta">
+	<div class="container">
+		<h1 class="title">
+			源码解析｜推送开关
+		</h1>
+		<a class="edit-button -hidden-mobile"
+			href="https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-registry/code-analyze/code-analyze-push-switch/index.md"
+		>编辑</a>
+	</div>
+	<div class="meta">
+		更新时间: 2024-06-18 
+		
+			
+			·   
+					<a href="https://github.com/YechenGu">顾叶宸</a> 
+				
+			
+		
+	</div>
+</div>
+
+		<article class="typo">
+  <h2 id="前言">前言</h2>
+
+<p>某些场景下 SOFARegistry 需要暂时关闭推送功能，这样集群内的业务可以利用 client 的缓存继续工作，比如说 SOFARegistry 需要进行不兼容升级，需要全集群下线，更新版本后再拉起。</p>
+
+<p>推送开关的状态存储在数据库中，通过 Meta 修改数据后，Session 可以通过读取到推送开关的变更通知，并在对应的推送流程上进行切断。</p>
+
+<p>本文将聚焦推送开关功能的三个关键问题：</p>
+
+<ul>
+<li>meta 如何存储开关配置数据。</li>
+<li>session 如何获取到开关配置的变更并触发更新（通知、定时）。</li>
+<li>session 关闭推送功能的实现。</li>
+</ul>
+
+<h2 id="总体流程">总体流程</h2>
+
+<p>关闭推送的请求，主要由 <code>StopPushDataResource</code>类下的<code>closePush</code>负责处理。我们来看看它的实现：</p>
+
+<pre><code class="language-java">public Result closePush() {
+    boolean ret;
+    Result result = new Result();
+    // 1.重设灰度推送开关
+    ret = resetGrayOpenPushSwitch();
+    if (!ret) {
+      result.setSuccess(false);
+      return result;
+    }
+
+    PersistenceData persistenceData =
+        PersistenceDataBuilder.createPersistenceData(
+            ValueConstants.STOP_PUSH_DATA_SWITCH_DATA_ID, &quot;true&quot;);
+
+    try {
+      // 2.重设全局推送开关
+      ret = provideDataService.saveProvideData(persistenceData);
+      ......
+    } catch (Throwable e) {
+      ......
+    }
+
+    if (ret) {
+      // 3.发送数据变更通知
+      fireDataChangeNotify(
+          persistenceData.getVersion(), ValueConstants.STOP_PUSH_DATA_SWITCH_DATA_ID);
+    }
+
+    result.setSuccess(ret);
+    return result;
+  }
+</code></pre>
+
+<p>可以看到，<code>closePush</code>函数主要做了三件事：</p>
+
+<ol>
+<li>重设灰度推送开关
+<br /></li>
+</ol>
+
+<p>灰度推送开关中，存储着一个 IP 列表。灰度推送允许 SOFARegistry  即使在全局推送关闭的情况下，仍满足特定 IP 的推送请求。因此想要完全关闭推送功能，需要重设该开关，清空其中的 IP 列表。</p>
+
+<ol>
+<li>重设全局推送开关
+<br /></li>
+</ol>
+
+<p>关闭推送功能，需要重设全局推送开关，保存开关配置为关闭的新数据。</p>
+
+<ol>
+<li>发送数据变更通知
+<br /></li>
+</ol>
+
+<p>数据变更通知将告诉 Session，开关配置已经改变，需要进行更新。</p>
+
+<h2 id="meta存储开关配置数据">Meta存储开关配置数据</h2>
+
+<p>我们以重设全局推送开关中，开关数据的存储为例：</p>
+
+<ol>
+<li>meta 首先从内存中读取旧的开关配置版本号，并与当前数据版本号进行比较。</li>
+</ol>
+
+<p>       只有确定是更新的数据，才会进行后续存储。</p>
+
+<ol>
+<li><p>存储新的开关配置数据，并更新数据库中该数据的版本号。</p></li>
+
+<li><p>更新内存中的开关配置数据。</p></li>
+</ol>
+
+<pre><code class="language-java">public boolean saveProvideData(PersistenceData persistenceData, long expectVersion) {
+    // 1.比较版本号
+    if (persistenceData.getVersion() &lt;= expectVersion) {
+      ......
+      return false;
+    }
+
+    // 2.更新数据库
+    boolean success = provideDataRepository.put(persistenceData, expectVersion);
+
+    if (success) {
+      lock.writeLock().lock();
+      try {
+        // 3.更新内存
+        provideDataCache.put(
+            PersistenceDataBuilder.getDataInfoId(persistenceData), persistenceData);
+      } catch (Throwable t) {
+        ......
+        return false;
+      } finally {
+        lock.writeLock().unlock();
+      }
+    }
+    return success;
+  }
+</code></pre>
+
+<p>重设灰度开关中的步骤与之类似，因此这里不再赘述。</p>
+
+<h2 id="session-获取开关配置">Session 获取开关配置</h2>
+
+<h5 id="通知更新">通知更新</h5>
+
+<p>继续上文，<code>closePush</code>会调用<code>fireDataChangeNotify</code>函数，通知外界开关配置发生了更新。</p>
+
+<pre><code class="language-java">private void fireDataChangeNotify(Long version, String dataInfoId) {
+    ......
+    if (TASK_LOGGER.isInfoEnabled()) {
+      ......
+    }
+    provideDataNotifier.notifyProvideDataChange(provideDataChangeEvent);
+  }
+</code></pre>
+
+<ol>
+<li>这一通知首先会进行判断，是哪一种事件类型。在本例中，开关配置的更新是与 Session 有关的事件。</li>
+</ol>
+
+<pre><code class="language-java">public void notifyProvideDataChange(ProvideDataChangeEvent event) {
+    Set&lt;Node.NodeType&gt; notifyTypes = event.getNodeTypes();
+    // 判断事件类型
+    if (notifyTypes.contains(Node.NodeType.DATA)) {
+      defaultDataServerService.notifyProvideDataChange(event);
+    }
+    if (notifyTypes.contains(Node.NodeType.SESSION)) {
+      defaultSessionServerService.notifyProvideDataChange(event);
+    }
+  }
+</code></pre>
+
+<ol>
+<li>随后，通知会被交付给 Session 相关的消息交换类，并进行<code>Request</code>请求。</li>
+</ol>
+
+<pre><code class="language-java">public void notifyProvideDataChange(ProvideDataChangeEvent event) {
+    new NotifyTemplate&lt;ProvideDataChangeEvent&gt;().broadcast(event);
+}
+
+
+public void broadcast(E event) {
+      ......
+      getNodeExchanger().request(new NotifyRequest(event, connection, executors));
+      ......
+}
+</code></pre>
+
+<ol>
+<li>在消息交换类中，系统使用<code>getClientHandlers</code>得到了负责消息响应的handler。</li>
+</ol>
+
+<pre><code class="language-java">public Response request(Request request) throws RequestException {
+    final URL url = request.getRequestUrl();
+    ......
+    connect(url);
+    ......
+}
+
+
+public Channel connect(URL url) {
+    Client client = getClient();
+    ......
+    client = boltExchange.connect(serverType,getConnNum(),url,
+                getClientHandlers().toArray(new ChannelHandler[0]));
+    ......
+}
+</code></pre>
+
+<ol>
+<li>负责消息响应的 handler，已经通过 bean 注册在了 Spring 之中。在推送开关数据变更的场景下，通知会交给<code>notifyProvideDataChangeHandler</code>进行处理。</li>
+</ol>
+
+<pre><code class="language-java">protected Collection&lt;ChannelHandler&gt; getClientHandlers() {
+    return metaClientHandlers;
+}
+
+
+@Resource(name = &quot;metaClientHandlers&quot;)
+private Collection&lt;ChannelHandler&gt; metaClientHandlers;
+</code></pre>
+
+<pre><code class="language-java">@Bean(name = &quot;metaClientHandlers&quot;)
+public Collection&lt;AbstractClientHandler&gt; metaClientHandlers() {
+   Collection&lt;AbstractClientHandler&gt; list = new ArrayList&lt;&gt;();
+   list.add(notifyProvideDataChangeHandler());
+   ......
+   return list;
+}
+</code></pre>
+
+<ol>
+<li><code>notifyProvideDataChangeHandler</code>在 <code>interest</code> 函数中，设定了自己可以处理 <code>ProvideDataChangeEvent</code> 类型消息。最后，通知最终会被转交给<code>AbstractFetchPersistenceSystemProperty</code>进行处理</li>
+</ol>
+
+<pre><code class="language-java">public Object doHandle(Channel channel, ProvideDataChangeEvent provideDataChangeEvent) {
+    final String notifyDataInfoId = provideDataChangeEvent.getDataInfoId();
+
+    systemPropertyProcessorManager.doFetch(notifyDataInfoId);
+    return null;
+  }
+
+  public Class interest() {
+    return ProvideDataChangeEvent.class;
+  }
+</code></pre>
+
+<pre><code class="language-java">public boolean doFetch(String dataInfoId) {
+    private Collection&lt;AbstractFetchPersistenceSystemProperty&gt; systemDataPersistenceProcessors =
+      new ArrayList&lt;&gt;();
+
+    ......
+    for (FetchSystemPropertyService systemDataProcessor : systemDataPersistenceProcessors) {
+      if (systemDataProcessor.support(dataInfoId)) {
+        return systemDataProcessor.doFetch();
+      }
+    }
+    ......
+  }
+</code></pre>
+
+<ol>
+<li><code>AbstractFetchPersistenceSystemProperty</code>类，是最终负责更新的类
+<br /></li>
+</ol>
+
+<p>让我们分析一下它的结构</p>
+
+<pre><code class="language-java">public boolean doFetch() {
+    watchDog.wakeup();
+    return true;
+}
+
+
+protected final class WatchDog extends WakeUpLoopRunnable {
+
+    @Override
+    public void runUnthrowable() {
+      doFetchData();
+    }
+
+    @Override
+    public int getWaitingMillis() {
+      return getSystemPropertyIntervalMillis();
+    }
+}
+</code></pre>
+
+<p>当<code>doFetch</code>通知到达时，<code>watchDog</code>会被唤醒(wakeup)。</p>
+
+<p>被唤醒后做了什么事呢？我们先对 watchDog 进行一番分析。</p>
+
+<p>在功能上，它重写了父类的两个方法。</p>
+
+<p>在结构上，它继承了<code>WakeUpLoopRunnable</code>父类。</p>
+
+<p><img title="" src="https://img-blog.csdnimg.cn/d0dabd391b9c49d0a463d414a72f2c63.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5YWz5bGx5Y-j5aSn5ZK46bG8,size_1,color_FFFFFF,t_7,g_se,x_16" alt="" width="300" data-align="center"></p>
+
+<p>在父类<code>WakeUpLoopRunnable</code>中，维护了一个长度为1的阻塞队列<code>bell</code>。</p>
+
+<blockquote>
+<p><strong>阻塞队列（BlockingQueue）</strong> 是一个支持两个附加操作的队列。这两个附加的操作是：在队列为空时，获取元素的线程会等待队列变为非空。当队列满时，存储元素的线程会等待队列可用。阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿元素。</p>
+</blockquote>
+
+<pre><code class="language-java">  // 阻塞队列
+  private final ArrayBlockingQueue&lt;Object&gt; bell = new ArrayBlockingQueue&lt;&gt;(1);
+
+  // 从队列中取出
+  @Override
+  public void waitingUnthrowable() {
+    ConcurrentUtils.pollUninterruptibly(bell, getWaitingMillis(), TimeUnit.MILLISECONDS);
+  }
+
+  // 设置最长等待时间
+  public abstract int getWaitingMillis();
+
+  // 向队列中添加
+  public void wakeup() {
+    bell.offer(this);
+  }
+</code></pre>
+
+<p>上文的唤醒（wakeup）操作，便是将自身加入到这个长度为 1 的阻塞队列之中。</p>
+
+<p>而<code>waitingUnthrowable</code>函数，负责了等待功能的实现。它会尝试从阻塞队列中取出对象。如果队列中没有对象，它将进行等待&mdash;&mdash;直到存在对象或者指定的时间耗尽。</p>
+
+<pre><code class="language-java"> public static &lt;T&gt; T pollUninterruptibly(BlockingQueue&lt;T&gt; queue, long wait, TimeUnit unit) {
+    try {
+      // 从队列中取出
+      return queue.poll(wait, unit);
+    } catch (InterruptedException ignored) {
+      .......
+    }
+    return null;
+  }
+</code></pre>
+
+<p>我们继续向下分析<code>WakeUpLoopRunnable</code>的父类<code>LoopRunnable</code>。它实现了<code>Runnable</code>接口，并重写了 run 方法。</p>
+
+<p>可以看出，该线程一经启动，便会在循环中不休止地重复进行功能执行和等待。</p>
+
+<pre><code class="language-java">public void run() {
+    ......
+    for (; ; ) {
+      .......
+        try {
+          // 执行功能
+          runUnthrowable();
+        } catch (Throwable unexpect) {
+          ......
+        }
+        try {
+          // 等待
+          waitingUnthrowable();
+        } catch (Throwable unexpect) {
+          ......
+        }
+      } 
+    ......
+}
+</code></pre>
+
+<p>在正常情况下，阻塞队列<code>bell</code>中是没有对象的，因此等待函数无法从队列中取出对象，会进行等待。</p>
+
+<p>而当推送通知传来，<code>watchDog</code>被<code>wakeup</code>之后，队列中会被添加对象。</p>
+
+<p>因此，等待函数可以立即取出对象，从而开始下一轮循环，执行功能<code>runUnthrowable</code>。</p>
+
+<p>在<code>watchDog</code>中，功能执行由<code>doFetchData</code>接管，具体体现为对内存开关配置进行更新。</p>
+
+<pre><code class="language-java">protected final class WatchDog extends WakeUpLoopRunnable {
+
+    @Override
+    public void runUnthrowable() {
+      doFetchData();
+    }
+
+    ......
+}
+
+
+protected boolean doFetchData() {
+    T expect = storage.get();
+    E fetchData = fetchFromPersistence();
+
+    if (fetchData == null) {
+      ......
+      return false;
+    }
+
+    if (fetchData.getVersion() &lt; expect.getVersion()) {
+      ......
+      return false;
+    } else if (fetchData.getVersion() == expect.getVersion()) {
+      return true;
+    }
+    // do compare and set
+    return doProcess(expect, fetchData);
+  }
+</code></pre>
+
+<p>在<code>doFetchData</code>中，从内存得到的开关数据会和从数据库得到的数据进行比较。</p>
+
+<p>只有当数据库的版本更新时，Session 才会进行 CompareAndSet 操作，更新内存中的开关配置。</p>
+
+<h5 id="定时更新">定时更新</h5>
+
+<p>当 Session 启动时，将开启对开关状态的监视。</p>
+
+<p>一个 WatchDog 的守护线程将会被创建。</p>
+
+<pre><code class="language-java">public boolean start() {
+    ......
+      ConcurrentUtils.createDaemonThread(
+              StringFormatter.format(&quot;FetchPersistenceSystemProperty-{}&quot;, dataInfoId), watchDog)
+          .start();
+    ......
+}
+
+
+public static Thread createDaemonThread(String name, Runnable r) {
+    Thread t = new Thread(r, name);
+    t.setDaemon(true);
+    return t;
+  }
+</code></pre>
+
+<p>守护线程被创建后，除非通知更新到来，否则上文中的<code>bell</code>队列一直会是空的。</p>
+
+<p>因此，<code>LoopRunnable</code>便会重复执行更新操作，并等待一段规定时间。</p>
+
+<pre><code class="language-java">public void run() {
+    ......
+    for (; ; ) {
+      .......
+        try {
+          // 更新
+          runUnthrowable();
+        } catch (Throwable unexpect) {
+          ......
+        }
+        try {
+          // 等待
+          waitingUnthrowable();
+        } catch (Throwable unexpect) {
+          ......
+        }
+      } 
+    ......
+}
+</code></pre>
+
+<p>由此，定时更新得到了实现。</p>
+
+<h2 id="关闭推送的实现">关闭推送的实现</h2>
+
+<p><code>PushSwitchService</code>中，存在着以下两个类，它们会对内存中的全局开关配置和灰度开关配置进行读取。</p>
+
+<pre><code class="language-java">public boolean canPush() {
+    return !fetchStopPushService.isStopPushSwitch()
+        || CollectionUtils.isNotEmpty(fetchGrayPushSwitchService.getOpenIps());
+  }
+
+  public boolean canIpPush(String ip) {
+    return !fetchStopPushService.isStopPushSwitch()
+        || fetchGrayPushSwitchService.getOpenIps().contains(ip);
+  }
+</code></pre>
+
+<p>当配置开关关闭后，依照上文所分析的，全局开关将会被关闭，而灰度开关的 IP 列表也会被清空。因此，这两个函数将会返回 false。</p>
+
+<p>与推送相关的功能，例如 Data 的通知，Session 的兜底 check 等，会调用这两个函数判定是否可以推送。如果不可以推送，后续的流程就会被切断。</p>
+
+<pre><code class="language-java">public Object doHandle(.......) {
+    if (!pushSwitchService.canPush()) {
+      return null;
+    }
+    // 推送处理
+    ......
+}
+
+
+void firePush(......) {
+    if (!pushSwitchService.canIpPush(addr.getAddress().getHostAddress())) {
+      return;
+    }
+    // 推送处理
+    .......
+}
+</code></pre>
+
+<p>由此，关闭推送得到了实现。</p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+	</main>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

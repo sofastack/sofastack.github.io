@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	SOFAStack 背后的实践和思考｜新一代分布式云 PaaS 平台，打造企业上云新体验 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		SOFAStack 背后的实践和思考｜新一代分布式云 PaaS 平台，打造企业上云新体验
+	</h1>
+	<div class="meta">
+		
+			2021-12-23 ·
+			
+				<a href="https://github.com/sofastack">马振雄</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>近几年云计算的发展如火箭般迅猛，异构变革日新月异，这是基础设施层明确的发展趋势。值得关注的是，随着基础设施的复杂度越来越高，也为整个基础设施的统一资源调度带来了极大挑战。</p>
+
+<p>在越来越复杂的异构基础设施上，存量应用和增量应用应该如何上云？面对大量异构基础设施带来的挑战，企业如何最大化上云价值？</p>
+
+<p>12 月 15 日，在以“引领分布式云变革，助力湾区数字经济”为主题的全球分布式云大会上，蚂蚁集团数字科技事业部产品总监马振雄分享了分布式云异构基础设施之上，蚂蚁集团在构建分布式云 PaaS 平台 SOFAStack 背后的实践和思考。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*ITAlTqF5Xc0AAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<h2 id="part-1-服务网格定义新的应用上云路径">PART. 1 服务网格定义新的应用上云路径</h2>
+
+<p>随着云原生的发展，企业在技术升级的过程中伴随着大量的历史包袱，这些历史包袱是所有存量的异构功能，这些异构功能有以下几个特征：技术架构异构、通信协议异构、开发框架异构。</p>
+
+<p>这些存量的应用如何在异构的基础设施上统一纳管，背后就涉及到了应用的全生命周期，从研发时的应用改造成本，到运行时如何对异构应用做统一服务治理，再到运维时如何对基础设施进行统一元数据管理、统一变更、统一容灾、统一应急以及资金安全，这些都是存在于 PaaS 层的挑战。</p>
+
+<p>如果说 IaaS 层的统一资源调度以资源为视角和出发点，那么在上层 PaaS 则需要以应用为视角思考整个分布式基础设施的复杂度到底会带来哪些挑战，以及企业应该如何应对。</p>
+
+<p>企业存在大量的历史包袱，历史包袱五花八门，如果要把这些历史包袱全部改造成分布式应用或者云原生应用，背后需要的代价非常昂贵，很难有一家企业在短时间内愿意负担起这样的时间和成本，彻底将所有的历史包袱云原生化。</p>
+
+<p>相比于其他上云方式，Service Mesh 能够实现跨平台、跨协议，并且业务代码无侵入改造，从而快速地将应用植入 Sidecar 完成 Mesh 化，获得分布式红利、安全可观测，并且整个架构平滑演进。企业在架构升级过程中可以按部就班、循序渐进，并且实现端到端的安全可信以及全链路可观测能力。</p>
+
+<p>总体来说网格服务首先降低了传统应用改造成分布式、云原生应用的成本问题；其次是解决了所有企业新老系统的互联互通和统一纳管的问题；第三是让企业应用架构在升级过程变得更平滑；第四是让所有企业保留自己存量系统的技术栈，且保留了企业自身自主可控性要求。</p>
+
+<p>Forrester 长期以来对蚂蚁集团的创新技术保持关注，Forrester 首席分析师、Serving Technology Executives 服务技术决策者戴鲲发布《蚂蚁集团服务网格总体经济影响》，并分享了他对于 Mesh 的研究，</p>
+
+<p>未来要实现开发的智能化，需要通过微服务来进行智能化进程，不再像以前一样零敲碎打。对传统应用进行定制化，要通过网格服务动态地组装，实现云上开发。</p>
+
+<p>通过对蚂蚁集团客户的访谈，Forrester 发现无论是传统金融机构还是互联网金融机构，都面临在混合架构下存在的共性挑战，包括基础设施升级换代、应用开发升级、云上云下交互等方方面面。Forrester 发现网格服务从单体应用改造成本节省到运维安全管理效率提升等方面都有明显的收益，通过研究三年数据测算，使用蚂蚁服务网格产品后，客户的投资回报率达到 99%。</p>
+
+<h2 id="part-2-sofastack-实现异构统一运维与弹性容灾">PART. 2 SOFAStack 实现异构统一运维与弹性容灾</h2>
+
+<p>基于自身的技术积累和场景打磨，蚂蚁数字科技定义了分布式云 PaaS 平台在运维态的六大能力，包括统一元数据管理、统一集群资源管理、统一变更能力、统一应急能力、统一容灾能力，和统一端到端从业务、应用到基础设施的可观测能力。在此基础上，蚂蚁数字科技重新定义 SRE，实现统一应用运维能力。</p>
+
+<p>行业一般认为 SRE 中的“R”（Reliability）是可靠性，蚂蚁数字科技结合自身十几年来对业务可用性和连续性的极致追求，经历了十多次双十一大规模验证，对 SRE 进行重新定义，将 SRE 里的 R 从 Reliability 转变为 Risk，意味着蚂蚁自身的保障体系是以风险为核心。最终通过十几年来的技术沉淀，打造了自己的技术风险保障平台 TRaaS。也正是因为这十几年沉淀的精华，才能让蚂蚁做到业务、应用、基础设施的运维无人值守，运维“自动驾驶”。</p>
+
+<p>蚂蚁的技术风险防控体系从上到下分别代表了三个目标：高可用、资金安全、低成本。三个组织保障：团队、文化、制度。再到需求、研发、发布以及监控的四条防线，最终沉淀出一套完整的技术风险保障体系的平台能力，整个平台由四个能力板块组成，包括了从应急、变更到容量、资金安全。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*YmQNRpEevRgAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>应急平台建立起了以风险为核心的事前、事中、事后的故障风险保障体系，分别对应故障风险检测能力、故障定位能力、故障应急和自愈能力，以及故障的回溯能力。变更平台建立起了以变更为核心的事前、事中、事后的变更风险自动分析、防御、阻断能力。容量平台建立起了对于全局数据中心和系统整体瓶颈的自动探测、容量规划和容量保鲜能力。最后的资金平台，通过对业务应用无侵入地建立起了资金核对第二道防线，帮助企业彻底规避资金安全风险，减少资损。</p>
+
+<p>如果说第一个核心的挑战解决的是研发态和运行态的问题，第二个核心挑战解决运维态问题，第三个核心挑战，要解决的是从整体架构上解决容灾态的问题。</p>
+
+<p>随着分布式云基础设施的蓬勃发展，企业数据中心从集中化走向离散化，这意味着企业任何一个应用随时随地可以跑在全国的任何一家数据中心机房的任何一个节点。这种变化背后，从应用视角来看，迫切需要整体的系统应用架构，支撑业务突破地域和城市级别的无限可扩展能力。基于蚂蚁对于业务连续性的极致追求，蚂蚁在支撑业务发展过程中，建立起了金融行业超大规模的三地五中心，并沉淀了一套异地多活单元化架构，解决企业在容灾、弹性、灰度方面的三大痛点。</p>
+
+<p>容灾方面，可以支撑企业的数据中心架构彻底从单活走向同城双活、两地三中心、再走向多地多活。一个业务单元发生故障不会影响到另外一个业务单元，从架构本身原生保障了业务的可靠性和连续性。</p>
+
+<p>弹性方面，由于灵活部署和快速扩容机制，能够结合灵活的流量调拨机制，支撑企业的数据中心突破城市和地域级别的扩展，做到真正意义上的无限可扩展。</p>
+
+<p>灰度，结合跨单元的路由分发，可以轻易地做到蓝绿单元这样具有创新的业务灰度方式。</p>
+
+<p>多地多活的架构非常复杂，从上至下包含了四层，从接入层做路由规则和路由分发，到应用层的中间件路由，再到数据层的数据分片和数据路由，最后到运维层的统一容灾、统一监控、单元拓扑。</p>
+
+<p>以金融行业为例，大型银行在主机下移过程中，需要面临的重要课题就是如何将核心系统下沉到分布式集群，在分布式集群下移过程中如何匹配主机系统性能和稳定性，背后很重要的能力就是多地多活架构。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*QzrXSr-achgAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>最终，蚂蚁在以上三个核心挑战的实践过程中，沉淀出新一代分布式云 PaaS 平台 SOFAStack。平台在金融行业有非常多的头部客户案例，从原生能力就满足了金融行业远高于其他行业在容量、性能、规模、高可用、合规、降本提效等方面的高标准要求。更重要的是 SOFAStack 来源于金融行业，但不止于金融行业，蚂蚁希望通过 SOFAStack 赋能到更多的行业，完成更多企业的数字化转型。</p>
+
+<h2 id="part-3-sofastack-未来演进方向">PART. 3 SOFAStack 未来演进方向</h2>
+
+<p>Mesh 的未来会经历三个重要的发展阶段：</p>
+
+<p>第一个阶段，不止是 Service Mesh，还有更多 Mesh 产品形态出现，包括消息 Mesh、缓存 Mesh、DB Mesh 等。在这个阶段，将会帮助企业更轻松地自主掌控异构运行时基础设施；</p>
+
+<p>第二个阶段，在兼容异构运行时基础设施之上，尝试定义社区或者事实的 API 标准，这个标准能让企业拥有统一的编程界面。当企业开发完一个应用，底层的基础设施发生任何变更，对于应用来说都是无感的。在这个阶段的愿景是让应用 build once，run anywhere，一旦应用开发完成，就不再需要做任何变更，可以随时跑在全国任何一个机房的数据中心节点，并且这个节点向上承载的运行时基础设施是可变的；</p>
+
+<p>第三个阶段，如果说前两个阶段是把基础服务范畴端到端下沉到基础设施，在第三个阶段更多要看到的是横向能力的下沉，包括资源调用和系统调用。在这个阶段，将会尝试尽可能把业务应用里更多和业务本身不相关的逻辑下沉到 Sidecar，彻底解放业务开发，让业务开发者关注能力编程，而不需要关注底层，回归业务本位，聚焦业务本身。</p>
+
+<p>最后，蚂蚁集团一直致力于技术架构前瞻性布局和持续创新，会继续在异构基础设施上打磨端到端的可信原生能力。</p>
+
+<p>未来，蚂蚁希望将 SOFAStack 打造成各行各业数字化转型的跨云操作系统。</p>
+
+<h3 id="本周推荐阅读">本周推荐阅读</h3>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247499337&amp;idx=1&amp;sn=a0f3965f5989858c7e50763e696c9c53&amp;chksm=faa31193cdd49885045adfce40c76e7cde9b689203845f2f674c24f379c246868d272c8adcbd&amp;scene=21">网商双十一基于 ServiceMesh 技术的业务链路隔离技术及实践</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247498935&amp;idx=1&amp;sn=7b9976f41a35eba7db6025ff42ba7086&amp;chksm=faa3136dcdd49a7b67baf40f78cf50cbd45d560a249d2d94af85af9fb9cf63b9e7be59f3dcc8&amp;scene=21">云原生运行时的下一个五年</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247487717&amp;idx=1&amp;sn=ca9452cdc10989f61afbac2f012ed712&amp;chksm=faa0ff3fcdd77629d8e5c8f6c42af3b4ea227ee3da3d5cdf297b970f51d18b8b1580aac786c3&amp;scene=21">积跬步至千里：QUIC 协议在蚂蚁集团落地之综述</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247499122&amp;idx=1&amp;sn=9733d1c015e7b0e8e64bd5cf44118b10&amp;chksm=faa312a8cdd49bbec97612e9756ef4372c446c410518a04bd0ae990a60fea9b8e78025e60c6d&amp;scene=21">Service Mesh 在中国工商银行的探索与实践</a></p>
+
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/75d7bde6-1f48-4f28-80a4-215f8ec811bd.webp" alt="img" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofaark-committer-interview-if-you-dont-like-it-just-change-it/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFAArk Committer 专访｜看它不爽，就直接动手改！</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211224/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly |社区开发者的搬砖日常、本周 Contributor、QA 整理</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/sofaark-committer-interview-if-you-dont-like-it-just-change-it/">SOFAArk Committer 专访｜看它不爽，就直接动手改！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/deeper-into-http/3-evolution-of-the-protocol-from-the-creation-and-closing-of-quic-links/">深入 HTTP/3（一）｜从 QUIC 链接的建立与关闭看协议的演进</a></li>
+		
+			<li><a href="/sofastack.tech/blog/online-business-double-eleven-servicemesh-technology-based-service-link-isolation-technology-and-practice/">网商双十一-基于 ServiceMesh 技术的业务链路隔离技术及实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/exploration-and-practice-of-service-mesh-in-icbc/">Service Mesh 在中国工商银行的探索与实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/the-next-five-years-of-cloud-native-runtime/">云原生运行时的下一个五年</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

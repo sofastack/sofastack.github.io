@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFA on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/categories/sofa/</link>
+    <description>Recent content in SOFA on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 14 May 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/sofa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【活动回顾】《SOFAMeetup 成都站-云原生技术交流专场》</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-15/</link>
+      <pubDate>Sat, 14 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-15/</guid>
+      <description>概要 活动主题：SOFAMeetup 成都站-云原生技术交流专场 活动时间：2022 年 05 月 14 日（周六）14:00-18:00 活动形式：线上直播 资料</description>
+    </item>
+    
+    <item>
+      <title>【活动回顾】《SOFAMeetup&amp;木兰技术开放日-云原生专场》</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-14/</link>
+      <pubDate>Fri, 01 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-14/</guid>
+      <description>概要 活动主题：SOFAMeetup&amp;amp;木兰技术开放日（云原生专场） 活动时间：2022 年 04 月 01 日（周五）09:30-12:00 活动形式：</description>
+    </item>
+    
+    <item>
+      <title>【活动回顾】《WebAssembly Open Day》</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-13/</link>
+      <pubDate>Sat, 18 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-13/</guid>
+      <description>概要 活动主题：SOFA x 字节码联盟 WAMR 社区「WebAssembly Open Day」 活动时间：2021 年 12 月 18 日（周六）13:00-17:00 活动形式</description>
+    </item>
+    
+  </channel>
+</rss>

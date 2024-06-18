@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Nerdctl 原生支持 Nydus 加速镜像 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Nerdctl 原生支持 Nydus 加速镜像
+	</h1>
+	<div class="meta">
+		
+			2023-01-10 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae3fe33e0148417fa455e2e749764819~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜李楠（GitHub ID : @loheagn）</p>
+
+<p>北京航空航天大学 21 级研究生</p>
+
+<p><em>云原生底层系统的开发和探索工作。</em></p>
+
+<p>本文 <strong>6369</strong> 字 阅读 <strong>16</strong> 分钟</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c19f61e3b4134ae8a9631ff337baa583~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>OSPP 开源之夏是由中科院软件研究所“开源软件供应链点亮计划”发起并长期支持的一项暑期开源活动。旨在鼓励在校学生积极参与开源软件的开发维护、促进优秀开源软件社区的蓬勃发展、培养和发掘更多优秀的开发者。</p>
+
+<p>这是去年（2022）的开源活动中，李楠同学参加 Nydus 容器开源生态集成课题的相关工作。</p>
+
+<p><strong>| 作者有话说 |</strong></p>
+
+<blockquote>
+<p>大家好！我是来自北京航空航天大学的 2021 级研究生李楠，对云原生技术很感兴趣，GitHub ID 是 @loheagn。在今年上半年，我参加了 Linux 基金会的春季实习，完成了 CNCF - Kubevela: Management of Terraform state 项目的工作，并因此培养了对开源工作的兴趣。在开源之夏 2022 开放题目后，我了解到了 Nydus 项目，感觉这是一个很酷的项目，由于我之前对容器和镜像的底层技术并不是很熟悉，觉得这是个很不错的学习机会。于是便尝试投递了简历申请，最终很幸运地通过了筛选，并在严松老师的帮助下顺利完成了题目。</p>
+</blockquote>
+
+<h2 id="part-1-项目背景">PART. 1 项目背景</h2>
+
+<h3 id="nerdctl">Nerdctl</h3>
+
+<p>Nerdctl 是一个对标 Docker CLI 和 Docker Compose 的、用于与 Containerd <em>（当下最流行的容器运行时，Docker 的后端也是调用的 Containerd，通常作为守护进程出现）</em> 交互的命令行工具。</p>
+
+<p>用户可以像使用 Docker CLI 一样使用 Nerdctl 与 Containerd 进行交互，比如使用 <code>nerdctl pull &lt;image_name&gt;</code> 来拉取镜像、使用 <code>nerdctl run &lt;image_name&gt;</code> 来运行容器等等。</p>
+
+<p>相比于 Containerd 本身提供的 CTR 工具，Nerdctl 默认提供了更友好的用户体验，并尽量保持其使用方式与 Docker 一致。对于从 Docker 迁移到 Containerd 的用户，往往只需要 <code>alias docker=nerdctl</code> 就可以与之前获得一致的使用体验。</p>
+
+<h3 id="oci-镜像格式">OCI 镜像格式</h3>
+
+<p>OCI 镜像格式是 OCI <em>（Open Container Initiative，开放容器计划）</em> 的重要组成部分。它给出了一个厂商无关的镜像格式规范，即一个镜像应该包含哪些部分、每个部分的数据结构是如何的、这些各个部分应该以怎样的方式进行组织等等。</p>
+
+<p>OCI 镜像格式脱胎于 Docker 镜像格式，它与 Docker 镜像格式有着非常类似的结构；但它比 Docker 镜像格式有更好的兼容性，并得到了各个厂商的普遍认同。</p>
+
+<p>因此，在这里主要介绍一下 OCI 镜像格式的主要内容。</p>
+
+<p>通常所说的镜像文件其实指的是一个包含了多个文件的“包”，“包”中的这些文件提供了启动一个容器所需要的所有需要信息，其中包括但不限于，容器所使用的文件系统等数据文件，镜像所适用的平台、数据完整性校验信息等配置文件。当我们使用 <code>docker pull</code> 或 <code>nerdctl pull</code> 从镜像中心拉取镜像时，其实就是在依次拉取该镜像所包含的这些文件。</p>
+
+<p>例如，当我们使用 <code>nerdctl pull</code> 拉取一个 OCI 镜像时：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7a789044ce6b4f20b6891cc5659f00d8~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<p>从 Log 中可以清晰地看到，Nerdctl 依次拉取了一个 index 文件、一个 manifest 文件、一个 config 文件和若干个 layer 数据文件。实际上，一个标准的 OCI 镜像通常就是由这几部分构成的。</p>
+
+<p>其中，layer 文件一般是 tar 包或者压缩后的 tar 包，其包含着镜像具体的数据文件。这些 layer 文件会共同组成一个完整的文件系统（<em>也就是从该镜像启动容器后，进入容器中看到的文件系统）</em> 。</p>
+
+<p>config 文件是一个 JSON 文件。其中包含镜像的一些配置信息，比如镜像时间、修改记录、环境变量、镜像的启动命令等等。</p>
+
+<p>manifest 文件也是一个 JSON 文件。它可以看作是镜像文件的清单，即说明了该镜像包含了哪些 layer 文件和哪个 config 文件。</p>
+
+<p>下面是一个 manifest 文件的典型例子：</p>
+
+<pre><code class="language-JSON">{
+  &quot;schemaVersion&quot;: 2,
+  &quot;mediaType&quot;: &quot;application/vnd.oci.image.manifest.v1+json&quot;,
+  &quot;config&quot;: {
+    &quot;mediaType&quot;: &quot;application/vnd.oci.image.config.v1+json&quot;,
+    &quot;digest&quot;: &quot;sha256:0584b370e957bf9d09e10f424859a02ab0fda255103f75b3f8c7d410a4e96ed5&quot;,
+    &quot;size&quot;: 7636
+  },
+  &quot;layers&quot;: [
+    {
+      &quot;mediaType&quot;: &quot;application/vnd.oci.image.layer.v1.tar+gzip&quot;,
+      &quot;digest&quot;: &quot;sha256:214ca5fb90323fe769c63a12af092f2572bf1c6b300263e09883909fc865d260&quot;,
+      &quot;size&quot;: 31379476
+    },
+    {
+      &quot;mediaType&quot;: &quot;application/vnd.oci.image.layer.v1.tar+gzip&quot;,
+      &quot;digest&quot;: &quot;sha256:50836501937ff210a4ee8eedcb17b49b3b7627c5b7104397b2a6198c569d9231&quot;,
+      &quot;size&quot;: 25338790
+    },
+    {
+      &quot;mediaType&quot;: &quot;application/vnd.oci.image.layer.v1.tar+gzip&quot;,
+      &quot;digest&quot;: &quot;sha256:d838e0361e8efc1fb3ec2b7aed16ba935ee9b62b6631c304256b0326c048a330&quot;,
+      &quot;size&quot;: 600
+    },
+    {
+      &quot;mediaType&quot;: &quot;application/vnd.oci.image.layer.v1.tar+gzip&quot;,
+      &quot;digest&quot;: &quot;sha256:fcc7a415e354b2e1a2fcf80005278d0439a2f87556e683bb98891414339f9bee&quot;,
+      &quot;size&quot;: 893
+    },
+    {
+      &quot;mediaType&quot;: &quot;application/vnd.oci.image.layer.v1.tar+gzip&quot;,
+      &quot;digest&quot;: &quot;sha256:dc73b4533047ea21262e7d35b3b2598e3d2c00b6d63426f47698fe2adac5b1d6&quot;,
+      &quot;size&quot;: 664
+    },
+    {
+      &quot;mediaType&quot;: &quot;application/vnd.oci.image.layer.v1.tar+gzip&quot;,
+      &quot;digest&quot;: &quot;sha256:e8750203e98541223fb970b2b04058aae5ca11833a93b9f3df26bd835f66d223&quot;,
+      &quot;size&quot;: 1394
+    }
+  ]
+}
+</code></pre>
+
+<p>index 文件也是一个 JSON 文件。它是可选的，可以被认为是 manifest 的 manifest。试想一下，一个 tag 标识的镜像，比如 <code>docker.io/library/nginx:1.20</code> ，会针对不同的架构平台 <em>（比如 linux/amd、linux/arm64 等等）</em> 有不同的镜像文件，每个不同平台的镜像文件都有一个 manifest 文件来描述，那么我们就需要有个更高层级的文件来索引这多个 manifest 文件。</p>
+
+<p>比如，<code>docker.io/library/nginx:1.20</code> 的 index 文件就包含一个 manifests 数组，其中记录了多个不同平台的 manifest 的基本信息：</p>
+
+<pre><code class="language-JSON">{
+  &quot;manifests&quot;: [
+    {
+      &quot;digest&quot;: &quot;sha256:a76df3b4f1478766631c794de7ff466aca466f995fd5bb216bb9643a3dd2a6bb&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;amd64&quot;,
+        &quot;os&quot;: &quot;linux&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:f46bffd1049ef89d01841ba45bb02880addbbe6d1587726b9979dbe2f6b556a4&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;arm&quot;,
+        &quot;os&quot;: &quot;linux&quot;,
+        &quot;variant&quot;: &quot;v5&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:d9a32c8a3049313fb16427b6e64a4a1f12b60a4a240bf4fbf9502013fcdf621c&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;arm&quot;,
+        &quot;os&quot;: &quot;linux&quot;,
+        &quot;variant&quot;: &quot;v7&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:acd1b78ac05eedcef5f205406468616e83a6a712f76d068a45cf76803d821d0b&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;arm64&quot;,
+        &quot;os&quot;: &quot;linux&quot;,
+        &quot;variant&quot;: &quot;v8&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:d972eee4f12250a62a8dc076560acc1903fc463ee9cb84f9762b50deed855ed6&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;386&quot;,
+        &quot;os&quot;: &quot;linux&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:b187079b65b3eff95d1ea02acbc0abed172ba8e1433190b97d0acfddd5477640&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;mips64le&quot;,
+        &quot;os&quot;: &quot;linux&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:ae93c7f72dc47dbd984348240c02484b95650b8b328464c62559ef173b64ce0d&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;ppc64le&quot;,
+        &quot;os&quot;: &quot;linux&quot;
+      },
+      &quot;size&quot;: 1570
+    },
+    {
+      &quot;digest&quot;: &quot;sha256:51f45f5871a8d25b65cecf570c6b079995a16c7aef559261d7fd949e32d44822&quot;,
+      &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.v2+json&quot;,
+      &quot;platform&quot;: {
+        &quot;architecture&quot;: &quot;s390x&quot;,
+        &quot;os&quot;: &quot;linux&quot;
+      },
+      &quot;size&quot;: 1570
+    }
+  ],
+  &quot;mediaType&quot;: &quot;application\/vnd.docker.distribution.manifest.list.v2+json&quot;,
+  &quot;schemaVersion&quot;: 2
+}
+</code></pre>
+
+<p>综上，组成镜像的各个文件相互之间形成了一个树状结构，树的上层节点持有对下层节点的引用。从最上层的 index 文件或 manifest 文件开始，就可以“顺藤摸瓜”地索引到镜像的所有文件。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/95f79fb6123043f884ff03f4a8709ee2~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>需要注意的是，OCI 镜像规范是一个开放的格式，它只规定了文件的组织形式，但没规定数据文件的具体内容。我们完全可以将一些其他类型的文件打包成一个 OCI 镜像的格式，当做 OCI 镜像进行分发，从而充分利用 DockerHub 等镜像注册中心的能力。</p>
+
+<h2 id="part-2-关于-nydus">PART. 2 关于 Nydus</h2>
+
+<p>Nydus 是 CNCF 孵化项目 Dragonfly 的子项目，它提供了容器镜像、代码包、数据分析按需加载的能力，无需等待整个数据下载完成便可开始服务。</p>
+
+<p>Nydus 在生产环境已经支撑了每日百万级别的加速镜像容器创建，在启动性能、镜像空间优化、网络带宽效率、端到端数据一致性等方面相比 OCI v1 格式有着巨大优势，并可扩展至例如 NPM 包懒加载等数据分发场景。</p>
+
+<p>目前 Nydus 由蚂蚁集团、阿里云、字节跳动联合开发，Containerd、Podman 社区接受了 Nydus 运行时作为其社区子项目，也是 Kata Containers 以及 Linux v5.19 内核态原生支持的镜像加速方案。</p>
+
+<h3 id="nydus-镜像格式">Nydus 镜像格式</h3>
+
+<p>Nydus 镜像格式是对下一代 OCI 镜像格式的探索。它的出现是基于以下的事实：在用户启动容器时，容器运行时会首先从远程 Registry 中下载完整的镜像文件 <em>（通常这一过程是容器启动时最耗时的部分）</em> ，然后才能对镜像的文件系统进行解包和挂载，最后完成容器的启动。</p>
+
+<p>但实际上，用户在运行容器过程中，并不会用到文件系统中的全部文件，数据使用率通常只有 6% 左右；也就是说，花费大量时间拉取的镜像文件，却大概率最终不会用到。</p>
+
+<p>因此，如果能在容器运行时，不提前拉取完整镜像，而只是在需要访问某些文件再动态拉取，将大大提高容器的启动效率，并带来网络带宽效率、镜像空间优化等更多好处。</p>
+
+<p>下图是相同内容的 Nydus 镜像和 OCI 镜像在创建容器时的耗时对比：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5d3cc4a9d7e84036beedd1d055b826cb~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<p>Nydus 镜像格式并没有对 OCI 镜像格式在架构上进行修改，而主要优化了其中的 layer 数据层的数据结构。Nydus 将原本统一存放在 layer 层的文件数据和元数据 <em>（文件系统的目录结构、文件元数据等）</em> 分开，分别存放在 “Blob layer” 和 “Bootstrap layer” 中。并对 Blob layer 中存放的文件数据进行分块 <em>（chunk）</em> ，以便于懒加载 <em>（在需要访问某个文件时，只需要拉取对应的 chunk 即可，不需要拉取整个 Blob layer）</em> 。</p>
+
+<p>同时，这些分块信息，包括每个 chunk 在 Blob layer 的位置信息等也被存放在 Bootstrap layer 这个元数据层中。这样，容器启动时，仅需拉取 Bootstrap layer 层，当容器具体访问到某个文件时，再根据 Bootstrap layer 中的元信息拉取对应 Blob layer 中的对应的 chunk 即可。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/670b8fce234d4a6ea7c248101ee7817f~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<p>从更上层的视角上，Nydus 镜像格式相比于 OCI 镜像格式的变化：</p>
+
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9bebf009a6542bea5f41d45c8325a40~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<p>可以看到，Nydus 镜像对外依旧可以表现出 OCI 镜像格式的组织形式，因此，Nydus 镜像可以充分利用原有的 Docker 镜像和 OCI 镜像的存储分发的生态。</p>
+
+<h3 id="nydus-daemon">Nydus Daemon</h3>
+
+<p>从前文的讨论中可以看出，从 Nydus 镜像生成的容器，当其访问文件系统中的文件时，实际上访问的不是文件系统，而是一个“网络文件系统”——实际访问的是这个“网络文件系统”在本地的缓存或 Registry 等存储后端中的数据。</p>
+
+<p>Nydus 中作为这个“网络文件系统”中的“本地客户端”的工具是 Nydus Daemon <em>（简称 Nydusd）</em> 。</p>
+
+<p>下图中的 Nydus Framework 中起主要作用的就是 Nydusd。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8bfd70d68f50434f952249c43ba45354~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>Nydusd 是一个用户态进程，它可以通过 FUSE、VirtioFS 或 EROFS 等方式将网络文件系统挂载到容器的 Rootfs 上。</p>
+
+<p>下图是使用 FUSE 的情况：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/85ca9d08fb06469284d4e8068a87fd3f~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<h3 id="nydus-snapshotter">Nydus Snapshotter</h3>
+
+<p>Nydus 镜像格式虽然在架构上与 OCI 格式保持一致，但对数据的解析、具体的 layer 文件的 MediaType 等方面与 OCI 格式有很大区别。现有的容器运行时 <em>（典型的如 Containerd、Podman、CRI-O 等）</em> 及其配套的工具并不能直接与拉取和运行 Nydus 镜像。</p>
+
+<p>例如，对于 Containerd：</p>
+
+<p>在 Containerd 拉取镜像时，会根据镜像的 manifest 中的描述将所有的层文件都拉取下来。这首先就失去了 Nydus 按需加载的意义。</p>
+
+<p>Containerd 在完成镜像每个层文件的拉取后，会调用 Snapshot 服务将每一层解包，以读取其中的文件。但 Nydus 镜像的 Blob layer 使用了自定义的 MediaType，Containerd 在处理时会直接报错。</p>
+
+<p>Containerd 在运行容器时，会将镜像所属的各个解包后的 Snapshot 目录作为 OverlayFS 的 Lower Dir，挂载到容器的 Rootfs 上。Nydus 必须能够 hack 这一过程，将 Nydusd 提供的网络文件系统作为 OverlayFS 的 Lower Dir 挂载。</p>
+
+<p>幸运的是，Containerd 在设计之初就考虑到了对多种文件系统的支持，支持用户自定义 Snapshot 插件，并在拉取和运行镜像时指定使用对应的 Snapshot 插件，以实现用户所期望的功能。Nydus 所提供的这样的 Snapshot 插件就是 Nydus Snapshotter。</p>
+
+<p><strong>PART. 3</strong></p>
+
+<p><strong>我的工作</strong></p>
+
+<p><strong>Nerdctl 支持运行 Nydus 镜像</strong></p>
+
+<p>在开源之夏的题目发布时，当需要使用 Nerdctl 来运行 Nydus 镜像时，不能像普通的 OCI 镜像或 Docker 镜像一样，直接使用 <code>nerdctl run</code> 等来运行 <em>（执行 <code>nerdctl run</code> 会直接报错）</em> ，必须首先使用 Nydus 自己提供的工具 ctr-remote 拉取镜像，然后才能进一步使用 <code>nerdctl run</code> 运行。</p>
+
+<p>通过阅读和调试 Nerdctl 的代码发现，当本地没有要运行的镜像时，Nerdctl 会执行 pull 命令从 Registry 中拉取镜像，而直接使用 <code>nerdctl run</code> 引发的报错正是在这个 pull 阶段产生的。因此，问题转化为解决 <code>nerdctl pull</code> 的报错。同时，想到 ctr-remote 其实主要就是在做 pull 镜像的功能。于是，进一步阅读 ctr-remote 的代码可以发现，ctr-remote 通过在镜像的拉取过程中，对 manifest 包含的各个 layer 添加相应的 annotation，使 Nydus Snapshotter 可以正确处理拉取的镜像。因此，只需要将 ctr-remote 中的这部分逻辑抽离出来，并添加到 <code>nerdctl pull</code> 的工作流程中即可。</p>
+
+<p><strong>Nerdctl 支持转换 Nydus 镜像</strong></p>
+
+<p>相比于 Docker CLI，Nerdctl 原生支持一些更多样化的命令，比如 <code>nerdctl image convert</code> 。顾名思义，该命令的作用是将一种格式的镜像转换为另一种格式。其最基础的用法是使用 <code>nerdctl image convert --oci &lt;src_image_tag&gt; &lt;target_image_tag&gt;</code> 将一个常见的 Docker v2 格式的镜像 <em>（也就是大家平常用的镜像格式）</em> 转换为一个标准的 OCI 格式的镜像。</p>
+
+<p>除了 Docker v2 和 OCI，截止到开源之夏题目发布时，<code>nerdctl image convert</code> 还支持将镜像转换到 eStargz 格式。因此，“ <code>nerdctl image convert</code> 支持 Nydus” 这个题目的含义就是，拓展 <code>nerdctl image convert</code> 命令，使其支持将常见的 Docker V2 格式和 OCI 格式的镜像转换为 Nydus 格式的镜像。这个题目是本次项目最重要的一部分工作。</p>
+
+<p><code>nerdctl image convert</code> 的实现主要是借助  Containerd 本身对外开放的 API 中的 Convert 能力实现的。Containerd 对镜像转换的处理流程是，按照镜像组织的树形结构，从基础的 layer 和 config 开始，到 index 层结束，一层层进行转换，从而最终生成一个新的镜像；其中，调用者可以自定义数据层的转换逻辑，<code>nerdctl image convert</code> 已有的对 eStargz 格式 的支持就是通过这种方式实现的。</p>
+
+<p>但目前类似 eStargz 格式的这种实现其实是默认转换后的镜像和转换前的镜像的各层之间一一对应，而 Nydus 镜像除了有与转换前的 OCI 镜像中的数据层一一对应的 Blob layer 之外，还有一个 Bootstrap layer。幸好 Containerd 的处理流程中，在完成了每一层的转换后，会调用一个回调函数，给调用者机会做进一步的处理。因此，可以利用 Containerd 对 manifest 层处理完的回调，在该回调中，额外生成一个 Bootstrap layer，并相应地修改 manifest 层和 config 层中的内容，从而最终构建出一个合法的 Nydus 镜像。</p>
+
+<p>在开发完基本逻辑后，测试过程中发现了转换后的 Nydus 镜像文件生成后又被意外删除的现象。甚至在一步步调试时，在函数返回前，转换后的 Nydus 镜像文件依旧存在，但函数返回后文件奇迹般的消失了。</p>
+
+<p>对此，我依次尝试了以下排查思路：</p>
+
+<p>Nydus 镜像文件的删除是在另一个协程中进行的，因此我在当前协程的断点没有调试到删除操作。但多次调试后发现，删除动作一定会发生在函数返回前，这与协程的不可预测性不符。</p>
+
+<p>Nydus 镜像文件触发了 Containerd 守护进程的某种 GC 操作。我使用 Inotify 监控镜像文件的创建和删除操作对应的进程，发现确实是 Containerd 守护进程的操作。</p>
+
+<p><strong>但问题是，Nerdctl 执行的代码也会与 Containerd 进行 RPC 通信，这一操作是 Containerd 进程自己的内置逻辑呢，还是 Nerdctl 通知 Containerd 做的呢？不得而知。</strong></p>
+
+<p>在花费了一周时间排查 bug 后，发现是函数返回前执行了函数体前部分的 Defer 操作触发了 Nydus 镜像文件的删除操作，而在 Defer 的函数体中没有设置断点，因此没有调试到。最终，通过分析 Defer 函数体中的逻辑，问题得以解决。</p>
+
+<p>总结下来，还是具体的编程经验不足，没有在一开始就想到所有可能得方面，导致绕了很大的弯路。</p>
+
+<p><strong>小结</strong></p>
+
+<p>上述两项工作的 PR 都已合入了 Nerdctl 的主分支 <em>（&gt;=0.22）</em> ，基本实现了 Nerdctl 原生支持 Nydus 镜像加速的能力。</p>
+
+<p>大家可以移步文档作进一步了解： *<a href="https://github.com/containerd/nerdctl/blob/master/docs/nydus.md">https://github.com/containerd/nerdctl/blob/master/docs/nydus.md</a>*。</p>
+
+<h2 id="part-4-项目总结与展望">PART. 4 项目总结与展望</h2>
+
+<p>Containerd 是当前最流行的容器运行时之一，Nerdctl 作为 Containerd 的社区中的核心项目提供了完善的使用体验。它们都是容器领域中非常重要的基础项目。</p>
+
+<p>通过本次项目的开发工作，我逐渐了解了 OCI 镜像的组成部分，每部分的作用和基本格式；知道了以及 Nydus 镜像和 OCI 镜像之间的差异，并且理解了 Nydus镜像中 Blob layer 和 Bootstrap layer 之间的区别；能够通过检查本地镜像相关文件排查一些简单的程序 bug。</p>
+
+<p>在项目进行的过程中，我阅读了 Nerdctl 和 Containerd 的代码，学到了一些实用的编程技巧，并最终向 Nerdctl 提交并成功合入了两个 PR。在向 Nerdctl 提交和修改 PR 的过程中，Nerdctl 的 Maintainer 们对待代码的严谨态度让我大受裨益———他们甚至会 review <code>go.sum</code> 每一行改动！</p>
+
+<p>不仅如此，这些的开源工作经历为我揭开了“顶级开源项目的神秘的面纱”，增强了我的信心，让我更有自信和兴趣进一步参与到云原生项目的相关工作中。</p>
+
+<p>本次项目的完成，将使得用户能非常方便地使用 Nerdctl 和 Containerd 来构造、拉取、运行 Nydus 镜像，这无疑会对 Nydus 镜像格式的普及和进一步发展起到非常好的推动作用。</p>
+
+<p><strong>| 致谢 |</strong></p>
+
+<p>非常感谢项目组织老师赵新、本题目 Mentor 严松老师和项目指导助理姚胤楠同学在本次项目进行过程指导和帮助，特别是严松老师细致入微的解答和指导，每次我的一个看起来很简单甚至很愚蠢的问题都能得到严松老师详细的解答，并且言辞中经常包含着肯定和鼓励，让人如沐春风。</p>
+
+<p>在后续的学习和工作中，我希望能持续参与到 Nydus 相关的开发工作中，继续为社区贡献 issue 和代码。</p>
+
+<p><strong>了解更多&hellip;</strong></p>
+
+<p><strong>Nydus Star 一下✨：</strong></p>
+
+<p><em><a href="https://github.com/dragonflyoss/image-service">https://github.com/dragonflyoss/image-service</a></em></p>
+
+<p><strong>更多福利&hellip;</strong></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247520052&amp;idx=1&amp;sn=add38b62aad83c73d14d3acca6090e45&amp;chksm=faa360eecdd4e9f80f448eebecb4c7a085c3750f36ac298568ddf687acf76438d7cc2780090b&amp;scene=21#wechat_redirect"><strong>《SOFAStack 社区 2022 年报》</strong></a>已发出</p>
+
+<p>扫描下方二维码填写问卷</p>
+
+<p>有机会获得 SOFAStack <strong>新年限定周边</strong> 哦！</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bdfb00ea22ff4325b82db1794fbab97e~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><strong>本周推荐阅读</strong></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247520024&amp;idx=1&amp;sn=e87a70a49cabde775b3c6651db652404&amp;chksm=faa360c2cdd4e9d46b19c2cc037e7379ff40dc7c1b2fef98de37fc524f8931d9704046b36b4c&amp;scene=21">Nydus 镜像扫描加速</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247504035&amp;idx=1&amp;sn=320b77bf5f3c6cf0da309f7527b98e64&amp;chksm=faa33f79cdd4b66f184d273a2d7460c41320711eab47af849e386c359e71eeebc6c7f21c1e0f&amp;scene=21">Nydus 镜像加速插件迁入 Containerd 旗下</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247517164&amp;idx=1&amp;sn=28f50763db2883839908057125a7b497&amp;chksm=faa36c36cdd4e52050796d00f2f5bf357471692c2da8727cc44ae47856cd925e599b6e954314&amp;scene=21">Nydus | 容器镜像基础</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247518517&amp;idx=1&amp;sn=74f6426f0b280cbd4aafd2d37eaaec04&amp;chksm=faa366efcdd4eff9b50d52dad855ab593034b4af94896c2386705a316f063a1825d1729da36a&amp;scene=21">Dragonfly 和 Nydus Mirror 模式集成实践</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofaweekly-20230106/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | SOFANews、本周贡献 &amp; issue 精选</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220113/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | 铜锁探「密」、本周贡献 &amp; issue 精选</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/sofaregistry-talk-about-the-data-consistency-of-service-discovery/">SOFARegistry | 聊一聊服务发现的数据一致性</a></li>
+		
+			<li><a href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/">SOFARegistry | 聊一聊服务发现的数据一致性</a></li>
+		
+			<li><a href="/sofastack.tech/blog/nydus-mirror-scan-acceleration/">Nydus 镜像扫描加速</a></li>
+		
+			<li><a href="/sofastack.tech/blog/dragonfly-and-nydus-mirror-mode-integration-practice/">Dragonfly 和 Nydus Mirror 模式集成实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/we-have-come-to-the-post-cloud-native-era-how-can-we-operate-and-maintain-on-a-large-scale/">已来到 “后云原生时代” 的我们，如何规模化运维？</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

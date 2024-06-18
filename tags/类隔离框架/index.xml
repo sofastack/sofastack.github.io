@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>类隔离框架 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/</link>
+    <description>Recent content in 类隔离框架 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 09 Jun 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFAChannel#28 SOFAArk 类隔离框架设计</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-28/</link>
+      <pubDate>Thu, 09 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-28/</guid>
+      <description>概要 活动主题：SOFAChannel#28:SOFAArk 类隔离框架设计 活动时间：06 月 09 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B</description>
+    </item>
+    
+  </channel>
+</rss>

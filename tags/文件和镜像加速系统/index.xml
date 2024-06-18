@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>文件和镜像加速系统 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 文件和镜像加速系统 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 26 Jul 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFAChannel#29 基于 P2P 的文件和镜像加速系统 Dragonfly</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-29/</link>
+      <pubDate>Tue, 26 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-29/</guid>
+      <description>概要 活动主题：SOFAChannel#29:基于 P2P 的文件和镜像加速系统 Dragonfly 活动时间：07 月 28 日，周四晚 19 点 活动形式：线上直播 直播回放：点击观看</description>
+    </item>
+    
+  </channel>
+</rss>

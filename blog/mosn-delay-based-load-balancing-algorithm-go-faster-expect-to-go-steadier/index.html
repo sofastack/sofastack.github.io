@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	MOSN 基于延迟负载均衡算法——走得更快，期待走得更稳 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		MOSN 基于延迟负载均衡算法——走得更快，期待走得更稳
+	</h1>
+	<div class="meta">
+		
+			2023-05-23 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://mmbiz.qpic.cn/mmbiz_gif/nibOZpaQKw09ARcsGuzib3ttcN4LZpdAC0n9KTQp7uibF8ia0ibk3Olf3sib50ExibicicOrzCOVrOyUD2dFib84f0fTx5uA/640?wx_fmt=gif&amp;wxfrom=5&amp;wx_lazy=1" alt="图片" /></p>
+
+<p>文｜纪卓志（GitHub ID：jizhuozhi)</p>
+
+<p>京东高级开发工程师</p>
+
+<p>MOSN 项目 Committer</p>
+
+<p>专注于云原生网关研发的相关工作，长期投入在负载均衡和流量控制领域</p>
+
+<h2 id="前言">前言</h2>
+
+<p>这篇文章主要是介绍 MOSN 在 v1.5.0 中新引入的基于延迟的负载均衡算法<a href="https://github.com/mosn/mosn/pull/2253">#2253</a>。首先会对分布式系统中延迟出现的原因进行剖析，之后介绍 MOSN 都通过哪些方法来降低延迟，最后构建与生产环境性能分布相近的测试用例来对算法进行验证。</p>
+
+<p>在开始聊基于延迟的负载均衡算法之前，我们先介绍下什么是负载均衡。</p>
+
+<h3 id="什么是负载均衡">什么是负载均衡</h3>
+
+<p>Wikipedia中 <a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)">Load Balancing (Computing)</a> 词条是这样介绍负载均衡的：</p>
+
+<blockquote>
+<p>负载均衡是将一组任务分配到一组资源（计算单元）上的过程，目的是使它们的整体处理更有效率。负载均衡可以优化响应时间，避免负载不均匀导致一些计算节点过载而其他计算节点处于空闲状态</p>
+</blockquote>
+
+<p>负载均衡在大型分布式系统中是关键的组成部分。负载均衡解决了分布式系统中最重要的两个问题：可伸缩性*（Scalability）*和韧性*（Resilience）*。</p>
+
+<ul>
+<li><p><strong>可伸缩性</strong>：应用程序部署在多个相同的副本中。当计算资源不足时可以通过部署额外的副本来增加计算资源，而当计算资源大量冗余时可以通过减少副本来节省成本。通过负载均衡可以将请求负载分布到不同的副本中。</p></li>
+
+<li><p><strong>韧性</strong>：分布式系统的故障是部分的。应用程序通过冗余副本的方式，保证在部分组件故障时仍能正常地提供服务。负载均衡通过感知节点的故障，调整流量的分配，将流量更多的分配到那些能够正常提供服务的节点上。</p></li>
+</ul>
+
+<h2 id="走得更快">走得更快</h2>
+
+<p>负载均衡使得现代软件系统具备了可扩展性和韧性。但在分布式系统中还存在不容忽视的问题：<strong>延迟</strong>。</p>
+
+<h3 id="延迟来自哪里">延迟来自哪里</h3>
+
+<p>现代软件系统通常是多层级结构大型分布式系统，即使是只服务单个终端用户的请求，它背后也有可能经过了上百次的数据访问，这种情况在微服务架构中更是尤为普遍。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/nibOZpaQKw09gdE1JR8UVvzarVkXniaic5ZMVwI8AVtKK2ibiaXvTIOQ09ibaTic8GtdRtnjnbNcvLO3fOEVPJhHluhQw/640?wx_fmt=jpeg&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>微服务架构<em>（引用自 Microservices Pattern）</em></p>
+
+<p>单台性能稳定的服务器中延迟通常由以下几个方面造成：</p>
+
+<ul>
+<li>计算任务本身的复杂度</li>
+<li>内容的传输过程中的延迟</li>
+<li>请求排队等待的延迟</li>
+<li>后台任务活动所导的资源竞争</li>
+</ul>
+
+<p>这些服务器之间的延迟将会叠加，任何显著的延迟增加都会影响终端用户的体验。此外，任何来自单个节点的延迟峰值也会直接影响到终端用户体验。同时越来越多地使用公有云部署应用程序也进一步加剧了响应时间的不可预测性。因为在这些环境中存在共享资源*（CPU、内存和 IO）*的争用，应用程序机几乎不可避免地遇到性能影响，而这种影响是随时发生的。</p>
+
+<h3 id="如何减少延迟">如何减少延迟</h3>
+
+<p>有研究表明，在大型互联网应用中，延迟往往具有长尾特点，P99 比中位数高出几个数量级。如果在应用架构的每层都能够减少这些尾部延迟，那么对终端用户整体的尾部延迟将会显著降低。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw09gdE1JR8UVvzarVkXniaic5ZQMg98BayF8NEgCjPHMAoiatTTjYG0kKeV87u7CYkFo5y2bbdLPGEsMA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>在服务网格中，所有接收和发送的流量都会经过边车代理，通过边车代理可以轻松地控制网格的流量，而无需对服务进行任何修改。如果边车代理在对应用层流量进行转发时，总是通过负载均衡时选择响应时间较短的服务器，那么将会显著降低对终端用户的尾部延迟。</p>
+
+<p>基于此，我们准备开始为 MOSN 引入基于延迟的负载均衡算法，并进行适当调整来保证能够在大多数使用场景下显著减少延迟。</p>
+
+<h3 id="性能问题是局部的">性能问题是局部的</h3>
+
+<p>前面提到了，每个节点的性能受到多种因素的影响，这些影响因素是动态的，难以准确预测每个节点的性能，因此我们无法精确地选择最好的节点，但是可以避免较差的节点。</p>
+
+<p>在云环境中，服务器的性能常常是难以预测的，但是我们可以通过对大量的数据进行分析，发现服务器性能的分布大多数情况下是符合正态分布的。因此，尽管有一部分的服务器在性能方面表现比较差，它们的数量通常都是少数的*（3Sigma）*，而绝大部分服务器节点的表现是正常的。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw09gdE1JR8UVvzarVkXniaic5Z0qFTbWicuH7frC9J5YRWe0DHCydU7MCJ0QS9BoBrLYZ2lCC4iaACkGCg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>除了服务器之间的差异，还存在由基础设施导致的动态延迟，这种延迟可能是由于网络拥塞、故障或不断增长的流量所导致。这种延迟通常具有持续性和局部性：持续性则表示延迟会长时间存在，不会在短时间内消失；而局部性指的是延迟往往只出现在某些特定服务器上，而不会在全局发生。</p>
+
+<h3 id="peakewma">PeakEWMA</h3>
+
+<p>面对这些问题，我们使用 Peak EWMA*（Peak Exponentially Weighted Moving Average）*计算响应时间指标，并根据这个指标来对节点进行负载均衡。</p>
+
+<p>EWMA 是一种动态权重调整算法，各数值的加权影响力随时间而指数式衰退，越近期的数据加权影响力越重，但较旧的数据也给予一定的加权值。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw09gdE1JR8UVvzarVkXniaic5Z1nMUVxekAeJEdibWJKKjrsou4UIq6UtDrZWPgFkoglwHeRrbXIbg6xQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>它以相对较高的权重考虑了最近响应时间的影响，因此更具有针对性和时效性。加权的程度以常数 𝛼 决定，𝛼 数值介于 0 至 1，它用来控制数据加权影响力衰退的速率。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw09gdE1JR8UVvzarVkXniaic5ZibASlulorkBks22ucbbic4S5o0kou3J30QkmB5icJzZtM36p5IiaWx65Bw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>作为一种统计学指标，EWMA 的计算过程不需要大量的采样点以及时间窗口的设定，有效地避免了计算资源的浪费，更适合在 MOSN 这样的边车代理中使用。</p>
+
+<p>由于响应时间是历史指标，当服务器出现性能问题导致长时间未返回时，负载均衡算法会错误地认为这台服务器仍是最优的，而不断地向其发送请求而导致长尾延迟增高。我们使用活跃连接数作为实时变化的指标对响应时间进行加权，表示等待所有活跃的连接都返回所需要的最大时间。</p>
+
+<h3 id="p2c-power-of-two-choice">P2C（Power of Two Choice）</h3>
+
+<p>在大规模集群中，如果使用遍历所有服务器选择最好的服务器的方法，虽然可以找到最轻负载的服务器来处理请求，但这种方法通常需要大量的计算资源和时间，因此无法处理大规模的请求。因此，我们使用 P2C 来选择最优节点。相比之下，P2C 算法可以在常数时间内选择两个服务器进行比较，并选择其中负载更轻的服务器来处理请求。P2C 基于概率分配，即不直接基于权重分配，而是根据每个服务器优于其他服务器的概率值来决定请求的分配。</p>
+
+<p>此外，在多个负载均衡器的情况下，不同负载均衡器可能会有不同的节点视图，这可能导致某些负载均衡器选择的最优节点总是最差的节点。这是因为负载均衡器选择最优节点时基于自己的视图信息，而节点视图随着时间的变化可能会发生变化，因此不同的负载均衡器选择的最优节点也可能不同。P2C 算法通过对随机选择的两个节点进行比较，可以使节点间的负载均衡更加均匀，即使节点视图发生变化，也能提供稳定的负载均衡效果。</p>
+
+<blockquote>
+<p>在 MOSN 的 v1.5.0 版本中，只有节点权重相同时会使用 P2C，当权重不同时会使用 EDF 进行加权选择。后续会提供可配置的选项。</p>
+</blockquote>
+
+<h3 id="模拟流量验证">模拟流量验证</h3>
+
+<p>我们构建了与生产环境性能分布相近的测试用例来对算法进行验证。</p>
+
+<p>首先我们使用正态分布生成了 10 台服务器的基准性能，其中数学期望为 50ms，标准差为 10ms。接下来，我们将这些基准性能作为数学期望，并以标准差为 5ms 的正态分布随机生成了请求延迟，以模拟真实世界的情况。此外，我们还在其中一台服务器注入了概率为 0.1 的故障，故障发生时会产生 1000ms 的延迟，以测试系统的容错性。</p>
+
+<p>为了模拟请求倾斜时请求排队等待的延迟，我们限制了每台服务器的最大并发数为 8，当同时处理的最大请求数超过了最大并发数时，将会排队等待。这样能够更加真实地模拟出系统的运行情况。</p>
+
+<p>最后，我们使用了 Round Robin、Least Request 和 Peak EWMA 三种算法，分别以 16 并发同时发送请求，得到的 P99 如下：</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw09gdE1JR8UVvzarVkXniaic5ZSPyAvY7kiaFfqricpxLhBA9PG43246cfVaYibGNzTPjiaib7qFqaeF4fxSQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>Round Robin 算法虽然平衡，但是始终会选择到注入了故障的服务器，导致 P99 始终在 1000ms 上下波动；Least Request 算法虽然避开了故障服务器，但是其 P99 值依然表现出较大的波动。</p>
+
+<p>与此相比，Peak EWMA 算法在保持稳定的同时，P99 值始终低于 Round Robin 和 Least Request 算法。这恰当地体现了 MOSN 在性能优化方面的成功，MOSN 确实做到了走得更快。</p>
+
+<h2 id="期待走得更稳">期待走得更稳</h2>
+
+<p>虽然 MOSN 在服务网格中解决了让应用跑得更快的问题，但是分布式系统中的故障却时刻存在。我们期望通过 MOSN 的负载均衡算法，可以让我们的服务走得更稳。</p>
+
+<h3 id="快速失败的挑战">快速失败的挑战</h3>
+
+<p>根据经验，故障时的响应时间往往远小于正常值，比如网络分区导致的连接超时，而没有实际处理请求。我们称这种故障时的响应时间远远小于正常值的情况为快速失败。</p>
+
+<p>在服务器出现快速失败时，从负载均衡的角度看，就会错误地认为该服务器是最优的选择。尽管可以通过断路器来避免向该服务器发送长期请求，但断路器本身也是一种快速失败，错误的视图依然会传播。此外，断路器的阈值设置也存在挑战。此外，断路器需要足够的错误样本才能触发，而我们期望尽可能避免错误的发生。</p>
+
+<p>因此，我们在后续版本中将会对负载均衡算法进行调整，让负载均衡算法能够感知错误的发生，并在触发断路器前就避免将请求转发到故障的服务器中。</p>
+
+<p><strong>MOSN Star 一下✨：</strong>
+<a href="https://github.com/mosn/mosn"><em>https://github.com/mosn/mosn</em></a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-230519/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly｜SOFA 大事记、Layotto 社区会议回顾与预告、社区本周贡献</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-230526/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly｜SOFAChannel#33 直播预告、Layotto 社区会议回顾与预告、社区本周贡献</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/moe-series-4-go-extended-asynchronous-mode/">MoE 系列（四）｜Go 扩展的异步模式</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-3dynamic-update-of-go-extension-configuration-with-istio/">MoE 系列（三）｜使用 Istio 动态更新 Go 扩展配置</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ant-security-technology-nydus-mirror-acceleration-practice/">蚂蚁安全科技 Nydus 镜像加速实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-2golang-extensions-receive-configuration-from-envoy/">MoE 系列（二）｜Golang 扩展从 Envoy 接收配置</a></li>
+		
+			<li><a href="/sofastack.tech/activities/sofa-anniversary-5/">SOFA 五周年，Live Long and Prosper！</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAchannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video.png" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1.png" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>
