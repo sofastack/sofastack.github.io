@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Occlum on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/occlum/</link>
+    <description>Recent content in Occlum on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 07 May 2021 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/occlum/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFAChannel#20：用安全计算保护关键业务</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-20/</link>
+      <pubDate>Fri, 07 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-20/</guid>
+      <description>概要 活动主题：SOFAChannel#20：用安全计算保护关键业务 活动时间：05 月 19 日周三晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站直播间</description>
+    </item>
+    
+    <item>
+      <title>人人都可以“机密计算”：Occlum 使用入门和技术揭秘 | SOFAChannel#18 直播回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-18-retrospect/</link>
+      <pubDate>Thu, 20 Aug 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-18-retrospect/</guid>
+      <description>&amp;lt; SOFA:Channel/ &amp;gt;，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 30315793，不错过每场直播。 本文根据 SOFAChannel#18 直</description>
+    </item>
+    
+  </channel>
+</rss>

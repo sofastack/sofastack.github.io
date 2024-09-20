@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFAChannel on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/sofachannel/</link>
+    <description>Recent content in SOFAChannel on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 31 Aug 2023 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/sofachannel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFAChannel#35《SOFABoot 4.0 — 迈向 JDK 17 新时代》——SOFABoot 社区</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-35/</link>
+      <pubDate>Thu, 31 Aug 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-35/</guid>
+      <description>概要 活动主题：SOFAChannel#35《SOFABoot 4.0 — 迈向 JDK 17 新时代》——SOFABoot 社区 活动时间：09 月 07 日，周四晚 19 点 活动</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#32 你的开源入门指南——Kata Containers 社区</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-32/</link>
+      <pubDate>Thu, 16 Feb 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-32/</guid>
+      <description>概要 活动主题：SOFAChannel#32:你的开源入门指南——Kata Containers 社区 活动时间：02 月 25 日，周四晚 19 点 活动形式：线上直播 资料下载：待</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#32 你的开源入门指南——Kata Containers 社区</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofachannel-32/</link>
+      <pubDate>Wed, 15 Feb 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofachannel-32/</guid>
+      <description>概要 活动主题：SOFAChannel#32:你的开源入门指南——Kata Containers 社区 活动时间：02 月 25 日，周四晚 19 点 活动形式：线上直播 资料下载：待</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#31 RPC 框架设计的考和量</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofachannel-31/</link>
+      <pubDate>Thu, 15 Dec 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofachannel-31/</guid>
+      <description>概要 活动主题：SOFAChannel#31:RPC 框架设计的考和量 活动时间：12 月 15 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站直播</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#30 Nydus 开源容器镜像加速服务的演进与未来</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-30/</link>
+      <pubDate>Thu, 03 Nov 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-30/</guid>
+      <description>概要 活动主题：SOFAChannel#30:Nydus 开源容器镜像加速服务的演进与未来 活动时间：11 月 03 日，周四晚 19 点 活动形式：线上直播 资料</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#29 基于 P2P 的文件和镜像加速系统 Dragonfly</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-29/</link>
+      <pubDate>Tue, 26 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-29/</guid>
+      <description>概要 活动主题：SOFAChannel#29:基于 P2P 的文件和镜像加速系统 Dragonfly 活动时间：07 月 28 日，周四晚 19 点 活动形式：线上直播 直播回放：点击观看</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#28 SOFAArk 类隔离框架设计</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-28/</link>
+      <pubDate>Thu, 09 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-28/</guid>
+      <description>概要 活动主题：SOFAChannel#28:SOFAArk 类隔离框架设计 活动时间：06 月 09 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#27 深入 HTTP/3｜从 QUIC-TLS 看协议的安全设计</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-27/</link>
+      <pubDate>Fri, 27 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-27/</guid>
+      <description>概要 活动主题：SOFAChannel#27:深入 HTTP/3｜从QUIC-TLS 看协议的安全设计 活动时间：05 月 26 日，周四晚 19 点 活动形式：线</description>
+    </item>
+    
+    <item>
+      <title>SOFA 四周年，开源正当时！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofastack-four-years-of-open-source/</link>
+      <pubDate>Sat, 16 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofastack-four-years-of-open-source/</guid>
+      <description>概要 活动主题：见证 SOFAStack 社区开源四周年! 活动时间： 2022 年 04 月 16 日 （14:00-17:40） 活动形式：线上直播 B 站直播间地址：http://live</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#26：解读 BabaSSL ：项目概况和最新进展</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-26/</link>
+      <pubDate>Thu, 17 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-26/</guid>
+      <description>概要 活动主题：SOFAChannel#26：解读 BabaSSL ：项目概况和最新进展 活动时间：03 月 17 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#25：蚂蚁大规模 Kubernetes 集群无损升级实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-25/</link>
+      <pubDate>Thu, 24 Feb 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-25/</guid>
+      <description>概要 活动主题：SOFAChannel#25：蚂蚁大规模 Kubernetes 集群无损升级实践 活动时间：02 月 24 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#24：漫谈 HTTP/3 进化史</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-24/</link>
+      <pubDate>Thu, 20 Jan 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-24/</guid>
+      <description>概要 活动主题：SOFAChannel#24：漫谈 HTTP/3 进化史 活动时间：01 月 20 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站直播间地址：h</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#23：蚂蚁服务发现的大规模实践与展望</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-23/</link>
+      <pubDate>Thu, 09 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-23/</guid>
+      <description>概要 活动主题：SOFAChannel#23：蚂蚁服务发现的大规模实践与展望 活动时间：12 月 09 日，周三晚 19 点 活动形式：线上直播 资料下载：戳这里</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#22：分布式共识：Raft 与 SOFAJRaft</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-22/</link>
+      <pubDate>Wed, 10 Nov 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-22/</guid>
+      <description>概要 活动主题：SOFAChannel#22：分布式共识：Raft 与 SOFAJRaft 活动时间：11月10日,周三晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#21：走进下一代互联网：HTTP/3</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-21-1/</link>
+      <pubDate>Wed, 18 Aug 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-21-1/</guid>
+      <description>概要 活动主题：SOFAChannel#21：走进下一代互联网：HTTP/3 活动时间：08月18日,周三晚19点 活动形式：线上直播 资料下载：戳</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#20：用安全计算保护关键业务</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-20/</link>
+      <pubDate>Fri, 07 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-20/</guid>
+      <description>概要 活动主题：SOFAChannel#20：用安全计算保护关键业务 活动时间：05 月 19 日周三晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站直播间</description>
+    </item>
+    
+    <item>
+      <title>人人都可以“机密计算”：Occlum 使用入门和技术揭秘 | SOFAChannel#18 直播回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-18-retrospect/</link>
+      <pubDate>Thu, 20 Aug 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-18-retrospect/</guid>
+      <description>&amp;lt; SOFA:Channel/ &amp;gt;，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 30315793，不错过每场直播。 本文根据 SOFAChannel#18 直</description>
+    </item>
+    
+    <item>
+      <title>网络通信框架 SOFABolt 功能介绍及协议框架解析 | SOFAChannel#17 直播回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-17-retrospect/</link>
+      <pubDate>Thu, 02 Jul 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-17-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 30315793，不错过每场直播</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#17：网络通信框架 SOFABolt 的功能介绍及协议框架解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-17/</link>
+      <pubDate>Fri, 12 Jun 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-17/</guid>
+      <description>概要 活动主题：SOFAChannel#17：网络通信框架 SOFABolt 的功能介绍及协议框架解析 活动时间：7 月 2 日周四晚 7 点 活动形式：线上直播 报名方式：戳</description>
+    </item>
+    
+    <item>
+      <title>不得不说的云原生隔离性 | SOFAChannel#16 直播回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-16-retrospect/</link>
+      <pubDate>Fri, 22 May 2020 13:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-16-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 30315793，不错过每场直播</description>
+    </item>
+    
+    <item>
+      <title>分布式链路组件 SOFATracer 埋点机制解析 | SOFAChannel#15 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-15-retrospect/</link>
+      <pubDate>Tue, 28 Apr 2020 18:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-15-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 21992058，不错过每场直播</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#16：不得不说的云原生隔离性</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-16/</link>
+      <pubDate>Tue, 28 Apr 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-16/</guid>
+      <description>概要 活动主题：SOFAChannel#16：不得不说的云原生隔离性 活动时间：5 月 21 日周四晚 7 点 活动形式：线上直播 报名方式：戳这里 介绍 | SOFAChannel &amp;lt;SOFA:Channel/&amp;gt; 有</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#15：分布式链路组件 SOFATracer 埋点机制解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-15/</link>
+      <pubDate>Fri, 17 Apr 2020 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-15/</guid>
+      <description>概要 活动主题：SOFAChannel#15：分布式链路组件 SOFATracer 埋点机制解析 活动时间：4 月 23 日周四晚 7 点 活动形式：线上直播 直播回顾：戳这里 介绍 |</description>
+    </item>
+    
+    <item>
+      <title>云原生网络代理 MOSN 扩展机制解析 | SOFAChannel#14 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-14-retrospect/</link>
+      <pubDate>Thu, 09 Apr 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-14-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 21992058，不错过每场直播</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#14：云原生网络代理 MOSN 的扩展机制解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-14/</link>
+      <pubDate>Fri, 27 Mar 2020 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-14/</guid>
+      <description>概要 活动主题：SOFAChannel#14：云原生网络代理 MOSN 的扩展机制解析 活动时间：4 月 9 日周四晚 7 点 活动形式：线上直播 直播回顾：戳这里 介绍</description>
+    </item>
+    
+    <item>
+      <title>云原生网络代理 MOSN 多协议机制解析 | SOFAChannel#13 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-13-retrospect/</link>
+      <pubDate>Thu, 26 Mar 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-13-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 回顾视频以及 PPT 查看地址见文末。欢迎加入直播互动钉钉群 : 21992058，不错过每场直播</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#13：云原生网络代理 MOSN 的多协议机制解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-13/</link>
+      <pubDate>Mon, 16 Mar 2020 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-13/</guid>
+      <description>概要 活动主题：SOFAChannel#13：云原生网络代理 MOSN 的多协议机制解析 活动时间：3 月 26 日周四晚 7 点 活动形式：线上直播 直播回顾：戳这里 介</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服分布式事务实践解析 | SOFAChannel#12 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-12-retrospect/</link>
+      <pubDate>Thu, 12 Mar 2020 20:30:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-12-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#12 直播分享整理，主题：蚂蚁金服分布式事务实践解析。 回顾视频以及 PPT 查看地址见文末</description>
+    </item>
+    
+    <item>
+      <title>从一个例子开始体验轻量级类隔离容器 SOFAArk | SOFAChannel#11 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-11-retrospect/</link>
+      <pubDate>Wed, 26 Feb 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-11-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#11 直播分享整理，主题：从一个例子开始体验轻量级类隔离容器 SOFAArk。 回顾视</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#12：蚂蚁金服分布式事务实践解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-12/</link>
+      <pubDate>Wed, 12 Feb 2020 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-12/</guid>
+      <description>概要 活动主题：SOFAChannel#12：蚂蚁金服分布式事务实践解析 活动时间：3 月 12 日周四晚 7 点 活动形式：线上直播 直播回顾：戳这里 介绍 | SOFAChannel</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#11：从一个例子开始体验轻量级类隔离容器 SOFAArk</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-11/</link>
+      <pubDate>Fri, 17 Jan 2020 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-11/</guid>
+      <description>概要 活动主题：SOFAChannel#11：从一个例子开始体验轻量级类隔离容器 SOFAArk 活动时间：2 月 13 日周四晚 7 点 活动形式：线上直播 直播回顾：戳这</description>
+    </item>
+    
+    <item>
+      <title>Seata 长事务解决方案 Saga 模式 | SOFAChannel#10 回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-10-retrospect/</link>
+      <pubDate>Thu, 09 Jan 2020 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-10-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#10 直播分享整理，主题：分布式事务 Seata 长事务解决方案 Saga 模式详解。 回顾视频以及 PPT 查看</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#10：分布式事务 Seata 长事务解决方案 Saga 模式详解</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-10/</link>
+      <pubDate>Tue, 31 Dec 2019 12:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-10/</guid>
+      <description>概要 活动主题：SOFAChannel#10：分布式事务 Seata 长事务解决方案 Saga 模式详解 活动时间：1 月 9 日周四晚 7 点 活动形式：线上直播 活动回顾：戳这</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#9：蚂蚁金服 Service Mesh 双十一落地详解</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-9/</link>
+      <pubDate>Tue, 26 Nov 2019 12:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-9/</guid>
+      <description>概要 活动主题：SOFAChannel#9：蚂蚁金服 Service Mesh 双十一落地详解 活动时间：12 月 5 日周四晚 7 点 活动形式：线上直播 直播回看：戳这里 介绍 | SOFAChannel</description>
+    </item>
+    
+    <item>
+      <title>从一个例子开始体验 SOFAJRaft | SOFAChannel#8 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-8-retrospect/</link>
+      <pubDate>Mon, 02 Sep 2019 13:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-8-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#8 直播分享整理，主题：从一个例子开始体验 SOFAJRaft。 回顾视频以及 PPT 查看</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#8：从一个例子开始体验 SOFAJRaft</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-8/</link>
+      <pubDate>Thu, 15 Aug 2019 12:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-8/</guid>
+      <description>概要 活动主题：SOFAChannel#8：从一个例子开始体验 SOFAJRaft 活动时间：8 月 29 日周四晚 7 点 活动形式：线上直播 视频回顾：https://tec</description>
+    </item>
+    
+    <item>
+      <title>自定义资源 CAFEDeployment 的背景、实现和演进 | SOFAChannel#7 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-7-retrospect/</link>
+      <pubDate>Thu, 18 Jul 2019 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-7-retrospect/</guid>
+      <description>本文简单介绍了蚂蚁金服 SOFAStack 的 Kubernetes 自定义资源 CafeDeployment 的开发背景和功能特性。 相关直播视频以及 PPT 查看地址 背景介绍 Kubernetes 原生社区 Deployment 和 StatefulSet 解决了“服务节点版本一致性”</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#7：扩展 Kubernetes 实现金融级云原生发布部署 - 自定义资源 CAFEDeployment 的背景、实现和演进</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-7/</link>
+      <pubDate>Mon, 08 Jul 2019 16:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-7/</guid>
+      <description>概要 活动主题：SOFAChannel#7：扩展 Kubernetes 实现金融级云原生发布部署 - 自定义资源 CAFEDeployment 的背景、实现和演进 活动时间：7 月 18 日周四晚 7 点 活动形式</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服轻量级监控分析系统解析 | SOFAChannel#6 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-6-retrospect/</link>
+      <pubDate>Fri, 28 Jun 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-6-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#6 直播分享整理，主题：轻量级监控分析系统 SOFALookout 原理讲解和功能演示。 回顾视频以及 PPT 查</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#6：轻量级监控分析系统 SOFALookout 原理讲解和功能演示</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-6/</link>
+      <pubDate>Wed, 12 Jun 2019 12:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-6/</guid>
+      <description>概要 活动主题：SOFAChannel#6：轻量级监控分析系统 SOFALookout 原理讲解和功能演示 活动时间：6 月 12 日周四晚 7 点 活动形式：线上直播 直播视频回顾 直</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#5：给研发工程师的代码质量利器 —— 自动化测试框架 SOFAActs</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-5/</link>
+      <pubDate>Wed, 08 May 2019 10:20:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-5/</guid>
+      <description>概要 活动主题：SOFAChannel#5：给研发工程师的代码质量利器 —— 自动化测试框架 SOFAActs 活动时间：5 月 16 日周四晚 7 点 活动形式：线上直播 报名方</description>
+    </item>
+    
+    <item>
+      <title>分布式事务 Seata TCC 模式深度解析 | SOFAChannel#4 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-4-retrospect/</link>
+      <pubDate>Wed, 24 Apr 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-4-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#4 直播分享整理，主题：分布式事务 Seata TCC 模式深度解析。 Seata：https://</description>
+    </item>
+    
+    <item>
+      <title>给研发工程师的代码质量利器 | SOFAChannel#5 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-5-retrospect/</link>
+      <pubDate>Wed, 24 Apr 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-5-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本文根据 SOFAChannel#5 直播分享整理，主题：给研发工程师的代码质量利器 —— 自动化测试框架 SOFAAc</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#4：分布式事务 Seata TCC 模式深度解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-4/</link>
+      <pubDate>Tue, 09 Apr 2019 12:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-4/</guid>
+      <description>概要 活动主题：SOFAChannel#4：分布式事务 Seata TCC 模式深度解析 活动时间：4 月 18 日周四晚 7 点 活动形式：线上直播 直播视频回顾 直播回顾文章 介</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#3：SOFARPC 性能优化（下）—— 手把手带你性能调优（含 Demo）</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-3/</link>
+      <pubDate>Thu, 28 Feb 2019 10:20:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-3/</guid>
+      <description>概要 活动主题：SOFAChannel#3：SOFARPC 性能优化（下）—— 手把手带你性能调优（含 Demo） 活动时间：2 月 28 日周四晚 7 点 活动形</description>
+    </item>
+    
+    <item>
+      <title>SOFARPC 性能优化实践（下）| SOFAChannel#3 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-3-retrospect/</link>
+      <pubDate>Thu, 28 Feb 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-3-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本次是 SOFAChannel 第三期，SOFARPC 性能优化（下），进一步分享 SOFARPC 在性能上做的一些优化。 本期你</description>
+    </item>
+    
+    <item>
+      <title>SOFARPC 性能优化实践（上）| SOFAChannel#2 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-2-retrospect/</link>
+      <pubDate>Mon, 25 Feb 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-2-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 本次是 SOFAChannel 第二期，主要分享 SOFARPC 在性能上做的一些优化，这个系列会分成上下两部分进行分享，今天</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#2：SOFARPC 性能优化（上）—— 详解优化设计点</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-2/</link>
+      <pubDate>Thu, 21 Feb 2019 10:20:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-2/</guid>
+      <description>概要 活动主题：SOFAChannel#2：SOFARPC 性能优化（上）—— 详解优化设计点 活动时间：2 月 21 日周四晚 7 点 活动形式：线上直播 直播视</description>
+    </item>
+    
+    <item>
+      <title>从蚂蚁金服微服务实践谈起 | SOFAChannel#1 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-1-retrospect/</link>
+      <pubDate>Mon, 28 Jan 2019 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-1-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 SOFA:Channel/ 作为 SOFA 所有在线内容的承载，包含直播/音视频教程，集中体现 SOFAStack 的能力全景图。欢迎加入直播</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#1——从蚂蚁金服微服务实践谈起</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-1/</link>
+      <pubDate>Thu, 17 Jan 2019 10:20:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-1/</guid>
+      <description>活动主题：SOFAChannel#1——从蚂蚁金服微服务实践谈起 活动时间：1 月 17 日周四晚 7 点 活动形式：线上直播 直播视频回顾 直播回顾文章 介绍 &amp;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Service Mesh 的下一站是 Sidecarless 吗？ · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Service Mesh 的下一站是 Sidecarless 吗？
+	</h1>
+	<div class="meta">
+		
+			2022-11-29 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b739484118204387bea70b72fdae124a~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜田阳 <em>（花名：烈元）</em></p>
+
+<p>MOSN Maintainer</p>
+
+<p>专注云原生等技术领域</p>
+
+<p>本文<strong>3042</strong>字 阅读 <strong>10</strong> 分钟</p>
+
+<h2 id="1-背景">1. 背景</h2>
+
+<p>Service Mesh 被越来越多的公司认可并实践，在实际落地过程中也遇到了形形色色的问题，同时架构也在持续演进去解决这些问题：有的从初始的 DaemonSet mode 转变为 Sidecar mode，如 Linkerd ；有的从做 CNI 延伸到 Service Mesh 场景， 结合 eBPF 使用 DaemonSet mode，如 Cilium ；如今 Istio 也新增了 Ambient Mesh ，支持 DaemonSet mode 作为其主推模式。</p>
+
+<p>不难看出一个演进趋势就是围绕着是否需要 Sidecar 而展开，那么 Service Mesh 的下一站将会是 Sidecarless 吗？本文将对目前的社区趋势做一个简要分析， 最后也将介绍蚂蚁在这方面的探索和实践。</p>
+
+<h2 id="2-社区趋势">2. 社区趋势</h2>
+
+<h3 id="2-1-cilium">2.1 Cilium</h3>
+
+<p>Cilium[1] 是目前最火的云原生网络技术之一，基于革命性的内核技术 eBPF，提供、保护和观察容器工作负载之间的网络连接。</p>
+
+<p>在 6 月份，Cilium 发布了 1.12 版本，其中发布了 Service Mesh 能力、Sidecarless 架构，它提供了两种模式：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1144f5f261e34b3b96109f84cf0c3d83~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>通过图表我们可以发现：针对 L3/L4 的能力，Cilium 使用内核的 eBPF 直接支持；对于 L7 的部分能力，将使用 DaemonSet 部署的 Envoy 来支持。Cilium 认为大部分能力都不需要 L7 的参与，通过 eBPF 就能满足，所以 Cilium 也称自己为内核级服务网格。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94397c061843411c9cb606d531769e61~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>针对于此 Cilium 也有一个解释，结合应用程序 TCPD 最终被合入 linux kernel 发展为 iptables 为例，认为 Mesh 也应该作为基础能力下沉到 linux kernel 作为网络的基础组件，就类似于 TCP，作为 Linux 的一部分透明地提供的服务。</p>
+
+<p>在当需要 L7 代理能力的时候，会构建 DaemonSet Envoy 处理 L7 的能力。Envoy 也已经有了 Namespace 的初步概念，它们被称为监听器。监听器可以携带单独的配置并独立运行，从而可以支持多租户的配置隔离 <em>(但目前还做不到资源和故障的隔离）</em> 。</p>
+
+<p>Cilium 认为 DaemonSet 相比 Sidecar 最明显的好处就是代理数大大减少，减少资源和管理成本。</p>
+
+<p>可以看出 Cilium Service Mesh 的发展历程是由下而上，从内核层慢慢向业务层扩展自己的服务边界，由 eBPF 来支持服务网络也是有一定的立场因素。但 eBPF 并不是银弹，DaemonSet mode 也是有一些其他的问题，收益和损失都是相对的。</p>
+
+<h4 id="2-2-linkerd">2.2 Linkerd</h4>
+
+<p>当然，Cilium 这个架构也不乏有挑战者，其中来头最大的就是 Linkerd[2] <em>（Service Mesh 概念的提出者）</em> 的创始人 William Morgan ，比较有意思的是 Linkerd 最开始的架构是 DaemonSet mode ，在后面的版本才换成 Sidecar mode ，对于此，作为逆行者的他应该最有发言权。</p>
+
+<p>在 William Morgan 的最新文章[3] 中也客观提出了 eBPF 的一些局限性，为了保证  eBPF  的安全执行而不影响 kernel ，需要通过验证器验证是否有不正确的行为，这就导致 eBPF 的编写存在一定的潜规则，比如不能有无界循环；不能超过预设的大小等，代码的复杂性也就受到了一定限制。所以较复杂的逻辑用 eBPF 来实现也是有较高的成本的。</p>
+
+<p>文章中也提到了 DaemonSet 的一些弊端：</p>
+
+<p><strong>- 资源管理不可评估</strong>：这取决于 K8s 调度多少 Pod 到该 Node；</p>
+
+<p><strong>- 隔离性</strong>：所有应用公用一个 Proxy ，相互影响稳定性；</p>
+
+<p><strong>- 爆炸半径变大</strong>：影响整个 Node 的 Pod 实例；</p>
+
+<p><strong>- 安全问题更复杂</strong>：比如 Proxy 保存有整个 Node 的秘钥。</p>
+
+<p>简而言之，Sidecar 模式继续贯彻了容器级别的隔离保护 —— 内核可以在容器级别执行所有安全保护和公平的多租户调度。容器的隔离仍然可以完美的运行，而 DaemonSet 模式却破坏了这一切，重新引入了争抢式的多租户隔离问题。</p>
+
+<p>当然他也认为 eBPF 可以更好的促进 Mesh 的发展，eBPF+Sidecar 的结合是 Mesh 的未来。</p>
+
+<blockquote>
+<p>我们也比较认可他对于 eBPF 的看法， eBPF 就像是一把瑞士军刀，小巧精湛，作为胶水把各种网络数据面连接起来，提供基础网络能力，比如提供访问加速，透明劫持，网络可观察性等能力。但要开发复杂的业务能力，在实操之后，感觉还是有点力不从心。目前我们团队也正在使用 eBPF 开发 K8s Service 和透明拦截等基础网络能力。</p>
+</blockquote>
+
+<p>William Morgan 的说法看着也不无道理，我们先不急着站队，再来看看 Istio 是怎么做的，看是否会有新的想法~</p>
+
+<h3 id="2-3-istio">2.3 Istio</h3>
+
+<p>在 9 月份，Service Mesh 领域的当家花旦 Istio 毫无征兆的发布了 Ambient Mesh ，并作为自己后续的主推架构，简单来讲就是把数据面从 Sidecar 中剥离出来独立部署，Sidecarless 架构，以彻底解决 Mesh 基础设施和应用部署耦合的问题。</p>
+
+<blockquote>
+<p>比较好奇 Istio 在没有经过社区讨论和落地案例的情况下，是怎样决策笃定这个新的架构方向的呢？</p>
+</blockquote>
+
+<p>Istio 认为 Sidecar mode 存在如下三个问题：</p>
+
+<p><strong>- 侵入性</strong></p>
+
+<p>必须通过修改应用程序的 Kubernetes pod spec 来将 Sidecar 代理 “注入” 到应用程序中，并且需要将 Pod 中应用的流量重定向到 Sidecar 。因此安装或升级 Sidecar 需要重新启动应用 Pod ，这对工作负载来说可能是破坏性的。</p>
+
+<p><strong>- 资源利用不足</strong></p>
+
+<p>由于每个 Sidecar 代理只用于其 Pod 中相关的工作负载，因此必须针对每个 Pod 可能的最坏情况保守地配置 Sidecar 的 CPU 和内存资源。这导致了大量的资源预留，可能导致整个集群的资源利用不足。</p>
+
+<p><strong>- 流量中断</strong></p>
+
+<p>流量捕获和 HTTP 处理 通常由 Sidecar 完成，这些操作的计算成本很高，并且可能会破坏一些实现和 HTTP 协议不完全兼容的应用程序。</p>
+
+<p>Envoy 的创始人也来凑了个热闹，他对 Sidecar 架构也是颇有微词。</p>
+
+<p>我们在落地过程中也是遇到了类似的痛点，比如随着机房规模和应用规模的变大，应用的连接数继续膨胀导致 CPU 和 MEM 资源占用也在持续增加，但这一切都不是应用本身想去关心的。</p>
+
+<p>那么让我们来解开 Ambient Mesh 架构真面目，是怎样来解决 Sidecar mode 的问题， 架构主要提出了分层：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e7251fce10284976a2031f4907ec57ee~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>从图中可以看出，跟 Cilium 有一些类似，这儿的两层数据面都是基于 Envoy 来构建的，Secure Overlay Layer 主要处理 L4 场景，DaemonSet 部署，L7 processing Layer 主要处理 L7 场景，以 gateway 形式通过 Pod 部署，一个应用部署一个 gateway。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4090371414c7457a9138017d984592ca~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>图中的 ztunnel 就是 L4 <em>（DaemonSet 部署）</em> ，waypoint 就是 L7 <em>（Pod 部署）</em> ，L4 和 L7 都是可选的，可以根据业务场景灵活组合，比如没有 L7 的场景，直接就用 L4 即可。</p>
+
+<p>注：图中的 ztunnel 就是L4 *（*DaemonSet<em> 部署）</em> ，waypoint 就是 L7 <em>（Pod 部署）</em> 。</p>
+
+<p>无形之中，Ambient Mesh 架构对 William Morgan 评论中的问题也做了一定的解决和反驳：</p>
+
+<p><strong>- 资源评估</strong></p>
+
+<p>Istio 认为 L4 资源占用少，然后 L7 的资源占用是通过 Pod 部署，可以更好的弹性。</p>
+
+<p><strong>- 隔离性</strong></p>
+
+<p>每个应用都将有一个 L7 集群，相互不影响。</p>
+
+<p><strong>- 爆炸半径</strong></p>
+
+<p>L4 逻辑简单相对比较稳定，L7 独立部署，也只影响自身应用。</p>
+
+<p><strong>- 安全问题</strong></p>
+
+<p>Istio 认为 Envoy 作为被世界上最大的网络运营商使用的久经考验的成熟软件，它出现安全漏洞的可能性远低于与它一起运行的应用程序。DaemonSet 模式下，出现安全问题时的影响范围并不比任何其他依赖每节点密钥进行加密的 CNI 插件差。有限的 L4 攻击面和 Envoy 的安全特性，Istio 觉得这种风险是有限和可以接受的。</p>
+
+<p>针对 William Morgan 提到的 DaemonSet 增加了安全风险，我们也持保留意见，就拿证书场景为例，在没有统一接入层 <em>（南北向接入网关）</em> 这个产品之前 <em>（15 年前，还没有 K8s ）</em> ，应用的 HTTPS 证书和私钥都是放在跟应用一起部署的 Tengine 上，就类似于 Sidecar 模式，但接入层诞生的一个原因恰恰就是为了集中管理证书和私钥来减少安全风险，通过证书和私钥的分离架构，私钥单独存放在更加安全的 key 集群，并且通过 QAT 硬件加速，HTTPS 性能也更加高效。</p>
+
+<p><strong>把 HTTPS 和 L7 服务治理能力从应用空间解耦出来下沉为基础设施，也让我们有更多的机会去做集中的优化和演进，同时也对应用更加透明，那个时代的以应用为中心。</strong></p>
+
+<p><strong>统一接入层和目前 Service Mesh 的 DaemonSet mode 有着不少相似之处，DaemonSet mode 也可以认为是一个东西流量的 Node 接入层。</strong></p>
+
+<p><strong>网络通信作为基础设施，和应用完全解耦后，可以更好的优化和演进，也能更加透明高效的为应用提供相关基础能力，比如网络连接治理，可信身份，链路加密，流量镜像，安全隔离，服务治理等，更好的以应用为中心。</strong></p>
+
+<p>从 Cilium 到 Linkerd，再到 Istio，几大社区相互切磋，归根结底还是大家的业务场景不一样，也或者是立场不一样。在安全性，稳定性，管理成本，资源占用上，总是会有一个侧重点，这是需要根据不同的业务场景去选择，脱离业务场景谈架构，还是比较空洞。</p>
+
+<h2 id="3-下一站">3. 下一站</h2>
+
+<p>没有最好的架构，只有最适合自己的架构，在大家的业务场景，你会选择 Sidecar ，还是 Sidecarless ，你认为的下一站是什么呢？</p>
+
+<p>下周我们即将发布 《降本增效: 蚂蚁在 Sidecarless 的探索和实践》，一起来聊聊蚂蚁在这个方向的探索和演进，期待和大家的交流~</p>
+
+<h2 id="4-引用">4. 引用</h2>
+
+<p>[1]Cilium :</p>
+
+<p><em><a href="https://istio.io/latest/blog/2022/introducing-ambient-mesh/">https://istio.io/latest/blog/2022/introducing-ambient-mesh/</a></em></p>
+
+<p>[2]Linkerd :</p>
+
+<p><em><a href="https://isovalent.com/blog/post/cilium-service-mesh/">https://isovalent.com/blog/post/cilium-service-mesh/</a></em></p>
+
+<p>[3]William Morgan 的最新文章:</p>
+
+<p><em><a href="https://buoyant.io/blog/ebpf-sidecars-and-the-future-of-the-service-mesh">https://buoyant.io/blog/ebpf-sidecars-and-the-future-of-the-service-mesh</a></em></p>
+
+<p><strong>MOSN Star 一下✨：</strong></p>
+
+<p><strong><a href="https://github.com/mosn/mosn">https://github.com/mosn/mosn</a></strong></p>
+
+<h2 id="本周推荐阅读">本周推荐阅读</h2>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247509391&amp;idx=1&amp;sn=95883f61905cc4de15125ffd2183b801&amp;chksm=faa34a55cdd4c3434a0d667f8ed57e59c2fc747315f947b19b23f520786130446b6828a68069&amp;scene=21">蚂蚁集团 Service Mesh 进展回顾与展望</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247514453&amp;idx=1&amp;sn=1a1a3edb14cc1e9f9a2afc2ac1cc939c&amp;chksm=faa3568fcdd4df998340a1cc1dbd0e9c5cc3c762fed1ff2ede263ebc7af86aa4d86bb23fb0e3&amp;scene=21">顺丰科技 Service Mesh：落地半年，最初目标已经实现，将在更多场景进行大规模探索
+</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247499337&amp;idx=1&amp;sn=a0f3965f5989858c7e50763e696c9c53&amp;chksm=faa31193cdd49885045adfce40c76e7cde9b689203845f2f674c24f379c246868d272c8adcbd&amp;scene=21">「网商双十一」基于 ServiceMesh 技术的业务链路隔离技术及实践</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247513902&amp;idx=1&amp;sn=be00c5af2e9775a4039430bf187e16f4&amp;chksm=faa358f4cdd4d1e23d7e9c93b4a94d6e6c377f51eb5e96b6dd5f74b840e48ebd3f518c4bf80a&amp;scene=21">MOSN 反向通道详解</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/tongsuo-supports-the-semi-homomorphic-encryption-algorithm-paillier/">
+		<span class="text">上一篇: </span>
+		<span class="text">Tongsuo 支持半同态加密算法 Paillier</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20221209/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | MOSN v1.3.0 版本发布、公众号半自助投稿、本周 Contributor &amp; QA</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/tongsuo-supports-the-semi-homomorphic-encryption-algorithm-paillier/">Tongsuo 支持半同态加密算法 Paillier</a></li>
+		
+			<li><a href="/sofastack.tech/blog/p2p-transfer-protocol-optimization-in-dragonfly/">Dragonfly 中 P2P 传输协议优化</a></li>
+		
+			<li><a href="/sofastack.tech/blog/container-image-basics/">Nydus | 容器镜像基础</a></li>
+		
+			<li><a href="/sofastack.tech/blog/c-go-mechanism-calling-go-from-c/20221008/">cgo 机制 - 从 c 调用 go</a></li>
+		
+			<li><a href="/sofastack.tech/blog/20220929/">开源项目文档社区化！Tongsuo/铜锁实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

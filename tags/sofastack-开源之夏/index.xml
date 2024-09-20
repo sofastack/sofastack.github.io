@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFAStack 开源之夏 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/</link>
+    <description>Recent content in SOFAStack 开源之夏 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 05 May 2023 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【开源之夏 2023】欢迎报名 SOFAStack 社区项目！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/open-source-promotion-plan-2023-welcome-to-the-sofastack-community-project/</link>
+      <pubDate>Fri, 05 May 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/open-source-promotion-plan-2023-welcome-to-the-sofastack-community-project/</guid>
+      <description>开源之夏是由“开源软件供应链点亮计划”发起并长期支持的一项暑期开源活动，旨在鼓励在校学生积极参与开源软件的开发维护，促进优秀开源软件社区的蓬</description>
+    </item>
+    
+  </channel>
+</rss>

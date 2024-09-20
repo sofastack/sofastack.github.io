@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFATalk on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/categories/sofatalk/</link>
+    <description>Recent content in SOFATalk on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 14 Sep 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/sofatalk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFATalk#1 SOFARegistry 源码解析：推送延迟 trace</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-talk-1/</link>
+      <pubDate>Wed, 14 Sep 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-talk-1/</guid>
+      <description>概要 活动主题：SOFATalk#1 SOFARegistry 源码解析：推送延迟 trace 活动时间：09 月 14 日，周三晚 19 点 活动形式：线上直播 直播回放：点击观看 资料下载：戳这里</description>
+    </item>
+    
+  </channel>
+</rss>

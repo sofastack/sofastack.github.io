@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ServerlessTask on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/serverlesstask/</link>
+    <description>Recent content in ServerlessTask on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 02 Mar 2021 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/serverlesstask/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Serverless 给任务调度带来的变化及蚂蚁集团落地实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/antgroup-serverless-task/</link>
+      <pubDate>Tue, 02 Mar 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/antgroup-serverless-task/</guid>
+      <description>Serverless Task 是蚂蚁集团在分布式调度和批处理中间件发展而来的解决方案。通过 ServiceMesh 的精细化引流能力，再利用研发框架的“服务分组”配置能力，将 Serverless Task 流量全部收敛</description>
+    </item>
+    
+  </channel>
+</rss>

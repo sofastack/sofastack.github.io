@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	一个 go-sql-driver 的离奇 bug · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		一个 go-sql-driver 的离奇 bug
+	</h1>
+	<div class="meta">
+		
+			2023-01-17 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/409616d4418f44baac6f70b88d9b5638~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜郝洪范</p>
+
+<p>京东技术专家</p>
+
+<p>Seata-go 项目共同发起人</p>
+
+<p><em>微服务底层技术的探索与研究。</em></p>
+
+<p>本文 <strong>3482</strong> 字 阅读 <strong>7</strong> 分钟</p>
+
+<blockquote>
+<p>对于 Go CURD Boy 来说，相信 <code>github.com/go-sql-driver/mysql</code> 这个库都不会陌生。基本上 Go 的 CURD 都离不开这个特别重要的库。我们在开发 Seata-go 时也使用了这个库。不过最近在使用 go-sql-driver/mysql 查询 MySQL 的时候，就出现一个很有意思的 bug, 觉得有必要分享出来，以防止后来者再次踩坑。</p>
+</blockquote>
+
+<h2 id="part-1-问题详述">PART. 1 问题详述</h2>
+
+<p>为了说明问题，这里不详述 Seata-go 的相关代码，用一个单独的 demo 把问题详细描述清楚。</p>
+
+<h3 id="1-1-环境准备">1.1 环境准备</h3>
+
+<p>在一个 MySQL 实例上准备如下环境：</p>
+
+<pre><code class="language-Go">CREATE TABLE `Test1` (
+`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE
+CURRENT_TIMESTAMP,  
+-PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+</code></pre>
+
+<p>从这个 SQL 语句中可以看出来， create_time 是 timestamp 类型，这里要特别留意 timestamp 这个类型。</p>
+
+<p>现在插入一条数据，然后查看刚插入的数据的值。</p>
+
+<pre><code class="language-Go">insert into Test1 values (1, '2022-01-01 00:00:00')
+</code></pre>
+
+<p>查看下 MySQL 当前的时区。请记好相关值，草蛇灰线，伏笔于此。</p>
+
+<pre><code class="language-Go"> show VARIABLES like '%time_zone%';
+</code></pre>
+
+<p>查询结果：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d739775fdf842e2af74ac789b0a55cf~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>接下来使用 MySQL unix_timestamp 查看 create_time 的时间戳：</p>
+
+<pre><code class="language-Go">SELECT unix_timestamp(create_time) from Test1 where id = 1;
+</code></pre>
+
+<p>查询结果：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/839249680d864fb8a820c9f82f9b9593~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<h3 id="1-2-测试程序">1.2 测试程序</h3>
+
+<p>有如下 demo 程序，示例使用 go-sql-driver 读取 create_time 的值：</p>
+
+<pre><code class="language-Go">package main
+
+import ( 
+&quot;database/sql&quot; 
+&quot;fmt&quot; 
+&quot;time&quot;
+
+    _ &quot;github.com/go-sql-driver/mysql&quot;
+    )
+    
+func main() {
+var user = &quot;user&quot; 
+var pwd = &quot;password&quot; 
+var dbName = &quot;dbname&quot;
+
+  dsn := fmt.Sprintf(&quot;%s:%s@tcp(localhost:3306)/%stimeout=100s&amp;parseTime=true&amp;interpolateParams=true&quot;, user, pwd, dbName)  
+  db, err := sql.Open(&quot;mysql&quot;, dsn)
+  if err != nil { 
+  panic(err) 
+  } 
+  
+  defer db.Close()
+  rows, err := db.Query(&quot;select create_time 
+  from Test1 limit 1&quot;) 
+  if err != nil {  
+  panic(err)  
+  }  
+  
+  for rows.Next() {  
+  t := time.Time{}   
+  rows.Scan(&amp;t)  
+  fmt.Println(t)   
+  fmt.Println(t.Unix())  }}
+</code></pre>
+
+<p>我们运行个程序会输出下面的结果:</p>
+
+<pre><code class="language-Go">2022-01-01 00:00:00 +0000 UTC1640995200
+</code></pre>
+
+<h3 id="1-3-问题详述">1.3 问题详述</h3>
+
+<p>发现问题所在了吗？有图如下，把结果放在一块，可以详细说明问题。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d56dc98937924c0f9f5bc584d4aa1bcc~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>图中红色箭头指向的两个结果，用 go-sql-driver 读取的结果和在 MySQL 中用 unix_timestamp 获取的结果明显是不一样的。</p>
+
+<h2 id="part-2-问题探案">PART. 2 问题探案</h2>
+
+<p>1.3 小节中最后示图可以看出，数据库中 create_time  的值 <code>2022-01-01 00:00:00</code> 是东八区的时间，也就是北京时间，这个时间对应的时间戳就是 <code>1640966400</code> 。但是 go-sql-driver 示例程序读出来的却是 <code>1640995200</code> ， 这是什么值？这是 0 时区的 <code>2022-01-01 00:00:00</code>。</p>
+
+<p>对问题的直白描述就是：MySQL 的 create_time 是 <code>2022-01-01 00:00:00 +008</code> ，而读取到的是 <code>2022-01-01 00:00:00 +000</code> ，他俩压根就不是一个值。</p>
+
+<p>基本能看出来 bug 是如何发生的了。那就需要剖析下 go-sql-driver 源码，追查问题的根源。</p>
+
+<h3 id="2-1-go-sq-driver-源码分析">2.1 go-sq-driver 源码分析</h3>
+
+<p>这里就不粘贴 <code>&quot;github.com/go-sql-driver/mysql&quot;</code> 的详细源码了，只贴关键的路径。</p>
+
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e937f0d9c3cb4ad89869caf0b785c22a~tplv-k3u1fbpfcp-watermark.image?" alt="image.png" /></p>
+
+<p>Debug 的时候详细关注调用路径中红色的两个方块的内存中的值。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00e1529740d945649ee3025b6c6c7e13~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<pre><code class="language-Go">// https://github.com/go-sql-driver/mysql/blob/master/packets.go#L788-
+L798
+func (rows *textRows) readRow(dest []driver.Value) error {
+
+  // ... 
+  
+  // Parse time field  
+  switch rows.rs.columns[i].fieldType
+  { 
+  case fieldTypeTimestamp, 
+  fieldTypeDateTime,  
+  fieldTypeDate,  
+  fieldTypeNewDate:   
+  if dest[i], err = parseDateTime(dest[i].([]byte), mc.cfg.Loc);
+  err != nil {      return err    }  }}
+</code></pre>
+
+<pre><code class="language-Go">func parseDateTime(b []byte, loc *time.Location) (time.Time, error) {  const base = &quot;0000-00-00 00:00:00.000000&quot;  switch len(b) {  case 10, 19, 21, 22, 23, 24, 25, 26: // up to &quot;YYYY-MM-DD HH:MM:SS.MMMMMM&quot;
+    year, err := parseByteYear(b)
+    month := time.Month(m)
+    day, err := parseByte2Digits(b[8], b[9])
+    hour, err := parseByte2Digits(b[11], b[12])
+    min, err := parseByte2Digits(b[14], b[15])
+    sec, err := parseByte2Digits(b[17], b[18])
+    // https://github.com/go-sql-driver/mysql/blob/master/utils.go#L166-L168    if len(b) == 19 {      return time.Date(year, month, day, hour, min, sec, 0, loc), nil    }  }}
+</code></pre>
+
+<p>从这里基本上就能明白，go-sql-driver 把数据库读出来的 create_time timestamp 值当做一个字符串，然后按照 MySQL timestamp 的标准格式 &ldquo;0000-00-00 00:00:00.000000&rdquo; 去解析，分别得到 <code>year, month, day, hour, min, sec</code>。最后依赖传入 time.Location 值，调用 Go 系统库 time.Date() 再去生成对应的值。</p>
+
+<p>这里表面看起来没有问题，其实这里严重依赖了传入的 time.Location。这个 time.Location 是如何得到的呢？进一步阅读源码，可以明显的看出来，是通过解析传入的 DSN 的 Loc 获取。</p>
+
+<p>其中关键代码是：<em><a href="https://github.com/go-sql-driver/mysql/blob/master/dsn.go#L467-L474">https://github.com/go-sql-driver/mysql/blob/master/dsn.go#L467-L474</a></em> 。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9d500656c7c4fbdb8679d7ea2ad1a5b~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>如果传入的 DSN 串不带 Loc 时，Loc 就是默认的 UTC 时区。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/956f149d288a43dcbed58198ab46efd2~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<h3 id="2-2-抽丝剥茧">2.2 抽丝剥茧</h3>
+
+<p>回头看开头的程序，初始化 go-sql-driver 的 DSN 是 <code>user:password@tcp(localhost:3306)/dbname?timeout=100s&amp;parseTime=true&amp;interpolateParams=true</code>，该 DSN 里面并不包含 Loc 信息，go-sql-driver 用使用了默认的 UTC 时区。然后解析从 MySQL 中获取的 timestamp 字段了，也就用默认的 UTC 时区去生成 Date，结果也就错了。</p>
+
+<p>因此，问题的主要原因是：go-sql-driver 并没有按照数据库的时区去解析 timestamp 字段，而且依赖了开发者生成的 DSN 传入的 Loc。当开发者传入的 Loc 和数据库的 time_Zone 不匹配的时候，所有的 timestamp 字段都会解析错误。</p>
+
+<p>有些人可能有疑问，如果 go-sql-driver 为什么不直接使用 MySQL 的时区去解析 timestamp 呢？</p>
+
+<p>我们已经提了一个 issue，商讨更好的解决方案：*<a href="https://github.com/go-sql-driver/mysql/issues/1379">https://github.com/go-sql-driver/mysql/issues/1379</a>*。</p>
+
+<h3 id="part-3-最后结论">PART. 3 最后结论</h3>
+
+<p>在 MySQL 中读写 timestamp 类型数据时，有如下注意事项：</p>
+
+<ol>
+<li><p>默认约定：写入 MySQL 时间时，把当前时区的时间转换为 UTC + 00:00（世界标准时区）的值，读取后在前端展示时再次进行转换；</p></li>
+
+<li><p>如果不愿意使用默认约定，在现阶段使用 go-sql-driver 的时候，一定要特别注意，需要在 DSN 字符串加上 &ldquo;loc=true&amp;time_zone=*&rdquo; , 和数据的时区保持一致，不然的话就会导致 timestamp 字段解析错误。</p></li>
+</ol>
+
+<p><strong>| 参考文档 |</strong></p>
+
+<p>《The date, datetime, and timestamp Types》 </p>
+
+<p><em><a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html">https://dev.mysql.com/doc/refman/8.0/en/datetime.html</a></em></p>
+
+<p>《MySQL 的 timestamp 会存在时区问题？》</p>
+
+<p><em><a href="https://juejin.cn/post/7007044908250824741">https://juejin.cn/post/7007044908250824741</a></em></p>
+
+<p>《Feature request: Fetch connection time_zone automatically》</p>
+
+<p><em><a href="https://github.com/go-sql-driver/mysql/issues/1379">https://github.com/go-sql-driver/mysql/issues/1379</a></em></p>
+
+<p><strong>社区讨论群</strong></p>
+
+<p>细节处见真章，</p>
+
+<p>Seata-go 社区认认真真做开源，</p>
+
+<p>做对用户负责任的高质量的项目。</p>
+
+<p><strong>了解更多&hellip;</strong></p>
+
+<p><strong>Seata Star 一下✨：</strong></p>
+
+<p><strong><a href="https://github.com/seata/seata-go">https://github.com/seata/seata-go</a></strong></p>
+
+<p><strong>本周推荐阅读</strong></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247516247&amp;idx=1&amp;sn=f57bb355cef6b823a32cd8b30c0b53ee&amp;chksm=faa36f8dcdd4e69b91a9231330f82af5558de9349425b97e2e88e6fb3f8b33845d93af156fb1&amp;scene=21">Seata AT 模式代码级详解</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247512945&amp;idx=1&amp;sn=006cc63f41c96a73b60ea7a11477310d&amp;chksm=faa35cabcdd4d5bd910d44550bda12642de3baa61eea1a7c966387d53ca62afa63cc9f76ad66&amp;scene=21">蚂蚁集团境外站点 Seata 实践与探索</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247512283&amp;idx=2&amp;sn=179ef79e922a7c7475d5db288c9af96d&amp;chksm=faa35f01cdd4d617ec9a818bdbe65b3581fa91e2f4b6162551bbacb93c11c0aef211bae8195e&amp;scene=21">Seata 多语言体系建设</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247515039&amp;idx=1&amp;sn=e6068fc1b925e71eb8550c8c41296c6d&amp;chksm=faa35445cdd4dd53b450c96f6077b161026a62e451c7c4b8288364b137b3786bbe3d5ea0340a&amp;scene=21">Seata-php 半年规划</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220113/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | 铜锁探「密」、本周贡献 &amp; issue 精选</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-special-weekly/">
+		<span class="text">下一篇: </span>
+		<span class="text">Special Weekly | 瑞兔送福，Live Long and Prosper</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/nerdctl-natively-supports-nydus-accelerated-mirroring/">Nerdctl 原生支持 Nydus 加速镜像</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofaregistry-talk-about-the-data-consistency-of-service-discovery/">SOFARegistry | 聊一聊服务发现的数据一致性</a></li>
+		
+			<li><a href="/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/">SOFARegistry | 聊一聊服务发现的数据一致性</a></li>
+		
+			<li><a href="/sofastack.tech/blog/nydus-mirror-scan-acceleration/">Nydus 镜像扫描加速</a></li>
+		
+			<li><a href="/sofastack.tech/blog/dragonfly-and-nydus-mirror-mode-integration-practice/">Dragonfly 和 Nydus Mirror 模式集成实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

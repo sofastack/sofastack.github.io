@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	终于！SOFATracer 完成了它的链路可视化之旅 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		终于！SOFATracer 完成了它的链路可视化之旅
+	</h1>
+	<div class="meta">
+		
+			2021-10-19 ·
+			
+				<a href="https://github.com/sofastack">赵陈</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>📄</p>
+
+<p>文｜赵陈（SOFA 开源之夏链路项目组)</p>
+
+<p>武汉理工大学计算机工程硕士在读</p>
+
+<p>研究方向：唐卡线稿的自动上色</p>
+
+<p>校对｜宋国磊（SOFATracer commiter)</p>
+
+<p>本文 6971 字 阅读 18 分钟</p>
+
+<p>▼</p>
+
+<h2 id="背-景">背 景</h2>
+
+<p>有幸参与开源软件供应链点亮计划——暑期 2021 支持的开源项目，目前 SOFATracer 已经能够将埋点数据上报到 Zipkin 中，本项目的主要目标是将产生的埋点数据上报给 Jaeger 和 SkyWalking 中进行可视化展示。</p>
+
+<h2 id="part-1-sofatracer">PART. 1 SOFATracer</h2>
+
+<p>SOFATracer 是蚂蚁集团基于 OpenTracing 规范开发的分布式链路跟踪系统，其核心理念就是通过一个全局的 TraceId 将分布在各个服务节点上的同一次请求串联起来。通过统一的 TraceId 将调用链路中的各种网络调用情况以日志的方式记录下来，以达到透视化网络调用的目的，这些链路数据可用于故障的快速发现，服务治理等。</p>
+
+<p>SOFATracer 提供了异步落地磁盘的日志打印能力和将链路跟踪数据上报到开源产品 Zipkin 做分布式链路跟踪展示的能力。这次参加开源之夏活动的任务是要把链路跟踪数据上报到 Jaeger 和 SkyWalking 中进行展示。</p>
+
+<h3 id="sofatracer-数据上报">SOFATracer 数据上报</h3>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*Mg8STYZRA6UAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>上图是 SOFATracer 中的链路上报流程，Span#finish 是 span 生命周期的最后一个执行方法，这是整个数据上报的入口，SOFATracer 的 report span 方法中含有上报链路展示端和日志落盘两个部分。SOFATracer 中没有把上报数据采集器和日志落盘分开只是在日志落盘之前调用 SOFATracer#invokeReporListeners 方法，找到系统中所有实现了 SpanReportListener 接口并加入了 SpanReportListenersHolder 的实例，调用其 onSpanReport 方法完成链路数据上报至数据采集器。下面的代码片段是 invokeReportListeners 方法的具体实现。</p>
+
+<pre><code class="language-python"> protected void invokeReportListeners(SofaTracerSpan sofaTracerSpan) {
+    List&lt;SpanReportListener&gt; listeners = SpanReportListenerHolder
+        .getSpanReportListenersHolder();
+    if (listeners != null &amp;&amp; listeners.size() &gt; 0) {
+        for (SpanReportListener listener : listeners) {
+            listener.onSpanReport(sofaTracerSpan);
+        }
+    }
+}
+</code></pre>
+
+<p>SpanReportListenerHolder 中的实例在项目启动的时候加入，且分为 Spring Boot 应用和 Spring 应用两种情况：</p>
+
+<ul>
+<li><p>在 Spring Boot 应用中自动配置类 SOFATracerSpanRemoteReporter 会将当前所有 SpanReportListener 类型的 bean 实例保存到 SpanReportListenerHolder 的 List 对象中。SpanReportListener 的实例对象会在各自的 AutoConfiguration 自动配置类中注入到 IOC 容器中。</p></li>
+
+<li><p>在 Spring 应用中通过实现 Spring 提供的 bean 生命周期接口 InitializingBean，在 afterPropertiesSet 方法中实例化 SpanReportListener 的实例对象并且加入到 SpanReportListenerHolder 中。</p></li>
+</ul>
+
+<p>要实现把 SOFATracer 中的 trace 数据上传到 Jaeger 和 SkyWalking 需要实现 SpanReportListener 接口并在应用启动的时候把对应实例加入到 SpanReportListenersHolder 中。</p>
+
+<h2 id="part-2-jaeger-数据上报">PART. 2 Jaeger 数据上报</h2>
+
+<p>下图是 Jaeger 中数据上报的部分图示，图中 CommandQueue 中存放的是刷新或添加指令，生产者是采样器和 flush 定时器，消费者是队列处理器。采样器判断一个 span 需要上报后向 CommandQueue 中添加一个 AppendCommand，flush 定时器根据设置的 flushInterval 不断向队列中添加 FlushCommand，队列处理器不断从 CommandQueue 中读取指令判断是 AppendCommand 还是 FlushCommand，如果刷新指令把当前 byteBuffer 中的数据发送到接受端，如果是添加指令把这个 span 添加到 byteBuffer 中暂存。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*yXSOQIb_JOYAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>在实现上报到 Jaeger 过程中主要工作是 Jaeger Span 和 SOFATracer Span 模型的转换，转换过后利用上面的逻辑发送 span 到后端。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*DbJ9RIcogPYAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>上图是 Jaeger 中 Sender 的 UML 图，从图中可以看到有两种类型的 Sender 分别是 HTTPSender 和 UDPSender 。分别对应用 HTTP 发送数据和 UDP 发送数据，在实现 SOFATracer 上报 Jaeger 中使用 UDPSender 发送 span 数据到 Jaeger Agent 中，使用 HTTPSender 直接发送数据到 Jaeger-Collector 中。</p>
+
+<h3 id="jaeger-span-与-sofatracer-span-模型的转换">Jaeger Span 与 SOFATracer Span 模型的转换</h3>
+
+<h4 id="模型转换对照">模型转换对照</h4>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*O2SoSpJO_xYAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<h4 id="traceid-和-spanid-的处理">TraceId 和 SpanId 的处理</h4>
+
+<p>TraceId 的转换：</p>
+
+<ul>
+<li>问题在 SOFATracer 中的 TracerId 的产生规则是：服务器 IP + ID 产生的时间 + 自增序列 + 当前进程号</li>
+</ul>
+
+<blockquote>
+<p>例如 ：0ad1348f1403169275002100356696 前 8 位 0ad1348f 即产生 TraceId 的机器的 IP，这是一个十六进制的数字，每两位代表 IP 中的一段，我们把这个数字，按每两位转成 10 进制即可得到常见的 IP 地址表示方式 10.209.52.143，您也可以根据这个规律来查找到请求经过的第一个服务器。后面的 13 位 1403169275002 是产生 TraceId 的时间。之后的 4 位 1003 是一个自增的序列，从 1000 涨到 9000，到达 9000 后回到 1000 再开始往上涨。最后的 5 位 56696 是当前的进程 ID，为了防止单机多进程出现 TraceId 冲突的情况，所以在 TraceId 末尾添加了当前的进程 ID。——TraceId 和 SpanId 生成规则</p>
+</blockquote>
+
+<p>在 SOFATracer 中 TraceId 是 String 类型，但是在 Jaeger 中 TraceId 是使用的两个 Long 型的整数来构成最终的 TraceId。</p>
+
+<h4 id="解决方案">解决方案</h4>
+
+<p>在 Jaeger 中表示 TraceId 的是 TraceIdHigh 与 TraceIdLow 在内部再使用函数将两者转换成 String 类型的 TraceIdAsString 在拼接的过程中分别将两个 ID 转换为对应的 HexString，当  HexString 不够 16 位时头部加 0。</p>
+
+<pre><code class="language-private">    StringBuilder builder = new StringBuilder(desiredLength);
+    int offset = desiredLength - id.length();
+
+    for (int i = 0; i &lt; offset; i++)
+        builder.append('0');
+    builder.append(id);
+    return builder.toString();
+}
+</code></pre>
+
+<h4 id="spanid-的转化">SpanId 的转化</h4>
+
+<ul>
+<li><p>问题在 Jaeger 中 SpanId 是 Long 型整数，在 SOFATracer 中是 String 类型。</p></li>
+
+<li><p>解决办法这个问题的解决办法同之前已有的转化为 Zipkin 中的 SpanId 的解决办法一样，也是使用 FNV Hash 将 String 映射成冲突较小的 Long 型。</p></li>
+</ul>
+
+<h3 id="两种上传方式">两种上传方式</h3>
+
+<h4 id="配合-jaeger-agent">配合 Jaeger Agent</h4>
+
+<blockquote>
+<p>The Jaeger agent is a network daemon that listens for spans sent over UDP, which it batches and sends to the Collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the Collectors away from the client.</p>
+</blockquote>
+
+<p>Jaeger Agent 被设计成一种基本组件部署到主机上，能够将路由和发现 Collector 的任务从 client 中抽离出来。Agent 只能接受通过 UDP 发送的 Thrift 格式的数据，所以要使用 Jaeger Agent 需要使用 UDPSender。</p>
+
+<h4 id="使用-http-协议上报-collector">使用 HTTP 协议上报 Collector</h4>
+
+<p>当使用 UDP 上报到 Jaeger Agent 的时候为了保证数据不在传输过程中丢失应该把 Jaeger Agent 部署在服务所在的机器，但是有的情况不能满足前述要求，这时可以使用 HTTP 协议直接发送数据到 Collector，这时使用 HTTPSender。</p>
+
+<h2 id="part-3-skywalking-数据上报">PART. 3 SkyWalking 数据上报</h2>
+
+<p>SkyWalking 是分布式系统的应用程序性能监视工具，专为微服务、云原生架构和基于容器架构而设计，提供分布式追踪、服务网格遥测分析、度量聚合和可视化的一体化解决方案。SkyWalking 采用字节码注入的方式实现代码的无侵入，且性能表现优秀。SkyWalking 的 receiver-trace 模块可以通过 gRPC 和 HTTPRestful 服务接受 SkyWalking 格式的 trace 数据，在实现上报 SkyWalking 中选择的上报方式是通过 HTTPRestful 服务上报。</p>
+
+<p><strong>模型转换对照</strong></p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*CuTTQpIuL98AAAAAAAAAAAAAARQnAQ" alt="" /></p>
+</blockquote>
+
+<h3 id="segmentid-spanid-patentspanid-的转换">SegmentId、SpanId、PatentSpanID 的转换</h3>
+
+<p>SOFATracer 中的 SpanId 是一个字符串，但是在 SkyWalking 中 SpanId 和 ParentSpanId 是一个 int 整数并且每一个 segment 中的 SpanId 都是从 0 开始编号，SpanId 最大值由配置的一个 segment 中最多有多少 span 指定。在转换过程中需要指定 SpanId，因为现在每一个 segment 中只有一个 span，所以转换生成的 segment 中的 span 的 ID 可以固定成 0。</p>
+
+<p>SegmentId 是用来唯一标识一个 segment 的，如果 segmentId 相同前一个 segment 会被后面的 segment 覆盖导致 span 丢失。最后使用的 segmentId 的构造方式是 segmentId = traceId + SpanId 哈希值 + 0/1，其中 0 和 1 分别代表 server 和 client。最后需要加上 client 和 server 的原因是在 Dubbo 和 SOFARPC 中存在 server -&gt; server 的情况，其中 RPC 调用的 client、server span 的 SpanId 和 parentId 都一样，需要以此来区分它们，否则 client 端的 span 会被覆盖。</p>
+
+<h3 id="dubbo-与-sofarpc-的处理">Dubbo 与 SOFARPC 的处理</h3>
+
+<p>基本的模型是 client-server-client-server-. 这种模式，但是在 Dubbo 和 SOFARPC 中存在 server -&gt; server 的情况，其中 client span、server span 两个 span 除了 kind 类型不同之外，其他的信息是一样。</p>
+
+<ul>
+<li><strong>parentSegmentId</strong></li>
+</ul>
+
+<p>要找出 parentSegmentId，在非 SOFARPC 和 Dubbo 情况下，遵循 server -&gt; client， client -&gt; server 也就是 client 的父 spa 只能是 server 类型的，server 类型的父 span 只能为空或 client 类型。转换方式是在 SOFARPC 和 Dubbo 中，根据使用 SkyWalking Java Agent 上报时两者的链路展示情况，转化按照：</p>
+
+<p>server span：parentSegmentId = traceId + parentId 哈希值 + client(1)</p>
+
+<p>client span：parentSegmentId = traceId + parentId 哈希值 + server(0)</p>
+
+<p>server span：parentSegmentId = traceId + spanId 哈希值 + client(1)</p>
+
+<p>client span ：parentSegmentId = traceId + parentId 哈希值 + server(0)</p>
+
+<ul>
+<li><strong>字段和 networkAddressUsedAtPeer 字段</strong>:</li>
+</ul>
+
+<p><strong>Peer 字段</strong></p>
+
+<p>在 Dubbo 中 Peer 字段可以通过 remote.host、remote.port 两个 tag 组成 SOFARPC 中在 remote.ip 中包含了 IP 和 port，只使用 IP，因为在 server 端上报的 span 中无法获得 client 使用的是自己的哪个端。</p>
+
+<p><strong>networkAddressUsedAtPeerDubbo</strong></p>
+
+<p>可以通过 local.host、local.port 组成 SOFARPC 中不能直接从 span 中获取到本机的 IP，使用的是获取本机的第一个有效 IPv4 地址，但是没有端口号，所以在上面的 peer 字段中也只用了 IP。</p>
+
+<h3 id="展示拓扑图">展示拓扑图</h3>
+
+<p>在构建链路的过程中几个比较关键的字段是 peer、networkAddressUsedAtPeer 、parentService、parentServiceInstance、parentEndpoint。其中 Peer 和 networkAddressUsedAtPeer 分别表示对端地址以及 client 端调用当前实例使用的地址，这两个字段的作用是将链路中的实例连接起来，如果这两个字段缺失会导致链路断开，在转换过程中这两个字段通过在 span 的 tag 中寻找或获取本机第一个合法的 IPv4 地址获得。后三个字段的作用是指出对应的父实例节点，如果不设置这三个字段会产生一个空的实例信息，如下图所示。目前 SOFATracer 中在能在上下文中传播的只有 TraceIdSpanId、parentId、sysBaggage、bizBaggage 从其中无法得到以上的三个字段，为了能展示拓扑图在 SOFATracer 的上下文中增加了七个字段 service、serviceInstance、endpoint、parentService、parentServiceInstance、parentEndpoint、peer 这样就能够在转换的过程中获得父服务的相关信息。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*_IeiRIIUV3QAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<h3 id="异步上传">异步上传</h3>
+
+<p>使用 HTTP 上报 Json 格式的 segment 数据到后端，上报时以 message 为单位，多个 segment 组合成一个 message。</p>
+
+<p>流程如下图，span 结束后将转换好的 segment 加入到 segment 缓冲数组中，另一个线程不断到数组中刷新数据到 message，当 message 的大小达到最大值或等待发送的时间达到设定值就发送一次数据，设置的 message 最大默认为 2MB。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*_IeiRIIUV3QAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<h2 id="part-4-压-测">PART. 4 压 测</h2>
+
+<h3 id="测试配置">测试配置</h3>
+
+<ul>
+<li><p>Windows 10</p></li>
+
+<li><p>Memory 16G</p></li>
+
+<li><p>Disk 500GB SSD</p></li>
+
+<li><p>Intel&reg; Core&trade; i7-7700HQ CPU @2.80GHz  2.80GHz</p></li>
+</ul>
+
+<h3 id="测试方式">测试方式</h3>
+
+<p>部署一个包含六个服务的调用链路。设置三组对照：</p>
+
+<ul>
+<li><p>不采集 span</p></li>
+
+<li><p>50% 采集</p></li>
+
+<li><p>全量采集</p></li>
+</ul>
+
+<h3 id="jaeger-测试结果">Jaeger 测试结果</h3>
+
+<p>测试中相关的几个参数设置如下：</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*XudqRaAG44sAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<h4 id="jaeger-agent-方式">Jaeger Agent 方式</h4>
+
+<p><strong>全量采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*-S94QohKzBwAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>50% 采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*tY6nTatUwJQAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>不采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*UMeERop_3DUAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<h4 id="上报-jaeger-collector">上报 Jaeger Collector</h4>
+
+<p><strong>全量采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*oKcwQKzqMyEAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>50%采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*Pb-2RISuTmkAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>不采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*uqB4RIFn5mAAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<h3 id="skywalking-测试结果">SkyWalking 测试结果</h3>
+
+<p><strong>全集采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*Yj_9T4_Ic-UAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>50% 采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*FVj2QL-sGaYAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>不采集</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*KmlQQYSKHMgAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p><strong>测试小结</strong></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*3cfZSYRvFGcAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+
+<p>在全采样时三种上报方式中上报 SkyWalking 的本机吞吐率是最低的只有 512.75/sec，相比于上报 Jaeger Agent 吞吐率下降了约 14%，相比于上传 Jaeger Agent 吞吐率减少了 11.89%。就每种方式对比全采样与不采样时吞吐率的变化：上报 Jaeger Agent 时因为全采样吞吐率下降了 14.6%，上报 Jaeger Collector 时因为全采样吞吐率下降了 17%，上报 SkyWalking 时因为全采样吞吐率下降了约 23%。</p>
+
+<p>本次介绍的 SOFATracer 的链路可视化，将会在下个版本 release。</p>
+
+<p>-</p>
+
+<p><strong>「收获」</strong></p>
+
+<p>很幸运能够参加这次的开源之夏活动，在阅读 SOFATracer 源码的过程中学习了很多优秀的设计思想与实现方式，实现的过程中会去模仿一些源码的实现方式在这个过程中自己学习到了很多。在项目实施过程中也发现了自己的一些问题，比如在解决问题时有一点思路就开始做，没有深挖这个思路是否可行，这个坏习惯浪费了许多时间。这是我第一次参与到开源社区的相关活动中，在这个过程中了解了开源社区的运作方式，在以后的学习过程中会更加努力提高自己的代码能力，争取能为开源社区做出一点贡献。</p>
+
+<p>特别感谢感谢宋国磊老师对我的耐心指导，在项目过程中宋老师帮助我解开了很多疑惑，学到很多东西，感谢 SOFAStack 社区在整个过程中对我的诸多帮助，感谢活动主办方提供的平台。</p>
+
+<p>-</p>
+
+<p><strong>「参考资料」</strong></p>
+
+<ol>
+<li><p>蚂蚁集团分布式链路跟踪组件 SOFATracer 数据上报机制和源码分析 | 剖析</p></li>
+
+<li><p>使用 SkyWalking 实现全链路监控</p></li>
+
+<li><p>Zipkin-SkyWalking Exporter</p></li>
+
+<li><p>STAM：针对大型分布式应用系统的拓扑自动检测方法</p></li>
+</ol>
+
+<h3 id="本周推荐阅读">本周推荐阅读</h3>
+
+<ul>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247495579&amp;idx=1&amp;sn=67d0abc1c513ba4f815550d235b7a109&amp;chksm=faa30041cdd489577c0e3469348ebad2ab2cc12cdfebca3a4f9e8dcd5ba828a76f500e8c0115&amp;scene=21">攀登规模化的高峰 - 蚂蚁集团大规模 Sigma 集群 ApiServer 优化实践</a></p></li>
+
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247495260&amp;idx=1&amp;sn=a56b0f82159e551dec4752b7290682cd&amp;chksm=faa30186cdd488908a73792f9a1748cf74c127a792c5c484ff96a21826178e2aa35c279c41b3&amp;token=1376607701&amp;lang=zh_CN#rd">SOFAJRaft 在同程旅游中的实践</a></p></li>
+
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247495808&amp;idx=1&amp;sn=88246170520e1e3942f069a559200ea4&amp;chksm=faa31f5acdd4964c877ccf2a5ef27e3c9acd104787341e43b2d4c01bed01c91f310262fb0ec4&amp;scene=21">蚂蚁集团技术风险代码化平台实践（MaaS）</a></p></li>
+
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247495694&amp;idx=1&amp;sn=0e2d5b03ac7320e8d1bcca3d547fdee8&amp;chksm=faa31fd4cdd496c2d646e1c651b601fab83acfb5f4361ca340cde0b029b78e9c894ccb094107&amp;scene=21">下一个 Kubernetes 前沿：多集群管理</a></p></li>
+</ul>
+
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/337fd10f-76f2-4e08-b25f-3d23e3510cb9.webp" alt="" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211015/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | QA 整理、SOFAStack&amp;MOSN 新手任务</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/a-new-generation-of-log-based-systems-in-sofajraft/">
+		<span class="text">下一篇: </span>
+		<span class="text">新一代日志型系统在 SOFAJRaft 中的应用</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/sofa-weekly-20211015/">SOFA Weekly | QA 整理、SOFAStack&amp;MOSN 新手任务</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ant-group-technical-risk-coding-platform-in-practice-maas/">蚂蚁集团技术风险代码化平台实践（MaaS）</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofa-weekly-20211008/">SOFA Weekly | Layotto 本周 Contributor、QA 整理、Layotto 发布新版本</a></li>
+		
+			<li><a href="/sofastack.tech/blog/next-kubernetes-frontier-multi-cluster-management/">下一个 Kubernetes 前沿：多集群管理</a></li>
+		
+			<li><a href="/sofastack.tech/blog/climbing-to-the-top-of-scale-ant-groups-large-scale-sigma-cluster-apiserver-optimization-in-practice/">攀登规模化的高峰 - 蚂蚁集团大规模 Sigma 集群 ApiServer 优化实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

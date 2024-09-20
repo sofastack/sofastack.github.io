@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Summer 2021 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/categories/summer-2021/</link>
+    <description>Recent content in Summer 2021 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 24 May 2021 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/summer-2021/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>“开源之夏” SOFAStack 社区 9 个项目任务上线，学生申请正式开始！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/summer-2021-of-open-source-promotion-plan/</link>
+      <pubDate>Mon, 24 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/summer-2021-of-open-source-promotion-plan/</guid>
+      <description>警告警告⚠️暑期即将到来， 在暑期到来之前你有没有考虑过这样一个问题？ 那就是这个夏天怎么过？ 我相信你读完问题后脑海里浮现出了 N 多个想法，我相信</description>
+    </item>
+    
+  </channel>
+</rss>

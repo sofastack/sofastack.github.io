@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	SOFAJRaft 在同程旅游中的实践 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		SOFAJRaft 在同程旅游中的实践
+	</h1>
+	<div class="meta">
+		
+			2021-09-21 ·
+			
+				<a href="https://github.com/sofastack">赵延</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>文｜<strong>赵延</strong>（SOFAJRaft Committer)</p>
+
+<p>校对｜<strong>冯家纯</strong>（SOFAJRaft Committer)</p>
+
+<p>本文 <strong>15717</strong> 字 阅读 <strong>23</strong> 分钟</p>
+
+<p>▼</p>
+
+<p><strong>同程艺龙</strong>作为对 Raft 研究较早的公司，早在 14 年算法的 paper 刚发布的时候，便已经对其进行了调研。同时也与 paxos 、zab 等算法进行了详细的对比，并在公司内部的计数器、任务调度元信息存储等场景进行试点。</p>
+
+<p>不过早期对于 Raft 的尝试较多的是在 C++ 技术栈试水，在 Java 技术栈里却很少有涉及。</p>
+
+<p>近期刚好有基于 etcd 的老项目由于需要自定义的数据结构需要重构，原有的 etcd 无法在底层数据结构层面满足需求，因此决定<strong>采用 Java 技术栈结合开源项目</strong> <strong>SOFAJRaft 进行底层数据存储的开发</strong>，以期解决多节点数据强一致的问题。</p>
+
+<p>本文假设读者对 Raft 及强一致的概念已经有了较深的理解，详细介绍了<strong>公司内部如何使用 *<em>JRaft*</em> 的进行老系统的改造以及使用过程中遇到的工程问题</strong>，希望其他对 Raft 有兴趣的同学可以一起讨论。</p>
+
+<p><strong><em>PART. 1</em></strong></p>
+
+<p><strong>背 景</strong></p>
+
+<p>公司内部原本存在一个系统 <strong>mdb</strong> (metadata database)，go 语言编写，用于管理所有的实例元数据信息，元数据的内容就是一个 map。</p>
+
+<p>该组件提供对元数据增删改查的接口，并且使用  go 语言编写，在检索数据时引入了 K8s selector 的包，使用 K8s selector 的解析规则筛选特定标签的元数据信息。</p>
+
+<p>数据持久化则是实用了强一致组件 etcd 进行存储，key 为元数据的 ID，保证唯一，value 为具体的元信息，包含各个标签以及对应的值。</p>
+
+<p>该系统大体架构如图 -1 所示:</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*21YqTpZXf_kAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+</blockquote>
+
+<p>图-1：原来的架构</p>
+
+<p><strong><em>「该架构的弊端」</em></strong></p>
+
+<ol>
+<li><p>每隔一段时间需要去拉取 etcd 的全量数据，担心单次请求数据量太大的情况，对数据 ID 进行了 hash 分片，依次获取每个分片下个 key，再通过 key 去获取 value，导致 etcd 的查询频率非常高。</p></li>
+
+<li><p>非 ID 查询条件的一致性查询，和上面的问题一样，也需要做拉取全量数据的操作。</p></li>
+
+<li><p>更新删除操作也是一样，需要拉取全量数据再操作。</p></li>
+</ol>
+
+<p>分析以上问题可以发现，使用 etcd 作为强一致存储，但 etcd 是基于 KV 存储的组件，并且解析组件 mdb 和 etcd 是分离的，在需要保证数据最新的情况下，必须得去 etcd 拿最新的数据到本地再进行操作。</p>
+
+<p>而 etcd 基于 KV，就得拿到 etcd 的全量数据都给拉到本地后再做操作。</p>
+
+<p>如果有一个组件，提供强一致的存储能力，又能直接去解析 K8s selector 的规则，存储的数据结构和元数据信息更加亲和，那么中间的那一层 mdb 就可以直接去掉了，由这个组件来解析对应的 crud 规则，将解析过后的规则直接在本地查询，那么以上问题就能够直接解决了。</p>
+
+<p><strong><em>PART. 2</em></strong></p>
+
+<p><strong>改 造</strong></p>
+
+<p>基于以上问题，我们准备自己开发一个强一致存储的组件，能够自己解析 K8s selector 的规则，并且将数据保存在自己本地。</p>
+
+<p>因为个人对 Java 语言比较了解，并且之前使用 Nacos 时，对 SOFAJRaft 也有一定了解，最终选择了 SOFAJRaft 来构建强一致存储组件，将它命名为 <strong>mdb-store</strong>。</p>
+
+<p><strong><em>主要改造点：</em></strong></p>
+
+<ol>
+<li><p>使用 SOFAJRaft 编程模型构建业务状态机，业务状态机中根据 Raft log 中的 data 类型，进行 crud 的操作。</p></li>
+
+<li><p>mdb-store 提供与原来 mdb 相同的 api，让改造对用户透明，改造完成后只需要切换域名对应的实例即可。</p></li>
+
+<li><p>迁移 K8s selector 的解析逻辑，这里用 Java 写了一套和 go 版本 K8s selector 一样解析逻辑的组件 K8s-selector-Java。</p></li>
+</ol>
+
+<p>改造过后的架构如图-2所示:</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/db254f89-b153-42f4-9de9-539ece66bb21.webp" alt="" /></p>
+</blockquote>
+
+<p>图-2：重构后的架构</p>
+
+<p>通过改造过后，将 mdb 移除，让用户直接和 mdb-store 进行通信，中间的通信少了一跳，加快了访问效率。将 mdb 和 etcd 也进行了移除，减少了整个系统的组件，降低运维成本。</p>
+
+<p><strong><em>PART. 3</em></strong></p>
+
+<p><strong>SOFAJRaft 的具体使用</strong></p>
+
+<p><strong><em>将写操作转换成 Raft log</em></strong></p>
+
+<p>在 SOFAJRaft 中，编程模型和通常的 Spring MVC 的编程模式不太一样。</p>
+
+<p>在 Spring MVC 中，一个请求到达了后端，通常会通过 Controller -&gt; Service -&gt; Processor 这么几层。Controller 负责本次 http 请求的资源映射， 再由 Controller 去调用特定的 Service 方法，在 Service 层中，对参数进行一些处理和转换，再交由 Processor 层去对请求做真正的处理。</p>
+
+<p>大体逻辑如图 -3 所示，</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*RX5_QboDXGsAAAAAAAAAAAAAARQnAQ" alt="" /></p>
+</blockquote>
+
+<p>图-3：通常的编程模型</p>
+
+<p>在 SOFAJRaft 中，所有的写操作都要通过状态机去执行（读操作不需要经过状态机）。需要将写操作转换成 task，状态机去应用 task 然后再进行业务处理。</p>
+
+<p>task 中包含两个属性是需要关注的，一个是 done，一个是 data。</p>
+
+<p><strong>-</strong> <strong>done</strong> 就是本次 task 被状态机处理完成后的回调，比如在 done 的回调逻辑中，将 response flush 到客户端。</p>
+
+<p><strong>-</strong> <strong>data</strong> 就是 Raft log 中的具体数据，比如要执行一条插入元数据的命令。data 就会包含本次操作的类型（插入），以及本次操作的具体数据。</p>
+
+<pre><code class="language-public">    private ByteBuffer        data             = LogEntry.EMPTY_DATA;
+    private Closure           done;
+    /// 省略部分代码
+}
+</code></pre>
+
+<p>大体逻辑如图 -4 所示，</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/e1ec1e80-1570-4543-8b26-59704a968c7b.webp" alt="" /></p>
+</blockquote>
+
+<p>图-4：SOFAJRaft 的编程模型</p>
+
+<p>所有的操作都抽象成一个实体 Operation，在 Service 层，就根据业务把参数转换成不同的 Operation，然后再将 Operation 序列化，设置到 Task 中的 data 属性，再由 Node 将 task 提交。</p>
+
+<p>这里可以将 task 看成是一个 Raft log，一旦 Raft log 被半数的机器给提交。状态机就会应用 Raft log，应用完成之后就会触发 done 中的回调。</p>
+
+<p><strong>·</strong> <strong>抽象过后的实体类</strong></p>
+
+<pre><code class="language-class">    //操作类型，比如增删改查
+    int type;
+    //操作的哪个表，某些类型不需要此字段
+    String table;    
+//具体的操作数据，根据 type 的不同，数据类型也会不同    
+T params;}
+</code></pre>
+
+<p><strong>·</strong> <strong>构建 task 并通过 node 提交给状态机</strong></p>
+
+<pre><code class="language-final">//定义回调的逻辑，当该 Raft log 被状态机应用后，会进行回调
+task.setDone(new StoreClosure(operation, status -&gt; {
+    StoreStatus storageStatus = (StoreStatus) status;
+    closure.setThrowable(storageStatus.getThrowable());
+    closure.setResponse(storageStatus.getResponse());
+    closure.run(storageStatus);
+}));
+//将 operation 进行序列化，在状态机中会将该值反序列化还原，再交给 processor 处理
+task.setData(ByteBuffer.wrap(serializer.serialize(operation)));
+node.apply(task);
+</code></pre>
+
+<p><strong><em>状态机的实现</em></strong></p>
+
+<p><strong>·</strong> <strong>onApply</strong></p>
+
+<p>onApply 是状态机的核心功能，其目的就是接收入参中的 Raft log 以及 done，然后将 Raft log 中的数据反序列化，交由自己的业务处理器去进行处理。</p>
+
+<p>处理完成之后，触发 done 的回调，这里就和 Node.apply(task) 关联上了。</p>
+
+<pre><code class="language-while">                Status status = Status.OK();
+                try {
+                    if (iter.done() != null) {
+                        // 说明当前状态机是 Leader，可以直接从 closure 中获取操作数据
+                        closure = (MdbStoreClosure) iter.done();
+                        operation = closure.getOperation();
+                    } else {
+                        // 当前状态机不是 Leader，通过对 Raft log 中的数据进行反序列化操作，还原操作数据
+                        ByteBuffer data = iter.getData();
+                        operation = serializer.deserialize(data.array(), Operation.class);
+                    } 
+                   //业务处理器进行业务处理，业务处理器中会判断 operation 的类型，选择不同的处理逻辑
+                    OperationResponse result = mdbStoreProcessor.processOperation(operation);
+                    //将 result 序列化
+                    GrpcResponse response = GrpcResponse.newBuilder().setSuccess(true)
+                            .setData(ByteString.copyFrom(serializer.serialize(result))).build();
+
+                              Optional.ofNullable(closure)
+                            .ifPresent(closure1 -&gt; closure1.setResponse(response));
+                } catch (Throwable e) {
+                    status.setError(RaftError.UNKNOWN, e.toString());
+                    Optional.ofNullable(closure).ifPresent(closure1 -&gt; closure1.setThrowable(e));
+                    throw e;
+                } finally {
+                    //对 task 中的 done 进行回调
+                    Optional.ofNullable(closure).ifPresent(closure1 -&gt; closure1.run(status));
+                }
+                //将 Raft log 的消费位置 +1，表示当前这个 Raft log 已经被成功应用了
+                iter.next();
+            }
+</code></pre>
+
+<p><strong>·</strong> <strong>onSnapshotSave</strong></p>
+
+<p><strong>-</strong> 在初始化 SOFAJRaft node 时，存在一个参数，<strong>NodeOptions#snapshotUri</strong>。</p>
+
+<p><strong>-</strong> 该参数设置后就会开启 snapshot 机制，一般是推荐设置。</p>
+
+<p><strong>-</strong> 开启完成之后，每隔 30 分钟 就会进行一次 <strong>snapshot</strong>（这里需要注意的是，30 分钟内有 Raft log 提交时，才会进行 snapshot）。</p>
+
+<p><strong>-</strong> 在进行 snapshot 的时候，需要把当前的数据进行持久化操作。</p>
+
+<p><strong>-</strong> 在 snapshot 完成后，就会将 snapshot 中最后一条 Raft log 之前的 raft-log 全部删除。其意义就是避免 Raft log 一直增加，导致磁盘占用飙高。</p>
+
+<p><strong>snapshot 机制</strong>可以这么去理解，在 SOFAJRaft 中，业务 processor 中的操作都是状态机驱动的，而状态机又是由 Raft log 驱动。<strong>那么 processor 中数据的最终形态其实就是所有的 Raft log 应用的总和。</strong></p>
+
+<p>比如存在一个 Raft log，其业务含义是 i++。10 条 Raft log 被状态机应用后，驱动 processor 进行 10 次 i++ 操作，最终的值就是为 10。应用就算崩溃重启后，重启时，他会去应用之前的 10 条 i++ 的Raft log，processor 中的值也还是 10。使用 snapshot 机制，在进行 snapshot 时，把 processor 中的 10 进行持久化，持久化完成过后，将前 10 条 Raft log 进行删除，后续再来 2 条 i++ 的 Raft log，processor 的值变为 12，存在 2 条 i++ 的 Raft log。应用就算崩溃重启，那么它首先也会读取 snapshot 中的数据 10，再去应用 2 条 i++ 的 Raft log，最终数据也是 12，和崩溃之前保持一致。</p>
+
+<p><strong>Processor 的最终态 =</strong> <strong>snapshot + Raft log</strong></p>
+
+<pre><code class="language-MdbStoreStoreSnapshotFileImpl">        String tempPath = snapshotPath + &quot;_temp&quot;;
+        File tempFile = new File(tempPath);
+        FileUtils.deleteDirectory(tempFile);
+        FileUtils.forceMkdir(tempFile);
+        //记录总共的 table 数量
+        mdbStoreStoreSnapshotFile
+                .writeToFile(tempPath, &quot;tailIndex&quot;, new TailIndex(persistData.size()));
+        //将每一个 table 中的数据都进行持久化
+        for (int i = 0; i &lt; persistData.size(); i++) {
+            mdbStoreStoreSnapshotFile.writeToFile(tempPath, combineDataFile(i),
+                    new TablePersistence(persistData.get(i)));
+        }
+        File destinationPath = new File(snapshotPath);
+        FileUtils.deleteDirectory(destinationPath);
+        FileUtils.moveDirectory(tempFile, destinationPath);
+</code></pre>
+
+<p><strong>·</strong> <strong>onSnapshotLoad</strong></p>
+
+<p>onSnapshotLoad 的几个触发场景。</p>
+
+<ol>
+<li><p>当一个节点重新启动时。</p></li>
+
+<li><p>当 Follower 中的 commit-index 都小于 Leader 中 snapshot 的最后一条 Raft log 时（Follower 太落后了，Follower 需要的 Raft log 已经被 Leader 的 snapshot 机制删除了）</p></li>
+</ol>
+
+<p>onSnapshotLoad 和上面的 onSnapshotSave 是成对的，这里只需要把之前保存的文件中的内存读取，然后再进行反序列化，添加到 processor 中的数据容器即可。</p>
+
+<pre><code class="language-MdbStoreStoreSnapshotFileImpl">        //读取总共的文件数
+        TailIndex tailIndex = mdbStoreStoreSnapshotFile
+                .readFromFile(snapshotPath, TAIL_INDEX, TailIndex.class);
+
+        int size = tailIndex.data();
+
+        for (int i = 0; i &lt; size; i++)
+             //挨个读取文件，将文件内容进行反序列化
+            TablePersistence tablePersistence = mdbStoreStoreSnapshotFile
+                    .readFromFile(snapshotPath, combineDataFile(i), TablePersistence.class);
+            TableDataDTO data = tablePersistence.data();
+
+            Table table = new Table(data.getName(), new HashSet&lt;&gt;(data.getIndexNames()),
+                    data.getRetryCount());
+            for (Record dataData : data.getDatas()) {
+                table.addRecord(dataData);
+            }
+            //将数据丢给 processor 中的数据容器
+            dataComponent.putData(table.getName(), table);
+        }
+</code></pre>
+
+<p><strong>·</strong> <strong>状态机的其他状态变更的方法</strong></p>
+
+<p>一般来说，节点的状态是不会发生变化的，一旦发生变化，就需要去分析应用的状态了，观察节点是否正常。</p>
+
+<p>StateMachine 提供了状态回调的接口，我们在回调中对接内部的监控系统，当状态机的节点状态发生变化时，会实时通知到维护人员，维护人员再对应用进行分析排查。</p>
+
+<p><strong><em>使用 read-index read 进行读操作</em></strong></p>
+
+<p>按照 Raft 论文正常来说，读写操作都只能由 Leader 进行处理，这样能够保证读取的数据都是一致的。这样的话，读请求的吞吐就没办法增加。</p>
+
+<p>关于这个 case，SOFAJRaft 提供了 read-index read，可以在 Follower 中进行读取操作，并且能保证在 Follower 中读的结果和在 Leader 中读的结果一致。</p>
+
+<p><em>关于 read-index read 可以参考 pingcap 的这篇博客：</em></p>
+
+<p><em><a href="https://pingcap.com/zh/blog/lease-read">https://pingcap.com/zh/blog/lease-read</a></em></p>
+
+<pre><code class="language-com.alipay.sofa.jraft.Node#readIndex(final"></code></pre>
+
+<p>第一个参数是发起 read-index read 时的上下文，可以在回调中使用。</p>
+
+<p>第二个参数就是具体的回调逻辑，需要在 run 方法中实现读取逻辑。</p>
+
+<p><strong>·</strong> <strong>read-index read 编程模型</strong></p>
+
+<pre><code class="language-CompletableFuture">            node.readIndex(BytesUtil.EMPTY_BYTES, new ReadIndexClosure() {
+                @Override
+                public void run(Status status, long index, byte[] reqCtx) {
+                    //状态 ok，说明可以通过 read-index 去进行读取
+                    if (status.isOk()) {
+                        try {
+                            //直接使用 processor 查询数据，不通过状态机
+                            OperationResponse&lt;T&gt; res = (OperationResponse&lt;T&gt;) mdbStoreProcessor
+                                    .processOperation(operation);
+                            future.complete(res);
+                        } catch (Throwable t) {
+                            future.completeExceptionally(
+                                    new IllegalStateException(&quot;Fail to read data from processor&quot;,
+                                            t));
+                        }
+                    } else {
+                        //状态不 ok，可能是超时，也可能是状态机异常等其他原因
+                        if (Operation.ALL_DATA == operation.getType()) {
+                            //这里判断是不是读取全量的数据，读取全量数据的话，需要快速失败，不能转到 leader 走 raft log读取，
+                            //原因见 4.3
+                            future.completeExceptionally(new IllegalStateException(
+                                    &quot;Fail to get all data by read-index read, status: &quot; + status
+                                            .getErrorMsg()));
+                        } else {
+                            //通过将本次请求转发到 Leader 中，走 raft log，在 Leader 的状态机中把本条 raft log 应用后，再
+                            //返回数据给 Follower
+                            LOGGER.warn(&quot;ReadIndex read failed, status: {}, go to Leader read.&quot;,
+                                    status.getErrorMsg()); 
+                           readFromLeader(operation, future);
+                        }
+                    }
+                }
+            }
+        Object o = future.get(5_000L, TimeUnit.MILLISECONDS);
+        if (o instanceof GrpcResponse) {
+            //返回类型的 GrpcResponse，说明本次请求是通过 Raft log 转到 Leader 处理并返回的，需要将数据反序列化
+            return serializer
+                    .deserialize(((GrpcResponse) o).getData().toByteArray(), OperationResponse.class);
+        } else {
+            //直接在本地通过 read-index read 读本地内存
+            return (OperationResponse&lt;T&gt;) o;
+        }
+</code></pre>
+
+<p><strong><em>Follower 请求转发</em></strong></p>
+
+<p>在 SOFAJRaft 中，所有的写请求都只能由 Leader 节点进行处理，当写请求落到了 Follower 中，有两种方式进行处理。</p>
+
+<ol>
+<li><p>直接拒绝该请求，并将 Leader 节点的地址返回给客户端，让客户端重新发起请求。</p></li>
+
+<li><p>将当前请求 hold 在服务端，并将该请求转发到 Leader 节点，Leader 节点处理完成后，将 response 返回给 Follower，Follower 再将之前 hold 住的请求返回给客户端。</p></li>
+</ol>
+
+<p>这里使用第一种时，需要客户端也进行相应的改造，为了对客户端透明，我们选择了第二种，通过转发的方式，将请求转给 Leader。</p>
+
+<p>在 SOFAJRaft 中，各个节点需要通过 RPC 来进行通信，比如发送心跳，投票等。</p>
+
+<p>SOFAJRaft 默认提供了两种通信方式，一种是 sofa-bolt，还有一种是 grpc，考虑到组件的流行性，选择了grpc来作为通信方式。在构建 server 时，使用 GrpcRaftRpcFactory 在创建 RpcServer 。然后将 SOFAJRaft 中自带的处理器（心跳处理器，投票处理器等）注册到 RpcServer中。这些处理器都是实现了 RpcProcessor 接口，该接口的 handleRequest 方法会处理收到的请求。</p>
+
+<p>使用 GrpcRaftRpcFactory 需要注意的是，需要引入依赖。</p>
+
+<pre><code class="language-&lt;dependency&gt;">&lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+&lt;artifactId&gt;rpc-grpc-impl&lt;/artifactId&gt;
+&lt;version&gt;${jraft.grpc.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>并且需要通过 spi 指定使用 GrpcRaftRpcFactory。</p>
+
+<p><strong>文件路径</strong> /resources/META-INF.services/com.alipay.sofa.jraft.rpc.RaftRpcFactory，<strong>文件内容</strong> com.alipay.sofa.jraft.rpc.impl.GrpcRaftRpcFactory。</p>
+
+<p>这里，可以定义一个自己的处理器，实现 RpcProcessor 接口，将该 Processor 也注册到 RpcServer 中，复用同一个 RpcServer。</p>
+
+<p><strong>·</strong> <strong>创建 RpcServer 并注册处理器</strong></p>
+
+<pre><code class="language-//获取">           GrpcRaftRpcFactory raftRpcFactory = (GrpcRaftRpcFactory) RpcFactoryHelper.rpcFactory();
+           //GrpcRequest 是自己的 Processor 通信使用，这里使用 proto 去生成 GrpcRequest 和 GrpcResponse                     
+           raftRpcFactory.registerProtobufSerializer(GrpcRequest.class.getName(),
+                       GrpcRequest.getDefaultInstance());
+           
+MarshallerRegistry registry = raftRpcFactory.getMarshallerRegistry();
+//注册 GrpcRequest 对应的 response 的默认对象
+registry.registerResponseInstance(GrpcRequest.class.getName(),
+GrpcResponse.getDefaultInstance());        
+//创建 GrpcServer        
+final RpcServer rpcServer = raftRpcFactory.createRpcServer(peerId.getEndpoint());         
+//注册 sofa-jraft 中自带的处理器
+RaftRpcServerFactory.addRaftRequestProcessors(rpcServer,
+RaftExecutor.getRaftCoreExecutor(),
+RaftExecutor.getRaftCliServiceExecutor());        
+//注册自己业务的处理器        
+rpcServer.registerProcessor(new GrpcRequestProcessor(server));
+        return rpcServer;
+</code></pre>
+
+<p><strong>·</strong> <strong>proto file</strong></p>
+
+<pre><code class="language-syntax">&quot;proto3&quot;;option java_multiple_files = true;
+package com.xxx.mdb.store.raft.entity;
+
+message GrpcRequest {
+//这里的 data 保存的就是 Operation 序列化过后的二进制流
+bytes data =1;
+}
+message GrpcResponse {
+ //这里的 data 保存的是业务 Processor 处理完 Operation 过后，并且经过序列化后的二进制流  bytes data = 1;
+ //异常信息
+ string errMsg = 2;
+ //标志位，请求是否 ok
+ bool success = 3;
+ }
+</code></pre>
+
+<p><strong>·</strong> <strong>自己的处理器，用于接收 Follower 过来的转发请求。</strong></p>
+
+<pre><code class="language-//如果当前节点不是">if (!jRaftServer.getNode().isLeader()) {
+return;
+}
+//定义 done，状态机应用 Raft log 后，会回调这个 done
+FailoverClosure done = new FailoverClosure() {
+           
+           GrpcResponse data;
+            
+           Throwable ex;
+            
+           @Override
+           public void setResponse(GrpcResponse data) {
+                 //Follwer 在状态机中执行成功后，会将 result 封装成 GrpcResponse，然后在这里设置
+                 this.data = data;            }
+            @Override            public void setThrowable(Throwable throwable) {
+            //在异常时，会进行调用
+            this.ex = throwable;            }
+            @Override
+            public void run(Status status) {
+            if (Objects.nonNull(ex)) {
+            LOGGER.error(&quot;execute has error&quot;, ex);
+            //ex 不为 null，说明发生了异常，将异常返回给 Follower
+            rpcCtx.sendResponse(
+            GrpcResponse.newBuilder().setErrMsg(ex.toString()).setSuccess(false)
+            .build());
+            } else {
+            //将请求返回 Follower
+            rpcCtx.sendResponse(data);
+            }
+           }
+          };
+          //将从 Follower 过来的请求提交给状态机，在内部会把 request 的 data 字段给反序列化为 Operation
+          jRaftServer.applyOperation(jRaftServer.getNode(), request, done);
+</code></pre>
+
+<p><strong>·</strong> <strong>Follower 中的转发逻辑</strong></p>
+
+<pre><code class="language-try">//将 operation 序列化成 byte 数组，然后构建 GrpcRequest.
+GrpcRequest request = GrpcRequest.newBuilder()
+.setData(ByteString.copyFrom(serializer.serialize(operation))).build();
+//从缓存获取当前 Leader 节点的地址，如果 Leader 为空，抛出异常。这里的 Leader 需要动态刷新，每隔5秒中就去刷新一次
+//Leader，保证 Leader 是最新的。可以通过 RouteTable#refreshLeader 去定时刷新。
+final Endpoint leaderIp = Optional.ofNullable(getLeader())
+.orElseThrow(() -&gt; new IllegalStateException(&quot;Not find leader&quot;)).getEndpoint();
+//通过 grpc 将请求发送给自己的处理器
+cliClientService.getRpcClient().invokeAsync(leaderIp, request, new InvokeCallback() {
+@Override
+public void complete(Object o, Throwable ex) {
+if (Objects.nonNull(ex)) {
+//存在异常，将异常进行回调
+closure.setThrowable(ex);
+//进行 fail 的回调，回调中会将 exception 返回给客户端
+closure.run(new Status(RaftError.UNKNOWN, ex.getMessage()));
+return;
+}
+//将 grpc response 设置给回调类
+closure.setResponse((GrpcResponse) o);
+//进行 success 的回调，回调中会将数据返回给客户端
+closure.run(Status.OK());
+}
+                @Override
+                public Executor executor() {
+                return RaftExecutor.getRaftCliServiceExecutor();
+                }
+            }, timeoutMillis);
+     } catch (Exception e) {
+         closure.setThrowable(e);
+         closure.run(new Status(RaftError.UNKNOWN, e.toString()));        }
+</code></pre>
+
+<p><strong><em>PART. 4</em></strong></p>
+
+<p><strong>SOFAJRaft</strong> <strong>的一些实践</strong></p>
+
+<p><strong>read-index read</strong></p>
+
+<p><strong>返回数据量过大导致 oom</strong></p>
+
+<p>在我们的业务场景中，有一个获取全量数据的接口，并且是通过 read-index read 去进行读数据的。在对这个接口进行压测时，会发现 CPU 飙高的情况，经过排查，是由于堆内存占满了，GC 线程一直在 work 导致的。经过 dump 堆内存后发现，是由于内部使用 Disruptor 导致的问题，该问题目前已被我们修复，并且也已反馈给社区，在 1.3.8 版本中进行了解决。</p>
+
+<p><em>具体问题见</em> <strong><em>issue#618</em></strong></p>
+
+<p><strong>read-index read</strong></p>
+
+<p><strong>响应时间较长</strong></p>
+
+<p>在测试同学进行压测，发现读取接口的最大耗时偶尔会跑到 500ms，平均响应耗时大概在 100ms 左右。经过反复排查以及阅读代码，最终发现这个问题和 election timeout  有关。</p>
+
+<p>在 SOFAJRaft 中，election timeout 就是选举超时的时间，一旦超过了 election timeout，Follwer 还没有收到 Leader 的心跳，Follower 认为当前集群中没有 Leader，自己发起投票来尝试当选 Leader。</p>
+
+<p>正常情况下，Leader 给 Follower 发心跳的频率是 election timeout / 10，也就是说在 election timeout 期间内，Leader 会给 Follower 发 10 次心跳，Follower 10次都没有收到心跳的情况下，才会发生选举。</p>
+
+<p>而恰巧的是，我设置的 election timeout 刚好就是 5s，5s / 10 刚好就是 500ms。</p>
+
+<p>于是进一步分析 <strong>read-index read</strong> 的机制，当 Follower 使用 read-index read 时，首先要去 Leader 获取 Leader 当前的 commit index，然后需要等待 Follower 自己的状态机的 apply index 超过从 Leader 那边获取到的 commit index，然后才会进行 read-index read 的回调。</p>
+
+<p>而 Follower 的状态机的 apply 操作是通过 Leader 的心跳请求驱动的，Leader 中能够知道 Raft log 是否被半数提交了，一旦某一条 Raft log 被半数提交，Leader 在下一次的心跳请求中就会发最新的 commit index 同步给 Follower，Follower 收到新的 commit index 后，才会驱动自己的状态机去 apply Raft log。</p>
+
+<p>而心跳请求的频率又是 election timeout / 10，所有会存在 read-index read 偶尔的响应时间会是 election timeout / 10.</p>
+
+<p><strong>如何解决：</strong></p>
+
+<p>基于以上分析，将 election timeout 的时间调整为了 1s，心跳频率也就变成了 100ms，最大的响应耗时也就变低了，平均响应耗时也降低到了 4ms 左右。</p>
+
+<p>read-index read 大概逻辑如图-5所示，</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/fd718f8f-28d4-4cc6-be2c-e569a079b8f1.webp" alt="" /></p>
+</blockquote>
+
+<p>图-5：read-index read 处理逻辑</p>
+
+<p><strong>read-index read</strong></p>
+
+<p><strong>大响应接口失败后转发请求到</strong></p>
+
+<p><strong>leader 导致状态机阻塞</strong></p>
+
+<p>在一次排查问题的过程中，怀疑网络存在问题。于是联系运维同学，运维同学对执行 tcpdump 命令，对网络进行了抓包。</p>
+
+<p>整个集群分为 3 个机房，2+2+1 的模式进行部署，1 这个节点的网络偶尔会存在波动。在当时执行 tcpdump 过后 4 分钟，到1这个节点的读请求就开始发生 read-index timeout 了，而当时的逻辑是，只要 read-index read 回调状态不 ok，就将该请求转发到 Leader，走 Raft log 来进行处理。</p>
+
+<p>这里存在一个接口，是去读所有的数据，数据量比较大。当 read-index read 超时时，会将这个请求转发到了 Leader 节点，走 Raft log 去读数据，走 Raft log 就会在状态机中去进行处理，而这个请求的 response 比较大，导致在获取完数据后，去序列化数据时比较耗时，大概需要消耗 1500ms，状态机中处理 Raft log 的吞吐就降低了。并且 Raft log 是会从 Leader 复制给 Follower 的，也就是说，Follower 的状态机也会去执行这个耗时 1500 ms的 Raft log，只是 Follower 不对 response 做处理而已。</p>
+
+<p>在上面描述了 read-index read 的逻辑，Follower 要执行 read-index read，需要状态机的 apply-index 追上 Leader 的 commit index，当发生上述网络波动时，这个大接口走 Raft log 的方式，降低了状态机处理 Raft log 的吞吐，导致 Follwer 的 apply index 更难追上 Leader 的 commit index 了。</p>
+
+<p>因此陷入了恶性循环，这个大接口一致通过 Raft log 转向 Leader 去读取数据，而这个 Raft log 处理非常耗时。</p>
+
+<p>最终导致状态机的 apply index 远远小于 commit index，所有的客户端的读操作和写操作全部都超时。</p>
+
+<p><strong>如何解决：</strong></p>
+
+<p>将这个大接口的读取操作改成快速失败，一旦 read-index read 的回调不成功，不把请求通过 Raft log 转到 Leader 去，直接返回异常给客户端，让客户端重试。</p>
+
+<p><strong>snapshot 操作时，</strong></p>
+
+<p><strong>阻塞状态机应用 Raft log，</strong><strong>导致响应超时</strong></p>
+
+<p>系统在压测时，跑着跑着客户端偶尔会超时。经过反复排查，发现超时的时间点和 snapshot 的时间点重合。根据阅读代码发现，状态机的 apply 操作和 snapshot 操作默认是同步的，而 snapshot 比较耗时，导致了状态机 apply Raft log 时间被延长了，从而客户端请求超时。</p>
+
+<p><strong>如何解决：</strong></p>
+
+<p>在 snapshot 时，将 snapshot 的操作变为异步操作，使用 copy on write 把 snapshot 时的内存数据 copy 了一份，再异步进行持久化处理。</p>
+
+<p>这里需要注意的是，copy on write 会消耗 2 倍的内存，这里需要确保不要导致 OOM 了。不同的场景需要考虑不同的异步 snapshot 的方式。</p>
+
+<p><strong>Raft中存在 Raft log 和 snapshot file，</strong></p>
+
+<p><strong>需要文件系统保证有状态</strong></p>
+
+<p>SOFAJRaft 需要保存 Raft log 以及 snapshot file。</p>
+
+<p>在容器部署时，需要确保应用使用的 Raft 目录是持久化的。</p>
+
+<p><strong>开启 metrics 以及</strong></p>
+
+<p><strong>利用 kill -s SIGUSR2 帮助问题分析</strong></p>
+
+<p>在 SOFAJRaft 中，存在 node 参数 enableMetrics，是否开启 metrics 统计指标数据。</p>
+
+<p>我们将它打开，并且将指标数据输出到一个单独的日志文件，归档的日志可以在分析问题时提供线索。</p>
+
+<p><strong>比如：</strong>有时候的读取请求响应时间增大了，就可以通过观察指标数据 read-index 来帮助分析是否是线性读的机制导致请求响应飙升。</p>
+
+<p>将指标输出到日志文件:</p>
+
+<pre><code class="language-Node">NodeOptions nodeOpts =  ...
+//打开监控指标
+nodeOpts.setEnableMetrics(true);
+node.init(nodeOpts);
+
+Slf4jReporter reporter = Slf4jReporter
+.forRegistry(node.getNodeMetrics().getMetricRegistry())
+//获取到日志的输出对象
+.outputTo(LoggerFactory.getLogger(&quot;com.jraft.metrics&quot;))
+.convertRatesTo(TimeUnit.SECONDS)
+.convertDurationsTo(TimeUnit.MILLISECONDS)
+.build();
+reporter.start(30, TimeUnit.SECONDS);
+</code></pre>
+
+<p>除此之外，还可以利用 <strong>kill - s SIGUSR2 pid</strong> 给 SOFAJRaft 进程发送信号量，进程收到信号量后，会在进程的启动目录中生成指标数据数据文件。</p>
+
+<p>这里我个人比较关注 node_describe.log 中 log manager 的 diskId 和 appliedId，前者是 Raft log 写到磁盘中的位置，后者是状态机当前应用到 Raft log 的位置，可以通过对比这两个数据，用来观察状态机的吞吐是否正常，一旦两者相差很多，说明状态机出问题了。</p>
+
+<p><strong>「后续演进」</strong></p>
+
+<p><strong>·</strong> 引入 Learner 节点，增加整个集群的读吞吐量。</p>
+
+<p><strong>·</strong> 持续关注社区，和社区共同发展。</p>
+
+<p><strong><em>- END -</em></strong></p>
+
+<p>以上就是 SOFAJRaft 在我们公司内的使用分享，有问题的小伙伴可以找到我的 GitHub 直接邮箱和我沟通。</p>
+
+<p>感谢 SOFAStack 提供的一个如此优秀的 Java 框架。</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/c6f2a1fc-62ed-4185-8fe6-0ac47f803641.webp" alt="" /></p>
+</blockquote>
+
+<p>-</p>
+
+<p>「作 者」</p>
+
+<p><strong>· 赵延 ｜</strong>GitHub:horizonzy</p>
+
+<p>同程艺龙高级开发，负责服务治理相关工作，关注 RPC、服务治理和分布式等领域。</p>
+
+<p><strong>· 董春明</strong></p>
+
+<p>同程艺龙架构师，负责服务治理及云原生规划演进相关工作，分布式领域专家，Paper 爱好者。</p>
+
+<p>-</p>
+
+<p>「参 考」</p>
+
+<p><strong>·</strong> alibaba Nacos 中关于 SOFAJRaft 的使用</p>
+
+<p>· JRaft-rheakv 中关于 SOFAJRaft 的使用</p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/8a09120c-232f-4063-9091-1581d48c487b.webp" alt="图片" /></p>
+</blockquote>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247495260&amp;idx=1&amp;sn=a56b0f82159e551dec4752b7290682cd&amp;chksm=faa30186cdd488908a73792f9a1748cf74c127a792c5c484ff96a21826178e2aa35c279c41b3&amp;scene=21#wechat_redirect">SOFAJRaft 在同程旅游中的实践</a></p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/5930ca07-3a49-4d7e-b4cb-60441899b67b.webp" alt="图片" /></p>
+</blockquote>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247494701&amp;idx=1&amp;sn=f9a2b71de8b5ade84c77b87a8649fa3a&amp;chksm=faa303f7cdd48ae1b1528ee903a0edc9beb691608efd924189bcf025e462ea8be7bc742772e1&amp;scene=21#wechat_redirect">技术风口上的限流</a></p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/5a638c3f-4d7e-46f5-a296-e8afae0d0930.webp" alt="图片" /></p>
+</blockquote>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247491409&amp;idx=1&amp;sn=d6c0722d55b772aedb6ed8e34979981d&amp;chksm=faa0f08bcdd7799dabdb3b934e5068ff4e171cffb83621dc08b7c8ad768b8a5f2d8668a4f57e&amp;scene=21#wechat_redirect">蚂蚁集团万级规模 k8s 集群 etcd 高可用建设之路</a></p>
+
+<blockquote>
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/998a92fe-ff8d-4f50-82f0-c74cc721d9cc.webp" alt="图片" /></p>
+</blockquote>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247492248&amp;idx=1&amp;sn=c26d93b04b2ee8d06d8d495e114cb960&amp;chksm=faa30d42cdd48454b4166a29efa6c0e775ff443f972bd74cc1eb057ed4f0878b2cb162b356bc&amp;scene=21#wechat_redirect">2021 年云原生技术发展现状及未来趋势</a></p>
+
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/6cea061a-33ed-4997-a022-640132d7fa13.webp" alt="图片" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20210917/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | SOFAJRaft 发布新版本，QA 整理</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20210924/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | QA 整理</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/restricted-flow-on-the-technology-windfall/">技术风口上的限流</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ant-intelligent-monitoring/">蚂蚁智能监控</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofa-star-is-recruiting/">SOFA 星球招募啦～</a></li>
+		
+			<li><a href="/sofastack.tech/blog/2021-cloud-native-technology-development-status-and-future-trends/">2021 年云原生技术发展现状及未来趋势</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ant-group-sofatracer-principles-and-practices/">蚂蚁集团 SOFATracer 原理与实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Seata AT 模式代码级详解 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Seata AT 模式代码级详解
+	</h1>
+	<div class="meta">
+		
+			2022-09-20 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>文｜</p>
+
+<p>刘月财</p>
+
+<p>seata-go 项目负责人</p>
+
+<p>北京小桔科技有限公司【滴滴】开发工程师</p>
+
+<p>赵新（花名：于雨 )</p>
+
+<p>蚂蚁集团 Seata 项目开源负责人</p>
+
+<p>本文<strong>5343</strong>字 阅读 <strong>14</strong>分钟</p>
+
+<h2 id="背景">背景</h2>
+
+<p>Seata 四种事务模式中，AT 事务模式是阿里体系独创的事务模式，对业务无侵入，也是 Seata 用户最多的一种事务模式，兼具易用性与高性能。</p>
+
+<p>目前，Seata 社区正大力推进其多语言版本建设，Go、PHP、JS 和 Python 四个语言版本基本完成了 TCC 事务模式的实现。参照 Seata v1.5.2 版本的 AT 模式的实现，并结合 Seata 官方文档，本文尝试从代码角度详解 Seata AT 事务模式的详细流程，目的是梳理 Seata Java 版本 AT 模式的实现细节后，在多语言版本后续开发中，优先实现 AT 事务模式。</p>
+
+<h2 id="1-什么是-at-模式">1、什么是 AT 模式？</h2>
+
+<p>AT 模式是一种二阶段提交的分布式事务模式，它采用了本地 undo log 的方式来数据在修改前后的状态，并用它来实现回滚。从性能上来说，AT 模式由于有 undo log 的存在，一阶段执行完可以立即释放锁和连接资源，吞吐量比 XA 模式高。用户在使用 AT 模式的时候，只需要配置好对应的数据源即可，事务提交、回滚的流程都由 Seata 自动完成，对用户业务几乎没有入侵，使用便利。</p>
+
+<h2 id="2-at-模式与-acid-和-cap">2、AT 模式与 ACID 和 CAP</h2>
+
+<p>谈论数据库的事务模式，一般都会先谈论事务相关的 ACID 特性，但在分布式场景下，还需要考虑其 CAP 性质。</p>
+
+<h3 id="2-1-at-与-acid">2.1 AT 与 ACID</h3>
+
+<p>数据库事务要满足原子性、一致性、持久性以及隔离性四个性质，即 ACID 。在分布式事务场景下，一般地，首先保证原子性和持久性，其次保证一致性，隔离性则因为其使用的不同数据库的锁、数据 MVCC 机制以及相关事务模式的差异， 具有多种隔离级别，如 MySQL 自身事务就有读未提交（Read Uncommitted）、读已提交（Read Committed）、可重复读（Repeatable Read）、序列化（Serializable）等四种隔离级别。</p>
+
+<h4 id="2-1-1-at模式的读隔离">2.1.1 AT模式的读隔离</h4>
+
+<p>在数据库本地事务隔离级别<strong>读已提交（Read Committed）</strong> 或以上的基础上，Seata（AT 模式）的默认全局隔离级别是<strong>读未提交（Read Uncommitted）</strong> 。</p>
+
+<p>如果应用在特定场景下，必须要求全局的<strong>读已提交</strong>，目前 Seata 的方式是通过 SELECT FOR UPDATE 语句的代理。 </p>
+
+<p>SELECT FOR UPDATE 语句的执行会查询<strong>全局锁</strong>，如果<strong>全局锁</strong>被其他事务持有，则释放本地锁（回滚 SELECT FOR UPDATE 语句的本地执行）并重试。这个过程中，查询是被 block 住的，直到<strong>全局锁</strong>拿到，即读取的相关数据是<strong>已提交</strong>的，才返回。</p>
+
+<p>出于总体性能上的考虑，Seata 目前的方案并没有对所有 SELECT 语句都进行代理，仅针对 FOR UPDATE 的 SELECT 语句。</p>
+
+<p>详细例子参考 Seata 官网：<em><a href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">https://seata.io/zh-cn/docs/dev/mode/at-mode.html</a></em></p>
+
+<h4 id="2-1-2-at-模式的写隔离">2.1.2 AT 模式的写隔离</h4>
+
+<p>AT 会对写操作的 SQL 进行拦截，提交本地事务前，会向 TC 获取全局锁，未获取到全局锁的情况下，不能进行写，以此来保证不会发生写冲突：</p>
+
+<p><strong>-</strong> 一阶段本地事务提交前，需要确保先拿到<strong>全局锁</strong>；</p>
+
+<p><strong>-</strong> 拿不到<strong>全局锁</strong>，不能提交本地事务；</p>
+
+<p><strong>-</strong> 拿<strong>全局锁</strong>的尝试被限制在一定范围内，超出范围将放弃，并回滚本地事务，释放本地锁。</p>
+
+<p>详细例子参考 Seata 官网：<em><a href="https://seata.io/zh-cn/docs/dev/mode/at-mode.html">https://seata.io/zh-cn/docs/dev/mode/at-mode.html</a></em></p>
+
+<h3 id="2-2-at-与-cap">2.2 AT 与 CAP</h3>
+
+<p>Seata 所有的事务模式在一般情况下，是需要保证 CP，即一致性和分区容错性，因为分布式事务的核心就是要保证数据的一致性（包括弱一致性）。比如，在一些交易场景下，涉及到多个系统的金额的变化，保证一致性可以避免系统产生资损。</p>
+
+<p>分布式系统不可避免地会出现服务不可用的情况，如 Seata 的 TC 出现不可用时，用户可能希望通过服务降级，优先保证整个服务的可用性，此时 Seata 需要从 CP 系统转换为一个保证 AP 的系统。</p>
+
+<p>比如，有一个服务是给用户端提供用户修改信息的功能，假如此时 TC 服务出现问题，为了不影响用户的使用体验，我们希望服务仍然可用，只不过所有的 SQL 的执行降级为不走全局事务，而是当做本地事务执行。</p>
+
+<p>AT 模式默认优先保证 CP，但提供了配置通道让用户在 CP 和 AP 两种模式下进行切换：</p>
+
+<p><strong>-</strong> 配置文件的 tm.degrade-check 参数，其值为 true 则分支事务保证 AP，反之保证 CP；</p>
+
+<p><strong>-</strong> 手动修改配置中心的 service.disableGlobalTransaction 属性为 true，则关闭全局事务实现 AP。</p>
+
+<h2 id="3-at-数据源代理">3、AT 数据源代理</h2>
+
+<p>在 AT 模式中，用户只需要配置好 AT 的代理数据源即可， AT 的所有流程都在代理数据源中完成，对用户无感知。 </p>
+
+<p>AT 数据源代理的整体类结构如下图：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c080b82054b4f1aa46fe0e899f3bfc1~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p> AT 事务数据源代理类结构图【from *<a href="https://seata.io/zh-cn/docs/dev/mode/xa-mode.html">https://seata.io/zh-cn/docs/dev/mode/xa-mode.html</a>*】</p>
+
+<p>AT 的数据源代理中，分别对目标数据库的 DataSource 、 Connection 和 Statement  进行了代理，在执行目标 SQL 动作之前，完成了 RM 资源注册、 undo log 生成、分支事务注册、分支事务提交/回滚等操作，而这些操作对用户并无感知。</p>
+
+<p>下面的时序图中，展示了 AT 模式在执行过程中，这几个代理类的动作细节：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14654d9c71c5444899b66d1e53615e55~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p>注：图片建议在 PC 端查看</p>
+
+<h2 id="4-at-模式流程">4、AT 模式流程</h2>
+
+<p>以下是 AT 模式的整体流程，从这里可以看到分布式事务各个关键动作的执行时机，每个动作细节，我们后面来讨论：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/57696b4994cf4381b4560518fbac4b26~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p>注：图片建议在 PC 端查看</p>
+
+<h3 id="4-1-一阶段">4.1 一阶段</h3>
+
+<p>在 AT 模式的第一阶段， Seata 会通过代理数据源，拦截用户执行的业务 SQL ，假如用户没有开启事务，会自动开启一个新事务。如果业务 SQL 是写操作（增、删、改操作）类型，会解析业务 SQL 的语法，生成 SELECT SQL 语句，把要被修改的记录查出来，保存为 “before image” 。然后执行业务 SQL ，执行完后用同样的原理，将已经被修改的记录查出来，保存为 “after image” ，至此一个 undo log 记录就完整了。随后 RM 会向 TC 注册分支事务， TC 侧会新加锁记录，锁可以保证 AT 模式的读、写隔离。RM  再将 undo log 和业务 SQL 的本地事务提交，保证业务 SQL 和保存 undo log 记录 SQL 的原子性。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/446b6158d91540368bc8112559cd6d08~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h3 id="4-2-二阶段提交">4.2 二阶段提交</h3>
+
+<p>AT 模式的二阶段提交，TC 侧会将该事务的锁删除，然后通知 RM 异步删除 undo log 记录即可。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/45a02844579b485e922580acade69d48~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h3 id="4-3-二阶段回滚">4.3 二阶段回滚</h3>
+
+<p>如果 AT 模式的二阶段是回滚，那么 RM 侧需要根据一阶段保存的 undo log 数据中的 before image 记录，通过逆向 SQL 的方式，对在一阶段修改过的业务数据进行还原即可。</p>
+
+<p>但是在还原数据之前，需要进行脏数据校验。因为在一阶段提交后，到现在进行回滚的中间这段时间，该记录有可能被别的业务改动过。校验的方式，就是用 undo log 的 after image 和现在数据库的数据做比较，假如数据一致，说明没有脏数据；不一致则说明有脏数据，出现脏数据就需要人工进行处理了。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef9c9baf1d1e48bf90d71971e3c1df37~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h2 id="5-关键代码模块">5、关键代码模块</h2>
+
+<p>如下是 AT 模式整个流程的主要模块，我们从中可以了解开发 AT 模式需要做哪些事情：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bdfd453ba59e40e3b4781cd77c5f6fa2~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h3 id="5-1-undo-log数据格式">5.1 Undo log数据格式</h3>
+
+<p>undo log 存在表 undo_log 表中，undo_log 表的表结构如下：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/614de41ac4504a3c93c1fe97d0d968e4~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p>rollback_info 存放了业务数据修改前后的内容，数据表存放的是经过压缩后的格式，他的明文格式如下：</p>
+
+<pre><code class="language-Go">{
+    &quot;branchId&quot;:2828558179596595558,
+    &quot;sqlUndoLogs&quot;:[
+        {
+            &quot;afterImage&quot;:{
+                &quot;rows&quot;:[
+                    {
+                        &quot;fields&quot;:[
+                            {
+                                &quot;keyType&quot;:&quot;PRIMARY_KEY&quot;,
+                                &quot;name&quot;:&quot;id&quot;,
+                                &quot;type&quot;:4,
+                                &quot;value&quot;:3
+                            },
+                            {
+                                &quot;keyType&quot;:&quot;NULL&quot;,
+                                &quot;name&quot;:&quot;count&quot;,
+                                &quot;type&quot;:4,
+                                &quot;value&quot;:70
+                            }
+                        ]
+                    }
+                ],
+                &quot;tableName&quot;:&quot;stock_tbl&quot;
+            },
+            &quot;beforeImage&quot;:{
+                &quot;rows&quot;:[
+                    {
+                        &quot;fields&quot;:[
+                            {
+                                &quot;keyType&quot;:&quot;PRIMARY_KEY&quot;,
+                                &quot;name&quot;:&quot;id&quot;,
+                                &quot;type&quot;:4,
+                                &quot;value&quot;:3
+                            },
+                            {
+                                &quot;keyType&quot;:&quot;NULL&quot;,
+                                &quot;name&quot;:&quot;count&quot;,
+                                &quot;type&quot;:4,
+                                &quot;value&quot;:100
+                            }
+                        ]
+                    }
+                ],
+                &quot;tableName&quot;:&quot;stock_tbl&quot;
+            },
+            &quot;sqlType&quot;:&quot;UPDATE&quot;,
+            &quot;tableName&quot;:&quot;stock_tbl&quot;
+        }
+    ],
+    &quot;xid&quot;:&quot;192.168.51.102:8091:2828558179596595550&quot;
+}
+</code></pre>
+
+<h3 id="5-2-undologmanager">5.2 UndoLogManager</h3>
+
+<p>UndoLogManager 负责 undo log 的新加、删除、回滚操作，不同的数据库有不同的实现（不同数据库的 SQL 语法会不同），公共逻辑放在了 AbstractUndoLogManager 抽象类中，整体的类继承关系如下图：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0c39c8fe64de41caa2d4d5e5ee196aec~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p>注：图片建议在 PC 端查看</p>
+
+<p>插入和删除 undo log 的逻辑都比较简单，直接操作数据表就行。这里重点看下回滚 undo log 的逻辑：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f34351668e76479084c1cab76edd38f0~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p>源码分析如下：</p>
+
+<p>备注：需要特别注意下，当回滚的时候，发现 undo log 不存在，需要往 undo_log 表新加一条记录，避免因为 RM 在 TM 发出回滚请求后，又成功提交分支事务的场景。</p>
+
+<h3 id="5-3-compressor-压缩算法">5.3 Compressor 压缩算法</h3>
+
+<p>Compressor 接口定义了压缩算法的规范，用来压缩文本，节省存储空间：</p>
+
+<pre><code class="language-Go">public interface Compressor {
+
+    /**
+     * compress byte[] to byte[].
+     * @param bytes the bytes
+     * @return the byte[]
+     */
+    byte[] compress(byte[] bytes);
+
+    /**
+     * decompress byte[] to byte[].
+     * @param bytes the bytes
+     * @return the byte[]
+     */
+    byte[] decompress(byte[] bytes);
+
+}
+</code></pre>
+
+<p>目前已经实现的压缩算法有如下这些：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4acb59bd1443480abfe86d0d7a8e5e61~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h3 id="5-4-undologparser-序列化算法">5.4 UndoLogParser 序列化算法</h3>
+
+<p>Serializer 接口定义了序列化算法的规范，用来序列化代码：</p>
+
+<pre><code class="language-Go">public interface UndoLogParser {
+
+    /**
+     * Get the name of parser;
+     * 
+     * @return the name of parser
+     */
+    String getName();
+
+    /**
+     * Get default context of this parser
+     * 
+     * @return the default content if undo log is empty
+     */
+    byte[] getDefaultContent();
+
+    /**
+     * Encode branch undo log to byte array.
+     *
+     * @param branchUndoLog the branch undo log
+     * @return the byte array
+     */
+    byte[] encode(BranchUndoLog branchUndoLog);
+
+    /**
+     * Decode byte array to branch undo log.
+     *
+     * @param bytes the byte array
+     * @return the branch undo log
+     */
+    BranchUndoLog decode(byte[] bytes);
+}
+
+</code></pre>
+
+<p>目前已经实现的序列化算法有如下这些：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76b40e00afcf4ef889002ca53cc36d02~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h3 id="5-5-executor-执行器">5.5 Executor 执行器</h3>
+
+<p>Executor 是 SQL 执行的入口类， AT 在执行 SQL 前后，需要管理 undo log 的 image 记录，主要是构建 undo log ，包括根据不同的业务 SQL ，来组装查询 undo log 的 SQL 语句；执行查询 undo log 的 SQL ，获取到镜像记录数据；执行插入 undo log 的逻辑（未提交事务）。</p>
+
+<pre><code class="language-Go">​public interface Executor&lt;T&gt; {​    /**     * Execute t.     *     * @param args the args     * @return the t     * @throws Throwable the throwable     */    T execute(Object... args) throws Throwable;}
+</code></pre>
+
+<p>针对不同的业务 SQL ，有不同的 Executor 实现，主要是因为不同操作/不同数据库类型的业务 SQL ，生成 undo log 的 SQL 的逻辑不同，所以都分别重写了 beforeImage() 和 afterImage() 方法。整体的继承关系如下图所示：</p>
+
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/69c9ebc1fc7b4212b01d79d390b57181~tplv-k3u1fbpfcp-watermark.image?" alt="lQLPJxa0Js5RE3jNB7vNDLmwHf8cY0rctjYDKDoGXoCRAA_3257_1979.png" /></p>
+
+<p>注：图片建议在 PC 端查看</p>
+
+<p>为了直观地看到不同类型的 SQL 生成的 before image SQL 和 after iamge SQL ，这里做个梳理。假如目标数据表的结构如下：</p>
+
+<pre><code class="language-Go">public interface Executor&lt;T&gt; {
+
+    /**
+     * Execute t.
+     *
+     * @param args the args
+     * @return the t
+     * @throws Throwable the throwable
+     */
+    T execute(Object... args) throws Throwable;
+}
+</code></pre>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6b2c8cbfe19e4d3988cac1b7749d21aa~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<p>注：图片建议在 PC 端查看</p>
+
+<h3 id="5-6-asyncworker">5.6 AsyncWorker</h3>
+
+<p>AsyncWorker 是用来做异步执行的，用来做分支事务提交和 undo log 记录删除等操作。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/34297c63b8d640ebbc24d5bbada2a7bf~tplv-k3u1fbpfcp-zoom-1.image" alt="" /></p>
+
+<h2 id="6-关于性能">6、关于性能</h2>
+
+<p>并不存在某一种完美的分布式事务机制可以适应所有场景，完美满足所有需求。无论 AT 模式、TCC 模式还是 Saga 模式，本质上都是对 XA 规范在各种场景下安全性或者性能的不足的改进。Seata 不同的事务模式是在一致性、可靠性、易用性、性能四个特性之间进行不同的取舍。</p>
+
+<p>近期  Seata 社区发现有同行，在未详细分析 Java 版本 AT 模式的代码的详细实现的情况下，仅对某个早期的 Go 版本的 Seata 进行短链接压测后，质疑 AT 模型的性能及其数据安全性，请具有一定思辨能力的用户朋友们在接受这个结论前仔细查阅其测试方法与测试对象，区分好 “李鬼” 与 “李逵”。</p>
+
+<p>实际上，这个早期的 Go 版本实现仅参照了 Seata v1.4.0，且未严格把 Seata AT 模式的所有功能都予以实现。话说回来，即便其推崇的 Seata XA 模式，其也依赖于单 DB 的XA 模式。而当下最新版本的 MySQL XA 事务模式的 BUG 依然很多，这个地基并没有其想象中的那样百分百稳固。</p>
+
+<p>由阿里与蚂蚁集团共建的 Seata，是我们多年内部分布式事务工程实践与技术经验的结晶，开源出来后得到了多达 150+ 以上行业同行生产环境的验证。开源大道既长且宽，这个道路上可以有机动车道也有非机动车道，还可以有人行道，大家携手把道路拓宽延长，而非站在人行道上宣传机动车道危险性高且车速慢。</p>
+
+<h3 id="7-总结">7、总结</h3>
+
+<p>Seata AT 模式依赖于各个 DB 厂商的不同版本的 DB Driver（数据库驱动），每种数据库发布新版本后，其 SQL 语义及其使用模式都可能发生改变。随着近年 Seata 被其用户们广泛应用于多种业务场景，在开发者们的努力下，Seata AT 模式保持了编程接口与其 XA 模式几乎一致，适配了几乎所有的主流数据库，并覆盖了这些数据库的主要流行版本的 Driver：真正做到了把分布式系统的 “复杂性”留在了框架层面，把易用性和高性能交给了用户。</p>
+
+<p>当然，Seata Java 版本的 XA 和 AT 模式还有许多需要完善与改进的地方，遑论其它多语言版本的实现。欢迎对 Seata 及其多语言版本建设感兴趣的同行参与到 Seata 的建设中来，共同努力把 Seata 打造成一个标准化分布式事务平台。</p>
+
+<h2 id="本周推荐阅读">本周推荐阅读</h2>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247516046&amp;idx=1&amp;sn=c8ed0fbbc18b4377778c2ed06c7332ba&amp;chksm=faa35054cdd4d9425b6780ae5ed1a6b83ab16afd9d870affba350c8002a2c4e2efdb85abc603&amp;scene=21">Go内存泄漏，pprof 够用了么？</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247512138&amp;idx=1&amp;sn=851abb8d07d47f703e33978c9c125c59&amp;chksm=faa35f90cdd4d6869c6cd4934c042484dbe1063c3fb85462d2f33e936b96240ae33d02d18c3a&amp;scene=21">Go 原生插件使用问题全解析</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247515572&amp;idx=1&amp;sn=8fffc0fb13ffc8346e3ab151978d947f&amp;chksm=faa3526ecdd4db789035b4c297811524cdf3ec6b659e283b0f9858147c7e37c4fea8b14b2fc6&amp;scene=21">Go 代码城市上云&ndash;KusionStack 实践</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247515039&amp;idx=1&amp;sn=e6068fc1b925e71eb8550c8c41296c6d&amp;chksm=faa35445cdd4dd53b450c96f6077b161026a62e451c7c4b8288364b137b3786bbe3d5ea0340a&amp;scene=21#wechat_redirect">Seata-php 半年规划</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220916/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | C 位大咖说、本周 QA、本周 Contributor</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly/20220923/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly |开源人、本周 QA、本周 Contributor</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/is-pprof-enough-for-go-memory-leak/">Go 内存泄漏，pprof 够用了吗？</a></li>
+		
+			<li><a href="/sofastack.tech/blog/go-code-city-cloud-kusionstack-practice/">Go 代码城市上云——KusionStack 实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/kusionstack-in-practice-at-ant-group-first/">KusionStack 在蚂蚁集团的探索实践 (上)</a></li>
+		
+			<li><a href="/sofastack.tech/blog/seata-php-semi-annual-planning/">Seata-php 半年规划</a></li>
+		
+			<li><a href="/sofastack.tech/blog/mosn-reverse-channel-explained/">MOSN 反向通道详解</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

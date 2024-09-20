@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFARegistry on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/categories/sofaregistry/</link>
+    <description>Recent content in SOFARegistry on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 11 Apr 2023 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/sofaregistry/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>缘起｜蚂蚁应用级服务发现的实践之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/</link>
+      <pubDate>Tue, 11 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家、SOFARegistry Maintainer 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 的设计和研发工作。 本文 8339 字阅</description>
+    </item>
+    
+    <item>
+      <title>SOFARegistry | 大规模集群优化实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofaregistry-large-scale-cluster-optimization-practice/20221103/</link>
+      <pubDate>Thu, 03 Nov 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofaregistry-large-scale-cluster-optimization-practice/20221103/</guid>
+      <description>文｜李旭东 专注于 SOFARegistry 及其周边基础设施的开发与优化 本文 7016 字 阅读 15 分钟 1 前言 SOFARegistry 在蚂蚁内部迭代升级过程中，每年大促都会引来一些新的挑战，通过不断的优</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服服务注册中心如何实现 DataServer 平滑扩缩容 | SOFARegistry 解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-dataserver-smooth-expansion-contraction/</link>
+      <pubDate>Wed, 08 Apr 2020 18:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-dataserver-smooth-expansion-contraction/</guid>
+      <description>SOFAStack（Scalable Open Financial Architecture Stack ）是蚂蚁金服自主研发的金融级云原生架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里</description>
+    </item>
+    
+    <item>
+      <title>服务注册中心数据一致性方案分析 | SOFARegistry 解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-data-consistency/</link>
+      <pubDate>Tue, 03 Mar 2020 16:30:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-data-consistency/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁金服自主研发的金融级云原生架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>服务注册中心如何实现秒级服务上下线通知 | SOFARegistry 解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-service-offline-notification/</link>
+      <pubDate>Thu, 02 Jan 2020 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-service-offline-notification/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁金服自主研发的金融级云原生架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>服务注册中心 Session 存储策略 | SOFARegistry 解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-session-storage/</link>
+      <pubDate>Wed, 16 Oct 2019 19:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-session-storage/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁金服自主研发的金融级云原生架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>服务注册中心数据分片和同步方案详解 | SOFARegistry 解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-data-fragmentation-synchronization-scheme/</link>
+      <pubDate>Thu, 10 Oct 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-data-fragmentation-synchronization-scheme/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>服务注册中心 MetaServer 功能介绍和实现剖析 | SOFARegistry 解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-metaserver-function-introduction/</link>
+      <pubDate>Thu, 12 Sep 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-metaserver-function-introduction/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服服务注册中心 SOFARegistry 解析 | 服务发现优化之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-service-discovery-optimization/</link>
+      <pubDate>Thu, 18 Jul 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-service-discovery-optimization/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 SOFARegistry 是蚂蚁金服开</description>
+    </item>
+    
+    <item>
+      <title>海量数据下的注册中心 - SOFARegistry 架构介绍</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-introduction/</link>
+      <pubDate>Thu, 25 Apr 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-introduction/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 SOFARegistry 是蚂蚁金服开</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服开源服务注册中心 SOFARegistry | SOFA 开源一周年献礼</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-deep-dive/</link>
+      <pubDate>Wed, 27 Mar 2019 14:30:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-registry-deep-dive/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 本文根据 SOFA Meetup#1 北</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服开源服务注册中心 SOFARegistry | SOFA 开源一周年献礼</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-registry/</link>
+      <pubDate>Wed, 27 Mar 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-1-registry/</guid>
+      <description>SOFAStack Scalable Open Financial Architecture Stack 是蚂蚁金服自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来的最佳实践。 本文根据 SOFA Meetup#1 北</description>
+    </item>
+    
+  </channel>
+</rss>

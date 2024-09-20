@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	从一次 RPC 请求，探索 MOSN 的工作流程 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		从一次 RPC 请求，探索 MOSN 的工作流程
+	</h1>
+	<div class="meta">
+		
+			2024-03-26 ·
+			
+				<a href="https://github.com/sofastack">呈铭</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>王程铭（呈铭）</p>
+
+<p>蚂蚁集团技术工程师，Apache Committer</p>
+
+<p>专注 RPC、Service Mesh 和云原生等领域。</p>
+
+<p>本文  7368  字，预计阅读  15  分钟</p>
+
+<h2 id="前言">前言</h2>
+
+<p>MOSN（Modular Open Smart Network）是一款主要使用 Go 语言开发的云原生网络代理平台，由蚂蚁集团开源并经过了双十一大促几十万容器的生产级验证。</p>
+
+<p>MOSN 为服务提供多协议、模块化、智能化、安全的代理能力，融合了大量云原生通用组件，同时也可以集成 Envoy 作为网络库，具备高性能、易扩展的特点。MOSN 可以和 Istio 集成构建 Service Mesh，也可以作为独立的四、七层负载均衡，API Gateway、云原生 Ingress 等使用。</p>
+
+<p>MOSN 作为数据面，整体由 NET/IO、Protocol、Stream、Proxy 四个层次组成，其中：</p>
+
+<ul>
+<li><p>NET/IO 用于底层的字节流传输</p></li>
+
+<li><p>Protocol 用于协议的 decode/encode</p></li>
+
+<li><p>Stream 用于封装请求和响应，在一个 conn 上做连接复用</p></li>
+
+<li><p>Proxy 做 downstream 和 upstream 之间 stream 的转发</p></li>
+</ul>
+
+<p>那么 MOSN 是如何工作的呢？下图展示的是使用 Sidecar 方式部署运行 MOSN 的示意图，服务和 MOSN 分别部署在同机部署的 Pod 上， 您可以在配置文件中设置 MOSN 的上游和下游协议，协议可以在 HTTP、HTTP2.0 以及 SOFARPC 等中选择。</p>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/nibOZpaQKw08mAtjVB1jCyHOibXQ8yXHg5HP9TARkHUexF0uJqtzDsuKR66Dn3Lc9IhGXB1dRfouymaxfQL4t4LQ/640?wx_fmt=jpeg&amp;from=appmsg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img" /></p>
+
+<p>以上内容来自官网 <a href="https://mosn.io">https://mosn.io</a></p>
+
+<h2 id="rpc-场景下-mosn-的工作机制">RPC 场景下 MOSN 的工作机制</h2>
+
+<p>RPC 场景下，MOSN 的工作机制示意图如下：</p>
+
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_png/nibOZpaQKw08mAtjVB1jCyHOibXQ8yXHg5zwQvFic9nOO2DpsACVFSbJbBdn4URvzBaoRYXq68BsnUib3zlicT4184g/640?wx_fmt=png&amp;from=appmsg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img" /></p>
+
+<p>我们简单理解一下上面这张图的意义：</p>
+
+<ol>
+<li><p>Server 端 MOSN 会将自身 ingress 的协议端口写入到注册中心；</p></li>
+
+<li><p>Client 端 MOSN 会从注册中心订阅地址列表，第一次订阅也会返回全量地址列表，端口号是 Server 端 ingress 绑定的端口号；</p></li>
+
+<li><p>注册中心会实时推送地址列表变更到 Client 端（全量）；</p></li>
+
+<li><p>Client 端发起 rpc 调用时，请求会被 SDK 打到本地 Client 端 MOSN 的 egress 端口上；</p></li>
+
+<li><p>Client 端 MOSN 将 RPC 请求通过网络转发，将流量通过负载均衡转发到某一台 Server 端 MOSN 的 ingress 端口处理；</p></li>
+
+<li><p>最终到了 Server 端 ingress listener，会转发给本地 Server 应用；</p></li>
+
+<li><p>最终会根据原来的 TCP 链路返回。</p></li>
+</ol>
+
+<h2 id="全局视野下的-mosn-工作流程">全局视野下的 MOSN 工作流程</h2>
+
+<p>现在我们已经了解了 MOSN 的工作机制，那么 MOSN 作为 MESH 的数据面，是怎么进行流量拦截并且将响应原路返回的呢？</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_svg/AbruuZ3ILCkSywTjG2Aia8xic2Ol2vLrI1Uj5HEAtetMjBDFvtpmRk4b5AnT3VqJVibDJVKYymC1mvgHIGEdyicv8mDpEAsZ4hjj/640?wx_fmt=svg&amp;from=appmsg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="img" /></p>
+
+<p>为了方便大家理解，我将以上时序图内容进行拆分，我们一一攻破。</p>
+
+<h3 id="3-1-建立连接">3.1 建立连接</h3>
+
+<p>MOSN 在启动期间，会暴露本地 egress 端口接收 Client 的请求。MOSN 会开启 2 个协程，分别死循环去对 TCP 进行读取和写处理。MOSN 会通过读协程获取到请求字节流，进入 MOSN 的协议层处理。</p>
+
+<pre><code class="language-python">// 代码路径 mosn.io/mosn/pkg/network/connection.go
+func (c *connection) Start(lctx context.Context) {
+  // udp downstream connection do not use read/write loop
+  if c.network == &quot;udp&quot; &amp;&amp; c.rawConnection.RemoteAddr() == nil {
+    return
+  }
+  c.startOnce.Do(func() {
+    // UseNetpollMode = false
+    if UseNetpollMode {
+      c.attachEventLoop(lctx)
+    } else {
+      // 启动读/写循环
+      c.startRWLoop(lctx)
+    }
+  })
+}
+
+func (c *connection) startRWLoop(lctx context.Context) {
+  // 标记读循环已经启动
+  c.internalLoopStarted = true
+
+  utils.GoWithRecover(func() {
+    // 开始读操作
+    c.startReadLoop()
+  }, func(r interface{}) {
+    c.Close(api.NoFlush, api.LocalClose)
+  })
+  // 省略。。。
+}
+</code></pre>
+
+<h3 id="3-2-protocol-处理">3.2  Protocol 处理</h3>
+
+<p>Protocol 作为多协议引擎层，对数据包进行检测，并使用对应协议做 decode/encode 处理。MOSN 会循环解码，一旦收到完整的报文就会创建与其关联的 xstream，用于保持 tcp 连接用于后续响应。</p>
+
+<pre><code class="language-python">// 代码路径 mosn.io/mosn/pkg/stream/xprotocol/conn.go
+func (sc *streamConn) Dispatch(buf types.IoBuffer) {
+  // decode frames
+  for {
+    // 协议 decode，比如 dubbo、bolt 协议等
+    frame, err := sc.protocol.Decode(streamCtx, buf)
+
+    if frame != nil {
+      // 创建和请求 frame 关联的 xstream，用于保持 tcp 连接用于后续响应
+      sc.handleFrame(streamCtx, xframe)
+    }
+  }
+}
+
+func (sc *streamConn) handleFrame(ctx context.Context, frame api.XFrame) {
+  switch frame.GetStreamType() {
+  case api.Request:
+    // 创建和请求 frame 关联的 xstream，用于保持 tcp 连接用于后续响应，之后进入 proxy 层
+    sc.handleRequest(ctx, frame, false)
+  }
+}
+
+func (sc *streamConn) handleRequest(ctx context.Context, frame api.XFrame, oneway bool) {
+  // 创建和请求 frame 关联的 xstream
+  serverStream := sc.newServerStream(ctx, frame)
+  // 进入 proxy 层并创建 downstream
+  serverStream.receiver = sc.serverCallbacks.NewStreamDetect(serverStream.ctx, sender, span)
+  serverStream.receiver.OnReceive(serverStream.ctx, frame.GetHeader(), frame.GetData(), nil)
+}
+</code></pre>
+
+<h3 id="3-3-proxy-层处理">3.3  Proxy 层处理</h3>
+
+<p>proxy 层负责 filter 请求/响应链、路由匹配、负载均衡最终将请求转发到集群的某台机器上。</p>
+
+<h4 id="downstream-部分">downstream 部分</h4>
+
+<pre><code class="language-python">// 代码路径 mosn.io/mosn/pkg/proxy/downstream.go
+func (s *downStream) OnReceive(ctx context.Context, headers types.HeaderMap, data types.IoBuffer, trailers types.HeaderMap) {
+  s.downstreamReqHeaders = headers
+  // filter 请求/响应链、路由匹配、负载均衡
+  phase = s.receive(s.context, id, phase)
+}
+
+func (s *downStream) receive(ctx context.Context, id uint32, phase types.Phase) types.Phase {
+  for i := 0; i &lt;= int(types.End-types.InitPhase); i++ {
+    s.phase = phase
+
+    switch phase {
+
+    // downstream filter 相关逻辑
+    case types.DownFilter:
+      s.printPhaseInfo(phase, id)
+      s.tracks.StartTrack(track.StreamFilterBeforeRoute)
+
+      s.streamFilterChain.RunReceiverFilter(s.context, api.BeforeRoute,
+        s.downstreamReqHeaders, s.downstreamReqDataBuf, s.downstreamReqTrailers, s.receiverFilterStatusHandler)
+      s.tracks.EndTrack(track.StreamFilterBeforeRoute)
+
+      if p, err := s.processError(id); err != nil {
+        return p
+      }
+      phase++
+
+    // route 相关逻辑
+    case types.MatchRoute:
+      s.printPhaseInfo(phase, id)
+
+      s.tracks.StartTrack(track.MatchRoute)
+      s.matchRoute()
+      s.tracks.EndTrack(track.MatchRoute)
+
+      if p, err := s.processError(id); err != nil {
+        return p
+      }
+      phase++
+      
+    // 在集群中选择一个机器、包含cluster和loadblance
+    case types.ChooseHost:
+      s.printPhaseInfo(phase, id)
+
+      s.tracks.StartTrack(track.LoadBalanceChooseHost)
+      // 这里很重要，在选中一个机器之后，这里upstreamRequest对象有两个作用
+      // 1. 这里通过持有downstream保持着对客户端app的tcp引用，用来接收请求
+      // 2. 转发服务端tcp引用，转发客户端app请求以及响应服务端response时的通知
+      s.chooseHost(s.downstreamReqDataBuf == nil &amp;&amp; s.downstreamReqTrailers == nil)
+      s.tracks.EndTrack(track.LoadBalanceChooseHost)
+
+      if p, err := s.processError(id); err != nil {
+        return p
+      }
+      phase++
+    }
+  }
+}
+</code></pre>
+
+<h4 id="upstream-部分">upstream 部分</h4>
+
+<p>至此已经选中一台服务端的机器，开始准备转发。</p>
+
+<pre><code class="language-python">// 代码路径 mosn.io/mosn/pkg/proxy/upstream.go
+func (r *upstreamRequest) appendHeaders(endStream bool) {
+
+  if r.downStream.oneway {
+    _, streamSender, failReason = r.connPool.NewStream(r.downStream.context, nil)
+  } else {
+    // 会使用 ChooseHost 中选中的机器 host 创建 sender，xstream 是客户端的流对象
+    _, streamSender, failReason = r.connPool.NewStream(r.downStream.context, r)
+  }
+}
+</code></pre>
+
+<p>接下来会到达 conn.go 的 handleFrame 的 handleResponse 方法，此时 handleResponse 方法继续调用 downStream 的 receiveData 方法接收数据。</p>
+
+<pre><code class="language-python">//代码路径 mosn.io/mosn/pkg/stream/xprotocol/conn.go
+func (sc *streamConn) handleFrame(ctx context.Context, frame api.XFrame) {
+  switch frame.GetStreamType() {
+  case api.Response:
+    // 调用 downStream 的 receiveData 方法接收数据
+    // 因为 mosn 在转发之前修改了请求id，因此会重新 encode 请求
+    sc.handleResponse(ctx, frame)
+  }
+}
+</code></pre>
+
+<p>一旦准备好转发就会通过 upstreamRequest 选择的下游主机直接发送 write 请求，请求的协程此时会被阻塞。</p>
+
+<pre><code class="language-python">// 代码路径 mosn.io/mosn/pkg/stream/xprotocol/stream.go
+func (s *xStream) endStream() {
+  defer func() {
+    if s.direction == stream.ServerStream {
+      s.DestroyStream()
+    }
+  }()
+
+  if log.Proxy.GetLogLevel() &gt;= log.DEBUG {
+    log.Proxy.Debugf(s.ctx, &quot;[stream] [xprotocol] connection %d endStream, direction = %d, requestId = %v&quot;, s.sc.netConn.ID(), s.direction, s.id)
+  }
+
+  if s.frame != nil {
+    // replace requestID
+    s.frame.SetRequestId(s.id)
+    // 因为 mosn 在转发之前修改了请求 id，因此会重新 encode 请求
+    buf, err := s.sc.protocol.Encode(s.ctx, s.frame)
+    if err != nil {
+      log.Proxy.Errorf(s.ctx, &quot;[stream] [xprotocol] encode error:%s, requestId = %v&quot;, err.Error(), s.id)
+      s.ResetStream(types.StreamLocalReset)
+      return
+    }
+
+    tracks := track.TrackBufferByContext(s.ctx).Tracks
+
+    tracks.StartTrack(track.NetworkDataWrite)
+    // 一旦准备好转发就会通过upstreamRequest选择的下游主机直接发送 write 请求，请求的协程此时会被阻塞
+    err = s.sc.netConn.Write(buf)
+    tracks.EndTrack(track.NetworkDataWrite)
+    }
+  }
+}
+</code></pre>
+
+<h3 id="3-4-准备将响应写回客户端">3.4  准备将响应写回客户端</h3>
+
+<p>接下来客户端 xstream 将通过读协程接收响应的字节流，proxy.go 的 OnData 方法作为 proxy 层的数据接收点。</p>
+
+<pre><code class="language-python">// 代码位置 mosn.io/mosn/pkg/proxy/proxy.go
+func (p *proxy) OnData(buf buffer.IoBuffer) api.FilterStatus {
+  // 这里会做两件事
+  // 1. 调用 protocol 层进行decode
+  // 2. 完成后通知upstreamRequest对象，唤醒downstream阻塞的协程
+  p.serverStreamConn.Dispatch(buf)
+
+  return api.Stop
+}
+
+// 代码位置 mosn.io/mosn/pkg/proxy/upstream.go
+func (r *upstreamRequest) OnReceive(ctx context.Context, headers types.HeaderMap, data types.IoBuffer, trailers types.HeaderMap) {
+  // 结束当前stream
+  r.endStream()
+
+  // 唤醒
+  r.downStream.sendNotify()
+}
+</code></pre>
+
+<p>downstream 被唤醒处理收到的响应，重新替换回正确的请求 ID，并调用 protocol 层重新编码成字节流写回客户端，最后销毁请求相关的资源，流程执行完毕。</p>
+
+<pre><code class="language-python">// 比如我的 demo 是 dubbo 协议
+func encodeFrame(ctx context.Context, frame *Frame) (types.IoBuffer, error) {
+
+  // 1. fast-path, use existed raw data
+  if frame.rawData != nil {
+    // 1.1 replace requestId
+    binary.BigEndian.PutUint64(frame.rawData[IdIdx:], frame.Id)
+
+    // hack: increase the buffer count to avoid premature recycle
+    frame.data.Count(1)
+    return frame.data, nil
+  }
+
+  // alloc encode buffer
+  frameLen := int(HeaderLen + frame.DataLen)
+  buf := buffer.GetIoBuffer(frameLen)
+  // encode header
+  buf.WriteByte(frame.Magic[0])
+  buf.WriteByte(frame.Magic[1])
+  buf.WriteByte(frame.Flag)
+  buf.WriteByte(frame.Status)
+  buf.WriteUint64(frame.Id)
+  buf.WriteUint32(frame.DataLen)
+  // encode payload
+  buf.Write(frame.payload)
+  return buf, nil
+}
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>本文以工作中非常常见的一个思路为出发点，详细描述了 MOSN 内部网络转发的详细流程，希望可以帮助小伙伴加深对 MOSN 的理解。</p>
+
+<p>MOSN 是一款非常优秀的开源产品。MOSN 支持多种网络协议（如HTTP/2, gRPC, Dubbo 等），并且能够很容易地增加对新协议的支持；MOSN 提供了丰富的流量治理功能，例如限流、熔断、重试、负载均衡等；MOSN 在性能方面进行了大量优化，比如内存零拷贝、自适应缓冲区、连接池、协程池等，这些都有助于提升其在高并发环境下的表现。此外在连接管理方面，MOSN 设计了多协议连接池；在内存管理方面，MOSN 在 sync.Pool 之上封装了一层资源对的注册管理模块，可以方便的扩展各种类型的对象进行复用和管理。总的来说，MOSN 的设计体现了可扩展性、高性能、安全性以及对现代云环境的适应性等多方面的考虑。</p>
+
+<p>对于开发者来说，深入研究 MOSN 的代码和架构，无疑可以学到很多关于高性能网络编程和云原生技术的知识。MOSN 社区欢迎您的加入！</p>
+
+<p>MOSN 官网：<a href="https://mosn.io/">https://mosn.io/</a></p>
+
+<p>MOSN Github：<a href="https://github.com/mosn/mosn">https://github.com/mosn/mosn</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/koupleless-brings-split-plugin-to-help-you-to-improve-the-efficiency-of-collaborative-development/">
+		<span class="text">上一篇: </span>
+		<span class="text">单体应用协作开发太难？Koupleless 带来拆分插件，帮你抽丝剥茧提高协作开发效率！</span>
+	</a>
+	
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/koupleless-brings-split-plugin-to-help-you-to-improve-the-efficiency-of-collaborative-development/">单体应用协作开发太难？Koupleless 带来拆分插件，帮你抽丝剥茧提高协作开发效率！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/efficient-cost-reduction-case-study-of-koupleless-practical-application-in-nanjing-f6/">高效降本｜深度案例解读 Koupleless 在南京爱福路的落地实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/economical-and-efficient-enhance-the-competitiveness-of-enterprises-sofaserverless-brand-upgraded-to-koupleless-release-version-1.0/">成倍降本增效，提升企业竞争力！SOFAServerless 品牌升级为 Koupleless，重磅发布 1.0 版本</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ospp-exprience-sharing-keep-enthusiastic-and-all-in/">开源之夏经验分享｜Layotto 社区 陈亦昺：保持热情、全力以赴！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/open-source-together-seata-enters-apache-incubator/">携手开源，共同见证｜Seata 进入 Apache 孵化器</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

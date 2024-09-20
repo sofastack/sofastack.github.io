@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Dragonfly 中 P2P 传输协议优化 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Dragonfly 中 P2P 传输协议优化
+	</h1>
+	<div class="meta">
+		
+			2022-11-15 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efe942fbc1f145a3b4618f426b0f8673~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜孙珩珂</p>
+
+<p>上海交通大学</p>
+
+<p>本文<strong>1987</strong>字 阅读 <strong>10</strong> 分钟</p>
+
+<h3 id="01-优化背景">01 优化背景</h3>
+
+<p>此前 Dragonfly 的 P2P 下载采用静态限流策略，相关配置项在 <code>dfget.yaml</code> 配置文件中：</p>
+
+<pre><code class="language-c"># 下载服务选项。
+download:  
+# 总下载限速。  
+totalRateLimit: 1024Mi  
+# 单个任务下载限速。  perPeerRateLimit: 512Mi
+</code></pre>
+
+<p>其中 <code>perPeerRateLimit</code> 为单个任务设置流量上限， <code>totalRateLimit</code> 为单个节点的所有任务设置流量上限。</p>
+
+<p>静态限流策略的理想情况是： <code>perPeerRateLimit</code> 设置为20M ， <code>totalRateLimit</code> 设置为 100M ，且该节点目前运行了 5 个或更多的 P2P 下载任务，这种情况下可以确保所有任务总带宽不会超过 100M ，且带宽会被有效利用。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9961baec5df1458692eb084cf6b51538~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>这种限流策略的缺点是：若<code>perPeerRateLimit</code> 设置为 20M ， <code>totalRateLimit</code> 设置为 100M ，并且当前该节点只运行了一个下载任务，那么该任务的最大下载速度为 20M ，和最大带宽 100M 相比，浪费了 80% 的带宽。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5cbce33500ef462fa63615216e4a5712~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>因此，为了最大限度地利用带宽，需要使用动态限流来确保任务数量少时能能充分利用总带宽，而任务数量多时也能公平分配带宽。最终，我们设计出一套根据上下文进行动态限流的算法，其中上下文指各任务在过去一秒内使用的带宽，此外，算法还考虑到了任务数量、任务剩余大小、任务保底带宽等因素，性能相比原来的静态限流算法有显著提升。</p>
+
+<h3 id="02-相关代码分析">02 相关代码分析</h3>
+
+<p><code>perPeerRateLimit</code> 配置项最终赋值给 <code>peerTaskConductor</code> 的<code>pt.limiter</code> ，由 <code>peerTaskConductor</code> 的 <code>DownloadPiece()</code> 函数里进行限速，<code>pt.waitLimit()</code> 进行实际限流工作，底层调用 Go 自带的限流函数 <code>WaitN()</code> 。</p>
+
+<p><code>TotalRateLimit</code> 配置项则在创建 <code>Daemon</code> 时被赋值给 <code>pieceManager</code> 的<code>pm.limiter</code> ，在 <code>pieceManager</code> 的 <code>DownloadPiece()</code> 和 <code>processPieceFromSource()</code> 函数中用到的 <code>pm.limiter</code> ，而这两个函数都会由 <code>peerTaskConductor</code> 调用，也就是说 P2P 下载会先进行总限速，之后再进行每个任务单独限速。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97596adf05ba40929d31e7a777e2280e~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>根据以上分析，Dragonfly 进行任务限速的逻辑为，每个peer task（<code>peerTaskConductor</code>）会有单独的限速 <code>perPeerRateLimit</code> ，同时 <code>pieceManager</code> 会有 <code>TotalRateLimit</code> 的总限速，以此达到单任务单独限流，同时限制所有任务总带宽的效果。</p>
+
+<h3 id="03-优化方案">03 优化方案</h3>
+
+<p>为了解决此前静态限流算法总带宽利用率不佳的缺点，需要将其改进为动态限流算法，即总带宽限速仍恒定，但每个任务的单独带宽限速需要根据上下文适度、定期调整，已达到最大化利用总带宽、同时相对公平分配带宽的目的。</p>
+
+<p>在经过数个改版后，最终我们确定了根据上下文进行限流的 sampling traffic shaper 动态限流算法。具体方案为，每个任务的单任务限流交由 <code>TrafficShaper</code> 组建进行统一管理， <code>TrafficShaper</code> 维护当前正在运行的所有任务，并且定期（每秒）更新这些任务的带宽。</p>
+
+<p>具体来说，上下文指每个任务在上一秒使用的带宽、每个任务的剩余大小、任务数量、任务保底带宽（不能低于 <code>pieceSize</code> ）等因素， <code>TrafficShaper</code> 会根据这些上下文公平地、效率最大化地为每个任务分配其下一秒的带宽（具体分配方案详见下一小节），实现动态限流的效果。</p>
+
+<h3 id="04-优化实现">04 优化实现</h3>
+
+<p>定义 <code>TrafficShaper</code> 接口如下：</p>
+
+<pre><code class="language-c">// TrafficShaper allocates bandwidth for running tasks dynamically
+type TrafficShaper interface {
+   // Start starts the TrafficShaper
+   Start()   
+   // Stop stops the TrafficShaper
+   Stop()   
+   // AddTask starts managing the new task
+   AddTask(taskID string, ptc *peerTaskConductor)
+   // RemoveTask removes completed task
+   RemoveTask(taskID string)   
+   // Record records task's used bandwidth
+   Record(taskID string, n int)
+   // GetBandwidth gets the total download bandwidth in the past second
+   GetBandwidth() int64
+}
+</code></pre>
+
+<p>该接口有两种实现，第一种是 <code>samplingTrafficShaper</code> 即基于上下文的 traffic shaper ，第二种是 <code>plainTrafficShaper</code> 只记录带宽使用情况，除此之外不做任何动态限流工作，用于和 <code>samplingTrafficShaper</code> 对比性能提升。</p>
+
+<p>同时，将相关配置项修改为如下内容：</p>
+
+<pre><code class="language-c"># 下载服务选项。
+download:  
+# 总下载限速。
+totalRateLimit: 1024Mi
+# 单个任务下载限速。
+perPeerRateLimit: 512Mi
+# traffic shaper类型，有sampling和plain两种可选  trafficShaperType: sampling
+</code></pre>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba757d11dbf24c519474e9c885a1210a~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>Traffic shaper 的具体运行逻辑为，由<code>peerTaskManager</code>维护<code>trafficShaper</code>，在创建<code>peerTaskManager</code>时，根据配置初始化<code>trafficShaper</code>，并且调用<code>Start()</code>函数，启动<code>trafficShaper</code>，具体来说，新建<code>time.NewTicker</code>，跨度为 1 秒，也即每秒<code>trafficShaper</code>都会调用<code>updateLimit()</code>函数以动态更新所有任务的带宽限流。</p>
+
+<p><code>updateLimit()</code> 函数会遍历所有运行中的任务，得出每个任务上一秒消耗的带宽以及所有任务消耗的总带宽，随后根据任务上一秒使用的带宽、任务剩余大小等因素，按比例分配带宽，具体来说首先根据上一秒该任务使用带宽以及该任务剩余大小的最大值确定下一秒该任务带宽，接着所有任务带宽根据总带宽按比例缩放，得到下一秒的真实带宽；同时需要确保每个任务的带宽不低于该任务的 <code>pieceSize</code> ，以免出现持续饥饿状态。</p>
+
+<p>在 <code>peerTaskManager</code> 的 <code>getOrCreatePeerTaskConductor()</code> 函数中，若新建任务，需要带宽，那么调用 <code>AddTask()</code> 更新所有任务的带宽，即按照已有任务的平均任务分配带宽，然后再根据总带宽上限将所有任务的带宽等比例进行缩放；根据平均带宽分配新任务带宽的优势为，避免了已经有一个任务占满了所有带宽，有新任务进来时，带宽会被压缩到很小 **的情况；同时，不是平均分配带宽，而是按需等比例分配，可以确保带宽需求量大的任务仍然带宽最多。在 <code>peerTaskManager</code> 的 <code>PeerTaskDone()</code> 函数中，任务完成，不再占用带宽，调用 <code>RemoveTask()</code> 按比例扩大所有任务的带宽。</p>
+
+<p>最后， <code>peerTaskManager</code> 停止时，调用 <code>Stop</code> 函数，停止运行 traffic shaper 。</p>
+
+<h3 id="05-优化结果">05 优化结果</h3>
+
+<p>测试 traffic shaper 相比原有的静态限流策略在单个任务、多个任务并发、多个任务交错等多种情况下的性能提升，测试结果如下：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb7d9914142a4768a7f2c3ee943ebb5e~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" />
+<em>注：若不特殊注明，单任务限流为4KB/s，总限流为10KB/s</em></p>
+
+<p>可以看到， traffic shaper 在单任务、多任务不相交、单任务低带宽等情况下相比静态限流策略性能提升明显，为 24%~59% 。在多个任务并发、多个任务交错等情况下和静态限流策略性能相当。综上，实验证明 sampling traffic shaper 能很好地解决任务数量较少时总带宽被大量浪费的情况，同时在任务数量较多以及其他复杂情况时依旧能保证和静态限流算法持平的效果。</p>
+
+<p>PR 链接（已合并）：<em><a href="https://github.com/dragonflyoss/Dragonfly2/pull/1654">https://github.com/dragonflyoss/Dragonfly2/pull/1654</a></em></p>
+
+<p><strong>本周推荐阅读</strong></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247510940&amp;idx=1&amp;sn=b545e0836a6182abddd13a05b2f90ba9&amp;chksm=faa34446cdd4cd50a461f071cdc4d871bd6eeef2318a2ec73968c117b41740a56a296c726aee&amp;scene=21">Dragonfly 基于 P2P 的文件和镜像分发系统</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247515730&amp;idx=1&amp;sn=185ccafb2e52b09b0c5746e5dd70f9ae&amp;chksm=faa35188cdd4d89e014c71c1ebfdaa615eafca514443e40e923933df5e6ea32fe90ae50af74d&amp;scene=21">深入 HTTP/3（2）｜不那么 Boring 的 SSL</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247515572&amp;idx=1&amp;sn=8fffc0fb13ffc8346e3ab151978d947f&amp;chksm=faa3526ecdd4db789035b4c297811524cdf3ec6b659e283b0f9858147c7e37c4fea8b14b2fc6&amp;scene=21">Go 代码城市上云——KusionStack 实践</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247513902&amp;idx=1&amp;sn=be00c5af2e9775a4039430bf187e16f4&amp;chksm=faa358f4cdd4d1e23d7e9c93b4a94d6e6c377f51eb5e96b6dd5f74b840e48ebd3f518c4bf80a&amp;scene=21">MOSN 反向通道详解</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20221111/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | 本周贡献 &amp; issue 精选</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20221122/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | 开源人、本周 Contributor &amp; QA</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/container-image-basics/">Nydus | 容器镜像基础</a></li>
+		
+			<li><a href="/sofastack.tech/blog/c-go-mechanism-calling-go-from-c/20221008/">cgo 机制 - 从 c 调用 go</a></li>
+		
+			<li><a href="/sofastack.tech/blog/20220929/">开源项目文档社区化！Tongsuo/铜锁实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofastack20220927/">从规模化平台工程实践，我们学到了什么？</a></li>
+		
+			<li><a href="/sofastack.tech/blog/20220920/">Seata AT 模式代码级详解</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

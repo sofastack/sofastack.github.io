@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	一行降低 100000kg 碳排放量的代码！ · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		一行降低 100000kg 碳排放量的代码！
+	</h1>
+	<div class="meta">
+		
+			2021-12-28 ·
+			
+				<a href="https://github.com/sofastack">张稀虹</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>文｜张稀虹（花名：止语 )</p>
+
+<p>蚂蚁集团技术专家</p>
+
+<p>负责蚂蚁集团云原生架构下的高可用能力的建设
+主要技术领域包括 ServiceMesh、Serverless 等</p>
+
+<p>本文 3631 字 阅读 8 分钟</p>
+
+<h2 id="part-1-故事背景">PART. 1 故事背景</h2>
+
+<p>今年双十一大促后，按照惯例我们对大促期间的系统运行数据进行了详细的分析，对比去年同期的性能数据发现，MOSN 的 CPU 使用率有大约 1% 的上涨。</p>
+
+<p>为什么增加了？</p>
+
+<p>是合理的吗？</p>
+
+<p>可以优化吗？</p>
+
+<p>是不可避免的熵增，还是人为的浪费？</p>
+
+<p>带着这一些列灵魂拷问我们对系统进行了分析</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*Ia1MRYlHoWEAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<h2 id="part-2-问题定位">PART. 2 问题定位</h2>
+
+<p>我们从监控上发现，这部分额外的开销是在系统空闲时已有，并且不会随着压测流量增加而降低，CPU 总消耗增加 1.2%，其中 0.8% 是由 cpu_sys 带来。</p>
+
+<p>通过 perf 分析发现新版本的 MOSN 相较于老版本， syscall 有明显的增加。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*-NugTrIpJjQAAAAAAAAAAAAAARQnAQ" alt="旧版本" /></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*a_ltRIwt_CwAAAAAAAAAAAAAARQnAQ" alt="新版本" /></p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*sRK8Q6hJqHkAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>经过层层分析，发现其中一部分原因是 MOSN 依赖的 sentinel-golang 中的一个StartTimeTicker 的 func 中的 Sleep 产生了大量的系统调用，这是个什么逻辑？</p>
+
+<h2 id="part-3-理论分析">PART. 3 理论分析</h2>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*yyD1SbRaRtcAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>查看源码发现有一个毫秒级别的时间戳缓存逻辑，设计的目的是为了降低高调用频率下的性能开销，但空闲状态下频繁的获取时间戳和 Sleep 会产生大量的系统调用，导致 cpu sys util 上涨。我们先从理论上分析一下为什么这部分优化在工程上通常是无效的，先来看看 Sentinel 的代码：</p>
+
+<pre><code class="language-Go">package util
+
+import (
+  &quot;sync/atomic&quot;
+  &quot;time&quot;
+)
+
+var nowInMs = uint64(0)
+
+// StartTimeTicker starts a background task that caches current timestamp per millisecond,
+// which may provide better performance in high-concurrency scenarios.
+func StartTimeTicker() {
+  atomic.StoreUint64(&amp;nowInMs, uint64(time.Now().UnixNano())/UnixTimeUnitOffset)
+  go func() {
+    for {
+      now := uint64(time.Now().UnixNano()) / UnixTimeUnitOffset
+      atomic.StoreUint64(&amp;nowInMs, now)
+      time.Sleep(time.Millisecond)
+    }
+  }()
+}
+
+func CurrentTimeMillsWithTicker() uint64 {
+  return atomic.LoadUint64(&amp;nowInMs)
+}
+</code></pre>
+
+<p>从上面的代码可以看到，Sentinel 内部用了一个 goroutine 循环的获取时间戳存到 atomic 变量里，然后调用 Sleep 休眠 1ms，通过这种方式缓存了毫秒级别的时间戳。外部有一个开关控制这段逻辑是否要启用，默认情况下是启用的。从这段代码上看，性能开销最大的应该是 Sleep，因为 Sleep 会产生 syscall，众所周知 syscall 的代价是比较高的。</p>
+
+<h3 id="time-sleep-和-time-now-对比开销到底大多少呢">time.Sleep 和 time.Now 对比开销到底大多少呢？</h3>
+
+<p>查证资料（1）后我发现一个反直觉的事实，由于 Golang 特殊的调度机制，在 Golang 中一次 time.Sleep 可能会产生 7 次 syscall，而 time.Now 则是 vDSO 实现的，那么问题来了 vDSO 和 7 次系统调用相比提升应该是多少呢？</p>
+
+<p>我找到了可以佐证的资料，恰好有一个 Golang 的优化（2），其中提到在老版本的 Golang 中（golang 1.9-)，Linux/386 下没有这个 vDSO 的优化，此时会有 2 次 syscall，新版本经过优化后理论性能提高 5～7x+，可以约等于一次 time.Now &lt;= 0.3 次 syscall 的开销。</p>
+
+<p>Cache 设计的目的是为了减少 time.Now 的调用，所以理论上这里调用量足够大的情况下可能会有收益，按照上面的分析，假设 time.Now 和 Sleep 系统调用的开销比是 0.3:7.3（7+0.3），Sleep 每秒会执行 1000 次（不考虑系统精度损失的情况下），这意味着一秒内 CurrentTimeMillsWithTicker 的调用总次数要超过 2.4W 才会有收益。</p>
+
+<p>所以我们再分析一下 CurrentTimeMillsWithTicker 的调用次数，我在这个地方加了一个 counter 进行验证，然后模拟请求调用 Sentinel 的 Entry，经过测试发现：</p>
+
+<ol>
+<li><p>当首次创建资源点时，Entry 和 CurrentTimeMillsWithTicker 的放大比为 20，这主要是因为创建底层滑动窗口时需要大量的时间戳计算</p></li>
+
+<li><p>当相同的 resource 调用 Entry 时，调用的放大比⁰为 5:1</p></li>
+</ol>
+
+<p>｜注 0: 内部使用的 MOSN 版本基于原版 Sentinel 做了一些定制化，社区版本放大比理论上低于该比值。</p>
+
+<p>考虑到创建资源点是低频的，我们可以近似认为此处调用放大比为 5。所以理论上当单机 QPS 至少超过 4800 以上才可能会取得收益&hellip;&hellip;我们动辄听说什么 C10K、C100K、C1000K 问题，这个值看上去似乎并不很高？但在实际业务系统中，这实际上是一个很高的量。</p>
+
+<p>我随机抽取了多个日常请求量相对大的应用查看 QPS（这里的 QPS 包含所有类型的资源点，入口/出口调用以及子资源点等，总之就是所有会经过 Sentinel Entry 调用的请求量），日常峰值也未超过 4800QPS，可见实际的业务系统中，单机请求量超过这个值的场景是非常罕见的。¹</p>
+
+<p>｜注 1: 此处监控为分钟级的数据监控，可能与秒级监控存在一定的出入，仅用于指导日常请求量评估。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*FMOhSL2KopEAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>考虑到这个优化还有一个好处，是可以降低同步请求时间戳时的耗时，所以我们可以再对比一下直接从 atomic 变量读取缓存值和通过 time.Now() 读取时间戳的速度。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*FMOhSL2KopEAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>可以看到单次直接获取时间戳确实比从内存读取开销大很多，但是仍然是 ns 级别的，这种级别的耗时增长对于一笔请求而言是可以忽略不计的。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*N-m1SbgDOwUAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>大概是 0.06 微秒，即使乘以 5，也就是 0.3 微秒的增加。在 4000QPS 这个流量档位下我们也可以看一下 MOSN 实际 RT。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*yhOCRajzgqAAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>两台机器的 MOSN RT 也没有明显的差异，毕竟只有 0.3 微秒&hellip;</p>
+
+<h2 id="part-4-测试结论">PART. 4 测试结论</h2>
+
+<p>同时我们也找了两台机器，分别禁用/启用这个 Cache 进行测试，测试结果佐证了上述分析的结论。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*0-sgTonPQ5UAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>从上图的数据可以看出来，启用 Cache 的情况下 cpu sys util 始终比不启用 Cache 的版本要大，随着请求量增加，性能差距在逐步缩小，但是直至 4000QPS 仍然没有正向的收益。</p>
+
+<p>经过测试和理论分析可得知，在常规的场景下，Sentinel 的这个 Cache 特性是没有收益的，反而对性能造成了损耗，尤其是在低负载的情况下。即使在高负载的情况下，也可以推论出：没有这个 Cache 不会对系统造成太大的影响。</p>
+
+<p>这次性能分析也让我们意识到了几个问题：</p>
+
+<ol>
+<li><p>不要过早优化，正所谓过早优化是万恶之源；</p></li>
+
+<li><p>一定要用客观数据证明优化结果是正向的，而不是凭借直觉；</p></li>
+
+<li><p>要结合实际场景进行分析，而不应该优先考虑一些小概率场景；</p></li>
+
+<li><p>不同语言间底层实现可能存在区别，移植时应该仔细评估。</p></li>
+</ol>
+
+<h2 id="part-5-有必要吗">PART. 5 有必要吗？</h2>
+
+<p>你上面不是说了，不要过早优化，那这个算不算过早优化呢，你是不是双标？</p>
+
+<p>“过早优化是万恶之源”实际上被误用了，它是有上下文的。</p>
+
+<p>We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%. —— Donald Knuth</p>
+
+<p>Donald Knuth 认为许多优化是没必要的，我们可能花费了大量的时间去做了投入产出比不高的事情，但他同时强调了一些关键性优化的必要性。简而言之就是要考虑性价比，不能盲目地、没有数据支撑地去做性能优化，premature 似乎翻译成“不成熟、盲目的”更为贴切，因此这句话的本意是“盲目的优化是万恶之源”。这里只需要一行代码的改动，即可省下这部分不必要的开销，性价比极高，何乐而不为呢？</p>
+
+<p>从数据上看，这个优化只是降低了 0.7% 的 cpu sys util，我们缺这 0.7% 吗？</p>
+
+<p>从系统水位的角度思考或许还好，毕竟我们为了保险起见预备了比实际需求更多的资源，这 0.7% 并不会成为压垮我们系统的最后一颗稻草。但从环保的角度，很有必要！今年我们强调的是绿色环保，提效降本。这区区一行代码，作为 Sidecar 跑在数十万的业务 Pod 中，背后对应的是上万台的服务器。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*_7_jTIydQeIAAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>同时这也是一行开源社区的代码，社区已经采纳我们的建议（3）将该特性默认设置为关闭，或许有上千家公司数以万计的服务器也将得到收益。</p>
+
+<p><img src="https://gw.alipayobjects.com/mdn/rms_1c90e8/afts/img/A*qT8UT66fp78AAAAAAAAAAAAAARQnAQ" alt="图片" /></p>
+
+<p>｜注 2: TDP 即热功耗设计，不能等价于电能功耗，热设计功耗是指处理器在运行实际应用程序时，可产生的最大热量。TDP 主要用于和处理器相匹配时，散热器能够有效地冷却处理器的依据。处理器的 TDP 功耗并不代表处理器的真正功耗，更没有算术关系，但通常可以认为实际功耗会大于 TDP。</p>
+
+<h3 id="扩展阅读">「扩展阅读」</h3>
+
+<ul>
+<li><p>time: Sleep requires ~7 syscalls #25471：
+<a href="https://github.com/golang/go/issues/25471">https://github.com/golang/go/issues/25471</a></p></li>
+
+<li><p>How does Go know time.Now?：
+<a href="https://tpaschalis.github.io/golang-time-now/">https://tpaschalis.github.io/golang-time-now/</a></p></li>
+
+<li><p>It&rsquo;s Go Time on Linux：
+<a href="https://blog.cloudflare.com/its-go-time-on-linux/">https://blog.cloudflare.com/its-go-time-on-linux/</a></p></li>
+
+<li><p>69390: runtime: use vDSO on linux/386 to improve - - time.Now performance：
+<a href="https://go-review.googlesource.com/c/go/+/69390">https://go-review.googlesource.com/c/go/+/69390</a></p></li>
+</ul>
+
+<p>（1）查证资料：<a href="https://github.com/golang/go/issues/25471">https://github.com/golang/go/issues/25471</a></p>
+
+<p>（2）Golang 的优化：<a href="https://go-review.googlesource.com/c/go/+/69390">https://go-review.googlesource.com/c/go/+/69390</a></p>
+
+<p>（3）我们的建议：<a href="https://github.com/alibaba/sentinel-golang/issues/441">https://github.com/alibaba/sentinel-golang/issues/441</a></p>
+
+<p>感谢艺刚、茂修、浩也、永鹏、卓与等同学对问题定位做出的贡献，本文部分引用了 MOSN 大促版本性能对比文档提供的数据。同时感谢宿何等 Sentinel 社区的同学对相关 issue 和 PR 的积极支持。</p>
+
+<h3 id="本周推荐阅读">本周推荐阅读</h3>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247494701&amp;idx=1&amp;sn=f9a2b71de8b5ade84c77b87a8649fa3a&amp;chksm=faa303f7cdd48ae1b1528ee903a0edc9beb691608efd924189bcf025e462ea8be7bc742772e1&amp;scene=21">技术风口上的限流</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247499565&amp;idx=1&amp;sn=00a26362451ee3bbc8ee82588514eb52&amp;chksm=faa310f7cdd499e15e39f1cfc32644cb175340f26148cab50ca90f973e786c5ef4d8cb025580&amp;scene=21">深入 HTTP/3（一）｜从 QUIC 链接的建立与关闭看协议的演进</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247499337&amp;idx=1&amp;sn=a0f3965f5989858c7e50763e696c9c53&amp;chksm=faa31193cdd49885045adfce40c76e7cde9b689203845f2f674c24f379c246868d272c8adcbd&amp;scene=21">网商双十一基于 ServiceMesh 技术的业务链路隔离技术及实践</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247498209&amp;idx=1&amp;sn=7dbfd98e922d938ffce24986945badef&amp;chksm=faa3163bcdd49f2d3b5dd6458a3e7ef9f67819d8a1b5b1cbb3d10ab3b7cda12dd7a3d2971a9e&amp;scene=21">降本提效！注册中心在蚂蚁集团的蜕变之路</a></p>
+
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/75d7bde6-1f48-4f28-80a4-215f8ec811bd.webp" alt="img" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211224/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly |社区开发者的搬砖日常、本周 Contributor、QA 整理</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211231/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly |社区新年祝福、QA 整理、MOSN 本周发布</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/the-practice-and-thinking-behind-sofastack/">SOFAStack 背后的实践和思考｜新一代分布式云 PaaS 平台，打造企业上云新体验</a></li>
+		
+			<li><a href="/sofastack.tech/blog/deeper-into-http/3-evolution-of-the-protocol-from-the-creation-and-closing-of-quic-links/">深入 HTTP/3（一）｜从 QUIC 链接的建立与关闭看协议的演进</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofaark-committer-interview-if-you-dont-like-it-just-change-it/">SOFAArk Committer 专访｜看它不爽，就直接动手改！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/online-business-double-eleven-servicemesh-technology-based-service-link-isolation-technology-and-practice/">网商双十一-基于 ServiceMesh 技术的业务链路隔离技术及实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/exploration-and-practice-of-service-mesh-in-icbc/">Service Mesh 在中国工商银行的探索与实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

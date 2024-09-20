@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>开源五周年 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/</link>
+    <description>Recent content in 开源五周年 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 15 Apr 2023 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFA 五周年，Live Long and Prosper！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-anniversary-5/</link>
+      <pubDate>Sat, 15 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-anniversary-5/</guid>
+      <description>概要 活动主题：SOFA 五周年，Live Long and Prosper！ 活动时间：04 月 15 日 12:00&amp;ndash;17:00 活动形式：线下 Meetup + 线上直播 资料下载： 《SOFAStack 的下</description>
+    </item>
+    
+  </channel>
+</rss>

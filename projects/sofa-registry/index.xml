@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFARegistry on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/</link>
+    <description>Recent content in SOFARegistry on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/projects/sofa-registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>缘起｜蚂蚁应用级服务发现的实践之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/</link>
+      <pubDate>Tue, 11 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家、SOFARegistry Maintainer 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 的设计和研发工作。 本文 8339 字阅</description>
+    </item>
+    
+    <item>
+      <title>SOFARegistry | 聊一聊服务发现的数据一致性</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/</link>
+      <pubDate>Tue, 03 Jan 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 设计、研发工作。 本文 9492字 阅读 24 分钟 PART. 1 前言 1.1 什么是</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜registry meta 选主</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/</link>
+      <pubDate>Wed, 11 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-registry-meta/</guid>
+      <description>背景 SOFARgeistry 分为 Session、Data 和 Meta 三个模块。Session 模块用于 client 交互，可以横向扩容，可以承受大量 client 连接请求；Data 是数据存储模块，</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜发布订阅推送</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/</link>
+      <pubDate>Mon, 09 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-publish-subscription-push/</guid>
+      <description>前言 此次源码解析均在 sofa-registry:6.1.4-SNAPSHOT 版本下分析 一、架构流程图 二、订阅流程 以客户端首次订阅，且服务发布方已注册的场景为例，订阅流程主要分为三步， 客户端发起订</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜无损运维</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/</link>
+      <pubDate>Fri, 06 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-non-destructive-o-and-m/</guid>
+      <description>源码解析：无损运维 SOFARegistry 是一个基于内存存储的分布式注册中心，数据是分散存储在各个节点，为了做到注册中心自身运维期间依然能够对外正常提供服务，需要</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜推送开关</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/</link>
+      <pubDate>Fri, 22 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-switch/</guid>
+      <description>前言 某些场景下 SOFARegistry 需要暂时关闭推送功能，这样集群内的业务可以利用 client 的缓存继续工作，比如说 SOFARegistry 需要进行不兼容升级，需要全集群下线，更新版本后再拉起</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜SlotTable</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/</link>
+      <pubDate>Fri, 08 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-slottable/</guid>
+      <description>SOFARegistry 对于服务数据是分片进行存储的，因此每一个 data server 只会承担一部分的服务数据，具体哪份数据存储在哪个 data server 是有一个称为 SlotTable 的路由表提供的，sessio</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜数据同步</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/</link>
+      <pubDate>Wed, 06 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-synchronization/</guid>
+      <description>本篇主要对 SOFARegistry 的数据同步模块进行解析，对于注册中心的概念以及 SOFARegistry 的基础架构不做过多阐述，相关介绍可以见海量数据下的注册中心 - SOFARegistry 架构介绍 本文主要写</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜通讯数据压缩</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/</link>
+      <pubDate>Wed, 30 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-communication-data-compression/</guid>
+      <description>为了支撑超大规模集群以及大内容传输的支持，增加传输效率，减少网络带宽，考虑对消息进行压缩处理，SOFARegistry的data和sessi</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜推送延迟 trace</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/</link>
+      <pubDate>Wed, 23 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-push-delay-trace/</guid>
+      <description>大致代码流程 推送延迟的计算方式 首次订阅和后续推送延迟计算的区分 如何统计各个阶段的耗时 前言： 此次源码解析均在 sofa-registry:6.1.4-SNAPSHOT 版本下分析 1、大致代码流转流程 起</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜数据倒排索引</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/</link>
+      <pubDate>Wed, 23 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyze-data-inverted-index/</guid>
+      <description>SOFAStack （Scalable Open Financial Architecture Stack） 是蚂蚁集团自主研发的金融级云原生架构，包含了构建金融级云原生架构所需的各个组件，是在金融场景里锤炼出来</description>
+    </item>
+    
+    <item>
+      <title>源码解析｜数据表监听</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/</link>
+      <pubDate>Fri, 18 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/code-analyza-data-table-listening/</guid>
+      <description>数据表结构要求 以应用级服务发现元数据表为例 param type description data_center String local data center revision String revision app_name String appName client_version String clientVersion base_params String base_params service_params String service_params deleted boolean delete or no gmt_create Date create time gmt_modified Date last update time 写入 写入缓存 cachedExecutor.execute 执行缓存写</description>
+    </item>
+    
+    <item>
+      <title>Java SDK</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/java-sdk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/java-sdk/</guid>
+      <description>1. Maven 坐标 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;registry-client-all&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${registry.client.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 2. 创建 SOFARegistry 客户端实例 构建 SOFARegistry 客户端实例的关键代码如下： RegistryClientConfig config = DefaultRegistryClientConfigBuilder.start().setRegistryEndpoint(&amp;quot;127.0.0.1&amp;quot;).setRegistryEndpointPort(9603).build(); DefaultRegistryClient registryClient = new DefaultRegistryClient(config); registryClient.init(); 其中注册中心相关的属性通过 DefaultRegistryClientConfigBuilder 构建指定，该类包含以下关</description>
+    </item>
+    
+    <item>
+      <title>SOFARegistry 介绍</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/overview/</guid>
+      <description>项目简介 SOFARegistry 是蚂蚁集团开源的一个生产级、高时效、高可用的服务注册中心。SOFARegistry 最早源自于淘宝的 ConfigServer，十年来</description>
+    </item>
+    
+    <item>
+      <title>参与贡献</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/contributing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/contributing/</guid>
+      <description>可以先去 发展路线 &amp;amp; 任务认领 内了解下开发任务及未来规划。 准备工作 贡献代码前需要先了解 git 工具的使用和 GitHub 网站的使用。 git 工具用法可以查看git官方书</description>
+    </item>
+    
+    <item>
+      <title>发展路线 &amp; 任务认领</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/roadmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/roadmap/</guid>
+      <description>发展路线 任务列表 部分内部已有的功能特性，待内部整理完毕后随各个迭代放出。 如果还没有实现的功能特性会列在下面的表格中，欢迎大家认领任务，参与贡</description>
+    </item>
+    
+    <item>
+      <title>发布说明</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/release-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/release-notes/</guid>
+      <description>更多参见：https://github.com/sofastack/sofa-registry/releases</description>
+    </item>
+    
+    <item>
+      <title>基础术语</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/terminology/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/terminology/</guid>
+      <description>业界通用术语 术语 说明 服务（Service） 通过网络提供的、具有特定业务逻辑处理能力的软件功能。 服务提供者（Service Provider） 通</description>
+    </item>
+    
+    <item>
+      <title>客户端使用</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/client-quick-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/client-quick-start/</guid>
+      <description>1. 创建 Maven 工程 服务端部署完毕后，我们可以新建一个 Maven 工程使用 SOFARegistry 提供的服务。首先新建一个 Maven 工程，然后引入如下依赖： &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;registry-client-all&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${registry.client.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 2. 发布数据 // 构建客户端</description>
+    </item>
+    
+    <item>
+      <title>总览</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/summary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/summary/</guid>
+      <description>TODO</description>
+    </item>
+    
+    <item>
+      <title>扩容与缩容</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/scale/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/scale/</guid>
+      <description>1. 集成部署模式 1.1 扩容 registry-integration 假设目前已经部署了 3 台 registry-integration，分别是 node1/node2/node3，扩容的新节点</description>
+    </item>
+    
+    <item>
+      <title>服务端部署</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/server-quick-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/server-quick-start/</guid>
+      <description>本地开发 在本地启动 SOFARegistry 是使用的H2 database 作为注册中心使用的配置数据库, 可以直接启动 com.alipay.sofa.registry.server.integration.RegistryApplication#main 默认会使用 application-dev.properties 作为配置文件 部署模式 SOFARegistry 部署依赖 mysql, 使用 mysql 作为注册中心</description>
+    </item>
+    
+    <item>
+      <title>版本规范</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/release-standard/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/release-standard/</guid>
+      <description>版本号 采用三位版本号，分别是主版本号、次版本号、修订版本号。例如 5.2.0。 参见: http://semver.org/lang/zh-CN/ 主版本号：主版本号内的所有版本必须相互兼容；与其它主版本</description>
+    </item>
+    
+    <item>
+      <title>版权声明</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/notice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/notice/</guid>
+      <description>依赖组件版权说明 SOFARegistry 使用了一些三方开源组件，他们分别是： Spring under Apache 2.0 license Spring Boot under Apache 2.0 license Netty under Apache License 2.0 SLF4j under the MIT License jersey under CDDL Version 1.1 SOFAJRaft under Apache License 2.0 SOFABolt under Apache License 2.0 SOFAHessian under Apache License 2.0 &amp;hellip; 其</description>
+    </item>
+    
+    <item>
+      <title>运维命令</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/management-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/management-api/</guid>
+      <description>1. registry-meta 1.1 推送开关 在注册中心新版本发布的过程中为了把对业务的影响减少到最小，避免服务端重启动引发大规模服务地址信息变更产生大量推送，我们提供运维</description>
+    </item>
+    
+    <item>
+      <title>部署</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/deployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/deployment/</guid>
+      <description>1. 环境准备 要使用 SOFARegistry，需要先准备好基础环境，SOFARegistry 依赖以下环境： Linux/Unix/Mac JDK8 需要采用 Apache Maven 3.2.5 或者以上的版本来编译</description>
+    </item>
+    
+  </channel>
+</rss>

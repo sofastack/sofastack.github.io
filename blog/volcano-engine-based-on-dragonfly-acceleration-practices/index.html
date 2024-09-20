@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	火山引擎基于 Dragonfly 加速实践 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		火山引擎基于 Dragonfly 加速实践
+	</h1>
+	<div class="meta">
+		
+			2023-03-21 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://mmbiz.qpic.cn/mmbiz_gif/nibOZpaQKw09ARcsGuzib3ttcN4LZpdAC0n9KTQp7uibF8ia0ibk3Olf3sib50ExibicicOrzCOVrOyUD2dFib84f0fTx5uA/640?wx_fmt=gif&amp;wxfrom=5&amp;wx_lazy=1" alt="图片" /></p>
+
+<p>文｜黄逸炀</p>
+
+<p>Dragonfly Maintainer</p>
+
+<p>字节跳动火山引擎软件工程师</p>
+
+<p>专注于镜像存储及镜像 P2P 分发</p>
+
+<p><strong>PART. 0</strong></p>
+
+<p><strong>背景</strong></p>
+
+<p>火山引擎镜像仓库 CR 使用 TOS 来存储容器镜像。目前在一定程度上能满足并发大规模的镜像拉取。然而最终拉取的并发量受限于 TOS 的带宽和 QPS。</p>
+
+<p>这里简单介绍一下目前针对于大规模拉镜像遇到的两个场景的问题：</p>
+
+<p>1、客户端数量越来越多，镜像越来越大，TOS 带宽最终无法满足需求。
+2、如果客户端使用了 Nydus 对镜像格式做转换之后，对 TOS 的请求量会有数量级的增加，TOS API 的 QPS 限制导致无法满足需求。</p>
+
+<p>不论是镜像仓库服务本身还是背后的存储，最终肯定是有带宽和 QPS 限制的。如果单纯依赖服务端提供的带宽和 QPS，很容易就无法满足需求。因此需要引入 P2P ，减轻服务端压力，进而满足大规模并发拉取镜像的需求。</p>
+
+<p><strong>PART. 1</strong></p>
+
+<p><strong>基于 P2P 技术镜像分发系统调研</strong></p>
+
+<p>目前开源社区有几个 P2P 项目，这里对这些项目进行简单介绍。</p>
+
+<p><strong>Dragonfly</strong></p>
+
+<p><strong>架构图</strong></p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpSJ87kBXVKEib1OV2hsPSenk6fibxI2F44BzHHYCs55bvib7kaD6m0rbog/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p><strong>术语</strong></p>
+
+<p><strong>Manager</strong></p>
+
+<p>1、存储动态配置供 Seed Peer 集群、Scheduler 集群以及 Dfdaemon 消费。</p>
+
+<p>2、维护 Seed Peer 集群和 Scheduler 集群之间关联关系。</p>
+
+<p>3、提供统一异步任务管理，用作预热等功能。</p>
+
+<p>4、监听各模块是否健康运行。</p>
+
+<p>5、为 Dfdaemon 筛选最优 Scheduler 集群调度使用。</p>
+
+<p>6、提供可视化控制台，方便用户操作管理 P2P 集群。</p>
+
+<p><strong>Scheduler</strong></p>
+
+<p>1、基于机器学习的多场景自适应智能 P2P 节点调度, 为当前下载节点选择最优父节点。</p>
+
+<p>2、构建 P2P 下载网络的有向无环图。</p>
+
+<p>3、根据不同特征值评估节点下载能力, 剔除异常节点。</p>
+
+<p>4、当下载失败情况，主动通知 Dfdaemon 进行回源下载。</p>
+
+<p><strong>Dfdaemon</strong></p>
+
+<p>1、基于 gRPC 提供下载功能, 并提供多源适配能力。</p>
+
+<p>2、开启 Seed Peer 模式可以作为 P2P 集群中回源下载节点, 也就是整个集群中下载的根节点。</p>
+
+<p>3、为镜像仓库或者其他 HTTP 下载任务提供代理服务。</p>
+
+<p>4、下载任务基于 HTTP 或 HTTPS 或其他自定义协议。</p>
+
+<p><strong>Kraken</strong></p>
+
+<p><strong>架构图</strong></p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpH6fW1GHQiaribm5rCd4XIWvE9LVYmvZkjP2MDVJg7T9zG7hokFibqquJA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p><strong>术语</strong></p>
+
+<p><strong>Agent</strong></p>
+
+<p>1、是 P2P 网络中的对等节点，需要在每个节点上部署。</p>
+
+<p>2、实现了 Docker Registry interface。</p>
+
+<p>3、通知 tracker 自己拥有的数据。</p>
+
+<p>4、下载其他 agent 的数据（tracker 会告诉该 agent 需要下载这块数据需要到哪个 agent 上下载）</p>
+
+<p><strong>Origin</strong></p>
+
+<p>1、负责从存储中读取数据做种。</p>
+
+<p>2、支持不同的存储。</p>
+
+<p>3、通过 Hash 环的形式保证高可用。</p>
+
+<p><strong>Tracker</strong></p>
+
+<p>1、P2P 网络中的协调者，追踪谁是 Peer，谁是 Seeder。</p>
+
+<p>2、追踪 Peer 拥有的数据。</p>
+
+<p>3、提供有序的 Peer 节点供 Peer 下载数据。</p>
+
+<p>4、通过 Hash 环的形式保证高可用。</p>
+
+<p><strong>Proxy</strong></p>
+
+<p>1、实现了 Docker Registry Interface。</p>
+
+<p>2、将镜像层传给 Origin 组件。</p>
+
+<p>3、将 Tag 传给 BUILD INDEX 组件。</p>
+
+<p><strong>Build-Index</strong></p>
+
+<p>1、Tag 和 digest 映射，agent 下载对应 Tag 数据时向 Build-Index 获取对应的 Digest 值。</p>
+
+<p>2、集群之间镜像复制。</p>
+
+<p>3、保存 Tag 数据在存储中。</p>
+
+<p>4、通过 Hash 环的形式保证高可用。</p>
+
+<p><strong>Dragonfly vs Kraken</strong></p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpibmVicmzAQfObd7VP6Aiaz3UxzA9JPELY3oyjlZtVpFtibyCNSTAzwCZ2g/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p><strong>PART. 2</strong></p>
+
+<p><strong>方案</strong></p>
+
+<p>在火山引擎上，主要考虑 VKE 和 VCI 通过 CR 拉取镜像。</p>
+
+<p>1、VKE 的产品特点是基于 ECS 部署的 K8S，因此十分适合每个节点部署 Dfdaemon，充分利用每个节点的带宽，进而充分利用 P2P 的能力。</p>
+
+<p>2、VCI 的产品特点是底层有一些资源很充足虚拟节点。上层的服务是以 POD 为载体，因此无法像 VKE 那样每个节点部署 Dfdaemon，所以部署的形式部署几个 Dfdaemon 作为缓存，利用缓存的能力。</p>
+
+<p>3、VKE 或 VCI 客户端拉取经过 Nydus 格式转化过的镜像。在该场景下，需要使用 Dfdaemon 作为缓存，不宜使用过多的节点，避免对 Scheduler 造成过大的调度压力。</p>
+
+<p>基于火山引擎对于以上产品的需求，以及结合 Dragonfly 的特点，需要设计一套兼容诸多因素的部署方案。部署 Dagonfly 的方案设计如下。</p>
+
+<p><strong>PART. 3</strong></p>
+
+<p><strong>整体架构图</strong></p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpzbjGZ6M9ORrV5LEH5SNBp2wQnfP7wc6AakTy6BdgO60J9MpFhPibSDw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>1、火山引擎上的资源都是归属于主账号下。P2P 控制组件以主账号级别隔离，每个主账号下一套 P2P 控制组件。服务端实现 P2P Manager Controller，通过该 Controller 来管控控制面所有 P2P 控制组件。</p>
+
+<p>2、P2P 控制组件部署在镜像仓库数据面 VPC，通过 LB 与用户集群打通。</p>
+
+<p>3、在 VKE 集群上，Dfdaemon 以 DaemonSet 方式部署，每个节点上部署一个 Dfdaemon。</p>
+
+<p>4、在 VCI 上，Dfdaemon 以 Deployment 方式部署。</p>
+
+<p>5、ECS 上 Containerd 通过 127.0.0.1:65001 访问本节点上的 Dfdaemon。</p>
+
+<p>6、通过在用户集群部署一个 controller 组件，基于 PrivateZone 功能，在用户集群生成.p2p.volces.com 域名， controller 会根据一定的规则挑选特定节点*（包括 VKE、VCI）*的 Dfdaemon pod，以 A 记录的形式解析到上述域名。</p>
+
+<ul>
+<li>ECS 上 Nydusd 通过.p2p.volces.com 域名访问 Dfdaemon。</li>
+<li>VCI 上镜像服务客户端和 Nydusd 通过.p2p.volces.com 域名访问 Dfdaemon。</li>
+</ul>
+
+<p><strong>PART. 4</strong></p>
+
+<p><strong>压测数据</strong></p>
+
+<p><strong>环境</strong></p>
+
+<p>镜像仓库：带宽 10Gbit/s。</p>
+
+<p>ECS: 4C8G，挂载本地盘，带宽 6Gbit/s。</p>
+
+<p><strong>镜像</strong></p>
+
+<p>Nginx (500M)</p>
+
+<p>TensorFlow (3G)</p>
+
+<p><strong>组件版本</strong></p>
+
+<p>Dragonfly v2.0.8。</p>
+
+<p><strong>Quota</strong></p>
+
+<p>Dfdaemon: Limit 2C6G。</p>
+
+<p>Scheduler: 2 Replicas，Request 1C2G，Limit 4C8G。</p>
+
+<p>Manager: 2 Replicas，Request 1C2G，Limit 4C8G。</p>
+
+<p><strong>POD 启动时间对比</strong></p>
+
+<p>Nginx Pod 分别并发 50、100、200、500 的所有 Pod 从创建到启动消耗时间。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpL5Or9CyvnpKQiaQD2CM1Lu8UQibq6XuqwK6Qa67vpQBjljoy0gmtTrpg/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>TensorFlow Pod 分别并发 50、100、200、500 的所有 Pod 从创建到启动消耗时间。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpAXU4nu7H9UFcYcYquQLtB3VEYj87BL4ej6rI9HCYmGE2guF3JXNRzw/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>在大规模拉镜像的场景下，在使用 Dragonfly 和 Dragonfly &amp; Nydus 场景对比 OCIv1 场景能够节省 90% 以上的容器启动时间。使用 Nydus 之后启动时间更短是因为镜像 lazyload 的特性，只需要拉取很小的一部分元数据 Pod 就能启动。</p>
+
+<p><strong>存储源端带宽峰值对比</strong></p>
+
+<p>Nginx Pod 分别并发 50、100、200、500 的存储端峰值流量。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpP9NYZRB6ETjwC2O93sOia3s7Cz0xaP8aywHmYLtfas9jHPTickLhGujQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>TensorFlow Pod 分别并发 50、100、200、500 的存储端峰值流量。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpogPasEkCmCUp2nqMdWY8flz1s9ul8vicS8JTo8DxOa2licXQRX1HD1Og/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p><strong>回源流量对比</strong></p>
+
+<p>Nginx Pod 分别并发 50、100、200、500 的回源流量。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpLsEWDrZIwF7xfdQCJlP9pLiaphiclwRwZuAGm9pMx12TxvCQH2IGzAnQ/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>TensorFlow Pod 分别并发 50、100、200、500 的回源流量。</p>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/nibOZpaQKw08g4b8VzZ3YJtheJicaoOOhpP3omRADmYiaWRuoaux5veiaicINicqlxalBS2z1FYUn8T4Ss0YR43fZwTA/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" /></p>
+
+<p>在大规模场景下，使用 Dragonfly 回源拉取镜像的数量很少。OCIv1 的场景所有的镜像拉取都要回源，因此使用 Dragonfly 回源峰值和回源流量相比 OCIv1 的场景少很多。并且使用 Dragonfly 后随着并发数提高，回源峰值和流量不会显著提高。</p>
+
+<p><strong>PART. 5</strong></p>
+
+<p><strong>总结</strong></p>
+
+<p>基于项目整体成熟度，社区活跃度、用户数量、架构复杂度，是否针对 Nydus 优化。未来发展趋势等因素综合考虑，Dragonfly 是 P2P 项目中最优的选型。</p>
+
+<p><strong>PART. 6</strong></p>
+
+<p><strong>术语及定义</strong></p>
+
+<p><strong>OCI</strong></p>
+
+<p>Open Container Initiative，开放容器计划是一个 Linux 基金会项目，由Docker在2015年6月启动，旨在为操作系统级虚拟化（*最重要的是 Linux 容器）*设计开放标准。</p>
+
+<p><strong>OCI Artifact</strong></p>
+
+<p>遵循 OCI image spec 的制品。</p>
+
+<p><strong>镜像</strong></p>
+
+<p>本文中的镜像指 OCI Artifact，因此也包括 Helm Chart 等其他 OCI Artifact。</p>
+
+<p><strong>镜像仓库</strong></p>
+
+<p>遵循 OCI distribution spec 实现的制品仓库。</p>
+
+<p><strong>ECS</strong></p>
+
+<p>是一种由CPU、内存、云盘组成的资源集合，每一种资源都会逻辑对应到数据中心的计算硬件实体。</p>
+
+<p><strong>CR</strong></p>
+
+<p>火山引擎镜像仓库服务。</p>
+
+<p><strong>VKE</strong></p>
+
+<p>火山引擎通过深度融合新一代云原生技术，提供以容器为核心的高性能 Kubernetes 容器集群管理服务，助力用户快速构建容器化应用。</p>
+
+<p><strong>VCI</strong></p>
+
+<p>火山一种 Serverless 和容器化的计算服务。当前 VCI 可无缝集成容器服务 VKE，提供 Kubernetes 编排能力。</p>
+
+<p>使用 VCI，可以专注于构建应用本身，而无需购买和管理底层云服务器等基础设施，并仅为容器实际运行消耗的资源付费。VCI 还支持秒级启动、高并发创建、沙箱容器安全隔离等能力。</p>
+
+<p><strong>TOS</strong></p>
+
+<p>火山引擎提供的海量、安全、低成本、易用、高可靠、高可用的分布式云存储服务。</p>
+
+<p><strong>Private Zone</strong></p>
+
+<p>基于专有网络VPC*（Virtual Private Cloud）*环境的私有DNS服务。该服务允许在自定义的一个或多个VPC中将私有域名映射到IP地址。</p>
+
+<p><strong>P2P</strong></p>
+
+<p>点对点技术，当 P2P 网络中某一个 peer 从 server 下载数据的时候，下载完数据后也能当作服务端供其他 peer 下载。当大量节点同时下载的时候，能保证后续下载的数据，可以不用从 server 端下载。从而减轻 server 端的压力。</p>
+
+<p><strong>Dragonfly</strong></p>
+
+<p>Dragonfly 是⼀款基于 P2P 技术的文件分发和镜像加速系统，并且是云原生架构中镜像加速领域的标准解决方案以及最佳实践。现在为云原生计算机基金会*（CNCF）*托管作为孵化级项目。</p>
+
+<p><strong>Nydus</strong></p>
+
+<p>Nydus 简介: Nydus 镜像加速框架是 Dragonfly 的子项目，它提供了容器镜像按需加载的能力，在生产环境支撑了每日百万级别的加速镜像容器创建，在启动性能，镜像空间优化，端到端数据一致性，内核态支持等方面相比 OCIv1 有巨大优势。</p>
+
+<p><strong>Dragonfly 社区官网网站</strong>:</p>
+
+<p>Volcano Engine: <a href="https://www.volcengine.com/"><em>https://www.volcengine.com/</em></a></p>
+
+<p>Volcano Engine VKE: <a href="https://www.volcengine.com/product/vke"><em>https://www.volcengine.com/product/vke</em></a></p>
+
+<p>Volcano Engine CR: <a href="https://www.volcengine.com/product/cr"><em>https://www.volcengine.com/product/cr</em></a></p>
+
+<p>Dragonfly 官网: <a href="https://d7y.io/"><em>https://d7y.io/</em></a></p>
+
+<p>Dragonfly Github Repo: <a href="https://github.com/dragonflyoss/Dragonfly2"><em>https://github.com/dragonflyoss/Dragonfly2</em></a></p>
+
+<p>Nydus 官网: <a href="https://nydus.dev/"><em>https://nydus.dev/</em></a></p>
+
+<p>Nydus Gihtub Repo: <a href="https://github.com/dragonflyoss/image-service"><em>https://github.com/dragonflyoss/image-service</em></a></p>
+
+<p><strong>Dragonfly Star 一下✨：</strong>
+<a href="https://github.com/dragonflyoss/Dragonfly2"><em>https://github.com/dragonflyoss/Dragonfly2</em></a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-230317/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | MOSN、Layotto 社区会议通知、Seata 版本发布</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20230324/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | 本周贡献 &amp; issue 精选</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/seata-go-1-1-0-released-completes-at-mode-support/">Seata-go 1.1.0 发布，补齐 AT 模式支持</a></li>
+		
+			<li><a href="/sofastack.tech/blog/dlrover-ant-open-source-large-scale-intelligent-distributed-training-system/">DLRover：蚂蚁开源大规模智能分布式训练系统</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofa-weekly-20230303/">SOFA Weekly｜铜锁探「密」、本周贡献 &amp; issue 精选</a></li>
+		
+			<li><a href="/sofastack.tech/blog/nudus-20230131/">Nydus 加速镜像一致性校验增强</a></li>
+		
+			<li><a href="/sofastack.tech/blog/go-sql-driver-amazing-bug/">一个 go-sql-driver 的离奇 bug</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

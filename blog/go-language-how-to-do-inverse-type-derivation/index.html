@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Go 语言，如何做逆向类型推导? · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Go 语言，如何做逆向类型推导?
+	</h1>
+	<div class="meta">
+		
+			2023-02-14 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/mosn/" rel="tag">#MOSN</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99b9ad6a5aa54a198cef65736b7c1fa5~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜朱德江（GitHub ID：doujiang24)</p>
+
+<p>MOSN 项目核心开发者蚂蚁集团技术专家</p>
+
+<p><em>专注于云原生网关研发的相关工作。</em></p>
+
+<p><strong>本文 224 字 阅读 8 分钟</strong></p>
+
+<p><strong>PART. 1</strong></p>
+
+<h3 id="引言">引言</h3>
+
+<p>在上回的文章<a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247516046&amp;idx=1&amp;sn=c8ed0fbbc18b4377778c2ed06c7332ba&amp;chksm=faa35054cdd4d9425b6780ae5ed1a6b83ab16afd9d870affba350c8002a2c4e2efdb85abc603&amp;token=977879696&amp;lang=zh_CN&amp;scene=21#wechat_redirect">《Go 内存泄漏，pprof 够用了么？》</a>中说到，从一个 core 文件生成内存引用关系火焰图时，虽然可以从 core 文件中读到所有的内存对象，但是并不知道它们的类型信息。</p>
+
+<p>这是因为 Go 作为静态类型语言，在运行时，内存对象的类型是已知的。也就是说，并不需要想动态类型语言那样，为每个内存对象在内存中存储其类型信息 <em>（有点例外的是 interface）</em> 。</p>
+
+<p>比如这个 Go 语言例子：</p>
+
+<pre><code class="language-go">type Foo struct {    a uint64    b int64}
+func foo(f *Foo) int64 {    return f.b}
+</code></pre>
+
+<p><code>Foo</code> 函数在使用 <code>f</code> 这个指针时，并不需要判断其类型，直接读一个带偏移量地址就能得到 <code>f.b</code>，也就是一条指令：<code>mov rax, qword ptr [rax + 8]</code>，就是这么简单直接。</p>
+
+<p>再看 Lua 语言这个例子：</p>
+
+<pre><code class="language-go">function foo(f)    return f.bendfoo({ b = 1 })
+</code></pre>
+
+<p><code>Foo</code> 函数在执行的时候，首先得判断 <code>f</code> 的类型，如果是 <code>table</code>，则按照 key 取 <code>b</code> 的值；如果不是，则抛运行时 error。</p>
+
+<p>能够运行时判断 <code>f</code> 的类型，是因为 Lua 中变量是用 <code>TValue</code> 来表示的，这个 <code>TValue</code> 结构中，就有一个信息用来存储变量类型。</p>
+
+<p><strong>PART. 2</strong></p>
+
+<h3 id="逆向类型推导">逆向类型推导</h3>
+
+<p>逆向类型推导的逻辑是：根据已知内存的类型信息，推导被引用的内存对象的类型信息。</p>
+
+<p>比如这个例子：</p>
+
+<pre><code class="language-go">type Foo struct {    a uint64    b int64}type Bar struct {    f *Foo}var b Bar
+</code></pre>
+
+<p>如果我们知道了 <code>b</code> 的类型是 <code>Bar</code>，那么 <code>b</code>  中第一个 field 指向的内存对象，就是 <code>Foo</code> 类型了 <em>（前提是合法的内存对象地址）</em> <em>。</em></p>
+
+<p><strong>既然存在推导，那我们怎么知道一些初始值呢？</strong></p>
+
+<p>一共有两类来源：</p>
+
+<p>1.全局变量；</p>
+
+<p>2.协程中每一帧函数的局部变量。</p>
+
+<p><strong>PART. 3</strong></p>
+
+<h3 id="全局变量">全局变量</h3>
+
+<p>Go 在编译的时候，默认会生成一些调试信息，按照 DWARF 标准格式，放在 ELF 文件中 <code>.debug_*</code> 这样的段里。</p>
+
+<p>这些调试信息中，我们关注两类关键信息：</p>
+
+<ol>
+<li><p><strong>类型信息：</strong> 包括了源码中定义的类型，比如某个 struct 的名字、大小、以及各个 field 类型信息；</p></li>
+
+<li><p><strong>全局变量：</strong> 包括变量名、地址、类型，调试信息中的、全局变量的地址、以及其类型信息，也就是构成推导的初始值。</p></li>
+</ol>
+
+<p>函数局部变量，要复杂一些，不过基本原理是类似的，这里就不细说了~</p>
+
+<p><strong>PART. 4</strong></p>
+
+<h3 id="推导过程">推导过程</h3>
+
+<p>推导过程，跟 GC-Mark 的过程类似，甚至初始值也跟 GC-Root 一样。</p>
+
+<p>所以，全部推导完毕之后，GC-Mark 认为是 alive 的内存对象，其类型信息都会被推导出来。</p>
+
+<p><strong>interface</strong></p>
+
+<p>Go 语言中 interface 比较类似动态类型，如下是空接口的内存结构，每个对象都存储了其类型信息：</p>
+
+<pre><code>type eface struct {    _type *_type    data  unsafe.Pointer}
+</code></pre>
+
+<p>按照类型推导，我们能知道一个对象是 <code>interface{}</code>，但是其中 Data 指向对象，是什么类型，我们则需要读取 <code>_type</code> 中的信息了。</p>
+
+<p><code>_type</code> 中有两个信息，对我们比较有用：</p>
+
+<p><strong>1.名字</strong></p>
+
+<p>不过比较坑的是，只存了 <code>pkg.Name</code> 并没有存完整的 Include Path 这个也合理的，毕竟 Go 运行时并不需要那么精确，也就是异常时，输出错误信息中用一下。不过在类型推导的时候，就容易踩坑了。</p>
+
+<p><strong>2.指针信息</strong></p>
+
+<p>具体存储形式有点绕，不过也就是表示这个对象中，有哪些偏移量是指针。</p>
+
+<p>有了这两个信息之后，就可以从全量的类型中，筛选出符合上面两个信息的类型。</p>
+
+<p>通常情况下，会选出一个正确的答案，不过有时候选出多个，仅仅根据这两个信息还不能区分出来，一旦一步错了，后面可能就全推导不出来了。</p>
+
+<p>我们给 Go 官方 Debug 贡献了一个补丁，可以进一步的筛选，有兴趣的可以看 CL 419176[1]。</p>
+
+<p><strong>unsafe.pointer</strong></p>
+
+<p>其实，在上面的 interface 示例中，最根源的原因，也就是 <code>data unsafe.pointer</code>，这个指针并没有类型信息，只是 interface 的实现中，有另外的字段来存储类型信息。</p>
+
+<p>不过，在 Go Runtime 中还有其它的 <code>unsafe.pointer</code>，就没有那么幸运了。</p>
+
+<p>比如 <code>map</code> 和 <code>sync.map</code> 的实现都有 <code>unsafe.pointer</code>，这种就没有办法像 <code>interface</code> 那样统一来处理了，只能 case-by-case，根据 <code>map/sync.map</code> 的结构特征来逆向写死了&hellip;</p>
+
+<p>我们给 Go 官方 Debug 贡献了 <code>sync.map</code> 的逆向实现，有兴趣的可以看 CL 419177[2]。</p>
+
+<p><strong>PART. 5</strong></p>
+
+<h3 id="隐藏类型">隐藏类型</h3>
+
+<p>除了源码中显示定义的类型，还有一些隐藏的类型，比如：<code>Method Value</code><code>、</code><code>Closure</code> 的实现中，也都是用 <code>struct</code> 来表示的，这些属于不太容易被关注到的“隐藏”类型。</p>
+
+<p><code>Method Value</code> 在逆向推导中，还是比较容易踩坑的，我们给 Go 官方 Debug 贡献了这块的实现，有兴趣的可以看 CL 419179[3]。</p>
+
+<p>相比 <code>Method Value</code> 这种固定结构的，<code>Closure</code> 这种会更难搞一些，不过幸运的是，我们目前的使用过程中，还没有踩坑的经历。</p>
+
+<p><strong>PART. 6</strong></p>
+
+<h3 id="逆向推导风险">逆向推导风险</h3>
+
+<p>这种逆向推导要做到 100% 完备还是挺难的，根本原因还是 <code>unsafe.pointer</code>。</p>
+
+<p>在 <code>reflect.Value</code>  中也有 <code>unsafe.pointer</code>，据我所知，这个是还没有逆向推导实现的，类似的应该也还有其它未知的。</p>
+
+<p>甚至，如果是标准库中的类型，我们还是可以一个个按需加上，如果是上层应用代码用到的 <code>unsafe.pointer</code>，那就很难搞了。</p>
+
+<p>还有一种可能，推导不出来的原因，就是内存泄漏的来源，我们就碰到这样一个例子，以后有机会再分享~</p>
+
+<p>幸运的是：如果是只是少量的对象没有推导出来，对于全局内存泄漏分析这种场景，通常影响其实也不大。</p>
+
+<p>另外，对于一个对象，只需要有一个路径可以推导出来也就够了。</p>
+
+<p>也就是说，如果一条推导线索因为 <code>unsafe.pointer</code> 断了，如果另外有一个线索可以推导到这个对象，那也是不影响的。因为从 <code>GC root</code> 到一个 <code>GC obj</code> 的引用关系链，可能会不止一条。</p>
+
+<p><strong>PART. 7</strong></p>
+
+<h3 id="小结">小结</h3>
+
+<p>Go 虽然是静态类型语言，不过由于提供了 <code>unsafe.pointer</code>，给逆向类型推导带来了很大的麻烦。好在 Go 对于 <code>unsafe.pointer</code> 的使用还是比较克制，把标准库中常用到的 <code>unsafe.pointer</code> 搞定了，基本也够用了。</p>
+
+<p>理论上来说，逆向推导这一套也适用于 C 语言，只不过 C 语言这种指针漫天飞的，动不动就来个强制类型转换，就很难搞了。</p>
+
+<p><strong>｜相关链接｜</strong></p>
+
+<p>[1]CL 419176：<br />
+<a href="https://go-review.googlesource.com/c/debug/+/419176">https://go-review.googlesource.com/c/debug/+/419176</a></p>
+
+<p>[2]CL 419177：
+<a href="https://go-review.googlesource.com/c/debug/+/419177">https://go-review.googlesource.com/c/debug/+/419177</a></p>
+
+<p>[3]CL 419179：
+<a href="https://go-review.googlesource.com/c/debug/+/419179">https://go-review.googlesource.com/c/debug/+/419179</a></p>
+
+<p><strong>了解更多&hellip;</strong></p>
+
+<p><strong>MOSN Star 一下✨：</strong>
+<a href="https://github.com/mosn/mosn">https://github.com/mosn/mosn</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20230210/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | 本周贡献 &amp; issue 精选</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20230217/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | 本周贡献 &amp; issue 精选</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/cloud-native-network-proxy-mosn-evolutionary-path/">云原生网络代理 MOSN 的进化之路</a></li>
+		
+			<li><a href="/sofastack.tech/blog/mosn-istio-service-mesh/">基于 MOSN 和 Istio Service Mesh 的服务治理实践</a></li>
+		
+			<li><a href="/sofastack.tech/activities/service-mesh-webinar-2/">Service Mesh Webinar#2：基于 MOSN 和 Istio Service Mesh 的服务治理实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/mosn-dubbo-dubbo-go-hessian2-performance-optimization/">记一次在 MOSN 对 Dubbo、Dubbo-go-hessian2 的性能优化</a></li>
+		
+			<li><a href="/sofastack.tech/activities/service-mesh-webinar-1/">Service Mesh Webinar#1：多点生活在 Service Mesh 上的实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

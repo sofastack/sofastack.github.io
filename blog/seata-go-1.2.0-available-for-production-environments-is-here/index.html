@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	生产环境可用的 Seata-go 1.2.0 来啦！！！ · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		生产环境可用的 Seata-go 1.2.0 来啦！！！
+	</h1>
+	<div class="meta">
+		
+			2023-06-06 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://img-blog.csdnimg.cn/img_convert/4fb4a738c67370e5ccf164bef59bd9b7.gif" alt="图片" /></p>
+
+<p>文｜刘月财（GitHub ID：luky116)</p>
+
+<p>360 服务端开发专家</p>
+
+<p>Seata-go 项目负责人</p>
+
+<p>本文 <strong>2752</strong> 字 阅读 <strong>7</strong> 分钟</p>
+
+<p><strong>发布概览</strong></p>
+
+<p>Seata-go 1.2.0 版本支持 XA 模式。XA 协议是由 X/Open 组织提出的分布式事务处理规范，其优点是对业务代码无侵入。当前 Seata-go 的 XA 模式支持 MySQL 数据库。至此，Seata-go 已经集齐 AT、TCC、Saga 和 XA 四种事务模式，完成了与 Seata Java 的功能对齐。</p>
+
+<p><strong>XA 模式的主要功能:</strong></p>
+
+<ul>
+<li><p>支持了 XA 数据源代理</p></li>
+
+<li><p>支持了 XA 事务模式</p></li>
+</ul>
+
+<p>XA 相关的 Samples 可以参考示例：</p>
+
+<p><a href="https://github.com/seata/seata-go-samples/tree/main/xa">https://github.com/seata/seata-go-samples/tree/main/xa</a></p>
+
+<p>在本版本中还修复了近期大量用户在使用过程中提交的 issue。</p>
+
+<p><strong>版本的主要更新如下</strong></p>
+
+<p><strong>Feature：</strong></p>
+
+<p>[#467] 实现 XA 模式支持 MySQL</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/467">https://github.com/seata/seata-go/pull/467</a></p>
+
+<p>[#534] 支持 Session 的负载均衡</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/534">https://github.com/seata/seata-go/pull/534</a></p>
+
+<p><strong>Bugfix：</strong></p>
+
+<p>[#540] 修复初始化 XA 模式的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/540">https://github.com/seata/seata-go/pull/540</a></p>
+
+<p>[#545] 修复 XA 模式获取 db 版本号的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/545">https://github.com/seata/seata-go/pull/545</a></p>
+
+<p>[#548] 修复启动 XA 时候会失败的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/548">https://github.com/seata/seata-go/pull/548</a></p>
+
+<p>[#556] 修复 XA 数据源的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/556">https://github.com/seata/seata-go/pull/556</a></p>
+
+<p>[#562] 修复提交 XA 全局事务的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/562">https://github.com/seata/seata-go/pull/562</a></p>
+
+<p>[#564] 修复提交 XA 分支事务的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/564">https://github.com/seata/seata-go/pull/564</a></p>
+
+<p>[#566] 修复使用 XA 数据源执行本地事务的 bug</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/566">https://github.com/seata/seata-go/pull/566</a></p>
+
+<p><strong>Optimize：</strong></p>
+
+<p>[#523] 优化 CI 流程</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/523">https://github.com/seata/seata-go/pull/523</a></p>
+
+<p>[#525] 将 Jackson 序列化重命名为 JSON</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/525">https://github.com/seata/seata-go/pull/525</a></p>
+
+<p>[#532] 移除重复的代码</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/532">https://github.com/seata/seata-go/pull/532</a></p>
+
+<p>[#536] 优化 go import 代码格式</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/536">https://github.com/seata/seata-go/pull/536</a></p>
+
+<p>[#554] 优化 XA 模式的性能</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/554">https://github.com/seata/seata-go/pull/554</a></p>
+
+<p>[#561] 优化 XA 模式的日志输出</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/561">https://github.com/seata/seata-go/pull/561</a></p>
+
+<p><strong>Test:</strong></p>
+
+<p>[#535] 添加集成测试</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/535">https://github.com/seata/seata-go/pull/535</a></p>
+
+<p><strong>Doc:</strong></p>
+
+<p>[#550] 添加 1.2.0 版本的改动日志</p>
+
+<p><a href="https://github.com/seata/seata-go/pull/550">https://github.com/seata/seata-go/pull/550</a></p>
+
+<p>英文版：<a href="https://github.com/seata/seata-go/releases/tag/v1.2.0">https://github.com/seata/seata-go/releases/tag/v1.2.0</a></p>
+
+<p><strong>致谢</strong></p>
+
+<p>非常感谢以下 Contributors 的代码贡献。若有无意遗漏，请报告。</p>
+
+<p>@georgehao</p>
+
+<p><a href="https://github.com/georgehao">https://github.com/georgehao</a></p>
+
+<p>@luky116</p>
+
+<p><a href="https://github.com/luky116">https://github.com/luky116</a></p>
+
+<p>@jasondeng1997</p>
+
+<p><a href="https://github.com/jasondeng1997">https://github.com/jasondeng1997</a></p>
+
+<p>@106umao</p>
+
+<p><a href="https://github.com/106umao">https://github.com/106umao</a></p>
+
+<p>@wang1309</p>
+
+<p><a href="https://github.com/wang1309">https://github.com/wang1309</a></p>
+
+<p>@iSuperCoder</p>
+
+<p><a href="https://github.com/iSuperCoder">https://github.com/iSuperCoder</a></p>
+
+<p>@Charlie17Li</p>
+
+<p><a href="https://github.com/Charlie17Li">https://github.com/Charlie17Li</a></p>
+
+<p>@Code-Fight</p>
+
+<p><a href="https://github.com/Code-Fight">https://github.com/Code-Fight</a></p>
+
+<p>@Kirhaku</p>
+
+<p><a href="https://github.com/Kirhaku">https://github.com/Kirhaku</a></p>
+
+<p>@Vaderkai</p>
+
+<p><a href="https://github.com/VaderKai">https://github.com/VaderKai</a></p>
+
+<p>同时，我们收到了社区反馈的很多有价值的 issue 和建议，非常感谢大家。</p>
+
+<p><strong>社区讨论</strong></p>
+
+<p><strong>加入钉钉群：</strong></p>
+
+<p>Seata-go 社区群：<strong>33069364</strong></p>
+
+<p>Seata-go 开发群：<strong>44816898</strong></p>
+
+<p><strong>未来展望</strong></p>
+
+<p>Seata 社区近期与不少国内 Go 语言微服务框架以及 ORM 框架背后的开发社区达成合作，比如 GORM 框架，已经集成到了 Sample 中，后续会将更多的 ORM 框架集成在 Seata-go-samples 项目中。</p>
+
+<p>Seata-go-samples 集成到 Seata-go GitHub Actions 的集成测试环境，目前已经在进行中，用于测试每个 PR，保证系统的兼容性与稳定性。<br />
+Seata-go 后续的 Saga 模式，计划采用 Temporal 框架来做服务编排，目前正在规划中，期待能给用户带来更实用便利的 Saga 使用体验。</p>
+
+<p>欢迎对开源感兴趣的朋友加入 Seata 开源建设中来。</p>
+
+<p><strong>常用链接</strong></p>
+
+<p><strong>Seata：</strong></p>
+
+<p><a href="http://github.com/seata/seata">http://github.com/seata/seata</a></p>
+
+<p><a href="https://github.com/seata/seata-php">https://github.com/seata/seata-php</a></p>
+
+<p><a href="https://github.com/seata/seata-js">https://github.com/seata/seata-js</a></p>
+
+<p><a href="https://github.com/seata/seata-go">https://github.com/seata/seata-go</a></p>
+
+<p><strong>Samples：</strong></p>
+
+<p><a href="https://github.com/seata/seata-samples">https://github.com/seata/seata-samples</a></p>
+
+<p><a href="https://github.com/seata/seata-go-samples">https://github.com/seata/seata-go-samples</a></p>
+
+<p><strong>官网：</strong></p>
+
+<p><a href="https://seata.io/">https://seata.io/</a></p>
+
+<p><strong>投稿</strong></p>
+
+<p>欢迎大家将 Seata/Seata-go/Seata-php/Seata-js 相关的实践文章投稿至：<a href="https://www.yuque.com/fred-x/ngfgiz/le1h4u5kn0xyhhoh">https://www.yuque.com/fred-x/ngfgiz/le1h4u5kn0xyhhoh</a></p>
+
+<p><strong>Seata Star 一下✨：</strong><br />
+<a href="https://github.com/seata/seata-go">https://github.com/seata/seata-go</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/moe-series-5envoy-go-extensions-memory-security/">
+		<span class="text">上一篇: </span>
+		<span class="text">MoE 系列（五）｜Envoy Go 扩展之内存安全</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-230609/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly｜可信基础设施技术分论坛、Layotto 社区会议回顾与预告、社区本周贡献</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/activities/sofa-channel-33/">SOFAChannel#33《Occlum x EDMM=更安全好用的机密计算 LibOS》——Occlum 社区</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-5envoy-go-extensions-memory-security/">MoE 系列（五）｜Envoy Go 扩展之内存安全</a></li>
+		
+			<li><a href="/sofastack.tech/blog/mosn-delay-based-load-balancing-algorithm-go-faster-expect-to-go-steadier/">MOSN 基于延迟负载均衡算法——走得更快，期待走得更稳</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-4-go-extended-asynchronous-mode/">MoE 系列（四）｜Go 扩展的异步模式</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-3dynamic-update-of-go-extension-configuration-with-istio/">MoE 系列（三）｜使用 Istio 动态更新 Go 扩展配置</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

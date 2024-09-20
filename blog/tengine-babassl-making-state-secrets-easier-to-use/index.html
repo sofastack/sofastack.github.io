@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Tengine &#43; BabaSSL ，让国密更易用！ · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Tengine &#43; BabaSSL ，让国密更易用！
+	</h1>
+	<div class="meta">
+		
+			2022-01-11 ·
+			
+				<a href="https://github.com/sofastack">杨洋</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p>文｜杨洋（花名：凯申 )</p>
+
+<p>蚂蚁集团高级技术专家</p>
+
+<p>负责密码学工程能力建设、BabaSSL 开源社区建设</p>
+
+<p>本文 2366 字 阅读 5 分钟</p>
+
+<p>近日，国内著名 Web 服务器和反向代理开源软件 Tengine<a href="https://tengine.taobao.org">BabaSSL</a> 完成了对 <a href="https://www.babassl.cn">BabaSSL</a>的适配工作。</p>
+
+<p>Tengine 对 BabaSSL 提供的特殊 API 进行了适配，并增加对 NTLS 相关能力的支持。</p>
+
+<p>「详细 Pull Request 请见」：<a href="https://github.com/alibaba/tengine/pull/1595">https://github.com/alibaba/tengine/pull/1595</a></p>
+
+<p>至此，对我国密码行业相关安全通信协议，有使用需求的用户可以直接使用 Tengine + BabaSSL 的组合。而无需额外的 patch 或者代码改动，从用户使用的角度进一步提升了便利性。</p>
+
+<h2 id="part-1-ntls">PART. 1 NTLS</h2>
+
+<p>目前，我国密码行业中有两个主要的通信协议相关的技术标准。一个是由信安标委于 2020 年发布的 TLCP 协议，即传输层密码协议；另外一个则是由密标委在 2012 年发布的 GM/T 0024《SSL VPN 技术规范》（以下简称 0024）。</p>
+
+<p>TLCP 和 0024 的具体内容差别不大，均是从 TLS 协议发展而来，他们的主要特点是将商用密码算法 SM2、SM3 和 SM4 应用到了 TLS 协议中，并使用 SM2 密钥交换机制替换掉了 TLS 协议原有的密钥交换流程。</p>
+
+<p>TLCP 和 0024 另外一个显著的特点将 TLS 协议中使用的数字证书拆分成了加密和签名两种用途的证书，加密证书和签名证书以及对应私钥均需要进行配置使用，所以 TLCP 和 0024 也俗称“国密双证书”协议。</p>
+
+<p>BabaSSL 对上述国密双证书协议进行了支持，并统称为 NTLS。</p>
+
+<p>NTLS 的全名为 National TLS，即我国核准的传输层安全协议，所以也可以叫做国密 TLS。</p>
+
+<p>由此可见，NTLS 并不是指某一种具体的符合商用密码相关技术标准要求的网络协议，而是多个协议的统称。在 BabaSSL 中代指 TLCP 和 0024 国密双证书协议，因为 NTLS 和标准 TLS 协议存在工作方式的不同，因此 BabaSSL 中增加了一些新的 API 来对其进行支持。而应用程序若想使用 NTLS 功能，就需要调用这些新增 API，给现有基于 OpenSSL API 进行适配的应用程序带来了额外的开发工作量。</p>
+
+<h2 id="part-2-tengine-babassl">PART. 2 Tengine + BabaSSL</h2>
+
+<p>Tengine 是由淘宝网发起的 Web 服务器项目，它在 Nginx 的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。</p>
+
+<p>Tengine 的性能和稳定性已经在大型的网站(如淘宝网，天猫商城等)得到了很好的检验。它的最终目标是打造一个高效、稳定、安全、易用的 Web 平台。</p>
+
+<p>Tengine 作为国内知名的开源 Web 服务器软件，在各领域均得到了广泛的使用且享有很高的知名度。</p>
+
+<p>BabaSSL 是一款轻巧、灵活且靠谱的密码学和 TLS 协议工具集。BabaSSL 是蚂蚁集团和阿里集团的各主要业务中所使用的底层密码库，目前开源出来供业界使用。BabaSSL 广泛的应用在包括网络、存储、移动端 App 等场景中。</p>
+
+<p>Tengine 来源于 Nginx，所以默认使用的是 OpenSSL。此次 Tengine 针对 BabaSSL 中的 NTLS 功能进行了适配，用户如果选择使用 BabaSSL 作为 Tengine 的底层密码库来实现通信加密的能力，则可以无需对 Tengine 进行任何代码改动，原生开启 NTLS 能力。</p>
+
+<h2 id="part-3-tengine-启用-ntls">PART. 3 Tengine 启用 NTLS</h2>
+
+<p>具体来说，此次在 Tengine 中增加了几个新的指令，对 NTLS 进行支持。</p>
+
+<h3 id="1-下载-babassl-和-tengine">1. 下载 BabaSSL 和 Tengine</h3>
+
+<ul>
+<li>前往 👇 下载 BabaSSL 的源代码包:</li>
+</ul>
+
+<p><a href="https://github.com/BabaSSL/BabaSSL/releases">https://github.com/BabaSSL/BabaSSL/releases</a></p>
+
+<ul>
+<li>前往 👇 获取 Tengine 的最新代码:</li>
+</ul>
+
+<p>「git clone」</p>
+
+<p><a href="https://github.com/alibaba/tengine.git">https://github.com/alibaba/tengine.git</a></p>
+
+<h3 id="2-编译-babassl-和-tengine">2. 编译 BabaSSL 和 Tengine</h3>
+
+<p>使用如下配置：</p>
+
+<pre><code class="language-java">./configure --add-module=modules/ngx_openssl_ntls \
+    --with-openssl=../path/to/BabaSSL \
+    --with-openssl-opt=&quot;--strict-warnings enable-ntls&quot; \
+    --with-http_ssl_module --with-stream \
+    --with-stream_ssl_module --with-stream_sni
+</code></pre>
+
+<h3 id="3-配置-tengine-开启-ntls">3. 配置 Tengine 开启 NTLS</h3>
+
+<p>一个开启了 NTLS 的 Tengine 配置文件的例子：</p>
+
+<pre><code class="language-java">worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    server {
+        listen       443 ssl;
+        server_name  localhost;
+        enable_ntls  on;
+        ssl_sign_certificate        server_sign.crt;
+        ssl_sign_certificate_key    server_sign.key;
+        ssl_enc_certificate         server_enc.crt;
+        ssl_enc_certificate_key     server_enc.key;
+        location / {
+            return 200 &quot;body $ssl_protocol:$ssl_cipher&quot;;
+        }
+    }
+}
+stream {
+     server {
+        listen       8443 ssl;
+        enable_ntls  on;
+        ssl_sign_certificate        server_sign.crt;
+        ssl_sign_certificate_key    server_sign.key;
+        ssl_enc_certificate         server_enc.crt;
+        ssl_enc_certificate_key     server_enc.key;
+        return &quot;body $ssl_protocol:$ssl_cipher&quot;;
+    }
+}
+</code></pre>
+
+<h3 id="4-测试-ntls">4. 测试 NTLS</h3>
+
+<p>可以使用 BabaSSL 的 s_client 工具对开启了 NTLS 的 Tengine 进行测试。</p>
+
+<p>「具体可以参考」：</p>
+
+<p><a href="https://babassl.readthedocs.io/zh/latest/Tutorial/SM/ntls/">https://babassl.readthedocs.io/zh/latest/Tutorial/SM/ntls/</a></p>
+
+<h2 id="part-4-总-结">PART. 4 总 结</h2>
+
+<p>随着互联网业务的发展，在新时期下，数据成为了影响人们正常生活的核心要素。</p>
+
+<p>因此数据安全和个人信息保护等问题变得更加需要重视，国家近期也针对数据安全领域进行了相关立法。</p>
+
+<p>密码学技术作为整个信息安全领域的基础技术能力，对数据安全也存在着很大的影响。同时密码行业是属于受到国家强监管的行业，其相关技术的应用和实施均有一定的特殊性。</p>
+
+<p>BabaSSL 作为一个开源的密码库，其核心目标之一就是为用户提供合规的技术能力，使得用户在符合要求的情况下可以更加便捷的将国家核定的技术标准应用起来。从而在满足技术合规的要求，也同时实现了对数据安全需求的达成。</p>
+
+<p>Tengine 作为国内著名的 Web 服务器和反向代理开源软件，在国内各行业的应用十分广泛，同时也是网络通信领域中实现对数据进行加密的关键开源软件。此次 Tengine 官方对 BabaSSL 进行适配和支持，让用户可以更加便捷的使用 BabaSSL 所提供的商用密码能力，也必将进一步的扩大各行业对商用密码算法的应用落地。</p>
+
+<p>BabaSSL 在未来会持续在技术合规和前沿密码学等方向上持续演进，给广大用户带来高效、易用、安全、稳定的密码学基础库。</p>
+
+<p>BabaSSL 的代码目前托管在 Github 上：<a href="https://github.com/BabaSSL/BabaSSL">https://github.com/BabaSSL/BabaSSL</a></p>
+
+<p>欢迎广大开发者积极参与到 BabaSSL 的建设中，为我国密码行业的发展壮大贡献力量！</p>
+
+<h2 id="本周推荐阅读">本周推荐阅读</h2>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247498688&amp;idx=1&amp;sn=7379528f786e0e35db67d1ce7576b5c4&amp;chksm=faa3141acdd49d0ce56d580cc1ea32347c04ecfa1503198c1ec8ce5614ead2bd8169a737250c&amp;scene=21">TLS 握手带宽直降 80%，BabaSSL 是怎么做到的</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247490428&amp;idx=1&amp;sn=8ca31baa5c99e0790cdee8a075a7c046&amp;chksm=faa0f4a6cdd77db07f3fb1149b7f6505fe6b8eca5b2e2a724960aee76d9667e3e970c44eef5a&amp;scene=21">RFC8998+BabaSSL&mdash;让国密驶向更远的星辰大海</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247490574&amp;idx=1&amp;sn=791b8d49759131ea1feb5393e1b51e7c&amp;chksm=faa0f3d4cdd77ac2316b179a24b7c3ac90a08d3768379795d97c18b14a9c69e4b82012c3c097&amp;scene=21">还在为多集群管理烦恼吗？OCM来啦！</a></p>
+
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247499661&amp;idx=1&amp;sn=7c609883a7fd3b6f738bd0c13b82d8e5&amp;chksm=faa31057cdd49941e00d39e0df6dd2e8c91050c0cb33bad124983cd8d732c6f5f2fc0bbdba49&amp;scene=21">一行降低 100000kg 碳排放量的代码！</a></p>
+
+<p><img src="https://gw.alipayobjects.com/zos/bmw-prod/75d7bde6-1f48-4f28-80a4-215f8ec811bd.webp" alt="img" /></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20220107/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly |SOFA 社区插话小剧场、本周 Contributor、QA 整理</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/ant-massive-sigma-cluster-etcd-splitting-in-practice/">
+		<span class="text">下一篇: </span>
+		<span class="text">蚂蚁大规模 Sigma 集群 Etcd 拆分实践</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/one-line-of-code-to-reduce-carbon-emissions-by-100000kg/">一行降低 100000kg 碳排放量的代码！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/the-practice-and-thinking-behind-sofastack/">SOFAStack 背后的实践和思考｜新一代分布式云 PaaS 平台，打造企业上云新体验</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofaark-committer-interview-if-you-dont-like-it-just-change-it/">SOFAArk Committer 专访｜看它不爽，就直接动手改！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/deeper-into-http/3-evolution-of-the-protocol-from-the-creation-and-closing-of-quic-links/">深入 HTTP/3（一）｜从 QUIC 链接的建立与关闭看协议的演进</a></li>
+		
+			<li><a href="/sofastack.tech/blog/online-business-double-eleven-servicemesh-technology-based-service-link-isolation-technology-and-practice/">网商双十一-基于 ServiceMesh 技术的业务链路隔离技术及实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

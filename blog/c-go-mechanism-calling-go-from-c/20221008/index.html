@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	cgo 机制 - 从 c 调用 go · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		cgo 机制 - 从 c 调用 go
+	</h1>
+	<div class="meta">
+		
+			2022-10-08 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ba0daf5e03e44459f92d3d3b4e61bde~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜朱德江（GitHub ID：doujiang24)</p>
+
+<p>MOSN 项目核心开发者蚂蚁集团技术专家</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2518ddb866e5430aa475f4ef28466a01~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p><em>专注于云原生网关研发的相关工作</em></p>
+
+<p><strong>本文</strong> <strong>4656</strong> <strong>字 阅读 12</strong> <strong>分钟</strong></p>
+
+<h2 id="一-前言">一、前言</h2>
+
+<p>去年刚学 go 语言的时候，写了这篇 cgo 实现机制[1] ，介绍了 cgo 的基本情况。主要介绍的是 <code>go=&gt;c</code> 这个调用方式，属于比较浅的层次。随着了解的深入，发现 <code>c=&gt;go</code> 的复杂度又高了一级，所以有了这篇文章。</p>
+
+<h2 id="二-两个方向">二、两个方向</h2>
+
+<p>首先，cgo 包含了两个方向， <code>c=&gt;go</code> ，<code>go=&gt;c</code> 。</p>
+
+<p>相对来说，<code>go=&gt;c</code> 是更简单的，是在 go runtime 创建的线程中，调用执行 c 函数。对 go 调度器而言，调用 c 函数，就相当于系统调用。执行环境还是在本线程，只是调用栈有切换，还多了一个函数调用的 ABI 对齐，对于 go runtime 依赖的 GMP 环境，都是现有的，并没有太大的区别。</p>
+
+<p>而 <code>c=&gt;go</code> 则复杂很多，是在一个 c 宿主创建的线程上，调用执行 go 函数。这意味着，需要在 c 线程中，准备好 go runtime 所需要的 GMP 环境，才能运行 go 函数。以及，go 和 c 对于线程掌控的不同，主要是信号这块。所以，复杂度又高了一级。</p>
+
+<h2 id="三-gmp-从哪里来">三、GMP 从哪里来</h2>
+
+<p>首先简单解释一下，为什么需要 <code>GMP</code> ，因为在 go 函数运行的时候，总是假设是运行在一个 goroutine 环境中，以及绑定有对应的 <code>M</code> 和 <code>P</code> 。比如，要申请内存的时候，则会先从 P 这一层 cache 的 span 中的获取，如果这些没有的话，go runtime 就没法运行了。</p>
+
+<p>虽然 <code>M</code> 是线程，但是具体实现上，其实就是一个 <code>M</code> 的数据结构来表示，对于 c 创建的协程，获取的是 <code>extra M</code> ，也就是单独的表示线程的 <code>M</code> 数据结构。</p>
+
+<p>简单来说，c 线程需要获取的 <code>GMP</code> ，就是三个数据对象。在具体的实现过程中，是分为两步来的：</p>
+
+<p>1. <code>needm</code> 获取一个 extra M</p>
+
+<p>开启了 cgo 的情况下，go runtime 会预先创建好额外的 <code>M</code> ，同时还会创建一个 goroutine，跟这个 <code>M</code> 绑定。所以，获取到 M，也就同时得到了 G。</p>
+
+<p>而且，go runtime 对于 M 并没有限制，可以认为是无限的，也就不存在获取不到 M 的情况。</p>
+
+<p>2.<code>exitsyscall</code> 获取 <code>P</code></p>
+
+<p>是的，这个就是 <code>go=&gt;c</code> 的反向过程。只是 <code>P</code> 资源是有限的，可能会出现抢不到 P 的情况，此时就得看调度机制了。</p>
+
+<h2 id="四-调度机制">四、调度机制</h2>
+
+<p>简单情况下，<code>M</code> 和 <code>P</code> 资源都顺利拿到了，这个 c 线程，就可以在 M 绑定的 goroutine 中运行指定的 go 函数了。更进一步，如果 go 函数很简单，只是简单的做点纯 CPU 计算就结束了，那么这期间则不依赖 go 的调度了。</p>
+
+<p>有两种情况，会发生调度：</p>
+
+<h3 id="1-exitsyscall-获取不到-p">1. exitsyscall 获取不到 P</h3>
+
+<p>此时没法继续执行了，只能：</p>
+
+<p>1.将当前 extra M 上绑定的 g ，放入全局 g 等待队列</p>
+
+<p>2.将当前 c 线程挂起，等待 g 被唤起执行</p>
+
+<p>在 g 被唤起执行的时候，因为 g 和 M 是绑定关系：</p>
+
+<p>1.执行 g 的那个线程，会挂起，让出 P ，唤起等待的 c 线程</p>
+
+<p>2.c 线程被唤起之后，拿到 P 继续执行</p>
+
+<h3 id="2-go-函数执行过程中发生了协程挂起">2. go 函数执行过程中发生了协程挂起</h3>
+
+<p>比如，go 函数中发起了网络调用，需要等待网络响应，按照之前介绍的文章，Goroutine 调度 - 网络调用[2] 。当前 g 会挂起，唤醒下一个 g ，继续执行。</p>
+
+<p>但是，因为 M 和 g 是绑定关系，此时会：</p>
+
+<p>1. g 放入等待队列</p>
+
+<p>2.当前 c 线程被挂起，等待 g 被唤醒</p>
+
+<p>3. P 被释放</p>
+
+<p>在 g 被唤醒的时候，此时肯定不是在原来的 c 线程上了</p>
+
+<p>1.当前线程挂起，让出 P，唤醒等待的 c 线程</p>
+
+<p>2.c 线程被唤醒后，拿到 P，继续执行</p>
+
+<p>直观来说，也就是在 c 线程上执行的 goroutine，并不像普通的 go 线程一样，参与 go runtime 的调度。对于 go runtime 而言，协程中的网络任务，还是以非阻塞的方式在执行，只是对于 c 线程而言，则完全是以阻塞的方式来执行了。</p>
+
+<p>为什么需要这样，还是因为线程的调用栈，只有一个，没有办法并发，需要把线程挂起，保护好调用栈。</p>
+
+<p>PS：这里的执行流程，其实跟上面抢不到 P 的流程，很类似，底层也是同一套函数在跑（核心还是 <code>schedule</code>）。</p>
+
+<h2 id="五-信号处理">五、信号处理</h2>
+
+<p>另外一大差异是，信号处理。</p>
+
+<ol>
+<li><p>c 语言世界里，把信号处理的权利/责任，完全交给用户了。</p></li>
+
+<li><p>go 语言，则在 runtime 做了一层处理。</p></li>
+</ol>
+
+<p>比如，一个具体的问题，当程序运行过程中，发生了 segfault 信号，此时是应该由 go 来处理，还是 c 来响应信号呢？</p>
+
+<p>答案是，看发生 segfault 时的上下文：</p>
+
+<p>1.如果正在运行 go 代码，则交给 go runtime 来处理</p>
+
+<p>2.如果正在运行 c 代码，则还是 c 来响应</p>
+
+<p>那具体是怎么实现的呢？信号处理还是比较复杂的，有比较多的细节，这里我们只介绍几个核心点。</p>
+
+<h3 id="1-sighandler-注册">1. sighandler 注册</h3>
+
+<p>首先，对于操作系统而言，同一个信号，只能有一个 handler 。再看 go 和 c 发生 sighandler 注册的时机：</p>
+
+<ol>
+<li><p>go 编译产生的 so 文件，被加载的时候，会注册 sighandler（仅针对 go 需要用的信号），并且会把原始的 sighandler 保存下来。</p></li>
+
+<li><p>c 可以在任意的时间，注册 sighandler，可以是任意的信号。</p></li>
+</ol>
+
+<p>所以，推荐的做法是，在加载 go so 之前，c 先完成信号注册，在 go so 加载之后，不要再注册 sighandler 了，避免覆盖 go 注册 sighandler。</p>
+
+<h3 id="2-信号处理">2.信号处理</h3>
+
+<p>对于最简单的情况，如果一个信号，只有 c 注册了 sighandler，那么还是按照常规 c 信号处理的方式来。</p>
+
+<p>对于 sigfault 这种，go 也注册了 sighandler 的信号，按照这个流程来：</p>
+
+<p>1.操作系统触发信号时，会调用 go 注册的 sighandler（最佳实践中，go 的信号注册在后面）；</p>
+
+<p>2.go sighandler 先判断是否在 c 上下文中（简单的理解，也就是没有 g，实际上还是挺复杂的）；</p>
+
+<p>3.如果，在 c 上下文中，会调用之前保存的原始 sighandler（没有原始的 sighandler，则会临时恢复 signal 配置，重新触发信号）；</p>
+
+<p>4.如果，在 go 上下文中，则会执行普通的信号处理流程。</p>
+
+<p>其中，2 和 3 是最复杂的，因为 cgo 包含了两个方向，以及信号还有 sigmask 等等额外的因素，所以这里细节是非常多的，不过思路方向还是比较清晰的。</p>
+
+<h2 id="六-优化">六、优化</h2>
+
+<p>上篇 cgo 实现机制[1] ，提过优化一些思路，不过主要针对 <code>go =&gt; c</code> 这个方向。因为 <code>c =&gt; go</code> 的场景中，还有其他更重要的优化点。</p>
+
+<h3 id="1-复用-extra-m">1.复用 extra M</h3>
+
+<p>通常情况下，最大的性能消耗点在获取/释放 <code>M</code>。</p>
+
+<p>1.上面提到，从 c 进入 go，需要通过 <code>needm</code> 来获取 <code>M</code> 。这期间有 5 个信号相关的系统调用。比如：避免死锁用的，临时屏蔽所有信号，以及开启 go 所需要的信号。</p>
+
+<p>2.从 go 返回 c 的时候，通过 <code>dropm</code> 来释放 <code>M</code> 。这期间有 3 个信号相关的系统调用。目的是恢复到 <code>needm</code> 之前的信号状态（因 needm 强制开启了 go 必须的信号）。</p>
+
+<p>这两个操作，在 MOSN 新的 MOE 架构的测试中，可以看到约占整体 2~5% 的 CPU 占用，还是比较可观的。</p>
+
+<p>了解了瓶颈之后，也就成功了一半。</p>
+
+<p>优化思路也很直观，第一次从 go 返回 c 的时候，不释放 <code>extra M</code> ，继续留着使用，下一次从 c 进入 go 也就不需要再获取 <code>extra M</code> 了。因为 <code>extra M</code> 资源是无限的，c 线程一直占用一个 <code>extra M</code> 也无所谓。</p>
+
+<p>不过，在 c 线程退出的时候，还是需要释放 <code>extra M</code> ，避免泄漏。所以，这个优化，在 windows 就不能启用了，因为 windows 的 pthread API 没有线程退出的 callback 机制。</p>
+
+<p>目前实现了一版在 CL 392854[3] 。虽然通过了一个大佬的初步 review，以及跑通了全部测试，不过，估计要合并还要很久&hellip;因为这个 PR 已经比较大了，被标记 L size 了，这种 CL 估计大佬们 review 起来也头大&hellip;</p>
+
+<p>在简单场景的测试中，单次 c =&gt; go 的调用，从 <code>~1600ns</code> 优化到了 <code>~140ns</code>，提升 10 倍，达到了接近 go =&gt; c 的水平（ <code>~80ns</code> ）效果还是挺明显的。</p>
+
+<p>实现上主要有两个较复杂的点：</p>
+
+<p>1.接收到信号时，判断在哪个上下文里，以及是否应该转发给 c。因为 cgo 有两个方向，而且这两个方向又是可以在一个调用栈中同时发生的，以及信号还有 <code>mask</code> ，系统默认 handler 之分。这里面已经不是简单的状态机可以描述的，go runtime 在这块有约 100 + 行的核心判断代码，以应对各式各样的用法。估计没几个人可以全部记住，只有碰到具体场景临时去分析。或者在跑测试用例失败的时候，才具体去分析。</p>
+
+<p>2.在 c 线程退出，callback 到 go 的时候，涉及到 c 和 go function call ABI 对齐。这里主要的复杂度在于，需要处理好不同的 CPU 体系结构，以及操作系统上的差异。所以工作量还是比较大的。比如 arm ，arm64 ， 期间有一个有意思的坑，Aarch64 的 stack pointer 必须是 16 byte 对齐的，否则会触发 bus error 信号。（也因此 arm64 的压栈/出栈指令，都是两个两个操作的）</p>
+
+<h3 id="2-获取不到-p">2.获取不到 P</h3>
+
+<p>从 c 进入 go，获取 GMP 的过程中，只有 <code>P</code> 资源是受限的，在负载较高时，获取不到 <code>P</code> 也是比较容易碰到的。</p>
+
+<p>当获取不到 <code>P</code> 时，c 线程会挂起，等待进入全局队列的 <code>g</code> 被唤醒。这个过程对于 go runtime 而言是比较合理的，但是对于 c 线程则比较危险，尤其当 c 线程中跑的是多路复用的逻辑，则影响更大了。</p>
+
+<p>此时有两个优化思路：</p>
+
+<p>1.类似 <code>extra M</code> ，再给 c 线程绑一个 <code>extra P</code> ，或者预先绑定一个 <code>P</code> 。这样 c 线程就不需要被挂起了。这个思路，最大的挑战在于 <code>extra P</code> ，是不受常规 <code>P</code> 数量的限制，对于 go 中 <code>P</code> 的定义，是一个不小的挑战。</p>
+
+<p>2.将 <code>g</code> 不放入全局队列，改为放到优先级更高的 <code>P.runnext</code> ，这样 g 可以被快速的调度到，c 线程可以等待的时间更短了。这个思路，最大的挑战则在于，对这个 <code>g</code> 加了优先级的判断，或许有一点有悖于 g 应该是平等的原则。不过应该也还好， <code>P.runnext</code> 本来也是为了应对某些需要优先的场景的，这里只是多了一个场景。</p>
+
+<p>这个优化方向，还没有 CL，不过我们有同学在搞了。</p>
+
+<h3 id="3-尽快释放-p">3.尽快释放 P</h3>
+
+<p>当从 go 返回 c 的时候，会调用 <code>entersyscall</code> ，具体是，<code>M</code> 和 <code>P</code> 并没有完全解除绑定，而是让 <code>P</code> 进入 <code>syscall</code> 的状态。</p>
+
+<p>接下来，会有两种情况：</p>
+
+<p>1.很快又有了下一个 c=&gt;go 调用，则直接用这个 P ；</p>
+
+<p>2.sysmon 会强制解除绑定。对于进入 <code>syscall</code> 的 P ，sysmon 会等 20 us =&gt; 10 ms，然后将 P 抢走释放掉。等待时间跨度还是挺大的，具体多久就看命了，主要看 <code>sysmon</code> 是否之前已经长时间空闲了。</p>
+
+<p>对于 go =&gt; c 这方向，一个 syscall 的等待时间，通常是比较小的，所以这套机制是合适的。但是对于 c =&gt; go 这个方向，这种伪 syscall 的等待时间，取决于两个 c =&gt; go 调用的间隔时间，其实不太有规律的。所以，可能会造成 <code>P</code> 资源被浪费 20us =&gt; 10ms。</p>
+
+<p>所以，又有一个优化方向，两个思路：</p>
+
+<p>1.从 go 返回 c 的时候，立即释放 <code>P</code> ，这样不会浪费 <code>P</code> 资源。</p>
+
+<p>2.调整下 sysmon，针对这种场景，有一种机制，能尽量在 20 us 就把 P 抢走。</p>
+
+<p>其中，思路 1 ，这个 CL 411034 里顺便实现了。这个本来是为了修复 go trace 在 cgo 场景下不能用的 bug ，改到这个点，是因为跟 Michael 大佬讨论，引发的一个改动（一开始还没有意识到是一个优化）。</p>
+
+<h2 id="七-总结">七、总结</h2>
+
+<p>不知道看到这里，你是否一样觉得，c =&gt; go 比 go =&gt; c 的复杂度又高了一级。反正我是有的。</p>
+
+<p>首先，c 线程得拿到 GMP 才能运行 go 函数，然后，c 线程上的 g 发生了协程调度事件的时候，调度策略又跟普通的 go 线程不一样。另外一个大坑则是信号处理，在 go runtime 接管了 sighandler 之后，我们还需要让 c 线程之前注册的 sighandler 一样有效，使 c 线程感觉不到被 go runtime 接管了一道。</p>
+
+<p>优化这块，相对来说，比较好理解一些，主要是涉及到 go 目前的实现方式，并没有太多底层原理上的改进。复用 extra M 属于降低 CPU 开销；P 相关的获取和释放，则更多涉及到延时类的优化（如果搞了 extra P，则也会有 CPU 的优化效果）。</p>
+
+<h2 id="八-最后">八、最后</h2>
+
+<p>最后吐个槽，其实目前的实现方案中，从 c 调用 go 的场景，go runtime 的调度策略，更多是考虑 go 这一侧，比如 goroutine 和 P 不能被阻塞。但是，对 c 线程其实是很不友好的，只要涉及到等待，就会把 c 线程挂起&hellip;</p>
+
+<p>因为 go 的并发模型中，线程挂起通常是可以接受的，但是对于宿主 c 线程而言，有时候被阻塞挂起则是很敏感的。比如，在 MOSN 的 MOE 架构中，对于这类可能导致 c 线程被挂起的行为，需要很小心的处理。</p>
+
+<p>那有没有办法改变，也是有的，只是改动相对要大一点，大体思路是，将 c 调用 go 的 API 异步化：</p>
+
+<p>意思是，调用 Go 函数，不再同步返回函数返回值，而是返回一个带状态 <code>g</code>，这样的好处是，因为 API 异步了，所以执行的时候，也不必同步等待 g 返回了。如果碰到 g 被挂起了，直接返回 <code>status = yield</code> 的 g 即可，goroutine 协程继续走 go runtime 的调度，c 线程也不必挂起等待了。</p>
+
+<p>这样的设计，对于 c 线程是最友好的，当然也还得有一些配套的改动，比如缺少 P 的时候，得有个 <code>extra P</code> 更好一些，等其他的细节。</p>
+
+<p>不过，这样子的改动还是比较大的，让 go 官方接受这种设计，应该还是比较难的，以后没准可以试试，万一接受了呢~</p>
+
+<h2 id="九-相关链接">九、相关链接</h2>
+
+<p>[1] cgo 实现机制：<a href="https://uncledou.site/2021/go-cgo/">https://uncledou.site/2021/go-cgo/</a></p>
+
+<p>[2] Goroutine 调度 - 网络调用：<a href="https://uncledou.site/2021/goroutine-schedule-network/">https://uncledou.site/2021/goroutine-schedule-network/</a></p>
+
+<p>[3] CL 392854 : <a href="https://go-review.googlesource.com/c/go/+/392854">https://go-review.googlesource.com/c/go/+/392854</a></p>
+
+<p><strong>本周推荐阅读</strong></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247513902&amp;idx=1&amp;sn=be00c5af2e9775a4039430bf187e16f4&amp;chksm=faa358f4cdd4d1e23d7e9c93b4a94d6e6c377f51eb5e96b6dd5f74b840e48ebd3f518c4bf80a&amp;scene=21#wechat_redirect">MOSN 反向通道详解</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247512138&amp;idx=1&amp;sn=851abb8d07d47f703e33978c9c125c59&amp;chksm=faa35f90cdd4d6869c6cd4934c042484dbe1063c3fb85462d2f33e936b96240ae33d02d18c3a&amp;scene=21#wechat_redirect">Go 原生插件使用问题全解析</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247516046&amp;idx=1&amp;sn=c8ed0fbbc18b4377778c2ed06c7332ba&amp;chksm=faa35054cdd4d9425b6780ae5ed1a6b83ab16afd9d870affba350c8002a2c4e2efdb85abc603&amp;scene=21#wechat_redirect">Go 内存泄漏，pprof 够用了么？</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247516354&amp;idx=1&amp;sn=804c45c191a9e319d4a47135e301f91a&amp;chksm=faa36f18cdd4e60e445dd9b4acfe51e40e2060349199e6160811ca069c2c54270d42ec0ca2b7&amp;scene=21#wechat_redirect">从规模化平台工程实践，我们学到了什么？</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20221007/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | C 位大咖说 &amp; QA</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly/20221028/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | MOSN v1.2.0 版本发布、开源人、本周 Contributor &amp; QA</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/20220929/">开源项目文档社区化！Tongsuo/铜锁实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/sofastack20220927/">从规模化平台工程实践，我们学到了什么？</a></li>
+		
+			<li><a href="/sofastack.tech/blog/20220920/">Seata AT 模式代码级详解</a></li>
+		
+			<li><a href="/sofastack.tech/blog/is-pprof-enough-for-go-memory-leak/">Go 内存泄漏，pprof 够用了吗？</a></li>
+		
+			<li><a href="/sofastack.tech/blog/go-code-city-cloud-kusionstack-practice/">Go 代码城市上云——KusionStack 实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

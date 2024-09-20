@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP/QUIC on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/http/quic/</link>
+    <description>Recent content in HTTP/QUIC on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 27 May 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/http/quic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFAChannel#27 深入 HTTP/3｜从 QUIC-TLS 看协议的安全设计</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-27/</link>
+      <pubDate>Fri, 27 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-27/</guid>
+      <description>概要 活动主题：SOFAChannel#27:深入 HTTP/3｜从QUIC-TLS 看协议的安全设计 活动时间：05 月 26 日，周四晚 19 点 活动形式：线</description>
+    </item>
+    
+    <item>
+      <title>SOFA 四周年，开源正当时！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofastack-four-years-of-open-source/</link>
+      <pubDate>Sat, 16 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofastack-four-years-of-open-source/</guid>
+      <description>概要 活动主题：见证 SOFAStack 社区开源四周年! 活动时间： 2022 年 04 月 16 日 （14:00-17:40） 活动形式：线上直播 B 站直播间地址：http://live</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#26：解读 BabaSSL ：项目概况和最新进展</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-26/</link>
+      <pubDate>Thu, 17 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-26/</guid>
+      <description>概要 活动主题：SOFAChannel#26：解读 BabaSSL ：项目概况和最新进展 活动时间：03 月 17 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#25：蚂蚁大规模 Kubernetes 集群无损升级实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-25/</link>
+      <pubDate>Thu, 24 Feb 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-25/</guid>
+      <description>概要 活动主题：SOFAChannel#25：蚂蚁大规模 Kubernetes 集群无损升级实践 活动时间：02 月 24 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#24：漫谈 HTTP/3 进化史</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-24/</link>
+      <pubDate>Thu, 20 Jan 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-24/</guid>
+      <description>概要 活动主题：SOFAChannel#24：漫谈 HTTP/3 进化史 活动时间：01 月 20 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站直播间地址：h</description>
+    </item>
+    
+  </channel>
+</rss>

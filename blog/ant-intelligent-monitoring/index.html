@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	蚂蚁智能监控 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		蚂蚁智能监控
+	</h1>
+	<div class="meta">
+		
+			2021-09-07 ·
+			
+				<a href="https://github.com/sofastack">向万鹏</a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <h2 id="antmonitor简介">AntMonitor简介</h2>
+
+<p>AntMonitor 是蚂蚁集团的智能监控系统，通过构建面向监控可观测数据的、实时的、稳定的采集、清洗、计算及存储数据链路，为技术风险大脑及体系提供实时、稳定、可靠、丰富的可观测数据与告警服务。</p>
+
+<p>AntMonitor 日常服务于蚂蚁全站 100+ 业务域，分钟峰值数据清洗量 20TB、数据聚合量 1TB、数据存储量 1.5 亿条，大促期间这些指标更是成倍增长，如此庞大且复杂的系统是如何对自身的稳定性进行保障的，这篇文章将从思考、策略与实现的角度带领大家一探究竟。</p>
+
+<h2 id="系统构架">系统构架</h2>
+
+<p>系统架构上，AntMonitor 可以分为产品、告警、计算和存储等四个子系统，各个子系统可以独立提供服务，又相互协调配合，承担起了蚂蚁技术风险的数据底盘角色。</p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-a90d9145029f81fbf45183540695b53e372.jpg" alt="" /></p>
+</blockquote>
+
+<h3 id="产品系统">产品系统</h3>
+
+<p>产品系统直接为用户提供各项可视化服务，包括 monitormeta 和 monitorprod 两个组件。</p>
+
+<ul>
+<li><p>monitormeta 负责元数据的管理与同步，例如计算配置、告警规则以及各类运维元数据等；</p></li>
+
+<li><p>monitorprod 为产品中台核心服务，对外提供数据服务；对内支持数据模型定义，数据模型抽象，数据模型转换等能力。</p></li>
+</ul>
+
+<h3 id="计算系统">计算系统</h3>
+
+<p>计算系统提供一体化的数据采集、清洗、聚合与数据生命周期管理服务。计算系统内组件较多，可以分为服务层、计算层和采集层进行介绍。</p>
+
+<p>一、服务层</p>
+
+<ul>
+<li><p>tableapi 对外提供标准的数据服务接口；</p></li>
+
+<li><p>dimservice 为列式的元数据缓存服务中心。</p></li>
+</ul>
+
+<p>二、计算层</p>
+
+<ul>
+<li>global-scheduler（gs）</li>
+</ul>
+
+<p>为全局任务调度组件，负责对注册过来的 compute-space 计算集群进行生命周期管理，并基于配置生成任务拓扑，随后投递到计算集群。</p>
+
+<ul>
+<li>compute-space（cspace）</li>
+</ul>
+
+<p>为一个抽象的计算能力资源池，负责对gs投递过来的任务拓扑进行解析执行以产出数据，写入存储系统，并将任务状态反馈给 gs ，cspace 并不与具体的数据计算资源池绑定，底层的实现可以是任意计算引擎。当前，一个 cspace 节点的实现为一个 spark 集群。</p>
+
+<p>三、采集层</p>
+
+<ul>
+<li><p>gaea-registry为整个采集侧的管控中心，它将采集配置下发给 agent 和 vessel ，同时也负责维护所有 agent 和 vessel 的健康状态与路由信息等。</p></li>
+
+<li><p>agent为部署在物理机上的采集服务进程，负责对日志、系统指标、事件等原始数据进行读取。</p></li>
+
+<li><p>vessel为数据清洗集群，负责拉群 agent 采集的原始数据进行结构化清洗，并以 rpc 形式返回给 cspace 。</p></li>
+</ul>
+
+<h3 id="告警系统">告警系统</h3>
+
+<p>告警系统基于用户配置的告警规则对计算产出的指标数据进行巡检，产出告警事件并推送给订阅者。告警系统的组件与计算系统有些类似，包括：</p>
+
+<ul>
+<li><p>alarm-global-scheduler（alarm-gs）为告警调度组件；</p></li>
+
+<li><p>alarm-compute-space（alarm-cspace）为告警计算资源池；</p></li>
+
+<li><p>alarm-gateway 为告警推送网关。</p></li>
+</ul>
+
+<p>如果将告警系统和计算系统进行类比的话，可以抽象地认为：告警的输入不是采集，而是计算系统产出的数据；告警的输出也不是存储系统，而是告警通知网关 alarm-gateway 。</p>
+
+<h3 id="存储系统">存储系统</h3>
+
+<p>存储系统（ceresdb）为 AntMonitor 提供时序数据的读写服务。</p>
+
+<ul>
+<li><p>ceresdbconsole 为可视化的运维管控组件；</p></li>
+
+<li><p>ceresmeta 为元数据管理组件，负责存储集群的主备切换、扩缩容等协调工作；</p></li>
+
+<li><p>ceresproxy 与 ceresbase 为部署在同一个容器内的两个伴随进程，其中 ceresproxy 为路由层，负责对查询或写入的数据进行汇总，并将结果返回给客户端，同时提供租户校验、流控、黑名单等能力；ceresbase 为数据存储节点，负责时序数据的存储、索引维护等功能。</p></li>
+</ul>
+
+<h2 id="稳定性建设">稳定性建设</h2>
+
+<p>监控系统在整个蚂蚁的体系架构内是一个特殊的角色，它在承载所有业务系统的可观测与告警能力的同时，还为容量、自愈、故障应急等技术风险其他子域提供着数据服务。</p>
+
+<p>因此，监控对自身的稳定性要求更加严苛，在诸如大规模宕机、机房网络中断或更极端情况下，监控也需要保障自身是可以稳定运行的。</p>
+
+<p>针对蚂蚁智能监控自身的稳定性建设，我们主要从两方面进行推进，包括稳定性架构的设计与运行时的稳定性保障，整体如下图所示。</p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-28bfc01900ca5b1a5ab50406f49eb021c4c.jpg" alt="" /></p>
+</blockquote>
+
+<h3 id="稳定性架构">稳定性架构</h3>
+
+<p>稳定性架构是建设稳定性中最重要的一环，一个经过缜密设计的稳定性架构，可以使我们后期尽可能优雅从容地处理各类稳定性问题，而不是疲于奔命地打地鼠。</p>
+
+<p>具体来说，在设计稳定性架构之初，我们首先应该意识到系统的运行时环境和输入都不会是稳定的。</p>
+
+<p>运行时环境的不稳定 ，主要体现在机器的故障宕机、网络的抖动，或者更极端的机房光纤被挖断、城市自然灾害等客观因素影响。处理这类问题通常从两方面出发：</p>
+
+<p><strong>第一、尽可能地提升系统的容灾等级。</strong></p>
+
+<p>例如单点、机房级容灾、城市级容灾等，以最基础的去单点来说，我们需要保证所有的调度或同步类节点（例如 monitormeta、gs）都是基于主备架构的，所有的服务类节点（例如 monitorprod、tableapi）都是无状态的，所有的分片节点（例如 gaea-registry、ceresbase）都是存在冗余副本的，所有的工作类节点（例如 cspace、alarm-cspace），宕机后也都是可以自行恢复的。</p>
+
+<p><strong>第二、所有的数据处理流程都应该面向失败进行设计。</strong></p>
+
+<p>因为当故障发生后，可能某几个周期的任务已经失败，这时候需要有能力驱动这些任务进行重试，例如 cspace 需要有能力对某一个计算任务的采集失败进行容忍和重试、alarm-gs 需要对告警任务的执行失败进行重新调度等。</p>
+
+<p>针对系统输入的不确定性 ，我们也分两种情况进行处理：</p>
+
+<p><strong>第一种情况是入口数据的错乱。</strong></p>
+
+<p>例如脏配置、脏元数据、不合法的数据类型等，错误的数据流入系统可能会导致不可预期的行为，针对此类问题，我们通常需要在入口处进行校验，拒绝非预期的数据流入系统。</p>
+
+<p><strong>第二种情况是入口数据量级管控。</strong></p>
+
+<p>任何系统，其性能都是和容量挂钩的，其设计也都是在一定的性能容量平衡假设下进行的。监控系统的输入通常是业务日志，而且监控配置的定义是直面用户的，那么很可能一个随意定义的配置将导致海量的服务调用明细日志流入监控系统，导致集群崩溃，所以对流量的限制与管控非常重要。在 AntMonitor 中，各个关键的入口例如采集入口、计算入口、存储入口、数据查询入口等都有严格的流量管控校验规则，确保监控系统在预期容量下能够稳定运行，而不会被突发的流量所压垮。</p>
+
+<p>综上，我们将重点从容灾架构和架构单元化两方面出发来阐述 AntMonitor 稳定性架构的设计思路。</p>
+
+<h2 id="容灾架构">容灾架构</h2>
+
+<p>前文简要提及了架构去单点问题的解决思路，这足以覆盖日常可能发生的节点宕机、网络抖动等小规模故障场景，但是当真正的毁灭性灾难来临时，还需要更高层面的容灾方案来应对。</p>
+
+<p>目前基于不同租户保障等级的区分以及资源配额等客观因素的权衡，AntMonitor 实施了两套不同等级的容灾策略，即针对常规业务域租户的机房级容灾和针对高保业务域租户的城市级容灾。</p>
+
+<h3 id="机房级容灾">机房级容灾</h3>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-a1a7d52e8f3cf6c1ff68b8554496b9bd7bb.jpg" alt="" /></p>
+</blockquote>
+
+<p>对于常规的业务域租户，AntMonitor 提供机房级的容灾能力，各子系统的机房级容灾方案实现如下。</p>
+
+<p><strong>产品系统</strong></p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-96dbeabc4f0a93ce5bea3daa6fb85ddbc17.jpg" alt="" /></p>
+</blockquote>
+
+<ul>
+<li><p>monitorprod 为同城三机房部署的无状态组件，每个机房的服务挂载一个 vip ，解决机房内单点容灾问题，多个机房的 vip 挂载到一个域名，依靠 dns 解决机房级容灾问题。</p></li>
+
+<li><p>monitormeta 为同城三机房部署的主备架构，基于分布式锁选出 master 节点提供同步能力。</p></li>
+</ul>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-1b87dc03a1430cc2c4e9ac748fa0d6006c4.jpg" alt="" /></p>
+</blockquote>
+
+<p>计算系统内组件较多，且直接关系到监控数据质量，所以稳定性工作也较为复杂。</p>
+
+<ul>
+<li><p>dimservice 与 tableapi 均为三机房部署的无状态节点，依靠 vip + dns 实现机房级容灾；</p></li>
+
+<li><p>gs 为同城三机房部署的主备架构，基于蚂蚁自研关系型数据库 oceanbase 抢占分布式锁，选出 master 节点对集群进行协调；</p></li>
+
+<li><p>cspace 的一个节点，底层的执行引擎实际上是一个 spark 集群。一个 cspace 节点内部依赖 spark 的资源调度能力（比如 yarn）解决单点问题。多个 cspace 注册到 gs 并托管自身的生命周期，可以被视为无状态的计算服务；</p></li>
+
+<li><p>gaea-registry为基于抢占 oceanbase 分布式锁的主备架构。master 节点将采集配置进行分片，每个分片具备两个副本，分配到不同的 slave 上，当一个 slave 节点故障时，master 节点会协调受影响的数据分片到健康的 slave 节点上；</p></li>
+
+<li><p>agent和 vessel 都是跟随业务系统进行部署的。每个物理机上部署一个agent 容器，负责采集同物理机上的多个业务容器；每个业务机房部署一个 vessel 集群，负责对该机房所有 agent 采集上来的原始数据进行清洗。这样做的原因是，原始数据（比如日志）的量级非常庞大，跨机房传输会带来大量的网络延迟和对网络设备的冲击，所以部署到机房内部是最高效的方式。也正是如此， agent 与 vessel 的容灾等级比较特殊，agent 无法解决单点问题，因为它本身就部署在单机上；vessel 为机房内的容灾组件，当机房故障时，机房内的业务本身已不可用，需要依赖业务自身的容灾方案切流到健康机房。</p></li>
+</ul>
+
+<p>但此时我们会提供另一个指标——数据齐全度——来反映监控数据的准确性问题。例如一个监控配置需要采集 100 个业务容器，如果某一个 agent 所在物理机挂掉导致 5 个业务容器采集失败，计算层会汇聚出 95% 的齐全度信息；如果某一个机房发生故障导致该机房 vessel 集群不可用，相应的 30 个业务容器的数据丢失，计算层同样会汇聚出 70% 的齐全度信息。</p>
+
+<p><strong>告警系统</strong></p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-79ba60877a961106239b01b9c24eb455600.jpg" alt="" /></p>
+</blockquote>
+
+<p>告警系统由于与计算系统架构的相似性，稳定性架构上也大同小异。</p>
+
+<ul>
+<li><p>alarm-gs 基于 oceanbase 的分布式锁选出 master 节点，对注册过来的 alarm-cspace 进行协调维护；</p></li>
+
+<li><p>alarm-cspace 同样可视为无状态的告警计算服务；</p></li>
+
+<li><p>alarm-gateway 为同城三机房无状态组件，基于 vip + dns 实现机房级容灾能力。</p></li>
+</ul>
+
+<p><strong>存储系统</strong></p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-b45596f68b9a183b485b8403f007ec8bc3d.jpg" alt="" /></p>
+</blockquote>
+
+<ul>
+<li><p>ceresdbconsole 为无状态节点，基于 vip + dns 实现机房级别的容灾能力。</p></li>
+
+<li><p>ceresmeta 基于分布式共识算法 raft 构建，为 ceresdb 集群提供高可靠的元数据管理能力和集群调度能力。采用三机房 2、2、1 模式部署，此外每个机房还会再添加几个 learner 角色，不参与 raft 选举，learner 节点不但可以对数据进行冷备，还可以在集群多数派不可用时切换为 follower 角色；</p></li>
+
+<li><p>cresproxy 与 ceresbase 为同一个容器内的两个伴随进程，单个进程的存活状态由 supervisor 保障。ceresdb 对数据进行切割形成数据分片，分片存储在 ceresbase 上，每个分片包含主、备2个副本，分布在不同的 ceresbase 节点上。当一个 ceresbase 所在的容器宕机后， ceresmeta 会进行 rebalance ，将受影响的数据分片切换到健康副本所在的 ceresbase 节点上。</p></li>
+</ul>
+
+<h3 id="城市级容灾">城市级容灾</h3>
+
+<p>对于高保的业务域租户（例如交易租户）， AntMonitor 提供城市级的容灾能力。</p>
+
+<p>具体的方案是异地双链路部署。针对高保租户，除了上述的上海链路外，我们同时在河源部署了一条完整的监控链路，即同一时刻、同一配置，任务会执行两次、产生两份数据和告警事件、并通过两个域名独立向外暴露服务，当某一条链路不可用时，可以手动切换到另一条链路。</p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-d6e28bd6cb98ff3bb8a4d3f16836847db61.jpg" alt="" /></p>
+</blockquote>
+
+<p>为什么选择异地双链路，而不是异地双活或者异地热备呢？</p>
+
+<p>原因有几点：</p>
+
+<ul>
+<li><p>其一，我们真正需要两份完全独立的环境来避免某些全局因素对监控造成影响。例如监控配置或者其他运维类元数据、例如 oceanbase 等监控依赖的少量自容灾组件，当冗余出一条独立的链路时，这些全局组件都可以双份部署，极大地减小它们对全局监控数据造成影响的风险；</p></li>
+
+<li><p>其二，我们需要两份数据做 double-check ，来进一步保障高保租户的数据准确性；</p></li>
+
+<li><p>其三，备用链路一定程度上可以作为主链路的灰度环境。当监控自身需要做变更时，尤其是针对高保租户集群，可以先发布备用链路，减少直接发布主链路带来的误报或漏报风险；</p></li>
+
+<li><p>其四，是由于资源配额存在限制。蚂蚁智能监控是蚂蚁全站的资源大户，客观因素不足以支撑我们在异地针对所有租户部署一套完全独立的双活或热备集群，而是选择针对流量占比不足1%的高保租户跨城冗余出双份数据。</p></li>
+</ul>
+
+<p>跨城双链路的部署，使得整个 AntMonitor 即使在最严苛的环境之下，也能生存下来。</p>
+
+<h4 id="架构单元化">架构单元化</h4>
+
+<p>架构单元化，可以理解为 AntMonitor 内部的集群管理。</p>
+
+<p>在最初的顶层设计中，我们便将整个 AntMonitor 的产品、计算、采集、告警和存储模块进行了水平拆分，以实现不同的集群服务于不同的业务域租户。</p>
+
+<p>具体实现方式是， AntMonitor 内定义了资源池标签，标签不仅打在系统内一个组件的一个集群上，同时也打在一个具体的监控配置上，一个监控配置，或者说一个监控任务，总是被调度到同标签的监控集群上进行执行。既然标签附着的粒度是一个组件的集群，那么我们可以灵活地组合标签来为不同的租户提供监控服务。</p>
+
+<p>例如存在三个租户 A、B、C，租户 A 由于存储写入量比普通租户更大，可以为其搭建单独的存储集群；租户 B 和租户 C 对告警有更高的实时性要求，可以为它们搭建单独的告警集群。</p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-8f32b3baf1f1cee1bed4853ab58b024879c.jpg" alt="" /></p>
+</blockquote>
+
+<p>单元化设计为 AntMonitor 的稳定性架构带来了诸多好处。</p>
+
+<ul>
+<li><p>首先，我们可以借此对全局的资源和任务管理进行区分，例如针对交易等高保租户，我们为其搭建单独的集群，并冗余更多资源使其运行在更低的容量水位，来确保数据具备更高的实时性、准确性和稳定性；</p></li>
+
+<li><p>其次，不同租户之间实现了特定程度甚至完全的物理隔离，当故障发生时，可以快速控制爆炸半径，减小影响范围；</p></li>
+
+<li><p>同时，根据各个租户的不同保障等级，我们可以制定更合理的发布频率和灰度顺序，减少发布变更对高保租户造成影响的可能性；</p></li>
+
+<li><p>最后，单元化的架构还可以帮助我们解决变更隔离以及监控领域内的自监控、基础设施循环依赖等经典问题，这将在后文进行展开。</p></li>
+</ul>
+
+<p>运行时保障</p>
+
+<p>设计并实现良好的稳定性架构，就像种下了一棵基因优良、枝干笔挺的树苗，但要让它长得枝繁叶茂，还需要平时地照看、灌溉与修剪，这就是日常的运行时稳定性保障。</p>
+
+<p>这一层面，我们主要的思路是自监控、数字化运营和配置管控。</p>
+
+<h4 id="自监控">自监控</h4>
+
+<p>提起监控，总有不少看似悖论的话题被提起，例如监控系统如何监控自己？</p>
+
+<p>例如是否存在基础设施依赖监控保障自身稳定性、监控又同时依赖某些基础设施的循环依赖情况？</p>
+
+<p>AntMonitor 处理这类问题的核心思想就是“隔离”。</p>
+
+<p>针对自监控问题，与双链路类似， AntMonitor 拥有一套内核态监控集群，这个集群独立部署且版本稳定，一方面避免了生产环境 AntMonitor 异常导致监控开发同学不能及时发现，另一方面也避免了由于生产环境 AntMonitor 变更导致异常且无法及时定位根因的风险。</p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-7ee2ef69940e08fdc37e6de381cbf0aafa4.jpg" alt="" /></p>
+</blockquote>
+
+<p>针对 基础础设施循环依赖的问题 ，一方面 AntMonitor 在设计之初就将自身作为了整个蚂蚁最底层的基础设施之一，只依赖了 iaas 与 oceanbase，没有依赖其他任何中间件。另一方面，针对被 AntMonitor 依赖的 iaas 与 oceanbase ，我们也单独为其搭建了独立且版本稳定的监控集群，确保不会由于生产环境的监控变更导致 AntMonitor 上游依赖的监控服务不可用。</p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-7f73bc19407addb33e356bb9a1235d1240c.jpg" alt="" /></p>
+</blockquote>
+
+<h2 id="数字化运营">数字化运营</h2>
+
+<p>数字化运营，顾名思义，就是针对监控本身，做好全方位的数字化衡量工作。</p>
+
+<h3 id="sla">SLA</h3>
+
+<p>对外，我们将监控能力服务化，用 SLO 指标来牵引稳定性保障的工作，比如我们会设定数据查询服务的可用率目标、数据计算的延迟和断点率目标，告警的延迟与准确率目标、存储的读写可用率与耗时目标等等。SLO 量化了服务目标，我们还需要承诺目标不满足将承担的后果，也就是 SLA。例如，如果交易租户数据断点率超过 50% 且持续超过 60 分钟，将记作一次故障。</p>
+
+<p>这样一来，整个监控系统面向用户的服务质量就是透明且言之有物的，同时这些指标也能反映长期以来监控稳定性的趋势走向。</p>
+
+<h3 id="成本">成本</h3>
+
+<p>对内，我们将监控的成本进行量化，具体方式是在整个链路上的关键节点上对成本的度量指标进行定义并统计。</p>
+
+<p>基于对当前监控链路上资源占比较多且成本衡量相对稳定的节点分析，我们定义了的数据清洗量（MB/分钟）、数据聚合量（MB/分钟）和数据存储量（数据点/分钟）三个成本度量指标。</p>
+
+<p>例如一个监控配置，它的数据采集清洗量是 X ，数据聚合量是 Y ，数据存储量是 Z 。而针对 AntMonitor 的性能现状，每提供一台 4C8G 的容器，清洗集群可以清洗数据 N ，计算集群可以聚合数据 M ，存储集群可以存储数据 L ，那么这个监控配置的成本就是 4 *（ X/N + Y/M + Z/L）核 CPU + 8 *（ X/N + Y/M + Z/L）G 内存借助量化的成本信息，一方面我们可以明确地针对一个具体配置进行性能优化效果衡量；另一方面，我们可以做出更精准的系统容量规划和配置降级指引方案，进而保障监控系统的稳定性。</p>
+
+<h3 id="配置管控">配置管控</h3>
+
+<p><strong>沙盒拦截</strong></p>
+
+<blockquote>
+<p><img src="https://oscimg.oschina.net/oscnet/up-844370c857c4a6ddc81b0be5ce66fe35cae.jpg" alt="" /></p>
+</blockquote>
+
+<p>经验告诉我们，变更往往最容易给系统引入稳定性问题。</p>
+
+<p>监控系统的变更除了自身的迭代发布外，还包含大量的用户配置变更（比如用户配置不合理导致的超大计算任务）。</p>
+
+<p>对于 AntMonitor 自身的变更，前文介绍的单元化架构可以最大限度的减小全局受到影响的可能性。</p>
+
+<p>针对用户的配置变更，我们引入了沙盒拦截机制，具体做法是基于单元化的能力搭建了一套独立于生产集群的沙盒集群。当配置发生变更时，新的配置会被产品系统拦截并投递到沙盒集群，新配置试跑一段时间后会产出成本数据，巡检组件根据成本判断这次变更是否是合法的，只有合法的变更会被应用到生产集群，否则将投入到审批流程。沙盒拦截依旧是基于隔离的思想，将配置变更的风险隔离到了沙箱集群，从而避免了对监控生产环境造成影响的可能性。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>系统的稳定性建设是一项长期投入的工作和不断精进的过程，直观地将稳定性拆分为“稳定”和“性”来看，“稳定”是当前业务体量与容量水平下系统保障的底线。</p>
+
+<p>但是业务是不断扩张的，在保障眼前稳定的前提下，我们还需要思索如何提升系统性能，以追求让有限的资源能稳定支撑更大的业务体量，也即是“性”。</p>
+
+<p>对个人来讲，参与系统稳定性的建设可以帮助自身对系统的全局架构、性能容量以及演进趋势都有更直观的掌握与更深刻的理解，即对系统长什么样子、能做多少事情以及如何做得更多更好都能心中有数，这是一项值得尝试的工作。</p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20210903/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | QA 整理，新手计划</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20210910/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | QA 整理</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/sofa-star-is-recruiting/">SOFA 星球招募啦～</a></li>
+		
+			<li><a href="/sofastack.tech/blog/2021-cloud-native-technology-development-status-and-future-trends/">2021 年云原生技术发展现状及未来趋势</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ant-group-sofatracer-principles-and-practices/">蚂蚁集团 SOFATracer 原理与实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/kcl-a-declarative-cloud-native-configuration-policy-language/">KCL：声明式的云原生配置策略语言</a></li>
+		
+			<li><a href="/sofastack.tech/blog/we-made-a-distributed-registry/">我们做出了一个分布式注册中心</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RPC 框架设计的考和量 on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/</link>
+    <description>Recent content in RPC 框架设计的考和量 on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 15 Dec 2022 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFAChannel#31 RPC 框架设计的考和量</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofachannel-31/</link>
+      <pubDate>Thu, 15 Dec 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofachannel-31/</guid>
+      <description>概要 活动主题：SOFAChannel#31:RPC 框架设计的考和量 活动时间：12 月 15 日，周四晚 19 点 活动形式：线上直播 资料下载：戳这里 B 站直播</description>
+    </item>
+    
+  </channel>
+</rss>

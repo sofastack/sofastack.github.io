@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Dragonfly 和 Nydus Mirror 模式集成实践 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Dragonfly 和 Nydus Mirror 模式集成实践
+	</h1>
+	<div class="meta">
+		
+			2022-12-20 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/79f11b7767c04c0c9f12fa97968cdf52~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜戚文博 <em>（花名：百蓦）</em></p>
+
+<p>Dragonfly Maintainer蚂蚁集团软件工程师</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd5eb6f417f843fba85968c7a3754a04~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>主要负责「基于 P2P 的文件以及镜像加速系统」。</p>
+
+<p>本文 <strong>2175</strong> 字 阅读 <strong>15</strong> 分钟</p>
+
+<h2 id="part-1-背景">PART. 1 背景</h2>
+
+<p>自 17 年开源以来，Dragonfly 被许多大规模互联网公司选用并投入生产使用，并在 18 年 10 月正式进入 CNCF，成为中国第三个进入 CNCF 沙箱级别的项目。2020 年 4 月，CNCF 技术监督委员会 <em>（TOC）</em> 投票决定接受 Dragonfly 作为孵化级别的托管项目。Dragonfly 多年生产实践经验打磨的下一代产品，它汲取了上一代 Dragonfly1.x[1] 的优点并针对已知问题做了大量的优化。</p>
+
+<p>Nydus 作为 Dragonfly 的子项目优化了 OCIv1 镜像格式，并以此设计了一个用户态文件系统，使容器可以按需下载镜像，不再需要下载完整镜像即可启动容器。在最新版本中 Dragonfly 完成了和子项目 Nydus 的集成，让容器启动即可以按需下载镜像，减少下载量。也可以在传输过程中利用 Dragonfly P2P 的传输方式，降低回源流量并且提升下载速度。</p>
+
+<h2 id="part-2-实践">PART. 2 实践</h2>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2a6591318b649979bc73ce7eec45112~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>注:如果没有可用的 Kubernetes 集群进行测试，推荐使用 Kind[2]。</p>
+
+<p><strong>安装 Dragonfly</strong></p>
+
+<p>基于 Kubernetes cluster 详细安装文档可以参考：</p>
+
+<p><em><a href="https://d7y.io/docs/next/getting-started/quick-start/kubernetes/">https://d7y.io/docs/next/getting-started/quick-start/kubernetes/</a></em> 。</p>
+
+<p><strong>使用 Kind 安装 Kubernetes 集群</strong></p>
+
+<p>创建 Kind 多节点集群配置文件  <code>kind-config.yaml</code> ，配置如下:</p>
+
+<pre><code class="language-YAML">kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker    
+extraPortMappings:
+- containerPort: 30950 
+hostPort: 65001  
+- role: worker
+</code></pre>
+
+<p>使用配置文件创建 Kind 集群:</p>
+
+<pre><code class="language-YAML">kind create cluster --config kind-config.yaml
+</code></pre>
+
+<p>切换 Kubectl 的 context 到 Kind 集群:</p>
+
+<pre><code class="language-YAML">kubectl config use-context kind-kind
+</code></pre>
+
+<p><strong>Kind 加载 Dragonfly 镜像</strong></p>
+
+<p>下载 Dragonfly latest 镜像:</p>
+
+<pre><code class="language-YAML">docker pull dragonflyoss/scheduler:latest
+docker pull dragonflyoss/manager:latest
+docker pull dragonflyoss/dfdaemon:latest
+</code></pre>
+
+<p>Kind 集群加载 Dragonfly latest 镜像:</p>
+
+<pre><code class="language-YAML">kind load docker-image dragonflyoss/scheduler:latest
+kind load docker-image dragonflyoss/manager:latest
+kind load docker-image dragonflyoss/dfdaemon:latest
+</code></pre>
+
+<p><strong>基于 Helm Charts</strong></p>
+
+<p><strong>创建 Dragonfly P2P 集群</strong></p>
+
+<p>创建 Helm Charts 配置文件 <code>charts-config.yaml</code> 并且开启 Peer 的预取功能, 配置如下:</p>
+
+<pre><code class="language-YAML">scheduler:  
+replicas: 1  
+metrics:    
+enable: true  
+config: 
+verbose: true    
+pprofPort: 18066
+seedPeer:  replicas: 1  
+metrics:    
+enable: true  
+config:    
+verbose: true    
+pprofPort: 18066    
+download:      
+prefetch: true
+dfdaemon:  
+hostNetwork: true  
+config:    
+verbose: true    
+pprofPort: 18066   
+metrics: :8000    
+download:    
+prefetch: true   
+proxy:      
+defaultFilter: 'Expires&amp;Signature&amp;ns'    
+security:     
+insecure: true     
+tcpListen:      
+listen: 0.0.0.0   
+port: 65001   
+registryMirror:   
+dynamic: true    
+url: https://index.docker.io   
+proxies:    
+- regx: blobs/sha256.*
+manager: 
+replicas: 1 
+metrics:   
+enable: true 
+config:   
+verbose: true  
+pprofPort: 18066
+</code></pre>
+
+<p>使用配置文件部署 Dragonfly Helm Charts:</p>
+
+<pre><code class="language-YAML">$ helm repo add dragonfly 
+https://dragonflyoss.github.io/helm-charts/$ helm install --wait --create-namespace --namespace dragonfly-system dragonfly 
+dragonfly/dragonfly 
+-f
+charts-config.yamlNAME: dragonflyLAST
+DEPLOYED: Wed Oct 19 04:23:22
+2022NAMESPACE: dragonfly-system
+STATUS: deployedREVISION: 1TEST 
+SUITE: None
+NOTES:
+
+1. Get the scheduler address by running these commands:  export SCHEDULER_POD_NAME=$(kubectl get pods --namespace dragonfly-system -l
+&quot;app=dragonfly,release=dragonfly,component=scheduler&quot; -o jsonpath={.items[0].metadata.name})  export SCHEDULER_CONTAINER_PORT=$(kubectl
+get pod --namespace dragonfly-system $SCHEDULER_POD_NAME -o jsonpath=&quot;{.spec.containers[0].ports[0].containerPort}&quot;)
+kubectl --namespace dragonfly-system port-forward $SCHEDULER_POD_NAME 8002:$SCHEDULER_CONTAINER_PORT  echo &quot;Visit http://127.0.0.1:8002 to use your scheduler&quot;
+
+2. Get the dfdaemon port by running these commands:  export DFDAEMON_POD_NAME=$(kubectl get pods
+--namespace dragonfly-system -l
+&quot;app=dragonfly,release=dragonfly,component=dfdaemon&quot; -o jsonpath={.items[0].metadata.name})  export DFDAEMON_CONTAINER_PORT=$
+(kubectl get pod --namespace dragonfly-system $DFDAEMON_POD_NAME -o jsonpath=&quot;{
+.spec.containers[0].ports[0].containerPort}&quot;)  You can use $DFDAEMON_CONTAINER_PORT as a proxy port in Node.
+
+3. Configure runtime to use dragonfly:  https://d7y.io/docs/getting-started/quick-start/kubernetes/
+</code></pre>
+
+<p>检查 Dragonfly 是否部署成功:</p>
+
+<pre><code class="language-YAML">$ kubectl get po -n dragonfly-systemNAME 
+READY   STATUS    RESTARTS 
+AGEdragonfly-dfdaemon-rhnr6 
+1/1     Running   4 (101s ago)   3m27sdragonfly-dfdaemon-s6sv5  
+1/1     Running   5 (111s ago)   3m27sdragonfly-manager-67f97d7986-8dgn8
+1/1     Running   0              3m27sdragonfly-mysql-0             
+1/1     Running   0              3m27sdragonfly-redis-master-0    
+1/1     Running   0              3m27sdragonfly-redis-replicas-0      
+1/1     Running   1 (115s ago)   3m27sdragonfly-redis-replicas-1      
+1/1     Running   0              95sdragonfly-redis-replicas-2    
+1/1     Running   0              70sdragonfly-scheduler-0        
+1/1     Running   0              3m27sdragonfly-seed-peer-0          
+1/1     Running   2 (95s ago)    3m27s
+</code></pre>
+
+<p>创建 Peer Service 配置文件 <code>peer-service-config.yaml</code> 配置如下:</p>
+
+<pre><code class="language-YAML">apiVersion: v1
+kind: Servicemeta
+data:  name: peer  
+namespace:
+dragonfly-systemspec: 
+type: NodePort  ports:    
+- name: http    
+nodePort: 30950      
+port: 65001  
+selector:  
+app: dragonfly    
+component: dfdaemon  
+release: dragonfly
+</code></pre>
+
+<p>使用配置文件部署 Peer Service:</p>
+
+<pre><code class="language-YAML">kubectl apply -f peer-service-config.yaml
+</code></pre>
+
+<p><strong>Containerd 集成 Nydus</strong></p>
+
+<p>生产环境 Containerd 集成 Nydus 详细文档可以参考：</p>
+
+<p>*<a href="https://github.com/dragonflyoss/image-service/blob/master/docs/containerd-env-setup.md#nydus-setup-for-containerd-environment">https://github.com/dragonflyoss/image-service/blob/master/docs/containerd-env-setup.md#nydus-setup-for-containerd-environment</a>*。</p>
+
+<p>下面例子使用 Systemd 管理 <code>nydus-snapshotter</code> 服务。</p>
+
+<p><strong>下载安装 Nydus 工具</strong></p>
+
+<p>下载 <code>containerd-nydus-grpc</code> 二进制文件, 下载地址为：</p>
+
+<p>*<a href="https://github.com/containerd/nydus-snapshotter/releases/latest">https://github.com/containerd/nydus-snapshotter/releases/latest</a>* 。</p>
+
+<pre><code class="language-YAML">NYDUS_SNAPSHOTTER_VERSION=0.3.0w
+get 
+https://github.com/containerd/nydus-snapshotter/releases/download/v$NYDUS_SNAPSHOTTER_VERSION/nydus-snapshotter-v$NYDUS_SNAPSHOTTER_VERSION-x86_64.tgztar zxvf nydus-snapshotter-v$NYDUS_SNAPSHOTTER_VERSION-x86_64.tgz
+</code></pre>
+
+<p>安装 <code>containerd-nydus-grpc</code> 工具:</p>
+
+<pre><code class="language-YAML">sudo cp nydus-snapshotter/containerd-nydus-grpc /usr/local/bin/
+</code></pre>
+
+<p>下载 <code>nydus-image</code>、<code>nydusd</code> 以及 <code>nydusify</code> 二进制文件, 下载地址为</p>
+
+<p>*<a href="https://github.com/dragonflyoss/image-service/releases/latest">https://github.com/dragonflyoss/image-service/releases/latest</a>* :</p>
+
+<pre><code class="language-YAML">NYDUS_VERSION=2.1.0wget 
+https://github.com/dragonflyoss/image-service/releases/download/v$NYDUS_VERSION/nydus-static-v
+$NYDUS_VERSION-linux-amd64.tgztar zxvf nydus-static-v
+$NYDUS_VERSION-linux-amd64.tgz
+</code></pre>
+
+<p>安装 <code>nydus-image</code>、<code>nydusd</code> 以及 <code>nydusify</code> 工具:</p>
+
+<pre><code class="language-YAML">sudo cp nydus-static/nydus-image nydus-static/nydusd nydus-static/nydusify /usr/local/bin/
+</code></pre>
+
+<p><strong>Containerd 集成</strong></p>
+
+<p><strong>Nydus Snapshotter 插件</strong></p>
+
+<p>配置 Containerd 使用 <code>nydus-snapshotter</code> 插件, 详细文档参考：</p>
+
+<p>*<a href="https://github.com/dragonflyoss/image-service/blob/master/docs/containerd-env-setup.md#configure-and-start-containerd">https://github.com/dragonflyoss/image-service/blob/master/docs/containerd-env-setup.md#configure-and-start-containerd</a>*。</p>
+
+<p>首先修改 Containerd 配置在 <code>/etc/containerd/config.toml</code> 添加下面内容:</p>
+
+<pre><code class="language-YAML">[proxy_plugins] 
+[proxy_plugins.nydus]  
+type = &quot;snapshot&quot;   
+address = &quot;/run/containerd-nydus/containerd-nydus-grpc.sock&quot;
+[plugins.cri] 
+[plugins.cri.containerd]   
+snapshotter = &quot;nydus&quot;  
+disable_snapshot_annotations = false
+</code></pre>
+
+<p>重启 Containerd 服务:</p>
+
+<pre><code class="language-YAML">sudo systemctl restart containerd
+</code></pre>
+
+<p>验证 Containerd 是否使用 <code>nydus-snapshotter</code> 插件:</p>
+
+<pre><code class="language-YAML">$ ctr -a /run/containerd/containerd.sock plugin ls | grep nydusio.containerd.snapshotter.v1          nydus                    -              ok
+</code></pre>
+
+<p><strong>Systemd 启动</strong></p>
+
+<p><strong>Nydus Snapshotter 服务</strong></p>
+
+<p>Nydusd 的 Mirror 模式配置详细文档可以参考：</p>
+
+<p>*<a href="https://github.com/dragonflyoss/image-service/blob/master/docs/nydusd.md#enable-mirrors-for-storage-backend">https://github.com/dragonflyoss/image-service/blob/master/docs/nydusd.md#enable-mirrors-for-storage-backend</a>*。</p>
+
+<p>创建 Nydusd 配置文件 <code>nydusd-config.json</code>,配置如下:</p>
+
+<pre><code class="language-YAML">{  &quot;device&quot;: {    &quot;backend&quot;: {      &quot;type&quot;: &quot;registry&quot;,      &quot;config&quot;: {        &quot;mirrors&quot;: [          {            &quot;host&quot;: &quot;http://127.0.0.1:65001&quot;,            &quot;auth_through&quot;: false,            &quot;headers&quot;: {              &quot;X-Dragonfly-Registry&quot;: &quot;https://index.docker.io&quot;            }          }        ],        &quot;scheme&quot;: &quot;https&quot;,        &quot;skip_verify&quot;: false,        &quot;timeout&quot;: 10,        &quot;connect_timeout&quot;: 10,        &quot;retry_limit&quot;: 2      }    },    &quot;cache&quot;: {      &quot;type&quot;: &quot;blobcache&quot;,      &quot;config&quot;: {        &quot;work_dir&quot;: &quot;/var/lib/nydus/cache/&quot;      }    }  },  &quot;mode&quot;: &quot;direct&quot;,  &quot;digest_validate&quot;: false,  &quot;iostats_files&quot;: false,  &quot;enable_xattr&quot;: true,  &quot;fs_prefetch&quot;: {    &quot;enable&quot;: true,    &quot;threads_count&quot;: 10,    &quot;merging_size&quot;: 131072,    &quot;bandwidth_rate&quot;: 1048576  }}
+</code></pre>
+
+<p>复制配置文件至</p>
+
+<p> <code>/etc/nydus/config.json</code> 文件:</p>
+
+<pre><code class="language-YAML">sudo mkdir /etc/nydus &amp;&amp; cp nydusd-config.json /etc/nydus/config.json
+</code></pre>
+
+<p>创建 Nydus Snapshotter Systemd 配置文件 <code>nydus-snapshotter.service</code> , 配置如下:</p>
+
+<pre><code class="language-YAML">[Unit]Description=nydus snapshotterAfter=network.targetBefore=containerd.service
+[Service]Type=simpleEnvironment=HOME=/rootExecStart=/usr/local/bin/containerd-nydus-grpc --config-path /etc/nydus/config.jsonRestart=alwaysRestartSec=1KillMode=processOOMScoreAdjust=-999StandardOutput=journalStandardError=journal
+[Install]WantedBy=multi-user.target
+</code></pre>
+
+<p>复制配置文件至</p>
+
+<p> <code>/etc/systemd/system/</code> 目录:</p>
+
+<pre><code class="language-YAML">sudo cp nydus-snapshotter.service /etc/systemd/system/
+</code></pre>
+
+<p>Systemd 启动 Nydus Snapshotter 服务:</p>
+
+<pre><code class="language-YAML">$ sudo systemctl enable nydus-snapshotter$ sudo systemctl start nydus-snapshotter$ sudo systemctl status nydus-snapshotter● nydus-snapshotter.service - nydus snapshotter     Loaded: loaded (/etc/systemd/system/nydus-snapshotter.service; enabled; vendor preset: enabled)     Active: active (running) since Wed 2022-10-19 08:01:00 UTC; 2s ago   Main PID: 2853636 (containerd-nydu)      Tasks: 9 (limit: 37574)     Memory: 4.6M        CPU: 20ms     CGroup: /system.slice/nydus-snapshotter.service             └─2853636 /usr/local/bin/containerd-nydus-grpc --config-path /etc/nydus/config.json
+Oct 19 08:01:00 kvm-gaius-0 systemd[1]: Started nydus snapshotter.Oct 19 08:01:00 kvm-gaius-0 containerd-nydus-grpc[2853636]: time=&quot;2022-10-19T08:01:00.493700269Z&quot; level=info msg=&quot;gc goroutine start...&quot;Oct 19 08:01:00 kvm-gaius-0 containerd-nydus-grpc[2853636]: time=&quot;2022-10-19T08:01:00.493947264Z&quot; level=info msg=&quot;found 0 daemons running&quot;
+</code></pre>
+
+<p><strong>转换 Nydus 格式镜像</strong></p>
+
+<p>转换 <code>python:latest</code> 镜像为 Nydus 格式镜像, 可以直接使用已经转换好的 </p>
+
+<p><code>dragonflyoss/python-nydus:latest</code> 镜像, 跳过该步骤。转换工具可以使用Nydusify[3] 也可以使用 acceld[4]。</p>
+
+<p><strong>登陆 Dockerhub</strong></p>
+
+<p>转换 Nydus 镜像, </p>
+
+<p><code>DOCKERHUB_REPO_NAME</code> 环境变量设置为用户个人的镜像仓库:</p>
+
+<pre><code class="language-YAML">DOCKERHUB_REPO_NAME=dragonflyosssudo nydusify convert --nydus-image /usr/local/bin/nydus-image --source python:latest --target $DOCKERHUB_REPO_NAME/python-nydus:latest
+</code></pre>
+
+<p><strong>Nerdctl 运行 Nydus 镜像</strong></p>
+
+<p>使用 Nerdctl 运行 <code>python-nydus:latest</code> , 过程中即通过 Nydus 和 Dragonfly 下载镜像:</p>
+
+<pre><code class="language-YAML">sudo nerdctl --snapshotter nydus run --rm -it $DOCKERHUB_REPO_NAME/python-nydus:latest
+</code></pre>
+
+<p>搜索日志验证 Nydus 基于 Mirror 模式通过 Dragonfly 分发流量:</p>
+
+<pre><code class="language-YAML">$ grep mirrors /var/lib/containerd-nydus/logs/**/*log[2022-10-19 10:16:13.276548 +00:00] INFO [storage/src/backend/connection.rs:271] backend config: ConnectionConfig { proxy: ProxyConfig { url: &quot;&quot;, ping_url: &quot;&quot;, fallback: false, check_interval: 5, use_http: false }, mirrors: [MirrorConfig { host: &quot;http://127.0.0.1:65001&quot;, headers: {&quot;X-Dragonfly-Registry&quot;: &quot;https://index.docker.io&quot;}, auth_through: false }], skip_verify: false, timeout: 10, connect_timeout: 10, retry_limit: 2 }
+</code></pre>
+
+<p><strong>PART. 3</strong></p>
+
+<p><strong>性能测试</strong></p>
+
+<p>测试 Nydus Mirror 模式与 Dragonfly P2P 集成后的单机镜像下载的性能。测试是在同一台机器上面做不同场景的测试。由于机器本身网络环境、配置等影响，实际下载时间不具有参考价值，但是不同场景下载时间所提升的比率是有重要意义的。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2725d1fc556c473883fe374f943d7b5b~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>●<strong>OCIv1</strong>: 使用 Containerd 直接拉取镜像并且启动成功的数据。</p>
+
+<p>●<strong>Nydus Cold Boot</strong>: 使用 Containerd 通过 Nydus 拉取镜像，没有命中任何缓存并且启动成功的数据。</p>
+
+<p>●<strong>Nydus &amp; Dragonfly Cold Boot</strong>: 使用 Containerd 通过 Nydus 拉取镜像，并且基于 Nydus Mirror 模式流量转发至 Dragonfly P2P，在没有命中任何缓存并且启动成功的数据。</p>
+
+<p>●<strong>Hit Dragonfly Remote Peer Cache</strong>: 使用 Containerd 通过 Nydus 拉取镜像，并且基于 Nydus Mirror 模式流量转发至 Dragonfly P2P，在命中 Dragonfly 的远端 Peer 缓存的情况下并且成功启动的数据。</p>
+
+<p>●<strong>Hit Dragonfly Local Peer Cache</strong>: 使用 Containerd 通过 Nydus 拉取镜像，并且基于 Nydus Mirror 模式流量转发至 Dragonfly P2P，在命中 Dragonfly 的本地 Peer 缓存的情况下并且成功启动的数据。</p>
+
+<p>●<strong>Hit Nydus Cache</strong>: 使用 Containerd 通过 Nydus 拉取镜像，并且基于 Nydus Mirror 模式流量转发至 Dragonfly P2P，在命中 Nydus 的本地缓存的情况下并且成功启动的数据。</p>
+
+<p>测试结果表明 Nydus Mirror 模式和 Dragonfly P2P 集成。使用 Nydus 下载镜像对比OCIv1的模式，能够有效减少镜像下载时间。Nydus 冷启动和 Nydus &amp; Dragonfly 冷启动数据基本接近。</p>
+
+<p>其他命中 Dragonfly Cache 的结果均好于只使用 Nydus 的情况。最重要的是如果很大规模集群使用 Nydus 拉取镜像，会将每个镜像层的下载分解按需产生很多 Range 请求。增加镜像仓库源站 QPS 。</p>
+
+<p>而 Dragonfly 可以基于 P2P 技术有效减少回源镜像仓库的请求数量和下载流量。最优的情况，Dragonfly 可以保证大规模集群中每个下载任务只回源一次。</p>
+
+<p><strong>｜相关链接｜</strong></p>
+
+<p>[1]Dragonfly1.x:<em><a href="https://github.com/dragonflyoss/Dragonfly">https://github.com/dragonflyoss/Dragonfly</a></em></p>
+
+<p>[2]Kind:<em><a href="https://kind.sigs.k8s.io/">https://kind.sigs.k8s.io/</a></em></p>
+
+<p>[3]Nydusify:<em><a href="https://github.com/dragonflyoss/image-service/blob/master/docs/nydusify.md">https://github.com/dragonflyoss/image-service/blob/master/docs/nydusify.md</a></em></p>
+
+<p>[4]Acceld:<em><a href="https://github.com/goharbor/acceleration-service">https://github.com/goharbor/acceleration-service</a></em></p>
+
+<p><strong>｜社区相关网址｜</strong></p>
+
+<p><strong>Dragonfly 社区官网网站</strong>:</p>
+
+<p><em><a href="https://d7y.io/">https://d7y.io/</a></em></p>
+
+<p>Github 仓库:</p>
+
+<p><em><a href="https://github.com/dragonflyoss/Dragonfly2">https://github.com/dragonflyoss/Dragonfly2</a></em></p>
+
+<p>Slack Channel: </p>
+
+<p><em>#dragonflyonCNCF Slack</em></p>
+
+<p>Discussion Group:</p>
+
+<p><em>dragonfly-discuss@googlegroups.com</em></p>
+
+<p>Twitter: <em>@dragonfly_oss</em></p>
+
+<p><strong>Nydus 社区官方网站</strong>:</p>
+
+<p><em><a href="https://nydus.dev/">https://nydus.dev/</a></em></p>
+
+<p>Github 库:</p>
+
+<p><em><a href="https://github.com/dragonflyoss/image-service">https://github.com/dragonflyoss/image-service</a></em></p>
+
+<p>Slack Channel:   <em>#nydus</em></p>
+
+<p><strong>点击原文，了解更多…</strong></p>
+
+<p><strong>Dragonfly Star 一下✨：</strong></p>
+
+<p><strong><a href="https://github.com/dragonflyoss/Dragonfly2">https://github.com/dragonflyoss/Dragonfly2</a></strong></p>
+
+<p><strong> 本周推荐阅读</strong></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247515730&amp;idx=1&amp;sn=185ccafb2e52b09b0c5746e5dd70f9ae&amp;chksm=faa35188cdd4d89e014c71c1ebfdaa615eafca514443e40e923933df5e6ea32fe90ae50af74d&amp;scene=21">Dragonfly 基于 P2P 的文件和镜像分发系统</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247517262&amp;idx=1&amp;sn=65ff04b4dbfed7fb97d3507ee3f4174e&amp;chksm=faa36b94cdd4e2821813e3f1ab88c8c7770a37b3137f028a6ac27e39831f8a0a801c53e78568&amp;scene=21">Dragonfly 中 P2P 传输协议优化</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247517164&amp;idx=1&amp;sn=28f50763db2883839908057125a7b497&amp;chksm=faa36c36cdd4e52050796d00f2f5bf357471692c2da8727cc44ae47856cd925e599b6e954314&amp;scene=21">Nydus | 容器镜像基础</a></p>
+
+<p><a href="http://mp.weixin.qq.com/s?__biz=MzUzMzU5Mjc1Nw==&amp;mid=2247510940&amp;idx=1&amp;sn=b545e0836a6182abddd13a05b2f90ba9&amp;chksm=faa34446cdd4cd50a461f071cdc4d871bd6eeef2318a2ec73968c117b41740a56a296c726aee&amp;scene=21">Nydus —— 下一代容器镜像的探索实践</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20221216/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly | Tongsuo 8.3.2 版本发布、C 位大咖说、本周 Contributor &amp; QA</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-202211223/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly | 新年礼包已就位、本周 Contributor &amp; QA</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/we-have-come-to-the-post-cloud-native-era-how-can-we-operate-and-maintain-on-a-large-scale/">已来到 “后云原生时代” 的我们，如何规模化运维？</a></li>
+		
+			<li><a href="/sofastack.tech/blog/cost-reduction-and-efficiency-increase-ants-exploration-and-practice-in-sidecarless/">降本增效：蚂蚁在 Sidecarless 的探索和实践</a></li>
+		
+			<li><a href="/sofastack.tech/blog/is-sidecarless-the-next-stop-for-servicemesh/">Service Mesh 的下一站是 Sidecarless 吗？</a></li>
+		
+			<li><a href="/sofastack.tech/blog/tongsuo-supports-the-semi-homomorphic-encryption-algorithm-paillier/">Tongsuo 支持半同态加密算法 Paillier</a></li>
+		
+			<li><a href="/sofastack.tech/blog/p2p-transfer-protocol-optimization-in-dragonfly/">Dragonfly 中 P2P 传输协议优化</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

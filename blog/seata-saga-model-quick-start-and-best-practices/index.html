@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Seata Saga 模式快速入门和最佳实践 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		Seata Saga 模式快速入门和最佳实践
+	</h1>
+	<div class="meta">
+		
+			2023-06-14 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e51785afde54cd5b739c97aaf372858~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>文｜王特 <em>（花名：亦夏）</em></p>
+
+<p>Email：yixia.wt@antgroup.com</p>
+
+<p>蚂蚁集团数据中间件核心开发</p>
+
+<p>本文<strong>4927</strong> 字 阅读 <strong>13</strong> 分钟</p>
+
+<p>Seata 是一款开源的分布式事务解决方案，致力于在微服务架构下提供高性能和简单易用的分布式事务服务。Seata 为用户提供了 AT、TCC、SAGA、XA 等多种事务模式，帮助解决不同业务场景下的事务一致性问题。</p>
+
+<p>本文主要介绍 Seata Saga 模式的使用以及最佳实践，围绕三个部分展开，第一部分是 Seata Saga 的简介、第二部分旨在快速介绍 Seata Saga 模式的使用方法并帮助大家入门，最后一部分将会给大家分享一些 Seata Saga 实践中的经验，帮助用户更快、更好得使用 Seata Saga 模式。</p>
+
+<h2 id="1-seata-saga-简介">1 Seata Saga 简介</h2>
+
+<h3 id="1-1-saga-模式">1.1 Saga 模式</h3>
+
+<p>Saga 模式是分布式事务的解决方案之一，理念起源于 1987 年 Hector &amp; Kenneth 发表的 Sagas 论文。它将整个分布式事务流程拆分成多个阶段，每个阶段对应我们的子事务，子事务是本地事务执行的，执行完成就会真实提交。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0cd911fc89a445d48eaacc39b13fb74c~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>它是一种基于失败的设计，如上图可以看到，每个活动或者子事务流程，一般都会有对应的补偿服务。如果分布式事务发生异常的话，在 Saga 模式中，就要进行所谓的“恢复”，恢复有两种方式，<strong>逆向补偿</strong>和<strong>正向重试</strong>。比如上面的分布式事务执行到 T3 失败，逆向补偿将会依次执行对应的 C3、C2、C1 操作，取消事务活动的“影响”。那正向补偿，它是一往无前的，T3 失败了，会进行不断的重试，然后继续按照流程执行 T4、T5 等。</p>
+
+<p>根据 Saga 模式的设计，我们可以得到 Saga 事务模式的优缺点。</p>
+
+<p><strong>优点：</strong></p>
+
+<ul>
+<li>子事务 <em>（或流程）</em> ，提交是本地事务级别的，没有所谓的全局锁，在长事务流程下，避免了长时间的资源锁定；另外这种流水线的处理模型天然符合阶段式信号处理模型，能发掘出更高的性能和吞吐。</li>
+<li>正向服务和补偿服务都是交给业务开发实现的，所以 Saga 模式和底层数据库协议是无关的。XA/AT 模式可能依赖特定的数据库类型和版本，比如 MySQL 是 5.0 之后才支持的 XA，那么低版本的 MySQL 就不能适用到 XA 模式。</li>
+</ul>
+
+<p><strong>缺点：</strong></p>
+
+<ul>
+<li>也是因为正向服务和补偿服务都由业务开发者实现，所以业务上是有开发成本的，侵入性相对 XA/AT 打一个注解的方式会高很多。</li>
+<li>因为一阶段子事务活动提交是本地事务级别的，所以 Saga 模式不保证隔离性。提交之后就可能“影响”其他分布式事务、或者被其他分布式事务所“影响”。例如：其他分布式事务读取到了当前未完成分布式事务中子事务的更新，导致脏读；其他分布式事务更新了当前未完成分布式事务子事务更新过的字段，导致当前事物更新丢失；还有不可重复读的场景等。</li>
+</ul>
+
+<p>所以 Saga 模式的使用也需要考虑这些问题带来的“影响”。一般 Saga 模式的使用场景有如下几个：</p>
+
+<ul>
+<li>长事务流程，业务上难以接受长时间的资源锁定，Saga 的特性使得它在长事务流程上处理非常容易；</li>
+<li>业务性质上，业务可以接受或者解决缺乏隔离性导致的“影响”。例如部分业务只要求最终一致性，对于隔离性要求没有那么严格，其实是可以落地 Saga 模式的；</li>
+<li>分布式事务参与者包含其他机构或者三方的服务，数据资源服务不是我们自身维护，无法提供 TCC 模式要求的几个接口。</li>
+</ul>
+
+<h3 id="1-2-seata-saga">1.2 Seata Saga</h3>
+
+<p>接下来我们来看看 Seata Saga 的实现。Saga 主流的实现分为两种：编排式和协调式。<strong>Seata Saga 的实现方式是编排式，是基于状态机引擎实现的。</strong> 状态机执行的最小单位是节点：节点可以表示一个服务调用，对应 Saga 事务就是子事务活动或流程，也可以配置其补偿节点，通过链路的串联，编排出一个状态机调用流程。在 Seata 里，调用流程目前使用 JSON 描述，由状态机引擎驱动执行，当异常的时候，我们也可以选择补偿策略，由 Seata 协调者端触发事务补偿。</p>
+
+<p>有没有感觉像是服务编排，区别于服务编排，Seata Saga 状态机是 <strong>Saga+服务编排</strong>，支持补偿服务，保证最终一致性。</p>
+
+<p>我们来看看一个简单的状态机流程定义：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9636ad0dbe9842de88685aa709c08be3~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>上方是一个 Name 为 <code>reduceIncentoryAndBalance</code> 的状态机描述，里面定了 ServiceTask 类型的服务调用节点以及对应的补偿节点 <code>CompensateReduceInventory</code>。</p>
+
+<p>看看几个基本的属性：</p>
+
+<ul>
+<li>Type：节点类型，Seata Saga 支持多种类型的节点。例如 ServiceTask 是服务调用节点</li>
+<li>ServiceName/ServiceMethod：标识 ServiceTask 服务及对应方法</li>
+<li>Input/Output：定义输入输出参数，输入输出参数取值目前使用的是 SPEL 表达式</li>
+<li>Retry：控制重试流程</li>
+<li>Catch/Next：用于流程控制、衔接，串联整个状态机流程</li>
+</ul>
+
+<p>更多类型和语法可以参考 Seata 官方文档[1]，可以看到状态机 JSON 声明还是有些难度的，为了简化状态机 JSON 的编写，我们也提供了可视化的编排界面[2]，如下所示，编排了一个较为复杂的流程。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9a0c27240a8a4ad793aa3f0ac872e62f~tplv-k3u1fbpfcp-watermark.image?" alt="1.png" /></p>
+
+<p>话不多说，我们进入下面的实践环节。</p>
+
+<h2 id="2-seata-saga-使用入门">2 Seata Saga 使用入门</h2>
+
+<h3 id="2-1-从-seata-官网新人文档开始">2.1 从 Seata 官网新人文档开始</h3>
+
+<blockquote>
+<p>Seata 分 TC、TM 和 RM 三个角色，TC <em>（Server 端）</em> 为单独服务端部署，TM 和 RM <em>（Client 端）</em> 由业务系统集成。</p>
+
+<p>Server 端存储模式 <em>（store.mode）</em> 现有 file、db、redis 三种 <em>（后续将引入 Raft、MongoDB）</em> ，file 模式无需改动，直接启动即可。</p>
+</blockquote>
+
+<p><strong>部署 Seata Server</strong></p>
+
+<p>从新人文档，可以看出 Seata 还是传统的 CS 模型。首先我们需要部署 Seata Server 端。Server 端默认的存储模式时 file 模式，无需改动，直接执行 SpringBoot 启动类 main 方法即可启动 Seata Server。为了方便，本次演示就使用 file 模式启动，其他模式的启动方式可以参考新人文档的详细介绍。</p>
+
+<p><strong>创建 Client 端测试应用</strong></p>
+
+<p>同时我们需要创建一个客户端的测试应用，这里命名 <code>seata-saga-test</code>，测试应用使用 SpringBoot 框架，配置好 spring 的 aplication.pname 和 port，并且引入 <code>seata-spring-boot-starter</code> 依赖，完成 Client 端应用的搭建。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66fad74b2e54467a9b0c245d53116d75~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<h3 id="2-2-从-seata-saga-单元测试看起">2.2 从 Seata Saga 单元测试看起</h3>
+
+<p>一般了解一个框架的功能，建议是从入口的单元测试类开始看起。在 Seata 仓库中找到 Seata Saga 的 test 模块，从最外围的测试类 <code>io.seata.saga.engine.StateMachineTests</code> 看起 <em>（一般开源项目最外围的测试类即是入口类）</em> ：</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/636bee749a034211a8b7639b947f9cf8~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>从上面的截图可以看出，入口测试方法主要分为三个部分：</p>
+
+<p>【1】处的 spring 配置文件声明了 StateMachineEngine Bean 以及对应的属性，【2】处也引用了该类执行 start，判断该类为我们状态机的入口类，其实 StateMachineEngine 该类也就是 Seata Saga 状态机操作入口，控制状态机的开始、恢复等操作。StateMachineEngine 有一个重要的属性 resources，该属性声明了状态机 JSON 文件的存储路径，Seata Saga 状态机引擎启动的时候会加载对应路径下的状态机定义，以供后续使用，这里的路径根据我们需求更改。</p>
+
+<p>【3】处调用了 StateMachineEngine 的 start 方法，传递状态机名称、启动参数，开启一个状态机流程调用。简单跟下实现，可以看到其中状态名称对应 resources 路径下状态机 JSON 定义中的 Name 属性。</p>
+
+<p>测试 Seata Saga 状态机流程，我们得先有一个状态机 JSON 定义。使用 Seata Saga StateMachine Designer[3]，定义一个简单 AService#doA 方法调用 BService#doB 方法的状态机流程，再加个入参，最终我们的类#方法和状态机 JSON 如下所示。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ac15a2d33834ba08fab1707aebfca84~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>有了基础的调用模型和状态机 JSON 定义，按照测试用例，我们同样声明出状态机 Bean 及执行入口 <em>（注意：start 方法里面的状态机名称需要和状态机 JSON 定义里面的 Name 名称保持一致）</em> ，执行下 main 方法，我们可以发现 AService#doA 方法和 BService#doB 方法都被成功调用了。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5d918936d7b146d7bf7784857d72a4db~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>至此，我们已经完成了 Seata Saga 状态机的入门使用。继续观察单测，我们发现 Seata Saga 单测还有两个模块，分别是 db 和 mock。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b397e1bc4ed2483d9d275568d3d6f6fd~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>我们先来看看 db 模块的单测，可以看到 db 模块的单测类和上面基本类似，唯一的区别就在于 StateMachineEngine，指定了 db 存储，执行了 DDL SQL <em>（初始化 Seata Saga 相关表）</em> 。指定了 db 存储，那么我们的状态机执行过程将会持久化在 db 存储，方便事务执行过程查询和异常恢复，也是生产环境的实践方式。</p>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f8a8f97d3c24181bdc56de63fba64f2~tplv-k3u1fbpfcp-zoom-1.image" alt="图片" /></p>
+
+<p>mock 模块通过 Mock Transcation，脱离 Seata Sever，仅使用了 Seata Saga 的服务编排能力。有兴趣的同学可以再去实践下 db 和 mock 模块的使用，这里就不展开了。</p>
+
+<h2 id="seata-saga-最佳实践">Seata Saga 最佳实践</h2>
+
+<h3 id="3-1-基本使用">3.1 基本使用</h3>
+
+<ul>
+<li>在应用层面，Seata Saga 状态机模式使用上不同于 AT、TCC 注解化方式，要使用状态机 API 执行；</li>
+<li>在状态机模式里面，恢复策略分为向前重试和向后补偿，根据业务场景，要选择合适的补偿策略；</li>
+<li>Seata Saga 支持异步状态执行、状态机异步执行，适时使用异步，可以提升整个系统的吞吐量。</li>
+</ul>
+
+<h3 id="3-2-saga-服务">3.2 Saga 服务</h3>
+
+<ul>
+<li>Saga 服务可能被多次调用，所以要保证幂等</li>
+<li>补偿服务较原服务可能先执行、需要允许空补偿、同时需要拒绝后续的原服务请求，进行防悬挂控制</li>
+</ul>
+
+<h3 id="3-3-隔离性问题应对">3.3 隔离性问题应对</h3>
+
+<ul>
+<li>业务驱动，如果业务上可以接受缺乏隔离性的影响，可以不用做任何操作</li>
+<li>语义锁，对操作资源进行语义级别的锁定</li>
+<li>使用悲观流程，例如 A-&gt;B 转账操作，先给 B 加钱，再给 B 减钱；换成悲观视图就是先给 A 减钱，再给 B 加钱，防止 B 加钱之后立刻消费导致的短款问题</li>
+<li>其它方式</li>
+</ul>
+
+<h3 id="3-4-稳定性">3.4 稳定性</h3>
+
+<p>基于 db 存储的 Saga 模式，需要注意：重试或者补偿默认会插入一条状态执行记录，频繁重试或者补偿，会导致状态执行记录爆炸，如果有大对象存储，可能会导致内存 crash。Seata Saga 提供了 update 模式，使用 update 记录代替新增执行记录，用来避免此类问题。</p>
+
+<h3 id="3-5-扩展">3.5 扩展</h3>
+
+<ul>
+<li>Seata Saga 状态机存储、语法解析等都是面向 SPI 设计的，业务上可以平滑替换对应的存储或者状态机语言实现。例如将状态机的 JSON 解析替换到 YAML 解析。</li>
+<li>Seata Saga 支持 Mock Transaction 的方式，仅使用服务编排能力，也支持状态机定义 <em>（JSON）</em> 动态发布，也就是编排的动态发布，这一点在做 DSL 动态管控端的时候将会非常有用。</li>
+</ul>
+
+<p>讲了这么多，Seata Saga 目前状态机的实现，上手成本相对还是比较高。一方面我们致力提升 Seata Saga 状态机模式的易用性，同时也在设计 Saga 的注解化模式、流式编排模式，期望提供给用户更具产品化能力的 Seata Saga。有兴趣的同学，也非常欢迎加入共建。</p>
+
+<p><strong>Seata Group 开源交流群：44816898</strong></p>
+
+<p><strong>相关链接：</strong></p>
+
+<p>[1]Seata 官方文档:</p>
+
+<p><a href="http://seata.io/zh-cn/docs/user/saga.html">http://seata.io/zh-cn/docs/user/saga.html</a></p>
+
+<p>[2]可视化的编排界面</p>
+
+<p><a href="http://seata.io/saga_designer/index.html#/">http://seata.io/saga_designer/index.html#/</a></p>
+
+<p>[3]Seata Saga StateMachine Designer：</p>
+
+<p><a href="http://seata.io/saga_designer/index.html#/">http://seata.io/saga_designer/index.html#/</a></p>
+
+<p><strong>Seata Star 一下✨：</strong><br />
+<a href="https://github.com/seata/seata">https://github.com/seata/seata</a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    if (src.toLowerCase().endsWith('.image')) {
+      img.setAttribute('src', src.replace('.image', ''));
+    }
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-230609/">
+		<span class="text">上一篇: </span>
+		<span class="text">SOFA Weekly｜可信基础设施技术分论坛、Layotto 社区会议回顾与预告、社区本周贡献</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-230616/">
+		<span class="text">下一篇: </span>
+		<span class="text">SOFA Weekly｜SOFARPC 5.10.1 版本发布、Layotto 社区会议回顾与预告、社区本周贡献</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/seata-go-1.2.0-available-for-production-environments-is-here/">生产环境可用的 Seata-go 1.2.0 来啦！！！</a></li>
+		
+			<li><a href="/sofastack.tech/activities/sofa-channel-33/">SOFAChannel#33《Occlum x EDMM=更安全好用的机密计算 LibOS》——Occlum 社区</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-5envoy-go-extensions-memory-security/">MoE 系列（五）｜Envoy Go 扩展之内存安全</a></li>
+		
+			<li><a href="/sofastack.tech/blog/mosn-delay-based-load-balancing-algorithm-go-faster-expect-to-go-steadier/">MOSN 基于延迟负载均衡算法——走得更快，期待走得更稳</a></li>
+		
+			<li><a href="/sofastack.tech/blog/moe-series-4-go-extended-asynchronous-mode/">MoE 系列（四）｜Go 扩展的异步模式</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_7.jpg" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>

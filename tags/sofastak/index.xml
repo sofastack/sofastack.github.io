@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFAStak on SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/sofastak/</link>
+    <description>Recent content in SOFAStak on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 11 Jul 2023 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/sofastak/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFABoot 4.0 正式发布，多项新特性等你来体验！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofaboot-4.0-is-officially-released-with-many-new-features-for-you-to-experience/</link>
+      <pubDate>Tue, 11 Jul 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofaboot-4.0-is-officially-released-with-many-new-features-for-you-to-experience/</guid>
+      <description>Part.1 「亿点点」新特性 基于 Java 17 SOFABoot 4.0 依赖 Java 17 作为最小支持的 JDK 版本。如果你的应用目前使用 Java 8 或 11，你需要先将自己的 JDK 版本升级到 17 才能基于 SOFABoot 4.0 进行开</description>
+    </item>
+    
+    <item>
+      <title>Nydus 在约苗平台的容器镜像加速实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/nydus-container-image-acceleration-practices-on-the-yosemite-platform/</link>
+      <pubDate>Tue, 28 Feb 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/nydus-container-image-acceleration-practices-on-the-yosemite-platform/</guid>
+      <description>文 | 向申 约苗平台运维工程师 关注云原生领域 本文字数 9574 阅读时间 24 分钟 本文是来自向申同学的分享，介绍了其在 K8s 生产环境集群部署 Nydus 的相关实践。 Nydus 是蚂蚁</description>
+    </item>
+    
+  </channel>
+</rss>

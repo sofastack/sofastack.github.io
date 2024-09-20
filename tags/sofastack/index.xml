@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SOFAStack</title>
+    <link>https://sofastack.github.io/sofastack.tech/tags/sofastack/</link>
+    <description>Recent content on SOFAStack</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 20 Apr 2024 15:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://sofastack.github.io/sofastack.tech/tags/sofastack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SOFA 六周年，Hello SOFA World</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-6th-anniversary/</link>
+      <pubDate>Sat, 20 Apr 2024 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-6th-anniversary/</guid>
+      <description>概要 活动主题：SOFA 六周年，Hello SOFA World！ 活动时间：04 月 20 日 13:30&amp;ndash;18:00 活动形式：线下 Meetup + 线上直播 资料下载： Apache Seata(incubating) 新征程 探索微服务下一站，</description>
+    </item>
+    
+    <item>
+      <title>从一次 RPC 请求，探索 MOSN 的工作流程</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/explore-the-workflow-of-mosn-from-an-rpc-request/</link>
+      <pubDate>Tue, 26 Mar 2024 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/explore-the-workflow-of-mosn-from-an-rpc-request/</guid>
+      <description>王程铭（呈铭） 蚂蚁集团技术工程师，Apache Committer 专注 RPC、Service Mesh 和云原生等领域。 本文 7368 字，预计阅读 15 分钟 前言 MOSN（Modul</description>
+    </item>
+    
+    <item>
+      <title>单体应用协作开发太难？Koupleless 带来拆分插件，帮你抽丝剥茧提高协作开发效率！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/koupleless-brings-split-plugin-to-help-you-to-improve-the-efficiency-of-collaborative-development/</link>
+      <pubDate>Tue, 19 Mar 2024 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/koupleless-brings-split-plugin-to-help-you-to-improve-the-efficiency-of-collaborative-development/</guid>
+      <description>梁栎鹏（立蓬） 蚂蚁集团技术工程师,云原生领域工程师 就职于蚂蚁集团中间件团队，参与维护与建设蚂蚁 SOFAArk 和 Koupleless 开源项目，参与内部 SOFAServerless 产品的研发和实践。 本</description>
+    </item>
+    
+    <item>
+      <title>高效降本｜深度案例解读 Koupleless 在南京爱福路的落地实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/efficient-cost-reduction-case-study-of-koupleless-practical-application-in-nanjing-f6/</link>
+      <pubDate>Tue, 27 Feb 2024 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/efficient-cost-reduction-case-study-of-koupleless-practical-application-in-nanjing-f6/</guid>
+      <description>文｜祁晓波 南京爱福路汽车科技基础设施负责人 主要研究微服务、可观测、稳定性、研发效能、Java 中间件等领域。 本文 4812 字 阅读 12 分钟 Koupleless *（原 SOFA</description>
+    </item>
+    
+    <item>
+      <title>成倍降本增效，提升企业竞争力！SOFAServerless 品牌升级为 Koupleless，重磅发布 1.0 版本</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/economical-and-efficient-enhance-the-competitiveness-of-enterprises-sofaserverless-brand-upgraded-to-koupleless-release-version-1.0/</link>
+      <pubDate>Tue, 06 Feb 2024 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/economical-and-efficient-enhance-the-competitiveness-of-enterprises-sofaserverless-brand-upgraded-to-koupleless-release-version-1.0/</guid>
+      <description>如果你是企业经营者，在为企业降本增效而发愁； 如果你是企业的开发、运维或架构同学，在日常工作中被开发效率、交付问题等困扰…… 欢迎来了解 Koupleless *（原</description>
+    </item>
+    
+    <item>
+      <title>开源之夏经验分享｜Layotto 社区 陈亦昺：保持热情、全力以赴！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ospp-exprience-sharing-keep-enthusiastic-and-all-in/</link>
+      <pubDate>Tue, 21 Nov 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ospp-exprience-sharing-keep-enthusiastic-and-all-in/</guid>
+      <description>今天 SOFAStack 邀请到了开源之夏 2023 Layotto 社区的中选学生陈亦昺同学！在本项目中，他负责可插拔式组件的开发。希望他分享的这段经历，能让更多人了解到 Layotto 开源社区，</description>
+    </item>
+    
+    <item>
+      <title>携手开源，共同见证｜Seata 进入 Apache 孵化器</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/open-source-together-seata-enters-apache-incubator/</link>
+      <pubDate>Thu, 16 Nov 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/open-source-together-seata-enters-apache-incubator/</guid>
+      <description>北京时间 2023 年 10 月 29 日，分布式事务开源项目 Seata 通过 Apache 基金会的投票决议，以全票通过的优秀表现正式成为 Apache 孵化器项目！ 根据 Apache基金会邮件列表显</description>
+    </item>
+    
+    <item>
+      <title>告别复杂性！用正确的工具轻松应对 K8s 管理挑战</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/say-goodbye-to-complexity-easily-tackle-k8s-management-challenges-with-the-right-tools/</link>
+      <pubDate>Tue, 14 Nov 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/say-goodbye-to-complexity-easily-tackle-k8s-management-challenges-with-the-right-tools/</guid>
+      <description>文｜王连平（花名：烨川) 蚂蚁集团容器团队专家 本文 3441 字 阅读 9 分钟 技术背景 Kubernetes 是容器编排的标杆平台，其标准化、插件化特性促使其拥有巨大的生态体系。</description>
+    </item>
+    
+    <item>
+      <title>开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/</link>
+      <pubDate>Tue, 07 Nov 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/</guid>
+      <description>今天，我们邀请到了开源之夏 2023 活动 Dragonfly 社区的中选学生李从旺同学，他此次承担的项目是——「PyTorch Serve 基于 Dragonfly P2P 技术分发模型」。希望通过他的开源</description>
+    </item>
+    
+    <item>
+      <title>Lunettes - 让 Kubernetes 服务运营更简单</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/lunettes-makes-kubernetes-service-operations-easier/</link>
+      <pubDate>Tue, 31 Oct 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/lunettes-makes-kubernetes-service-operations-easier/</guid>
+      <description>文｜谭崇康（*花名：见云*） 蚂蚁集团高级技术专家 本文 3781 字 阅读 10 分钟 问题：K8s 服务运营需要更好的可观测能力 云原生系统以 Kubernetes*</description>
+    </item>
+    
+    <item>
+      <title>VLDB2023｜方略：一个交互式的规则研发系统</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/vldb2023-fanglue-an-interactive-rule-development-system/</link>
+      <pubDate>Tue, 03 Oct 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/vldb2023-fanglue-an-interactive-rule-development-system/</guid>
+      <description>文｜梁仕威（花名：栖川） 蚂蚁集团算法专家 方略平台技术负责人，专注于分布式计算领域，主要负责蚂蚁基础算法的分布式设计与开发。 本文 3419 字，阅读 9 分</description>
+    </item>
+    
+    <item>
+      <title>喜报！CNCF 基金会宣布 KCL 成为沙盒项目！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/cncf-foundation-announced-kcl-as-a-sandbox-project/</link>
+      <pubDate>Tue, 26 Sep 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/cncf-foundation-announced-kcl-as-a-sandbox-project/</guid>
+      <description>2023 年 9 月 20 日，KCL 项目通过了全球顶级开源基金会云原生计算基金会 （CNCF） 技术监督委员会评定，正式成为 CNCF 沙盒项目。 这意味着 KCL 得到了云原生开</description>
+    </item>
+    
+    <item>
+      <title>Docker 环境基于 Dragonfly 的 Kubernetes 多集群镜像分发实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/dragonfly-based-kubernetes-multi-cluster-image-distribution-for-docker-environments/</link>
+      <pubDate>Tue, 19 Sep 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/dragonfly-based-kubernetes-multi-cluster-image-distribution-for-docker-environments/</guid>
+      <description>文｜唐荦彦 深信服高级开发工程师，主要负责 SASE 云化架构以及基础设施建设 本文 3056 字，阅读 6 分钟 1｜你将在本文学到什么 多 K8s 集群镜像分发方案 Dragonfly 的理解 Harbor 的</description>
+    </item>
+    
+    <item>
+      <title>DLRover 在 K8s 上千卡级大模型训练稳定性保障的技术实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/dlrovers-stability-guarantee-for-large-model-training-on-k8s-with-thousands-of-cardinalities/</link>
+      <pubDate>Tue, 12 Sep 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/dlrovers-stability-guarantee-for-large-model-training-on-k8s-with-thousands-of-cardinalities/</guid>
+      <description>文｜王勤龙（*花名：长凡*） 蚂蚁集团 AI 系统工程师 文｜张吉（*花名：理之*） 蚂蚁集团 AI 系统工程师 文｜兰霆峰 四川大学 20 级计算机系 本文 5104 字 阅读 13 分</description>
+    </item>
+    
+    <item>
+      <title>大象转身：支付宝资金技术 Serverless 提效总结</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/elephant-turn-summary-of-alipay-funding-technology-serverless-efficiency-improvements/</link>
+      <pubDate>Tue, 05 Sep 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/elephant-turn-summary-of-alipay-funding-technology-serverless-efficiency-improvements/</guid>
+      <description>1. 前言 本文是支付宝资金技术团队在《大象转身-支付宝资金技术交付提效之路》系列总结之一。如果你正在负责一个所支撑的业务面临从平台到场景化创新的</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁 SOFAServerless 微服务新架构的探索与实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-group-sofa-serverless-new-microservices-architecture-exploration-and-practice/</link>
+      <pubDate>Tue, 22 Aug 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-group-sofa-serverless-new-microservices-architecture-exploration-and-practice/</guid>
+      <description>作者简介 赵真灵（有济） 蚂蚁集团技术专家，Serverless 和微服务领域专家 曾负责基于 K8s Deployment 的应用发布运维平台建设、K8s 集群的 Node/pod 多级弹性伸缩</description>
+    </item>
+    
+    <item>
+      <title>超越边界：FaaS 的应用实践和未来展望</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/beyond-boundaries-faas-adoption-practices-and-future-prospects/</link>
+      <pubDate>Tue, 15 Aug 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/beyond-boundaries-faas-adoption-practices-and-future-prospects/</guid>
+      <description>作者简介 邢奇（薯片） 蚂蚁集团技术专家，云原生和 Service Mesh 领域专家 长期从事服务治理和服务发现等相关领域的研究和实践，在 RPC 框架（*Dubbo、Spri</description>
+    </item>
+    
+    <item>
+      <title>Dragonfly 发布 v2.1.0 版本！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/dragonfly-v-2-1-0-release/</link>
+      <pubDate>Tue, 08 Aug 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/dragonfly-v-2-1-0-release/</guid>
+      <description>Dragonfly 最新正式版本 v2.1.0 已经发布！ 感谢赵鑫鑫[1]同学帮助重构 Console 代码，并且提供全新的 Console[2]控制台方便用户可视化操作 P2P 集群。欢迎访问 d7</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#34《Dragonfly &amp; Nydus 在 AI 场景下的加速实践》——Dragonfly 社区</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-34/</link>
+      <pubDate>Wed, 02 Aug 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-34/</guid>
+      <description>Dragonfly 项目简介 Dragonfly 是一款基于 P2P 的镜像加速和文件分发系统。它旨在提高大规模文件传输的效率和速率，最大限度地利用网络带宽。在 AI 数据分发、文件分发、日志</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（七） - Envoy Go 扩展之沙箱安全</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series-7-envoy-go-extension-sandbox-security/</link>
+      <pubDate>Tue, 01 Aug 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series-7-envoy-go-extension-sandbox-security/</guid>
+      <description>文｜朱德江（GitHub ID：doujiang24) MOSN 项目核心开发者 蚂蚁集团技术专家 专注于云原生网关研发的相关工作 *本文* 807 字 阅读 3分钟 在本</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（六）｜ Envoy Go 扩展之并发安全</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series6envoy-go-extensions-concurrency-security/</link>
+      <pubDate>Tue, 18 Jul 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series6envoy-go-extensions-concurrency-security/</guid>
+      <description>文｜朱德江（GitHub ID：doujiang24) MOSN 项目核心开发者 蚂蚁集团技术专家 专注于云原生网关研发的相关工作 本文 1313 字 阅读 4 分钟 前一篇介</description>
+    </item>
+    
+    <item>
+      <title>Seata-DTX｜分布式事务金融场景案例介绍</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-dtxdistributed-transaction-financial-scenario-case-introduction/</link>
+      <pubDate>Tue, 27 Jun 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-dtxdistributed-transaction-financial-scenario-case-introduction/</guid>
+      <description>文｜魏陈豪（花名：无陈 Sam) 蚂蚁集团 SOFAStack 产品专家 本文 2966 字 阅读 8 分钟 序言 今天给大家带来一篇 Seata-DTX[1] 商业版分布式事务在金融行业如何保证事务一致性的实践介绍。</description>
+    </item>
+    
+    <item>
+      <title>SOFAStack 的下一个五年</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/the-next-five-years-of-sofastack/</link>
+      <pubDate>Tue, 20 Jun 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/the-next-five-years-of-sofastack/</guid>
+      <description>文｜宋顺（GitHub ID：nobodyiam) SOFAStack 社区开源负责人 蚂蚁集团高级技术专家 本文 3861 字 阅读 11 分钟 01 回顾开源这五年 回想起 2018 年 4 月 19 日 SOFAStack 首</description>
+    </item>
+    
+    <item>
+      <title>Seata Saga 模式快速入门和最佳实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-saga-model-quick-start-and-best-practices/</link>
+      <pubDate>Wed, 14 Jun 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-saga-model-quick-start-and-best-practices/</guid>
+      <description>文｜王特 （花名：亦夏） Email：yixia.wt@antgroup.com 蚂蚁集团数据中间件核心开发 本文4927 字 阅读 13 分钟 Seata 是一款开源的</description>
+    </item>
+    
+    <item>
+      <title>生产环境可用的 Seata-go 1.2.0 来啦！！！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-go-1.2.0-available-for-production-environments-is-here/</link>
+      <pubDate>Tue, 06 Jun 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-go-1.2.0-available-for-production-environments-is-here/</guid>
+      <description>文｜刘月财（GitHub ID：luky116) 360 服务端开发专家 Seata-go 项目负责人 本文 2752 字 阅读 7 分钟 发布概览 Seata-go 1.2.0 版本支持 XA 模式。XA 协议是由 X/Open 组织提</description>
+    </item>
+    
+    <item>
+      <title>SOFAChannel#33《Occlum x EDMM=更安全好用的机密计算 LibOS》——Occlum 社区</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-33/</link>
+      <pubDate>Wed, 31 May 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-channel-33/</guid>
+      <description>概要 活动主题：SOFAChannel#33《Occlum x EDMM=更安全好用的机密计算 LibOS》——Occlum 社区 活动时间：05 月 31 日</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（五）｜Envoy Go 扩展之内存安全</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series-5envoy-go-extensions-memory-security/</link>
+      <pubDate>Tue, 30 May 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series-5envoy-go-extensions-memory-security/</guid>
+      <description>前面几篇介绍了 Envoy Go 扩展的基本用法，接下来几篇将介绍实现机制和原理。 Envoy 是 C++ 实现的，那 Envoy Go 扩展，本质上就相当于把 Go 语言嵌入 C++ 里了。 在 Go 圈里，将 Go</description>
+    </item>
+    
+    <item>
+      <title>MOSN 基于延迟负载均衡算法——走得更快，期待走得更稳</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/mosn-delay-based-load-balancing-algorithm-go-faster-expect-to-go-steadier/</link>
+      <pubDate>Tue, 23 May 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/mosn-delay-based-load-balancing-algorithm-go-faster-expect-to-go-steadier/</guid>
+      <description>文｜纪卓志（GitHub ID：jizhuozhi) 京东高级开发工程师 MOSN 项目 Committer 专注于云原生网关研发的相关工作，长期投入在负载均衡和流量控制领域</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（四）｜Go 扩展的异步模式</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series-4-go-extended-asynchronous-mode/</link>
+      <pubDate>Tue, 16 May 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series-4-go-extended-asynchronous-mode/</guid>
+      <description>在《MoE 系列（三）｜使用 Istio 动态更新 Go 扩展配置》中我们体验了用 Istio 做控制面，给 Go 扩展推送配置，这次我们来体验一下，在 Go 扩展的异步模式下，对 Goroutine 等</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（三）｜使用 Istio 动态更新 Go 扩展配置</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series-3dynamic-update-of-go-extension-configuration-with-istio/</link>
+      <pubDate>Tue, 02 May 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series-3dynamic-update-of-go-extension-configuration-with-istio/</guid>
+      <description>上一篇我们用 Go 扩展实现了 Basic Auth，体验了 Go 扩展从 Envoy 接受配置。 之所以这么设计，是想复用 Envoy 原有的 xDS 配置推送通道，今天我们就来体验一番，云原生的</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁安全科技 Nydus 镜像加速实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-security-technology-nydus-mirror-acceleration-practice/</link>
+      <pubDate>Wed, 26 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-security-technology-nydus-mirror-acceleration-practice/</guid>
+      <description>文｜蚂蚁集团 ZOLOZ 团队 使用全球领先安全科技，为用户和机构提供安全、便捷的安全风控解决方案。 本文 6386 字 阅读 12 分钟 背景简介 ZOLOZ[1]是蚂蚁集团旗</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（二）｜Golang 扩展从 Envoy 接收配置</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series-2golang-extensions-receive-configuration-from-envoy/</link>
+      <pubDate>Tue, 18 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series-2golang-extensions-receive-configuration-from-envoy/</guid>
+      <description>文｜朱德江（GitHub ID：doujiang24) MOSN 项目核心开发者 蚂蚁集团技术专家 专注于云原生网关研发的相关工作 本文 1445 字 阅读 5 分钟 上一篇我</description>
+    </item>
+    
+    <item>
+      <title>SOFA 五周年，Live Long and Prosper！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-anniversary-5/</link>
+      <pubDate>Sat, 15 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-anniversary-5/</guid>
+      <description>概要 活动主题：SOFA 五周年，Live Long and Prosper！ 活动时间：04 月 15 日 12:00&amp;ndash;17:00 活动形式：线下 Meetup + 线上直播 资料下载： 《SOFAStack 的下</description>
+    </item>
+    
+    <item>
+      <title>缘起｜蚂蚁应用级服务发现的实践之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/originsants-practical-path-to-application-level-service-discovery/</link>
+      <pubDate>Tue, 11 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/originsants-practical-path-to-application-level-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家、SOFARegistry Maintainer 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 的设计和研发工作。 本文 8339 字 阅</description>
+    </item>
+    
+    <item>
+      <title>缘起｜蚂蚁应用级服务发现的实践之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/</link>
+      <pubDate>Tue, 11 Apr 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/origins-ant-s-practical-path-to-application-level-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家、SOFARegistry Maintainer 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 的设计和研发工作。 本文 8339 字阅</description>
+    </item>
+    
+    <item>
+      <title>MoE 系列（一）｜如何使用 Golang 扩展 Envoy</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/moe-series-1how-to-extend-envoy-with-golang/</link>
+      <pubDate>Tue, 28 Mar 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/moe-series-1how-to-extend-envoy-with-golang/</guid>
+      <description>本文作为 MoE 系列第一篇，主要介绍用 Golang 扩展 Envoy 的极速开发体验。 一、背景 MoE*（MOSN on Envoy）*是 MOSN 团队提出的技术架构，经过近两年的发展，</description>
+    </item>
+    
+    <item>
+      <title>火山引擎基于 Dragonfly 加速实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/volcano-engine-based-on-dragonfly-acceleration-practices/</link>
+      <pubDate>Tue, 21 Mar 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/volcano-engine-based-on-dragonfly-acceleration-practices/</guid>
+      <description>文｜黄逸炀 Dragonfly Maintainer 字节跳动火山引擎软件工程师 专注于镜像存储及镜像 P2P 分发 PART. 0 背景 火山引擎镜像仓库 CR 使用 TOS 来存储容器镜像。目前在一定程度上能满足并发</description>
+    </item>
+    
+    <item>
+      <title>Seata-go 1.1.0 发布，补齐 AT 模式支持</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-go-1-1-0-released-completes-at-mode-support/</link>
+      <pubDate>Tue, 14 Mar 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-go-1-1-0-released-completes-at-mode-support/</guid>
+      <description>发布概览 Seata-go 1.1.0 版本补齐了 AT 模式下对 Multi Delete、Multi Update、Insert on Update 和 Select for Update 的支持。至此 Seata-go 的 AT 模式与 Seata AT 模式全面对齐。 此</description>
+    </item>
+    
+    <item>
+      <title>DLRover：蚂蚁开源大规模智能分布式训练系统</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/dlrover-ant-open-source-large-scale-intelligent-distributed-training-system/</link>
+      <pubDate>Tue, 07 Mar 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/dlrover-ant-open-source-large-scale-intelligent-distributed-training-system/</guid>
+      <description>文｜沙剑 蚂蚁集团高级技术专家 专注分布式深度学习领域 主要负责蚂蚁大规模分布式训练引擎的设计和开发 本文 4491 字 阅读 12 分钟 本文整体介绍了 DLRover 的项目动机与</description>
+    </item>
+    
+    <item>
+      <title>SOFA Weekly｜铜锁探「密」、本周贡献 &amp; issue 精选</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20230303/</link>
+      <pubDate>Fri, 03 Mar 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20230303/</guid>
+      <description>SOFA Weekly｜铜锁探「密」、本周贡献 &amp;amp; issue 精选 筛选每周精华问答，同步开源进展，欢迎留言互动～ SOFAStack（Scalable Open Financial Architecture Sta</description>
+    </item>
+    
+    <item>
+      <title>Nydus 加速镜像一致性校验增强</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/nudus-20230131/</link>
+      <pubDate>Tue, 31 Jan 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/nudus-20230131/</guid>
+      <description>导言： GitLink 编程夏令营是在 CCF 中国计算机学会指导下，由 CCF 开源发展委员会（CCF ODC）举办的面向全国高校学生的暑期编程活动。这是去年（2022）的</description>
+    </item>
+    
+    <item>
+      <title>一个 go-sql-driver 的离奇 bug</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/go-sql-driver-amazing-bug/</link>
+      <pubDate>Tue, 17 Jan 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/go-sql-driver-amazing-bug/</guid>
+      <description>文｜郝洪范 京东技术专家 Seata-go 项目共同发起人 微服务底层技术的探索与研究。 本文 3482 字 阅读 7 分钟 对于 Go CURD Boy 来说，相信 github.com/go-sql-driver/mysql 这个库都不会陌生。基本上 Go 的 CURD 都离</description>
+    </item>
+    
+    <item>
+      <title>Nerdctl 原生支持 Nydus 加速镜像</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/nerdctl-natively-supports-nydus-accelerated-mirroring/</link>
+      <pubDate>Tue, 10 Jan 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/nerdctl-natively-supports-nydus-accelerated-mirroring/</guid>
+      <description>文｜李楠（GitHub ID : @loheagn） 北京航空航天大学 21 级研究生 云原生底层系统的开发和探索工作。 本文 6369 字 阅读 16 分钟 OSPP 开源之夏是由中科院</description>
+    </item>
+    
+    <item>
+      <title>SOFARegistry | 聊一聊服务发现的数据一致性</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofaregistry-talk-about-the-data-consistency-of-service-discovery/</link>
+      <pubDate>Tue, 03 Jan 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofaregistry-talk-about-the-data-consistency-of-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 设计、研发工作。 本文 9492字 阅读 24 分钟 PART. 1 前言 1.1 什么是</description>
+    </item>
+    
+    <item>
+      <title>SOFARegistry | 聊一聊服务发现的数据一致性</title>
+      <link>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/</link>
+      <pubDate>Tue, 03 Jan 2023 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-registry/code-analyze/sofaregistry-talk-about-the-data-consistency-of-service-discovery/</guid>
+      <description>文｜肖健（花名：昱恒） 蚂蚁集团技术专家 专注于服务发现领域，目前主要从事蚂蚁注册中心 SOFARegistry 设计、研发工作。 本文 9492字 阅读 24 分钟 PART. 1 前言 1.1 什么是</description>
+    </item>
+    
+    <item>
+      <title>Nydus 镜像扫描加速</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/nydus-mirror-scan-acceleration/</link>
+      <pubDate>Tue, 27 Dec 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/nydus-mirror-scan-acceleration/</guid>
+      <description>文｜余硕 上海交通大学22届毕业生阿里云开发工程师 从事云原生底层系统的开发和探索工作。 本文 6369 字 阅读 16 分钟 GitLink 编程夏令营是在 CCF 中国计算机学会指导下</description>
+    </item>
+    
+    <item>
+      <title>Dragonfly 和 Nydus Mirror 模式集成实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/dragonfly-and-nydus-mirror-mode-integration-practice/</link>
+      <pubDate>Tue, 20 Dec 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/dragonfly-and-nydus-mirror-mode-integration-practice/</guid>
+      <description>文｜戚文博 （花名：百蓦） Dragonfly Maintainer蚂蚁集团软件工程师 主要负责「基于 P2P 的文件以及镜像加速系统」。 本文 2175 字 阅读 15 分钟 PART. 1 背景 自 17 年开</description>
+    </item>
+    
+    <item>
+      <title>已来到 “后云原生时代” 的我们，如何规模化运维？</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/we-have-come-to-the-post-cloud-native-era-how-can-we-operate-and-maintain-on-a-large-scale/</link>
+      <pubDate>Fri, 16 Dec 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/we-have-come-to-the-post-cloud-native-era-how-can-we-operate-and-maintain-on-a-large-scale/</guid>
+      <description>文｜李大元 （花名：达远） Kusion 项目负责人 来自蚂蚁集团 PaaS 核心团队，PaaS IaC 基础平台负责人。 本文 4331 字 阅读 11 分钟 PART. 1 后云原生时代 距离 Kubernetes 第一个 commit 已经过</description>
+    </item>
+    
+    <item>
+      <title>降本增效：蚂蚁在 Sidecarless 的探索和实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/cost-reduction-and-efficiency-increase-ants-exploration-and-practice-in-sidecarless/</link>
+      <pubDate>Tue, 13 Dec 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/cost-reduction-and-efficiency-increase-ants-exploration-and-practice-in-sidecarless/</guid>
+      <description>文｜王发康 （花名：毅松 ） 蚂蚁集团技术专家、MOSN 项目核心开发者 深耕于高性能网络服务器研发，目前专注于云原生 ServiceMesh、Ngin</description>
+    </item>
+    
+    <item>
+      <title>Service Mesh 的下一站是 Sidecarless 吗？</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/is-sidecarless-the-next-stop-for-servicemesh/</link>
+      <pubDate>Tue, 29 Nov 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/is-sidecarless-the-next-stop-for-servicemesh/</guid>
+      <description>文｜田阳 （花名：烈元） MOSN Maintainer 专注云原生等技术领域 本文3042字 阅读 10 分钟 1. 背景 Service Mesh 被越来越多的公司认可并实践，在实际落地过程中也遇到了形形色色</description>
+    </item>
+    
+    <item>
+      <title>Tongsuo 支持半同态加密算法 Paillier</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/tongsuo-supports-the-semi-homomorphic-encryption-algorithm-paillier/</link>
+      <pubDate>Tue, 22 Nov 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/tongsuo-supports-the-semi-homomorphic-encryption-algorithm-paillier/</guid>
+      <description>文｜王祖熙（花名：金九 ) 蚂蚁集团开发工程师 负责国产化密码库 Tongsuo 的开发和维护 专注于密码学、高性能网络、网络安全等领域 本文 4316 字 阅读10 分钟 1. 背景 在</description>
+    </item>
+    
+    <item>
+      <title>Dragonfly 中 P2P 传输协议优化</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/p2p-transfer-protocol-optimization-in-dragonfly/</link>
+      <pubDate>Tue, 15 Nov 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/p2p-transfer-protocol-optimization-in-dragonfly/</guid>
+      <description>文｜孙珩珂 上海交通大学 本文1987字 阅读 10 分钟 01 优化背景 此前 Dragonfly 的 P2P 下载采用静态限流策略，相关配置项在 dfget.yaml 配置文件中： # 下载服务选项。 download: # 总下载</description>
+    </item>
+    
+    <item>
+      <title>Nydus | 容器镜像基础</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/container-image-basics/</link>
+      <pubDate>Wed, 09 Nov 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/container-image-basics/</guid>
+      <description>文｜唐斌 字节跳动基础架构研发工程师 Nydus 与 Nydus snapshotter 社区贡献者，专注存储，云原生技术。 本文 6964 字 阅读 15 分钟 1 Nydus 1.1 存在的问题 对于容器镜像使用者 问题一： 启动</description>
+    </item>
+    
+    <item>
+      <title>cgo 机制 - 从 c 调用 go</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/c-go-mechanism-calling-go-from-c/20221008/</link>
+      <pubDate>Sat, 08 Oct 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/c-go-mechanism-calling-go-from-c/20221008/</guid>
+      <description>文｜朱德江（GitHub ID：doujiang24) MOSN 项目核心开发者蚂蚁集团技术专家 专注于云原生网关研发的相关工作 本文 4656 字 阅读 12 分钟 一、前言</description>
+    </item>
+    
+    <item>
+      <title>开源项目文档社区化！Tongsuo/铜锁实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/20220929/</link>
+      <pubDate>Thu, 29 Sep 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/20220929/</guid>
+      <description>文｜杨洋（花名：凯申 ) 铜锁开源密码库创始人蚂蚁集团高级技术专家 本文 1284 字 阅读 5 分钟 1 前言 如大家所见，针对铜锁开源密码库（ *https://gi</description>
+    </item>
+    
+    <item>
+      <title>从规模化平台工程实践，我们学到了什么？</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack20220927/</link>
+      <pubDate>Tue, 27 Sep 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack20220927/</guid>
+      <description>文｜朵晓东（花名：奕杉 ) KusionStack 负责人、蚂蚁集团资深技术专家 在基础设施技术领域深耕，专注云原生网络、运维及编程语言等技术工作 一、摘要 本文尝试从平台</description>
+    </item>
+    
+    <item>
+      <title>Seata AT 模式代码级详解</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/20220920/</link>
+      <pubDate>Tue, 20 Sep 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/20220920/</guid>
+      <description>文｜ 刘月财 seata-go 项目负责人 北京小桔科技有限公司【滴滴】开发工程师 赵新（花名：于雨 ) 蚂蚁集团 Seata 项目开源负责人 本文5343字 阅读 14分钟 背景 Seata 四种事</description>
+    </item>
+    
+    <item>
+      <title>Go 内存泄漏，pprof 够用了吗？</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/is-pprof-enough-for-go-memory-leak/</link>
+      <pubDate>Tue, 13 Sep 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/is-pprof-enough-for-go-memory-leak/</guid>
+      <description>文｜朱德江（GitHub ID：doujiang24) MOSN 项目核心开发者、蚂蚁集团技术专家 专注于云原生网关研发的相关工作 本文 2651 字 阅读 8 分钟 MOSN 是主</description>
+    </item>
+    
+    <item>
+      <title>Go 代码城市上云——KusionStack 实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/go-code-city-cloud-kusionstack-practice/</link>
+      <pubDate>Tue, 30 Aug 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/go-code-city-cloud-kusionstack-practice/</guid>
+      <description>导语 KusionStack 是面向 Kubernetes 云原生场景的 IaC 配置代码化实践的开源一站式可编程协议栈。其基本思想是让「应用方+平台方」的同学能够共同基于 IaC 构建的 Konfig 模型库同一平</description>
+    </item>
+    
+    <item>
+      <title>KusionStack 在蚂蚁集团的探索实践 (上)</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/kusionstack-in-practice-at-ant-group-first/</link>
+      <pubDate>Tue, 23 Aug 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/kusionstack-in-practice-at-ant-group-first/</guid>
+      <description>文｜史贵明（花名：莫城) 蚂蚁集团技术专家 蚂蚁集团多云配置管理系统技术负责人 云原生基础设施领域，容器服务、配置管理、IaC、PaC、GitOp</description>
+    </item>
+    
+    <item>
+      <title>Seata-php 半年规划</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-php-semi-annual-planning/</link>
+      <pubDate>Tue, 16 Aug 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-php-semi-annual-planning/</guid>
+      <description>文｜ 赵新（花名：于雨)：蚂蚁集团 Seata 项目开源负责人、开放原子开源基金会代码贡献之星 郭成（花名：星北)：Seata-php 项目共同发起人、蚂蚁集</description>
+    </item>
+    
+    <item>
+      <title>MOSN 反向通道详解</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/mosn-reverse-channel-explained/</link>
+      <pubDate>Tue, 02 Aug 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/mosn-reverse-channel-explained/</guid>
+      <description>文｜郑泽超（GitHub ID：CodingSinger ) 字节跳动高级工程师 热衷于微服务和 ServiceMesh 开源社区 本文 6802 字，阅读 15 分钟 Part.1&amp;ndas</description>
+    </item>
+    
+    <item>
+      <title>你好，我的新名字叫“铜锁/Tongsuo”</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/my-new-name-is-tongsuo/</link>
+      <pubDate>Fri, 29 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/my-new-name-is-tongsuo/</guid>
+      <description>文｜杨洋（花名：凯申 ) 铜锁开源密码库创始人、蚂蚁集团高级技术专家 本文 2816 字，阅读 8 分钟 再见 BabaSSL ，你好 Tongsuo! BabaSSL 这个名字由于其历史上的若干特殊原因，导致</description>
+    </item>
+    
+    <item>
+      <title>Seata 在蚂蚁国际银行业务的落地实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-in-practice-in-ant-international-banking/</link>
+      <pubDate>Tue, 26 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-in-practice-in-ant-international-banking/</guid>
+      <description>文｜李乔（花名：南桥)、李宗杰（花名：白鹰) 李乔：蚂蚁集团高级开发工程师，负责蚂蚁境外银行支付结算系统开发 李宗杰：蚂蚁集团技术专家，负责蚂蚁</description>
+    </item>
+    
+    <item>
+      <title>KusionStack 开源｜Kusion 模型库和工具链的探索实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/exploration-of-kusion-model-library-and-toolchain-in-practice/</link>
+      <pubDate>Tue, 19 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/exploration-of-kusion-model-library-and-toolchain-in-practice/</guid>
+      <description>文｜杨英明（花名：向野) KusionStack 核心贡献者、蚂蚁集团高级研发工程师 在基础设施技术领域深耕，专注 IaC/XaC、GitOps 等方向 本文 4912 字 阅读 12 分钟</description>
+    </item>
+    
+    <item>
+      <title>Seata 多语言体系建设</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/seata-multi-programming-language-system-construction/</link>
+      <pubDate>Tue, 19 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/seata-multi-programming-language-system-construction/</guid>
+      <description>文｜赵新（花名：于雨 ) 蚂蚁集团可信原生部工程师阿里开源先锋人物、阿里开源大使 负责蚂蚁可信原生技术部 DB Mesh 系统开发，以及容器和分布式事务开源工作</description>
+    </item>
+    
+    <item>
+      <title>Go 原生插件使用问题全解析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/go-native-plug-in-use-problem-full-analysis/</link>
+      <pubDate>Tue, 12 Jul 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/go-native-plug-in-use-problem-full-analysis/</guid>
+      <description>文｜丁飞（花名：路德 ) 蚂蚁集团高级工程师 深耕于 SOFAMesh 产品的商业化落地 主要方向为基于服务网格技术的系统架构升级方案设计与落地 本文 4394 字 阅读 10 分钟 ｜前</description>
+    </item>
+    
+    <item>
+      <title>社区文章｜MOSN 构建 Subset 优化思路分享</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/build-subset-optimization/</link>
+      <pubDate>Mon, 20 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/build-subset-optimization/</guid>
+      <description>文｜李旭东（花名：向旭 ) 蚂蚁集团技术专家 蚂蚁中间件研发，专注于 SOFARegistry 及其周边基础设施的开发与优化 本文 2098 字 阅读 8 分钟 ｜前言｜ MOSN 使用了 Subset 算法作为其标</description>
+    </item>
+    
+    <item>
+      <title>Nydus —— 下一代容器镜像的探索实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/nydus-exploratory-practice-of-next-generation-container-images/</link>
+      <pubDate>Tue, 14 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/nydus-exploratory-practice-of-next-generation-container-images/</guid>
+      <description>文｜严松（花名：井守） Nydus 镜像开源项目 Maintainer蚂蚁集团技术专家 蚂蚁集团基础设施研发，专注云原生镜像与容器运行时生态 本文 7060 字 阅读 15 分</description>
+    </item>
+    
+    <item>
+      <title>KusionStack 开源有感｜历时两年，打破“隔行如隔山”困境</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/the-two-years-that-broke-the-kusionstack-open-source-dilemma/</link>
+      <pubDate>Tue, 07 Jun 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/the-two-years-that-broke-the-kusionstack-open-source-dilemma/</guid>
+      <description>文｜朵晓东（花名：奕杉 ) KusionStack 负责人、蚂蚁集团高级技术专家 在基础设施技术领域深耕，专注云原生网络、运维及编程语言等技术工作 本文 2580 字 阅读 6 分钟 ｜前</description>
+    </item>
+    
+    <item>
+      <title>如何看待 Dapr、Layotto 这种多运行时架构</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/how-to-think-about-multiple-runtime-architectures-like-dapr-layotto/</link>
+      <pubDate>Tue, 31 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/how-to-think-about-multiple-runtime-architectures-like-dapr-layotto/</guid>
+      <description>文｜周群力（花名：仪式 ) Layotto PMC；Layotto 和 SOFAStack 开源社区的建设，Dapr 贡献者，Dapr sig-api 的 Co-chair 本文 10963 字 阅读 20 分钟 2019 年，微软开源了 Dapr 项目。</description>
+    </item>
+    
+    <item>
+      <title>深入 HTTP/3（2）｜不那么 Boring 的 SSL</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/deeperinto-http-3-2-the-not-so-boring-ssl/</link>
+      <pubDate>Tue, 24 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/deeperinto-http-3-2-the-not-so-boring-ssl/</guid>
+      <description>文｜曾柯（花名：毅丝 ) 蚂蚁集团高级工程师*负责蚂蚁集团的接入层建设工作* 主要方向为高性能安全网络协议的设计及优化 本文 10924 字，阅读 20 分钟 PART. 1 引言</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁集团 Service Mesh 进展回顾与展望</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/review-and-prospect-of-service-mesh-progress-in-antgroup-2022/</link>
+      <pubDate>Tue, 17 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/review-and-prospect-of-service-mesh-progress-in-antgroup-2022/</guid>
+      <description>一、引言 继 2019 年的 《蚂蚁金服 Service Mesh 落地实践与挑战》之后，蚂蚁集团在 Service Mesh 方向已经继续探索演进近 3 年，这 3 年里有哪些新的变化，以及对未来的思考是什么</description>
+    </item>
+    
+    <item>
+      <title>SOFAServerless 体系助力业务极速研发</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofaserverless-system-for-speedy-business-development/</link>
+      <pubDate>Tue, 10 May 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofaserverless-system-for-speedy-business-development/</guid>
+      <description>文｜赵真灵（花名：有济）蚂蚁集团技术专家、刘晶（花名：飞廉） 蚂蚁集团技术专家 以下内容整理自 SOFAStack 四周年的分享 本文 5332 字 阅读 10 分钟 SOFAServerless 研发运维平台是蚂</description>
+    </item>
+    
+    <item>
+      <title>MOSN 1.0 发布，开启新架构演进</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/mosn-1-0-released-starting-a-new-architectural-evolution/</link>
+      <pubDate>Tue, 26 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/mosn-1-0-released-starting-a-new-architectural-evolution/</guid>
+      <description>文｜朱德江（花名：人德） 蚂蚁集团技术专家 负责 MOSN 核心开发，关注云原生流量网关的演进 以下内容整理自 SOFAStack 四周年的分享 本文 5332字 阅读 10 分钟 MOSN 1.0 发布</description>
+    </item>
+    
+    <item>
+      <title>社区文章｜MOSN 社区性能分析利器——Holmes 原理浅析</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/community-article-mosn-community-performance-analysis-tool-holmes-principle-analysis/</link>
+      <pubDate>Tue, 05 Apr 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/community-article-mosn-community-performance-analysis-tool-holmes-principle-analysis/</guid>
+      <description>文｜Junlong Liu Shopee Digital Purchase &amp;amp; Local Services Engineering 本文1743字 阅读 6分钟 贡献者前言 我是在开发工作过程中了解到 Holmes 的，为了保障系统稳定性需要一个性能排查工具，</description>
+    </item>
+    
+    <item>
+      <title>异构注册中心机制在中国工商银行的探索实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/exploratory-practice-of-heterogeneous-registration-centre-mechanism-in-icbc/</link>
+      <pubDate>Tue, 29 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/exploratory-practice-of-heterogeneous-registration-centre-mechanism-in-icbc/</guid>
+      <description>文｜颜高飞 【工商银行】金融科技研究院云计算实验室 本文 2651 字 阅读 5 分钟 前言 中国工商银行于 2014 年率先启动银行核心业务系统的分布式架构转型探索，自主研</description>
+    </item>
+    
+    <item>
+      <title>Nydus 镜像加速插件迁入 Containerd 旗下</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/nydus-mirror-acceleration-plugin-moves-to-containerd/</link>
+      <pubDate>Tue, 22 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/nydus-mirror-acceleration-plugin-moves-to-containerd/</guid>
+      <description>文｜葛长伟（花名：川朗 ) 蚂蚁集团技术专家 负责容器镜像加速项目 Nydus 的开发和维护，专注于容器镜像存储、持久存储和文件系统领域。 本文 1344 字 阅读 4 分钟 前</description>
+    </item>
+    
+    <item>
+      <title>社区文章｜MOSN 路由框架详解</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/community-article-mosn-routing-framework-explained/</link>
+      <pubDate>Tue, 15 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/community-article-mosn-routing-framework-explained/</guid>
+      <description>文｜曹先胜 e签宝中间件开发 负责e签宝中间件开发和维护，包括 MQ、网关、微服务、数据同步、全链路压测等 贡献者前言 「 开源就是在使用中，共同成长的</description>
+    </item>
+    
+    <item>
+      <title>BabaSSL：支持半同态加密算法 EC-ElGamal</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/babassl-support-for-semi-homomorphic-encryption-algorithm-ec-elgamal/</link>
+      <pubDate>Wed, 09 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/babassl-support-for-semi-homomorphic-encryption-algorithm-ec-elgamal/</guid>
+      <description>文｜王祖熙（花名：金九 ) 蚂蚁集团开发工程师 负责蚂蚁 Kubernetes 集群容器交付专注于集群交付能力、交付性能及交付 Trace 等相关领域 —— 数据不出域、可用不可见 01</description>
+    </item>
+    
+    <item>
+      <title>Occlum 入选 2021“科创中国”开源创新榜</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/occlum-named-to-2021-sci-tech-china-open-source-innovation-list/</link>
+      <pubDate>Thu, 03 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/occlum-named-to-2021-sci-tech-china-open-source-innovation-list/</guid>
+      <description>在近日中国科协召开的 2022“科创中国”年度会议上，中国工程院院士周济发布了 2021“科创中国”开源创新榜单。 蚂蚁集团开发的可信执行环境隐私</description>
+    </item>
+    
+    <item>
+      <title>BabaSSL 发布 8.3.0｜实现相应隐私计算的需求</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/babassl-released-8-3-0-implementation-of-the-corresponding-privacy-computing-requirements/</link>
+      <pubDate>Wed, 02 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/babassl-released-8-3-0-implementation-of-the-corresponding-privacy-computing-requirements/</guid>
+      <description>BabaSSL 8.3.0 稳定版本发布！ 密码学开源项目 BabaSSL 近日发布了 8.3.0 稳定版本，该版本中提供了若干 bug 修复以及较多的新特性支持。 从具体特性角度来看，BabaSSL 8.3.0 版</description>
+    </item>
+    
+    <item>
+      <title>探索 SOFARegistry（一）｜基础架构篇</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/explore-sofaregistry-1-infrastructure/</link>
+      <pubDate>Tue, 01 Mar 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/explore-sofaregistry-1-infrastructure/</guid>
+      <description>简介 SOFARegistry 是蚂蚁集团在生产大规模使用的服务注册中心，经历了多年大促的考验，支撑蚂蚁庞大的服务集群，具有分布式可水平扩容、容量大、推送延迟低、高可</description>
+    </item>
+    
+    <item>
+      <title>社区会议｜MOSN 社区将会发布 1.0 版本，同时推动下一代架构演进</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/community-meeting-mosn-community-will-release-version-1-0-and-drive-the-next-generation-architecture-evolution/</link>
+      <pubDate>Mon, 28 Feb 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/community-meeting-mosn-community-will-release-version-1-0-and-drive-the-next-generation-architecture-evolution/</guid>
+      <description>2 月 24 日，MOSN 举办了 2022 年首次的社区会议。 MOSN 社区在会议上提出了新一年的 Roadmap，社区成员分享了 MOSN 在不同场景下落地实践的经验，以及大家</description>
+    </item>
+    
+    <item>
+      <title>2021 大促 AntMonitor 总结 - 云原生 Prometheus 监控实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/2021sale-antmonitor-roundup-cloud-native-prometheus-monitoring-in-practice/</link>
+      <pubDate>Fri, 25 Feb 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/2021sale-antmonitor-roundup-cloud-native-prometheus-monitoring-in-practice/</guid>
+      <description>文｜陈岸琦（花名：敖清 ) 蚂蚁集团高级开发工程师 负责蚂蚁 Prometheus 监控原生功能，在蚂蚁集团的落地与产品化建设 本文 6566 字 阅读 15 分钟 前 言 日志和指标是监控不可</description>
+    </item>
+    
+    <item>
+      <title>应用运行时 Layotto 进入 CNCF 云原生全景图</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/application-runtime-layotto-into-cncf-cloud-native-panorama/</link>
+      <pubDate>Mon, 14 Feb 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/application-runtime-layotto-into-cncf-cloud-native-panorama/</guid>
+      <description>2022 年 2 月 10 日，CNCF 发布了最新版本的 Landscape。 Layotto 正式加入 CNCF 云原生全景图! 分类在 Serverless framework 板块下，详情见 ：https://l.cncf.</description>
+    </item>
+    
+    <item>
+      <title>喜迎虎年｜开源正当时！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/welcome-the-year-of-the-tiger-open-source-is-the-time/</link>
+      <pubDate>Thu, 03 Feb 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/welcome-the-year-of-the-tiger-open-source-is-the-time/</guid>
+      <description>Awesome SOFAer 👋: 大家好， 我是 SOFAStack 社区的负责人——齐天 虎年伊始，我谨代表 SOFAStack 社区 祝大家新年快乐！ 在新的一年事事如意，虎虎有生气！ Part 01 开源正当下！ 回想起 6 年</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁大规模 Sigma 集群 Etcd 拆分实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-massive-sigma-cluster-etcd-splitting-in-practice/</link>
+      <pubDate>Tue, 18 Jan 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-massive-sigma-cluster-etcd-splitting-in-practice/</guid>
+      <description>文｜杜克伟（花名：苏麟 ) 蚂蚁集团高级开发工程师 负责蚂蚁 Kubernetes 集群的稳定性方面的工作，专注于集群组件变更、稳定性风险保障 本文 15738 字 阅读 20 分钟 前 言 为了</description>
+    </item>
+    
+    <item>
+      <title>Tengine &#43; BabaSSL ，让国密更易用！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/tengine-babassl-making-state-secrets-easier-to-use/</link>
+      <pubDate>Tue, 11 Jan 2022 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/tengine-babassl-making-state-secrets-easier-to-use/</guid>
+      <description>文｜杨洋（花名：凯申 ) 蚂蚁集团高级技术专家 负责密码学工程能力建设、BabaSSL 开源社区建设 本文 2366 字 阅读 5 分钟 近日，国内著名 Web 服务器和反向代</description>
+    </item>
+    
+    <item>
+      <title>一行降低 100000kg 碳排放量的代码！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/one-line-of-code-to-reduce-carbon-emissions-by-100000kg/</link>
+      <pubDate>Tue, 28 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/one-line-of-code-to-reduce-carbon-emissions-by-100000kg/</guid>
+      <description>文｜张稀虹（花名：止语 ) 蚂蚁集团技术专家 负责蚂蚁集团云原生架构下的高可用能力的建设 主要技术领域包括 ServiceMesh、Serverles</description>
+    </item>
+    
+    <item>
+      <title>SOFAStack 背后的实践和思考｜新一代分布式云 PaaS 平台，打造企业上云新体验</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/the-practice-and-thinking-behind-sofastack/</link>
+      <pubDate>Thu, 23 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/the-practice-and-thinking-behind-sofastack/</guid>
+      <description>近几年云计算的发展如火箭般迅猛，异构变革日新月异，这是基础设施层明确的发展趋势。值得关注的是，随着基础设施的复杂度越来越高，也为整个基础设施</description>
+    </item>
+    
+    <item>
+      <title>SOFAArk Committer 专访｜看它不爽，就直接动手改！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofaark-committer-interview-if-you-dont-like-it-just-change-it/</link>
+      <pubDate>Tue, 21 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofaark-committer-interview-if-you-dont-like-it-just-change-it/</guid>
+      <description>吕冰洁（花名：尚之）蚂蚁集团技术专家 我们团队是在做蚂蚁集团内部 Serverless 项目，深度依赖 SOFAArk。SOFAArk 作为 Serverless 项目的核心热部署组件，在无</description>
+    </item>
+    
+    <item>
+      <title>深入 HTTP/3（一）｜从 QUIC 链接的建立与关闭看协议的演进</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/deeper-into-http/3-evolution-of-the-protocol-from-the-creation-and-closing-of-quic-links/</link>
+      <pubDate>Tue, 21 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/deeper-into-http/3-evolution-of-the-protocol-from-the-creation-and-closing-of-quic-links/</guid>
+      <description>文｜曾柯（花名：毅丝 ) 蚂蚁集团高级工程师 负责蚂蚁集团的接入层建设工作,主要方向为高性能安全网络协议的设计及优化 本文 10279 字 阅读 18 分钟 PART. 1 引言 作为</description>
+    </item>
+    
+    <item>
+      <title>网商双十一-基于 ServiceMesh 技术的业务链路隔离技术及实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/online-business-double-eleven-servicemesh-technology-based-service-link-isolation-technology-and-practice/</link>
+      <pubDate>Tue, 14 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/online-business-double-eleven-servicemesh-technology-based-service-link-isolation-technology-and-practice/</guid>
+      <description>文｜张化仁（花名：花伦 ) 网商银行基础技术架构部架构师 校对｜阚广稳(花名：空门) 本文 4832 字 阅读 10 分钟 ｜引言｜ 微服务架构下，服务之间的调用错综复杂</description>
+    </item>
+    
+    <item>
+      <title>Service Mesh 在中国工商银行的探索与实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/exploration-and-practice-of-service-mesh-in-icbc/</link>
+      <pubDate>Thu, 09 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/exploration-and-practice-of-service-mesh-in-icbc/</guid>
+      <description>Service Mesh 是下一代的微服务架构基础。蚂蚁集团从 2018 年初就开始了技术探索并进行了落地试点。目前， Service Mesh 覆盖了蚂蚁数千个应用，实现了核心链路全覆盖。 蚂蚁集</description>
+    </item>
+    
+    <item>
+      <title>云原生运行时的下一个五年</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/the-next-five-years-of-cloud-native-runtime/</link>
+      <pubDate>Tue, 07 Dec 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/the-next-five-years-of-cloud-native-runtime/</guid>
+      <description>文｜马振军（花名：古今 ) 在基础架构领域耕耘多年 目前在蚂蚁集团中间件团队 负责 MOSN、Layotto 等项目的开发工作 校对｜卓与、齐天 本文 9053 字 阅</description>
+    </item>
+    
+    <item>
+      <title>降本提效！注册中心在蚂蚁集团的蜕变之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/reduce-costs-and-improve-efficiency-the-metamorphosis-of-the-registration-centre-at-ant-group/</link>
+      <pubDate>Tue, 23 Nov 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/reduce-costs-and-improve-efficiency-the-metamorphosis-of-the-registration-centre-at-ant-group/</guid>
+      <description>文｜林育智（花名：源三 ) 蚂蚁集团高级专家 专注微服务/服务发现相关领域 校对｜李旭东 本文 8624 字 阅读 18 分钟 ｜引 言｜ 服务发现是构建分布式系统的最重要的</description>
+    </item>
+    
+    <item>
+      <title>Prometheus on CeresDB 演进之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/prometheus-on-ceresdb-evolutionary-path/</link>
+      <pubDate>Tue, 16 Nov 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/prometheus-on-ceresdb-evolutionary-path/</guid>
+      <description>文｜刘家财（花名：尘香 ) 蚂蚁集团高级开发工程师 专注时序存储领域 校对｜冯家纯 本文 7035 字 阅读 10 分钟 CeresDB 在早期设计时的目标之一就是对接开源协议，目前系</description>
+    </item>
+    
+    <item>
+      <title>SOFA Weekly |Layotto 本周 Contributor、QA 整理、新手任务</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211105/</link>
+      <pubDate>Fri, 05 Nov 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211105/</guid>
+      <description>SOFA WEEKLY | 每周精选，筛选每周精华问答 同步开源进展，欢迎留言互动 SOFAStack（Scalable Open Financial Architecture Stack）是蚂蚁金服自主研发的金融级云</description>
+    </item>
+    
+    <item>
+      <title>如何在生产环境排查 Rust 内存占用过高问题</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/how-to-troubleshoot-high-rust-memory-usage-in-a-production-environment/</link>
+      <pubDate>Tue, 02 Nov 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/how-to-troubleshoot-high-rust-memory-usage-in-a-production-environment/</guid>
+      <description>📄 文｜魏熙凯（蚂蚁集团技术专家） 本文 6320 字 阅读 10 分钟 ▼ 内存安全的 Rust，虽然基本不会出现内存泄漏，但如何合理分配内存，是每个复杂应用都要面临</description>
+    </item>
+    
+    <item>
+      <title>新一代日志型系统在 SOFAJRaft 中的应用</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/a-new-generation-of-log-based-systems-in-sofajraft/</link>
+      <pubDate>Tue, 26 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/a-new-generation-of-log-based-systems-in-sofajraft/</guid>
+      <description>📄 文｜黄章衡（SOFAJRaft 项目组） 福州大学 19 级计算机系 研究方向｜分布式中间件、分布式数据库 Github 主页｜https://github.com</description>
+    </item>
+    
+    <item>
+      <title>终于！SOFATracer 完成了它的链路可视化之旅</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofatracer-completes-its-link-visualisation-journey/</link>
+      <pubDate>Tue, 19 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofatracer-completes-its-link-visualisation-journey/</guid>
+      <description>📄 文｜赵陈（SOFA 开源之夏链路项目组) 武汉理工大学计算机工程硕士在读 研究方向：唐卡线稿的自动上色 校对｜宋国磊（SOFATracer commiter) 本文 6971</description>
+    </item>
+    
+    <item>
+      <title>SOFA Weekly | QA 整理、SOFAStack&amp;MOSN 新手任务</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211015/</link>
+      <pubDate>Fri, 15 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211015/</guid>
+      <description>SOFA WEEKLY | 每周精选，筛选每周精华问答 同步开源进展，欢迎留言互动 SOFAStack（Scalable Open Financial Architecture Stack）是蚂蚁金服自主研发的金融级云</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁集团技术风险代码化平台实践（MaaS）</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-group-technical-risk-coding-platform-in-practice-maas/</link>
+      <pubDate>Tue, 12 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-group-technical-risk-coding-platform-in-practice-maas/</guid>
+      <description>📄 文｜吴成辉（花名：清霄 蚂蚁集团高级技术专家) 校对｜陈真、庄晓丹、冯家纯 本文 6250 字 阅读 11 分钟 ▼ 我们一起回顾下监控上层业务曾经面临的问题： 烟囱式</description>
+    </item>
+    
+    <item>
+      <title>SOFA Weekly | Layotto 本周 Contributor、QA 整理、Layotto 发布新版本</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211008/</link>
+      <pubDate>Fri, 08 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-weekly-20211008/</guid>
+      <description>SOFA WEEKLY | 每周精选，筛选每周精华问答 同步开源进展，欢迎留言互动 SOFAStack（Scalable Open Financial Architecture Stack）是蚂蚁金服自主研发的金融级云</description>
+    </item>
+    
+    <item>
+      <title>下一个 Kubernetes 前沿：多集群管理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/next-kubernetes-frontier-multi-cluster-management/</link>
+      <pubDate>Mon, 04 Oct 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/next-kubernetes-frontier-multi-cluster-management/</guid>
+      <description>文｜金敏（蚂蚁集团技术专家)\邱见（Red Hat) 校对｜ 冯泳（蚂蚁集团资深技术专家) 本文 3311 字 阅读 6 分钟 从最初 Kubernetes 技术问世，业界一遍一遍的质疑它能否能</description>
+    </item>
+    
+    <item>
+      <title>攀登规模化的高峰 - 蚂蚁集团大规模 Sigma 集群 ApiServer 优化实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/climbing-to-the-top-of-scale-ant-groups-large-scale-sigma-cluster-apiserver-optimization-in-practice/</link>
+      <pubDate>Tue, 28 Sep 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/climbing-to-the-top-of-scale-ant-groups-large-scale-sigma-cluster-apiserver-optimization-in-practice/</guid>
+      <description>文｜唐博（花名：博易 蚂蚁集团技术专家) 谭崇康（花名：见云 蚂蚁集团高级技术家) 本文 10316 字 阅读 18 分钟 ▼ 蚂蚁集团运行着全球最大的 Kubernetes</description>
+    </item>
+    
+    <item>
+      <title>SOFAJRaft 在同程旅游中的实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofajraft-in-practice-in-the-same-tour/</link>
+      <pubDate>Tue, 21 Sep 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofajraft-in-practice-in-the-same-tour/</guid>
+      <description>文｜赵延（SOFAJRaft Committer) 校对｜冯家纯（SOFAJRaft Committer) 本文 15717 字 阅读 23 分钟 ▼ 同程艺龙作为对 Raft 研究较早的公司，早在 14 年算法的 paper 刚发布的</description>
+    </item>
+    
+    <item>
+      <title>技术风口上的限流</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/restricted-flow-on-the-technology-windfall/</link>
+      <pubDate>Tue, 14 Sep 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/restricted-flow-on-the-technology-windfall/</guid>
+      <description>站在风口上 要问近两年最火的技术话题是什么？ Service Mesh 一定不会缺席。 如果用一句话来解释什么是 Service Mesh。 可以将它比作是应用程序或者说微服务间的 TCP</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁智能监控</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-intelligent-monitoring/</link>
+      <pubDate>Tue, 07 Sep 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-intelligent-monitoring/</guid>
+      <description>AntMonitor简介 AntMonitor 是蚂蚁集团的智能监控系统，通过构建面向监控可观测数据的、实时的、稳定的采集、清洗、计算及存储数据链路，为技术风险大</description>
+    </item>
+    
+    <item>
+      <title>SOFA 星球招募啦～</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-star-is-recruiting/</link>
+      <pubDate>Tue, 31 Aug 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-star-is-recruiting/</guid>
+      <description>真的吗？真的吗？ SOFA 志愿者开始招募啦？ 直视他！直视他！ SOFA 星球在等你加入呀！ 我们正式启动“SOFA 星途者”计划 只差一个你 即可成团出道 不要感觉成团</description>
+    </item>
+    
+    <item>
+      <title>2021 年云原生技术发展现状及未来趋势</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/2021-cloud-native-technology-development-status-and-future-trends/</link>
+      <pubDate>Tue, 17 Aug 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/2021-cloud-native-technology-development-status-and-future-trends/</guid>
+      <description>个人有幸担任了 2021 年 GIAC 会议云原生专场的出品人兼讲师，组织了前后四个场子的演讲，在这个过程中个人同时作为听众从这些同行的演讲中学到了很多非常有用</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁集团 SOFATracer 原理与实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-group-sofatracer-principles-and-practices/</link>
+      <pubDate>Tue, 10 Aug 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-group-sofatracer-principles-and-practices/</guid>
+      <description>背景 微服务架构带来很多好处的同时也让系统的复杂度提升了，传统的单体应用按照不同的维度拆分成一个一个分布式微服务，不同的微服务甚至可能采用不同</description>
+    </item>
+    
+    <item>
+      <title>KCL：声明式的云原生配置策略语言</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/kcl-a-declarative-cloud-native-configuration-policy-language/</link>
+      <pubDate>Tue, 03 Aug 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/kcl-a-declarative-cloud-native-configuration-policy-language/</guid>
+      <description>楔子: 以蚂蚁典型的建站场景为例，在接入 Kusion 后，用户侧配置代码减少到 5.5%，用户面对的 4 个平台通过接入统一代码库而消减，在无其他异常的情况下交</description>
+    </item>
+    
+    <item>
+      <title>我们做出了一个分布式注册中心</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/we-made-a-distributed-registry/</link>
+      <pubDate>Tue, 27 Jul 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/we-made-a-distributed-registry/</guid>
+      <description>开篇 这篇文章是基于SOFA Meetup合肥站的分享总结，主要针对于注册中心的定位以及功能介绍，通过对蚂蚁注册中心发展史的分析，带领大家了解，</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁集团万级规模 K8s 集群 etcd 高可用建设之路</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/ant-groups-10000-scale-k8s-cluster-etcd-high-availability-construction-road/</link>
+      <pubDate>Mon, 26 Jul 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/ant-groups-10000-scale-k8s-cluster-etcd-high-availability-construction-road/</guid>
+      <description>蚂蚁集团运维着可能是全球最大的 K8s 集群：K8s 官方以 5k node 作为 K8s 规模化的顶峰，而蚂蚁集团事实上运维着规模达到 10k node 规模的 K8s 集群。一个形象的比喻就是</description>
+    </item>
+    
+    <item>
+      <title>还在为多集群管理烦恼吗？OCM来啦！</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/still-worried-about-multi-cluster-management/</link>
+      <pubDate>Tue, 20 Jul 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/still-worried-about-multi-cluster-management/</guid>
+      <description>作者简介：冯泳（花名鹿惊），资深技术专家，拥有西北工业大学计算机科学博士学位，在高性能计算，大数据和云计算领域拥有十多年的设计开发经验，专注</description>
+    </item>
+    
+    <item>
+      <title>RFC8998&#43;BabaSSL---让国密驶向更远的星辰大海</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/rfc8998-babassllet-guomi-sail-to-a-farther-starry-sea/</link>
+      <pubDate>Tue, 13 Jul 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/rfc8998-babassllet-guomi-sail-to-a-farther-starry-sea/</guid>
+      <description>01 引言-TLS 1.3 协议及 SM 算法 说起 TLS，大家一定不会陌生，TLS 可以说是整个互联网安全的基石，保障着我们的通信数据的安全。自从 2014 年 Heartbleed 漏洞被发</description>
+    </item>
+    
+    <item>
+      <title>开启云原生 MOSN 新篇章 — 融合 Envoy 和 GoLang 生态</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/opening-a-new-chapter-of-cloud-native-mosn-converging-envoy-and-golang-ecosystems/</link>
+      <pubDate>Tue, 06 Jul 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/opening-a-new-chapter-of-cloud-native-mosn-converging-envoy-and-golang-ecosystems/</guid>
+      <description>注：本文是王发康（毅松）在 2021 GopherChina 上演讲的文字稿，相关分享 PPT 可自行到 MOSN meetup 下载。MOSN meetup 地址；MOSN 官方 Github 地址；GitHub 地址。 前言 MOSN 在 Service Mesh</description>
+    </item>
+    
+    <item>
+      <title>MOSN 多协议扩展开发实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/mosn-multi-protocol-extension-development-practice/</link>
+      <pubDate>Tue, 29 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/mosn-multi-protocol-extension-development-practice/</guid>
+      <description>Service Mesh 是当今云原生的关键部分，蚂蚁已经在生产环境完成了大规模的落地，但是业界整体 Service Mesh 改造程度还不高。其中平稳的进行 Mesh 化改造是可以对已上线的业务</description>
+    </item>
+    
+    <item>
+      <title>MOSN 子项目 Layotto：开启服务网格&#43;应用运行时新篇章</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/</link>
+      <pubDate>Mon, 21 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/mosn-subproject-layotto-opening-a-new-chapter-in-service-grid-application-runtime/</guid>
+      <description>作者简介： 马振军，花名古今，在基础架构领域耕耘多年，对 Service Mesh 有深度实践经验，目前在蚂蚁集团中间件团队负责 MOSN、Layotto 等项目的开发工</description>
+    </item>
+    
+    <item>
+      <title>Gopher China 2021 专访之宋顺：Go 在蚂蚁集团的应用、实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/gopher-china-2021-interview-with-song-shun-the-application-and-practice-of-go-in-ant-group/</link>
+      <pubDate>Tue, 15 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/gopher-china-2021-interview-with-song-shun-the-application-and-practice-of-go-in-ant-group/</guid>
+      <description>GoCN：贵司从什么时候开始用 Go，基于什么原因，还记得第一个用 Go 的项目是什么吗? 宋顺：早在 2015 年，蚂蚁的基础设施团队就已经使用 Go 来尝试优化资</description>
+    </item>
+    
+    <item>
+      <title>【活动报名】SOFAMeetup#6 北京站，从数据库到架构，聊透分布式，玩转 Layotto</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-7/</link>
+      <pubDate>Tue, 08 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-7/</guid>
+      <description>主题：从数据库到架构，我们来聊透分布式 时间：2021年6 月 19 日（周六）13：00 -17：30 活动地点：北京海淀中关村创业大街 72 号拓荒族众创空</description>
+    </item>
+    
+    <item>
+      <title>揭秘 AnolisOS 国密生态，想要看懂这一篇就够了</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/the-secret-of-anolisos/</link>
+      <pubDate>Tue, 08 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/the-secret-of-anolisos/</guid>
+      <description>此文原系 2021 年阿里云开发者大会，开源操作系统社区和生态分论坛，题为《国密技术开发与实践》的分享会后解读。 AnolisOS 国密是社区在 AnolisOS 上做的国密技术解决方案</description>
+    </item>
+    
+    <item>
+      <title>助力数据安全：蚂蚁携手英特尔共同打造验证PPML解决方案</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/helping-data-security-ant-and-intel-work-together-to-create-a-verified-ppml-solution/</link>
+      <pubDate>Tue, 01 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/helping-data-security-ant-and-intel-work-together-to-create-a-verified-ppml-solution/</guid>
+      <description>机器学习（ML）和深度学习（DL）在众多真实的应用场景中愈发重要。这些模型使用已知数据进行训练，并部署在图像分类、内容推荐等场景中进行新数据</description>
+    </item>
+    
+    <item>
+      <title>用安全计算保护关键业务</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/protecting-critical-operations-with-secure-computing/</link>
+      <pubDate>Tue, 01 Jun 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/protecting-critical-operations-with-secure-computing/</guid>
+      <description>什么是安全计算？ Linux 基金会旗下的安全计算联盟对安全计算下了一个定义： Confidential Computing protects data in use by performing computation in a hardware-based Trusted Execution Environment. Confidential Computing Consortium 在这个定义中强调了这么几点： 1.安全计</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁云原生应用运行时的探索和实践 - ArchSummit 上海 </title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/exploration-and-practice-of-antcloud-native-application-runtime-archsummit-shanghai/</link>
+      <pubDate>Tue, 25 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/exploration-and-practice-of-antcloud-native-application-runtime-archsummit-shanghai/</guid>
+      <description>Mesh 模式的引入是实现应用云原生的关键路径，蚂蚁集团已在内部实现大规模落地。随着 Message、DB、Cache Mesh 等更多的中间件能力的下沉，从 Mesh</description>
+    </item>
+    
+    <item>
+      <title>带你走进云原生技术：云原生开放运维体系探索和实践</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/take-you-into-cloud-native-technology-cloud-native-open-operation-and-maintenance-system-exploration-and-practice/</link>
+      <pubDate>Tue, 18 May 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/take-you-into-cloud-native-technology-cloud-native-open-operation-and-maintenance-system-exploration-and-practice/</guid>
+      <description>本文是云原生开放协同技术探索与实践一阶段的总结和综述。 蚂蚁基础技术在过去3年多以来持续、深入推进全面的云原生化技术演进，我们将在线、离线计算</description>
+    </item>
+    
+    <item>
+      <title>服务网格定义企业上云新路径！ | Forrester X 蚂蚁集团 发布服务网格白皮书</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/service-grid-defines-a-new-path-for-enterprises-to-the-cloud-forrester-ant-group-releases-service-grid-white-paper/</link>
+      <pubDate>Mon, 04 Jan 2021 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/service-grid-defines-a-new-path-for-enterprises-to-the-cloud-forrester-ant-group-releases-service-grid-white-paper/</guid>
+      <description>Forrester 认为： 包括容器、微服务与服务网格等领域在内的云原生平台，将成为构建适应未来的现代企业的核心引擎。 在常态化混合异构环境下，面对云原生应用路径</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁 SOFAStack：云上自有江湖</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/antgroup-sofastack-rivers-and-lakes-on-the-cloud/</link>
+      <pubDate>Mon, 10 Aug 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/antgroup-sofastack-rivers-and-lakes-on-the-cloud/</guid>
+      <description>PS：阅读本文大约需要 15 分钟，或者您可以选择直接拉至文末投递简历，加入云上江湖。 有人说，历史是由懒汉推动的。 科技的演进史，其实就是人类不断偷</description>
+    </item>
+    
+    <item>
+      <title>Forrester 中国首席分析师戴鲲：云原生技术趋向成熟，金融企业选择云原生平台需满足三大要求</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/forrester-daipeng-white-paper-cloud-native/</link>
+      <pubDate>Thu, 11 Jun 2020 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/forrester-daipeng-white-paper-cloud-native/</guid>
+      <description>6月9日，在2020阿里云线上峰会上，蚂蚁联合全球知名市场研究与咨询机构 Forrester 发布《蚂蚁 SOFAStack 总体经济影响报告——金融级云原生市场趋势以及云原生平台</description>
+    </item>
+    
+    <item>
+      <title>（含视频回顾）SOFAStack 活动回顾整理集合</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-activity-retrospect-collection/</link>
+      <pubDate>Thu, 12 Sep 2019 12:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-activity-retrospect-collection/</guid>
+      <description>SOFAStack 是蚂蚁金服完全自主研发的金融级分布式架构，包含了构建金融级云原生架构所需的各个组件，如微服务研发框架、RPC 框架、服务注册中心、分布式定时</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup#3 广州站-从开源技术到产品能力</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-3/</link>
+      <pubDate>Thu, 25 Jul 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-3/</guid>
+      <description>概要 活动主题：SOFA Meetup#3 广州站-从开源技术到产品能力 活动时间：8 月 11 日周日下午 13 点 活动地点：广州市广电平云 B 塔 15F 活动形式：线下活动 报名方式：</description>
+    </item>
+    
+    <item>
+      <title>Serverless 市场观察和落地挑战</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/serverless-market-challenge/</link>
+      <pubDate>Thu, 11 Jul 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/serverless-market-challenge/</guid>
+      <description>&amp;gt; KubeCon China 2019 大会上， Serverless 应用服务正式亮相，在 SOFAStack 工作坊吸引了百余名参与者同场体验。 市场观察 当我们回顾云计算的发展历程，会看到基础架构经历了从物理机到</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服 3 个项目进入 CNCF 云原生全景图 | 开源</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-projects-joined-cncf-landscape/</link>
+      <pubDate>Wed, 10 Jul 2019 17:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-projects-joined-cncf-landscape/</guid>
+      <description>2019 年 6 月 25 日，全球知名开源组织云原生计算基金会 CNCF 宣布，蚂蚁金服正式成为 CNCF 黄金会员，蚂蚁金服表示将持续加大对开源项目的支持，包括 Kuberne</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服 3 个项目进入 CNCF 云原生全景图 | 开源</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-cncf-cloud-native-landscape/</link>
+      <pubDate>Mon, 08 Jul 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-cncf-cloud-native-landscape/</guid>
+      <description>2019 年 6 月 25 日，全球知名开源组织云原生计算基金会 CNCF 宣布，蚂蚁金服正式成为 CNCF 黄金会员，蚂蚁金服表示将持续加大对开源项目的支持，包括 Kuberne</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服 SOFAStack 荣获云计算开源产业大会尖峰开源技术创新奖</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-2019-oscar/</link>
+      <pubDate>Thu, 04 Jul 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-2019-oscar/</guid>
+      <description>2019 年 7 月 3 日，在 2019 云计算开源产业大会上，蚂蚁金服自主研发的金融级分布式架构 SOFAStack（Scalable Open Financial Architecture Stack）荣获 OSCAR 尖峰开</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服 Service Mesh 落地实践与挑战 | GIAC 实录</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/service-mesh-giac-2019/</link>
+      <pubDate>Mon, 24 Jun 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/service-mesh-giac-2019/</guid>
+      <description>本文整理自 GIAC（GLOBAL INTERNET ARCHITECTURE CONFERENCE）全球互联网架构大会，蚂蚁金服平台数据技术事业群技术专家石建伟（花名：卓与）的分享。</description>
+    </item>
+    
+    <item>
+      <title>金融级云原生探索实践系列 - 开篇</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-financial-cloud-native-exploration/</link>
+      <pubDate>Fri, 07 Jun 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-financial-cloud-native-exploration/</guid>
+      <description>由蚂蚁金服主办的 SOFAStack Cloud Native Workshop 将在 6月24日于 KubeCon + CloudNativeCon + Open Source Summit China 大会的同场活动中进行，欢迎报名参与，更多信息可见此链接。 欢迎加入 SOFA 钉钉互动群（钉钉搜</description>
+    </item>
+    
+    <item>
+      <title>当 Spring Cloud 遇上 SOFAStack | Meetup#2 回顾</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-2-1-retrospect/</link>
+      <pubDate>Wed, 29 May 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-meetup-2-1-retrospect/</guid>
+      <description>本文作者：玄北（曹杰），蚂蚁金服 SOFAStack 开源组核心成员。 本文根据 5月26日 SOFA Meetup#2 上海站 《当 Spring Cloud 遇上 SOFAStack》主题分享整理，主要来聊聊 spring-cloud-antfin 包含</description>
+    </item>
+    
+    <item>
+      <title>大公司开源怎么做？SOFAStack给出了一个很好的例子</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-linux-china/</link>
+      <pubDate>Fri, 24 May 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-linux-china/</guid>
+      <description>— 本文转载自 Linux 中国老王 蚂蚁金服的 SOFAStack 作为一个成功地将企业私有项目转化为开源核心模式的知名案例，我们之前对背后的思考和推动力做过专题分析，但是具</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup#2 上海站——使用 SOFAStack 快速构建微服务</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-2/</link>
+      <pubDate>Tue, 21 May 2019 11:20:00 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-2/</guid>
+      <description>概要 活动主题：SOFA Meetup#2 上海站-使用 SOFAStack 快速构建微服务 活动时间：5 月 26 日周日下午 13 点 活动地点：上海市徐汇区田林路200号A7栋一楼 活动形式：线</description>
+    </item>
+    
+    <item>
+      <title>持续技术开放 | SOFAStack 启用独立 Group</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-independent-droup/</link>
+      <pubDate>Thu, 16 May 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-independent-droup/</guid>
+      <description>SOFAStack 启用独立 Group ，社区更加开放 今日，SOFAStack 将启用独立 Group： https://github.com/sofastack 感谢大家的一路支持，未来，我们继续相伴~ 背景：分布式架构 SOFAStack 开源历史</description>
+    </item>
+    
+    <item>
+      <title>对话鲁直：蚂蚁金服中间件的开源头羊 | 穿山甲专访</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/antfin-middleware-open-source-key-figure-luzhi/</link>
+      <pubDate>Tue, 30 Apr 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/antfin-middleware-open-source-key-figure-luzhi/</guid>
+      <description>本文转自 Linux 中国 谈话中，鲁直反问的“你为什么不开源？”这句话让我印象深刻。&amp;ndash; 老王 二月初春，在西子湖畔的细雨中，我拜访了蚂蚁金服中间</description>
+    </item>
+    
+    <item>
+      <title>Hey, SOFAer！有些话想对你说：</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-anniversary-1/</link>
+      <pubDate>Mon, 15 Apr 2019 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-anniversary-1/</guid>
+      <description>Hey, SOFAer！有些话想对你说： “开源”二字代表的不仅仅是一个项目，更是代表了整个技术社区，代表了隐藏在背后的工程师们。 很幸运，这一年遇到你</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服总监杨冰：金融科技公司为什么要拥抱开源？ | 穿山甲专访</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/financial-technology-meet-open-source/</link>
+      <pubDate>Mon, 11 Mar 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/financial-technology-meet-open-source/</guid>
+      <description>我们选择将 SOFA 中间件框架逐步开源出来，在贡献给社区的同时，也期待社区、合作伙伴甚至客户，都能够一起参与共建，形成行业标准和最佳实践。&amp;ndas</description>
+    </item>
+    
+    <item>
+      <title>SOFA Meetup#1 北京站——服务注册中心、分布式事务重磅发布</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-1/</link>
+      <pubDate>Mon, 11 Mar 2019 12:10:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofa-meetup-1/</guid>
+      <description>概要 活动主题：SOFA Meetup#1 北京站——服务注册中心、分布式事务重磅发布 活动时间：3 月 24 日周日下午 13 点 活动地点：北京中关村创业大街 氪空间 活动形式：</description>
+    </item>
+    
+    <item>
+      <title>从蚂蚁金服微服务实践谈起 | SOFAChannel#1 直播整理</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-1-retrospect/</link>
+      <pubDate>Mon, 28 Jan 2019 21:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofa-channel-1-retrospect/</guid>
+      <description>SOFA:Channel/，有趣实用的分布式架构频道。 SOFA:Channel/ 作为 SOFA 所有在线内容的承载，包含直播/音视频教程，集中体现 SOFAStack 的能力全景图。欢迎加入直播</description>
+    </item>
+    
+    <item>
+      <title>企业实施分布式架构的挑战以及应对建议 | 上海 ATEC 科技大会实录</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/distributed-arch-in-the-enterprise/</link>
+      <pubDate>Tue, 15 Jan 2019 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/distributed-arch-in-the-enterprise/</guid>
+      <description>许文奇 蚂蚁金服高级技术专家，SOFAStack 商业化产品技术 Leader，多年分布式架构及中间件研发经验，负责过蚂蚁金服分布式架构在多家金融</description>
+    </item>
+    
+    <item>
+      <title>蚂蚁金服分布式中间件开源第二弹：丰富微服务架构体系</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/sofastack-open-source-doubles/</link>
+      <pubDate>Thu, 31 May 2018 10:12:34 +0000</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/sofastack-open-source-doubles/</guid>
+      <description>蚂蚁金服自主研发的分布式中间件（Scalable Open Financial Architecture，以下简称 SOFA 中间件），包含了构建金融级云原生架构所需的各个组件，</description>
+    </item>
+    
+    <item>
+      <title>金融级分布式交易的技术路径</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/technical-financial-distributed-trading/</link>
+      <pubDate>Fri, 09 Mar 2018 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/technical-financial-distributed-trading/</guid>
+      <description>声明：本文发表于《金融电子化杂志》2016年12期，经授权转发，系作者原创，经谢绝个人、媒体、公众号或网站未经授权转载，违者追究其法律责任。</description>
+    </item>
+    
+  </channel>
+</rss>
