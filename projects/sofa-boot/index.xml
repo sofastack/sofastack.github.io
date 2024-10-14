@@ -178,7 +178,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://sofastack.github.io/sofastack.tech/projects/sofa-boot/sofa-ark-readme/</guid>
-      <description>SOFAArk 是一款基于 Java 实现的轻量级类隔离容器，主要提供类隔离和应用(模块)合并部署能力，由蚂蚁金服公司开源贡献； 在大型软件开发过程中，通常会推荐底层</description>
+      <description>SOFAArk 是一款基于 Java 实现的轻量级类隔离容器，主要提供类隔离和应用(模块)合并部署能力，由蚂蚁金服公司开源贡献，目前已经基于 SOFAArk 提供了模块化合并部署的</description>
     </item>
     
     <item>

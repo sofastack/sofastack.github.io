@@ -1848,7 +1848,7 @@ if (!doNotTrack) {
 </div>
 
 		<article class="typo">
-  <p>SOFAArk 是一款基于 Java 实现的轻量级类隔离容器，主要提供类隔离和应用(模块)合并部署能力，由蚂蚁金服公司开源贡献；</p>
+  <p>SOFAArk 是一款基于 Java 实现的轻量级类隔离容器，主要提供类隔离和应用(模块)合并部署能力，由蚂蚁金服公司开源贡献，目前已经基于 SOFAArk 提供了模块化合并部署的完整解决方案 <a href="https://github.com/koupleless/koupleless">koupleless</a>, 如果想要使用合并部署能力，建议查看 <a href="https://koupleless.io/">Koupleless 使用文档</a>，如果只是想要使用的类隔离能力可以查看 SOFAArk Plugin 能力，继续查看本站点相关文档；</p>
 
 <p>在大型软件开发过程中，通常会推荐底层功能插件化，业务功能模块化的开发模式，以期达到低耦合、高内聚、功能复用的优点。基于此，SOFAArk 提供了一套较为规范化的插件化、模块化的开发方案，产品能力主要包括：</p>
 
@@ -1864,7 +1864,7 @@ if (!doNotTrack) {
 
 <h2 id="场景">场景</h2>
 
-<h4 id="包冲突">包冲突</h4>
+<h3 id="包冲突">包冲突</h3>
 
 <p>日常使用 Java 开发，常常会遇到包依赖冲突的问题，尤其当应用变得臃肿庞大，包冲突的问题也会变得更加棘手，导致各种各样的报错，例如 <code>LinkageError</code>, <code>NoSuchMethodError</code> 等；实际开发中，可以采用多种方法来解决包冲突问题，比较常见的是类似 Spring Boot 的做法，统一管理应用所有依赖包的版本，保证这些三方包不存在依赖冲突；这种做法只能有效避免包冲突问题，不能根本上解决包冲突的问题；如果某个应用的确需要在运行时使用两个相互冲突的包，例如 <code>protobuf2</code> 和 <code>protobuf3</code>，那么类似 Spring Boot 的做法依然解决不了问题。</p>
 
@@ -1878,15 +1878,15 @@ if (!doNotTrack) {
 
 <p>此时，即可使用 SOFAArk 解决该依赖冲突问题；只需要把 A 和版本为 0.1 的 C 包一起打包成一个 Ark 插件，然后让应用工程引入该插件依赖即可；</p>
 
-<h4 id="合并部署">合并部署</h4>
+<h3 id="合并部署">合并部署</h3>
 
 <p>复杂项目通常需要跨团队协作开发，各自负责不同的组件，而众所周知，协调跨团队合作开发会遇到不少问题；比如各自技术栈不统一导致的依赖冲突，又比如往同一个 Git 仓库提交代码常常导致 merge 冲突。因此，如果能让每个团队将负责的功能组件当成一个个单独的应用开发，运行时合并部署，通过统一的编程界面交互，那么将极大的提升开发效率及应用可扩展性。SOFAArk 提出了一种特殊的包结构 &ndash; Ark Biz，用户可以使用 Maven 插件将应用打包成 Biz，允许多 Biz 在 SOFAArk 容器之上合并部署，并通过统一的编程界面交互。</p>
 
-<h5 id="静态合并部署">静态合并部署</h5>
+<h4 id="静态合并部署">静态合并部署</h4>
 
 <p>SOFAArk 提供了静态合并部署能力，在开发阶段，应用可以将其他应用打成的 Biz 包通过 Maven 依赖的方式引入，而当自身被打成可执行 Fat Jar 时，可以将其他应用 Biz 包一并打入，启动时，则会根据优先级依次启动各应用。每个 Biz 使用独立的 BizClassLoader 加载，不需要考虑相互依赖冲突问题，Biz 之间则通过 <code>SofaService/SofaReference</code> JVM 服务进行交互。</p>
 
-<h5 id="动态合并部署">动态合并部署</h5>
+<h4 id="动态合并部署">动态合并部署</h4>
 
 <p>动态合并部署区别于静态合并部署最大的一点是，运行时通过 API 或者配置中心（Zookeeper）来控制 Biz 的部署和卸载。动态合并部署的设计理念图如下：</p>
 
@@ -1898,7 +1898,9 @@ if (!doNotTrack) {
 
 <p>SOFAArk 包含三个概念，<code>Ark Container</code>, <code>Ark Plugin</code> 和 <code>Ark Biz</code>; 运行时逻辑结构图如下:</p>
 
-<p><img src="https://cdn.yuque.com/lark/2018/png/590/1523868989241-f50695ed-dca0-4bf7-a6a9-afe07c2ade76.png" alt="image.png | center | 1310x1178" /></p>
+<div style="text-align: center;">
+    <img align="center" width="1310" height="1178" src="https://cdn.yuque.com/lark/2018/png/590/1523868989241-f50695ed-dca0-4bf7-a6a9-afe07c2ade76.png">
+</div>
 
 <p>在介绍这三个概念之前，先介绍上述 <code>Ark</code> 包概念；<code>Ark</code> 包是满足特定目录格式要求的可运行 <code>Fat Jar</code>，使用官方提供的 <code>Maven</code> 插件 <code>sofa-ark-maven-plugin</code> 可以将<strong>单个或多个应用</strong>打包成标准格式的 <code>Ark</code> 包；使用 <code>java -jar</code> 命令即可在 SOFAArk 容器之上启动所有应用；<code>Ark</code> 包通常包含 <code>Ark Container</code>、<code>Ark Plugin</code> 和 <code>Ark Biz</code>；以下我们针对这三个概念简单做下名词解释：</p>
 

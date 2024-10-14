@@ -1668,7 +1668,8 @@ if (!doNotTrack) {
 		<article class="typo">
   <p>﻿## Product description
 SOFAArk is a light-weight，java based classloader isolation framework
-open sourced by Ant Financial. Based on  <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#executable-jar-jar-file-structure">Fat Jar</a> technology, the container can pack simple single-module Java applications or Spring Boot applications into a self-contained executable Fat Jar, known as an Ark package. When the <code>java -jar</code> command is used to start an Ark package embedded with the SOFAArk class isolation container, the SOFAArk container will start, and it then starts each Ark plugin and application.</p>
+open sourced by Ant Financial. Based on  <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#executable-jar-jar-file-structure">Fat Jar</a> technology, the container can pack simple single-module Java applications or Spring Boot applications into a self-contained executable Fat Jar, known as an Ark package. When the <code>java -jar</code> command is used to start an Ark package embedded with the SOFAArk class isolation container, the SOFAArk container will start, and it then starts each Ark plugin and application.
+If you want to merge multi app into one jvm, please go and refer to <a href="https://github.com/koupleless/koupleless">koupleless</a> which based on SOFAArk; if you want to just isolate class by classLoader then you can read docs in this site, and focus on sofaArk Plugin.</p>
 
 <h2 id="background">Background</h2>
 
@@ -1684,7 +1685,9 @@ open sourced by Ant Financial. Based on  <a href="https://docs.spring.io/spring-
 
 <p>There are three concepts in SOFAArk: <code>Ark Container</code>, <code>Ark-Plugin</code> and <code>Ark-Biz</code>; they are organized as what the following graph shows:</p>
 
-<p><img src="https://cdn.yuque.com/lark/2018/png/590/1523868989241-f50695ed-dca0-4bf7-a6a9-afe07c2ade76.png" alt="image.png | center | 1310x1178" /></p>
+<div style="text-align: center;">
+    <img align="center" width="1310" height="1178" src="https://cdn.yuque.com/lark/2018/png/590/1523868989241-f50695ed-dca0-4bf7-a6a9-afe07c2ade76.png">
+</div>
 
 <p>First of all, we explain what roles these concepts play;</p>
 
