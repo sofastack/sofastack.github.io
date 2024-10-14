@@ -1829,7 +1829,7 @@ if (!doNotTrack) {
 		>编辑</a>
 	</div>
 	<div class="meta">
-		更新时间: 2024-10-10 
+		更新时间: 2024-10-14 
 		
 			
 		
@@ -1993,7 +1993,7 @@ sofa-dashboard-ark-facade 包中提供的类委托给宿主来加载。具体过
 &lt;/dependency&gt;
 </code></pre>
 
-<h3 id="在模块中提供-hook-实现">在模块中提供 hook 实现</h3>
+<h3 id="在模块中提供-hook-实现-参考-sofaark-官方提供的-delegatemasterbizclassloaderhook-https-github-com-sofastack-sofa-ark-blob-master-sofa-ark-parent-support-ark-support-starter-src-main-java-com-alipay-sofa-ark-support-common-delegatetomasterbizclassloaderhook-java">在模块中提供 hook 实现，参考 SOFAArk 官方提供的 <a href="https://github.com/sofastack/sofa-ark/blob/master/sofa-ark-parent/support/ark-support-starter/src/main/java/com/alipay/sofa/ark/support/common/DelegateToMasterBizClassLoaderHook.java">DelegateMasterBizClassLoaderHook</a></h3>
 
 <p>在模块代码中新建一个 DelegateMasterBizClassLoaderHook 类，如下：</p>
 
@@ -2071,12 +2071,14 @@ public class DelegateMasterBizClassLoaderHook implements ClassLoaderHook&lt;Biz&
 
 <p>不支持，会出现循环应引用问题。模块 BizClassLoader getResources 过程描述：</p>
 
-<p>1、preFindResource: 当前模块没有实现 hook，所以 preFindResource 不会执行，返回是 null
-2、getInternalResouces
-3、getJdkResource: 加载不到
-4、getExportResource: 这里会尝试使用插件 pluginClassLoader 来加载
-5、pluginClassLoader.getResources
-6、preFindResource: 这里委托给宿主 bizClassLoader 加载，bizClassLoader.getResources -&gt; getInternalResouces-&gt;getExportResource-&gt;pluginClassLoader.getResources-&gt;hook preFindResource -&gt; 委托给宿主 bizClassLoader 加载 -&gt; &hellip;.</p>
+<ol>
+<li>preFindResource: 当前模块没有实现 hook，所以 preFindResource 不会执行，返回是 null</li>
+<li>getInternalResouces</li>
+<li>getJdkResource: 加载不到</li>
+<li>getExportResource: 这里会尝试使用插件 pluginClassLoader 来加载</li>
+<li>pluginClassLoader.getResources</li>
+<li>preFindResource: 这里委托给宿主 bizClassLoader 加载，bizClassLoader.getResources -&gt; getInternalResouces-&gt;getExportResource-&gt;pluginClassLoader.getResources-&gt;hook preFindResource -&gt; 委托给宿主 bizClassLoader 加载 -&gt; &hellip;.</li>
+</ol>
 
 </article>
 
