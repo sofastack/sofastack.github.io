@@ -4,14 +4,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/blog/hello-sofastack/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -28,7 +28,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -45,7 +45,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -62,7 +62,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -79,7 +79,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -96,7 +96,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -113,7 +113,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -130,7 +130,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -147,7 +147,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -164,7 +164,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -181,7 +181,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/seata/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -198,7 +198,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/layotto/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -215,7 +215,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -232,7 +232,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -249,7 +249,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/koupleless/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -266,7 +266,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-ark/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -283,7 +283,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/tags/cloud-native/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -299,7 +299,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/tags/kubecon/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -315,7 +315,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/activities/sofastack-cloud-native-workshop/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -332,7 +332,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/tags/workshop/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -348,7 +348,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/blog/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -364,7 +364,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/categories/sofastack/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -380,7 +380,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/tags/sofastack/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -396,7 +396,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/guides/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -428,7 +428,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/search/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -445,7 +445,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/raft-introduction/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -462,7 +462,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/activities/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -479,7 +479,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/usage-ide/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -496,14 +496,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-repackage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/user-stories/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -520,14 +520,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-structure/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-ark-biz/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -544,7 +544,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-ark-jar/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -561,7 +561,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-ark-plugin/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -578,7 +578,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-classloader/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -595,7 +595,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-plugin/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -612,7 +612,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-startup/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -629,7 +629,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/async/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -646,14 +646,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-model/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/common-model/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -670,7 +670,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/bolt-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -687,7 +687,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/dubbo-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -704,7 +704,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/h2c-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -721,7 +721,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/http-json/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -738,7 +738,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/restful-basic/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -755,7 +755,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/benchmark-performance/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -772,7 +772,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/bolt/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -789,7 +789,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/guides/kc-serverless-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -806,7 +806,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/guides/sofastack-quick-start/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -823,7 +823,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/invoke-type/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -840,7 +840,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/client-ext-metrics/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -857,7 +857,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/client-invoke-flow/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -874,7 +874,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/client-configuration/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -891,7 +891,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/client-quick-start/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -908,14 +908,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-invocation-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/protocol/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -932,14 +932,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-compile/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/how-to-build/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -956,7 +956,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/configuration/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -973,7 +973,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-consul/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -990,7 +990,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-contribution/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1007,14 +1007,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-contribution/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/contributing/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1031,7 +1031,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/notice/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1048,7 +1048,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/notice/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1065,7 +1065,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/notice/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1082,14 +1082,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-app-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/custom-filter/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1106,7 +1106,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/custom-router/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1123,14 +1123,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/custom-thread-pool/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/dashboard-client/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1147,7 +1147,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-datasource/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1164,7 +1164,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-datasource/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1181,7 +1181,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/dependency-management/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1198,7 +1198,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/deployment/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1215,7 +1215,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/developer-guide/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1232,7 +1232,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/development-use-guide/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1249,7 +1249,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/peer-to-peer/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1266,7 +1266,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/fault/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1283,7 +1283,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/consistency-raft-jraft/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1300,7 +1300,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/dubbo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1317,7 +1317,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-dubbo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1334,7 +1334,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-dubbo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1351,7 +1351,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/engine-architecture/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1368,7 +1368,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/extension-loader/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1385,7 +1385,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/usage-api/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1402,7 +1402,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/faq/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1419,7 +1419,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/faq/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1436,7 +1436,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/fault-tolerance/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1453,7 +1453,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/configuration-fault-tolerance/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1470,7 +1470,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/sofa-bolt-functions/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1487,14 +1487,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/features/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/usage-ready/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1511,7 +1511,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/functional-interface-support/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1528,7 +1528,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/generic-invoke/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1545,7 +1545,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/getting-started-with-sofa-boot/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1562,7 +1562,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/getting-started-with-rpc/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1579,7 +1579,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/graceful-shutdown/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1596,7 +1596,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/h2c/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1613,14 +1613,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/http/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/health-check/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1637,7 +1637,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/contributing/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1654,7 +1654,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/contribution/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1671,7 +1671,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/contributing/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1688,7 +1688,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/sofa-bolt-contribution/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1705,7 +1705,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/how-to-contribute-code-to-sofajraft/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1722,7 +1722,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-httpclient/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1739,7 +1739,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-httpclient/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1756,7 +1756,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/fault-hystrix/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1773,7 +1773,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/pilot-setup-zookeeper-installation/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1790,14 +1790,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-health-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/restful-swagger/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1814,21 +1814,21 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-instruction/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-readme/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/pilot-readme/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1845,7 +1845,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-readme/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1862,14 +1862,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/sofa-mosn-readme/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/jraft-rheakv-user-guide/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1886,7 +1886,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/jraft-user-guide/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1903,7 +1903,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/java-sdk/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1920,7 +1920,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/jepson-test/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1937,14 +1937,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-lifecycle/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/invoke-chain-pass-data/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1961,7 +1961,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/load-balance/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1978,7 +1978,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-local/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -1995,7 +1995,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/reference-performance-report010/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2012,14 +2012,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/reference-performance-report010/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/management-api/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2036,7 +2036,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/maven-dependency/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2053,14 +2053,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-deploy/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/usage-model/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2077,7 +2077,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/modular-development/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2094,7 +2094,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofaboot-module/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2111,7 +2111,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/parallel-start/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2128,7 +2128,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-nacos/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2145,7 +2145,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/node-and-java-communicate/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2162,7 +2162,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-okhttp/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2179,7 +2179,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-okhttp/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2196,7 +2196,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-openfeign/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2213,7 +2213,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-openfeign/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2230,7 +2230,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2247,14 +2247,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2271,7 +2271,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2288,7 +2288,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-ark-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2305,7 +2305,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-ark-plugin-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2322,7 +2322,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/print-traceid-spanid/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2339,7 +2339,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/programming/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2356,7 +2356,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/quick-start-run-samples/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2373,14 +2373,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/quick-start-run-samples/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/use-guide-samples/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2397,7 +2397,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/module-service/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2414,7 +2414,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/guides/kc-cloud-mesh-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2431,7 +2431,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/getting-started/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2448,7 +2448,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/quick-start/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2465,7 +2465,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/quick-start-setup/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2482,14 +2482,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/quick-start-setup/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/quick-start/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2506,14 +2506,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/componentaccess/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/quick-start-client-boot/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2530,7 +2530,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/quick-start-client-java/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2547,7 +2547,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/restful-cors/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2564,7 +2564,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/restful-filter/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2581,7 +2581,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/restful/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2598,7 +2598,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/application-rpc-config/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2615,7 +2615,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/configuration-common/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2632,7 +2632,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/pilot-register-agent/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2649,7 +2649,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/related-links/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2666,7 +2666,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/release-notes/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2683,14 +2683,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/release-notes/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-release/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2707,14 +2707,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-release/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/release-node/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2731,7 +2731,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/release-log/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2748,7 +2748,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/release-notes/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2765,7 +2765,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/release-notes/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2782,7 +2782,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/report-to-zipkin/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2799,7 +2799,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-resttemplate/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2816,7 +2816,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-resttemplate/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2833,7 +2833,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/retry-invoke/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2850,7 +2850,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/sofa-bolt-roadmap/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2867,7 +2867,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-roadmap/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2884,14 +2884,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-roadmap/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/road-map/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2908,7 +2908,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/roadmap/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2925,7 +2925,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/roadmap/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2942,7 +2942,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/roadmap/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2959,7 +2959,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2976,7 +2976,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/ark-console/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -2993,7 +2993,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3010,7 +3010,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/upgrade_2_5_x/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3027,7 +3027,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/upgrade_3_x/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3044,7 +3044,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/extension/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3061,7 +3061,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/guides/kc-sofastack-dynamic-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3078,7 +3078,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3095,7 +3095,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofaboot-profile/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3112,7 +3112,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3129,7 +3129,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3146,7 +3146,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3163,7 +3163,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/sofarpc-metrics/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3180,7 +3180,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/structure-intro/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3197,7 +3197,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-sofarpc/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3214,7 +3214,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-sofa/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3231,7 +3231,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3248,7 +3248,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3265,7 +3265,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/sofatracer-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3282,7 +3282,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/utils/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3299,7 +3299,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/configuration/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3316,7 +3316,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/overview/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3333,7 +3333,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/sampler/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3350,7 +3350,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/scale/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3367,7 +3367,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-acts/usage-script/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3384,7 +3384,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/guides/kc-seata-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3401,7 +3401,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3418,7 +3418,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/serialization/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3435,7 +3435,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/server-quick-start/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3452,7 +3452,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-extension-guide/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3469,7 +3469,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/governance/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3486,7 +3486,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/publish-and-reference/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3503,7 +3503,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/rpc-config-xml-explain/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3520,7 +3520,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/skywalking-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3537,7 +3537,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/usage-of-mvc/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3554,7 +3554,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/log-format-springmvc/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3571,7 +3571,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-ark-terminology/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3588,7 +3588,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/explanation/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3605,7 +3605,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/terminology/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3622,7 +3622,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/test/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3639,7 +3639,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/bolt-timeout/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3656,7 +3656,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-tracer/traceid-generated-rule/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3673,7 +3673,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/tracing-usage/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3690,7 +3690,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/use-guide-api/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3707,7 +3707,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/programing-rpc/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3724,7 +3724,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/pilot-setup-zookeeper-quick-start-docker/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3741,14 +3741,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-jarslink-deploy-demo/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/mosn/quick-start-run-with-sofamesh/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3765,14 +3765,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/occlum/quick-start-run-with-sofamesh/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-lookout/use-guide-registry/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3789,7 +3789,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/programing-sofa-boot-xml/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3806,7 +3806,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/programing-sofa-boot-annotation/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3823,7 +3823,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-jraft/counter-example/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3840,7 +3840,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/classloader-isolation/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3857,7 +3857,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/programing-sofa-boot-api/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3874,7 +3874,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-bolt/sofa-bolt-handbook/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3891,14 +3891,14 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/sofa-jarslink-version/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/version-release/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3915,7 +3915,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-dashboard/version-rule/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3932,7 +3932,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-registry/release-standard/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3949,7 +3949,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-boot/view-versions/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3966,7 +3966,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/provider-warmup-weight/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -3983,7 +3983,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/pilot-x-protocol/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -4000,7 +4000,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-mesh/pilot-zookeeper-adapter/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -4017,7 +4017,7 @@
   
   <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/projects/sofa-rpc/registry-zookeeper/</loc>
-    <lastmod>2024-11-18T17:38:19+08:00</lastmod>
+    <lastmod>2024-11-18T17:55:03+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
