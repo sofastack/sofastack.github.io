@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	开源之夏经验分享｜Koupleless 社区魏照华：开源精神是场永不停歇的接力 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		开源之夏经验分享｜Koupleless 社区魏照华：开源精神是场永不停歇的接力
+	</h1>
+	<div class="meta">
+		
+			2025-02-18 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <h1 id="开源之夏经验分享-koupleless-社区魏照华-开源精神是场永不停歇的接力">开源之夏经验分享｜Koupleless 社区魏照华：开源精神是场永不停歇的接力</h1>
+
+<blockquote>
+<p>魏照华</p>
+
+<p>Computer Science
+Koupleless 社区贡献者</p>
+
+<p>就读于 University of Wolloging，Computer Science 专业研究生。</p>
+
+<p><strong>本文 5428 字，预计阅读 14 分钟</strong></p>
+</blockquote>
+
+<p>今天 SOFAStack 邀请到了开源之夏 2024 Koupleless 社区的中选学生<strong>魏照华</strong>同学！在本项目中，他参与完成了 ​<strong>Koupleless 模块打包插件 Gradle 版本</strong>​。希望他分享的这段经历，能让更多人了解到 Koupleless 开源社区，感受开源的魅力～</p>
+
+<p>​<strong>项目链接</strong>​：<a href="*https://summer-ospp.ac.cn/org/prodetail/2495a0374?lang=zh&amp;list=pro*">https://summer-ospp.ac.cn/org/prodetail/2495a0374?lang=zh&amp;list=pro</a></p>
+
+<h2 id="项目信息">项目信息</h2>
+
+<p>​<strong>项目名称</strong>​：Koupleless 模块打包插件 Gradle 版本</p>
+
+<p>​<strong>项目导师</strong>​：梁栎鹏</p>
+
+<p>​<strong>项目背景</strong>​：</p>
+
+<p>在 Koupleless 模块化研发框架里，模块是普通 SpringBoot 或者 Java 代码工程，通过使用 SOFAArk 模块打包插件构建出 jar 包，这个 jar 包就是我们的模块构建产物，通过在一个基座 JVM 里部署多个这样的模块 jar 包，运行起来的时候，​<strong>1 个模块 = 1 个 ClassLoader + 1 个 SpringContext</strong>​，通过多 ClassLoader 和 SpringContext 的隔离和共享来为模块开发提供最极致的研发效能和资源效能。</p>
+
+<p>而 SOFAArk 打包插件就是将传统 Maven 工程打包成 SOFAArk 模块 jar 包的插件，并且支持设置类的隔离与共享的配置能力*（对象的隔离与共享不在该插件里配置）*。但是当前 SOFAArk 打包插件只支持 Maven 版本，不支持 Gradle 版本，导致很多 Gradle 的用户无法使用 SOFAArk 来享受到 Koupleless 模块化研发框架的收益。</p>
+
+<h2 id="项目实现思路">项目实现思路</h2>
+
+<p>SOFAArk 目前拥有两种打包插件，分别为 sofa-ark-maven-plugin 和 sofa-ark-plugin-maven-plugin。前者负责将普通的 Java 工程或者 SpringBoot 工程打包成标准格式的 Ark 包或者 Ark Biz 包，后者是将一个或者多个普通的 jar 包打包成标准格式的 Ark Plugin。这三类 jar 包都有自己特定的格式和内容。具体的内容可以参考如下：</p>
+
+<ul>
+<li>Ark ：<a href="https://www.sofastack.tech/projects/sofa-boot/sofa-ark-ark-jar/"><em>https://www.sofastack.tech/projects/sofa-boot/sofa-ark-ark-jar/</em></a></li>
+<li>Ark Biz：<a href="https://www.sofastack.tech/projects/sofa-boot/sofa-ark-ark-biz/"><em>https://www.sofastack.tech/projects/sofa-boot/sofa-ark-ark-biz/</em></a></li>
+<li>Ark Plugin:<a href="*https://www.sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin/*"><em>https://www.sofastack.tech/projects/sofa-boot/sofa-ark-ark-plugin/</em></a></li>
+</ul>
+
+<p>这三类包从包含类别上而言，Ark 包是包含种类最多的包，除了 MANIFEST.MF 文件之外，还包含了业务的 Ark Biz 包、Ark 容器，以及启动相关的内容。Ark 包的 Maven 打包过程，在 SOFAArk 的官方文档^​[1]​^中，已经有了详细的解析。</p>
+
+<p>从这份文档中可以了解到，通过自定义 Maven 插件，按照 SOFAArk 中所定义的格式，重新编排后的 jar 包，就是我们想要得到的目标产物。</p>
+
+<p>回到 Gradle 打包插件上，通过了解 Maven 插件打包的具体实现过程，使用 Gradle 提供的插件 API，来实现上述过程即可。为此，需要去了解 Gradle 的生命周期，依赖管理，自定义插件等内容，进行后续开发工作。</p>
+
+<p>总览整个项目，实现过程中主要处理如下内容：</p>
+
+<ul>
+<li>用户的配置项</li>
+<li>项目依赖项</li>
+<li>启动类和容器类</li>
+<li>插件调试</li>
+</ul>
+
+<h3 id="用户配置项">用户配置项</h3>
+
+<p>SOFAArk 打包插件提供了非常丰富的用户配置选项，通过设置这些配置选项，能够打包出满足不同需求的产物内容。不同的配置项会对应不同的特性，这些特性极大地增强了项目构建的灵活性与定制性。并且使得用户能够根据项目实际的运行环境、性能需求以及部署要求等因素，精细地调整打包产物的内容与形式。</p>
+
+<p>Gradle 提供了 extensions 来让插件实现可配置，这一机制提供了一种优雅且强大的方式来定制插件行为。通过自定义 extension 类或者接口，声明需要的配置属性，便可以在插件中使用配置项。</p>
+
+<pre><code class="language-bash">//定义extensions
+abstract public class ArkExtension {
+   abstract public Property&lt;Boolean&gt; getAttach();
+    // 定义一个字符串集合类型的属性excludes，用于指定需要在打包过程中排除的依赖
+   abstract public SetProperty&lt;String&gt; getExcludes();
+}
+//在插件中使用
+class ArkPlugin implements Plugin&lt;Project&gt; {
+    void apply(Porject project){
+      ArkExtension arkExtension = project.getExtensions().create(&quot;arkPlugin&quot;, ArkPluginExArkExtension.class);
+ }
+}
+</code></pre>
+
+<p>这里需要注意的是，使用 extensions 的扩展方式，如果对插件的属性设置了默认值，那么在配置结束阶段，是没有办法获取到用户的自定义配置的。这里考虑到我们需要对 sofa-ark-all 包进行配置，装载进入 runtimeClasspath，以便再后续进行处理。可以通过设置 <code>&lt;span&gt;afterEvaluate&lt;/span&gt;</code> 来解决这个问题。<code>&lt;span&gt;afterEvaluate&lt;/span&gt;</code> 是 Gradle 提供的一个非常重要的机制，它允许我们在项目的配置阶段完成之后执行相应的操作，这样可以确保用户的自定义配置被完全考虑在内。当我们将自定义逻辑放在 <code>&lt;span&gt;afterEvaluate&lt;/span&gt;</code> 中时，Gradle 会先完成对所有用户配置的解析和应用，包括那些在 <code>&lt;span&gt;build.gradle&lt;/span&gt;</code> 或其他配置文件中显式指定的属性，然后再执行自定义的操作。</p>
+
+<h3 id="项目依赖项">项目依赖项</h3>
+
+<p>在打包过程中，需要对不同 scope 的依赖进行处理，这涉及到 Gradle 的依赖管理。Gradle 中通常用两个 Classpath 来进行管理：</p>
+
+<ul>
+<li>​<strong>compileClasspath</strong>​：编译依赖项，此路径下的依赖主要用于项目编译阶段。例如，项目使用特定的数据库连接库进行数据访问层代码的编写，在编译时，需要将该数据库连接库的相关 jar 包包含在 compileClasspath 中，这样编译器才能识别并正确编译涉及数据库操作的代码。编译依赖项确保了代码在编译期间能够顺利通过语法检查和类型校验，为后续的运行奠定基础。</li>
+<li>​<strong>runtimeClasspath</strong>​：运行时依赖项，这些依赖是项目在实际运行过程中所必需的。以一个基于 Web 的应用为例，在运行时可能需要 Servlet 容器相关的依赖，这些依赖并不一定在编译阶段就绝对必要，但在应用启动和处理用户请求时是不可或缺的。运行时依赖项保证了项目在运行环境中能够正常执行各项功能。</li>
+</ul>
+
+<p>在 Gradle 配置文件中通过 implementation、runtimeOnly 等声明的依赖项，最终会根据不同的阶段分类到上述的两个 classpath 中。例如，使用 implementation &lsquo;com.example:library:1.0.0&rsquo; 声明的依赖，会在编译阶段添加到 compileClasspath，同时也会在运行时存在于 runtimeClasspath，因为 implementation 配置表示该依赖对于编译和运行都至关重要。而像 runtimeOnly &lsquo;com.example:runtime-only-library:1.0.0&rsquo; 声明的依赖，则只会被添加到 runtimeClasspath，因为它仅在运行时才需要。</p>
+
+<p>在 Gradle 中的 Action 中，通过获取 runtimeClasspath 配置，可以对运行时的依赖项进行分类、筛选、过滤等操作。例如，项目在运行时可能依赖多个日志库，但由于某些原因，需要对日志库进行优化，只保留特定的日志库进行打包。我们便可以在 SOFAArk 打包过程中，通过自定义配置 exclude 设置依赖项的标识​*（groupId、artifactId 和 version）*​，去除不需要的日志库依赖。</p>
+
+<h3 id="启动类和容器类">启动类和容器类</h3>
+
+<p>在 Ark 包的打包过程中，会对所有的依赖项进行分类，根据不同的类别，分为 Biz 包、Container 包，以及 Container 包的启动类相关的内容。用户在使用之前，如果没有指定相关包的配置项，会启用默认配置，从远程仓库或者本地仓库中获取到 sofa-ark-all 内容，并在配置阶段进行处理。此外，涉及到 Biz 包时，需要先将项目的所有 Biz 包打包出来后，再将这些 Biz 包写入到 Ark 包中。</p>
+
+<p>想要实现上述的这些内容，并不需要自己去另外编写太多的代码，Gradle 提供了 Copy 和 CopySpec 两个工具。通过它们，我们可以极为方便地将依赖、配置项等各种内容输出到指定的目录。在使用这些工具时，我们只需要编写相应的过滤和操作规则，就能够精确地控制哪些内容需要被复制，哪些内容需要被排除，以及如何将它们按照我们期望的方式组织到目标目录中。</p>
+
+<pre><code class="language-bash">//定义目标目录为包的根目录
+this.bootInfSpec = project.copySpec().into(&quot;&quot;);
+bootInfSpec.into(&quot;&quot;, 定义过滤规则));
+bootInfSpec.into(&quot;lib&quot;, 定义lib下面的过滤规则));
+</code></pre>
+
+<p>除了 Copy 和 CopySpec，Gradle 还提供了 CopyAction 对文件进行复制操作。CopyAction 的核心功能是将文件从一个位置复制到另一个位置，这是构建系统中常见的操作，尤其是在将资源、依赖项或生成的输出文件部署到相应的目录时。它不仅仅是简单的文件复制，还可以根据复制细节*​（CopySpec​）*来决定哪些文件需要复制，如何复制，以及复制时需要进行哪些处理。再最终将资源和内容写入到 jar 包时的操作，便可以集中到自定义的 CopyAction 中来实现。</p>
+
+<h3 id="插件调试">插件调试</h3>
+
+<p>初步完成插件的编写工作后，想要在本地调试需要三步:</p>
+
+<ul>
+<li>发布到 Maven 仓库</li>
+<li>项目引入</li>
+<li>断点调试</li>
+</ul>
+
+<p>本地发布需要在插件项目的 <code>&lt;span&gt;build.gradle&lt;/span&gt;</code> 中设置如下：</p>
+
+<pre><code class="language-bash">plugins {
+//    本地调试用，发布到maven
+    id 'maven-publish'
+}
+</code></pre>
+
+<p>另外还需要对 publish 进行配置，配置完成发布到本地仓库后，就可以在想要测试的 Gradle 项目中进行引入，这里一般要设置测试项目中的 <code>&lt;span&gt;setting.gradle&lt;/span&gt;</code> 和 <code>&lt;span&gt;build.gradle&lt;/span&gt;</code> 文件，指定插件仓库和版本。最后，通过打断点启动插件，就可以对插件进行调试。</p>
+
+<h3 id="项目未来">项目未来</h3>
+
+<p>目前，Gradle 打包依然还有一些特性亟待解决和优化，包括即将支持的 declared 模式，优化 Ark 打包过程，抽离公用代码等内容。后续，我会进一步优化以上内容，使 Gradle 版本打包体验完成从可用到优雅的跃迁。</p>
+
+<h2 id="开源之夏个人随访">开源之夏个人随访</h2>
+
+<h3 id="自我介绍">自我介绍</h3>
+
+<p>大家好，我是​<strong>魏照华</strong>​。第一次了解到开源活动，是看到身边同学参加谷歌开源之夏的经历，当时为我推开了通往新世界的大门。我在随后也参与了一些国内外的活动，在此过程中，逐渐感受到开源精神和开源项目对世界产生的深刻影响。</p>
+
+<h3 id="参与该项目的原因">参与该项目的原因​</h3>
+
+<p>本次能参与 SOFAArk 打包插件项目，于我而言是份特别的缘分——三年前在社区发起的 SOFAArk 源码解析活动中，我注意到一个关于支持 Netty 插件的 issue，当时利用闲暇时间尝试提交了 PR，并幸运地被合并到主分支。未曾想两年后的今天，可以再次参与 SOFAArk 项目。</p>
+
+<h3 id="如何克服项目过程中的困难与挑战">如何克服项目过程中的困难与挑战</h3>
+
+<p>就个人成长而言，我想分享以下两点：<strong>技术沟通的艺术</strong>与​<strong>时间管理的哲学</strong>​。</p>
+
+<p>我本身并不擅长沟通，但是在项目实施中，我愈加体会到沟通是贯穿项目全周期的生命线。从前期与导师反复推敲项目目标、确定交付标准，到开发阶段针对方案的多轮技术探讨，直至后期维护方案的持续演变，每个环节都印证着一个事实——高质量的沟通本身就是技术实现的重要组成部分。这种认知让我开始有意识地培养自己的技术表达和沟通能力。</p>
+
+<p>而在时间管理维度上，由于此次项目的实施阶段，我已经毕业参加工作，平衡全职工作与开源贡献的挑战远超预期。特别是程序开发的工作时间往往随着项目的进度“灵活安排”，面对职业任务与开源承诺的双重时间需求，我不得不直面资源分配的残酷现实：前期因在 Gradle 插件 API 上面花费了大量精力，恍然间发现时间竟已悄悄过半；中期在昼夜颠倒的编码调试中，又不得不妥协于某些有趣构想只能置于脑海。这种“时间赤字”的困境，最终转化为对敏捷规划和碎片时间利用上的重新审视和思考。</p>
+
+<h3 id="有哪些感想">有哪些感想</h3>
+
+<p>站在这个节点回望，非常感谢这次社区给予的机会。我会重新出发，继续深耕开源这片土壤。​<strong>因为真正的开源精神，本就是场永不停歇的接力——我们既是前人智慧结晶的继承者，也是未来技术图景的脚手架搭建者</strong>​。</p>
+
+<p>参考链接</p>
+
+<p>[1]：<a href="https://www.sofastack.tech/projects/sofa-boot/sofa-ark-build-package-plugin/"><em>https://www.sofastack.tech/projects/sofa-boot/sofa-ark-build-package-plugin/</em></a></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    
+      
+    
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/content/zh/blog/open-source-summer-experience-haring-mosn-community-weixin-doing-what-you-think-is-cool/">
+		<span class="text">上一篇: </span>
+		<span class="text">Koupleless 2024 年度报告 &amp; 2025 规划展望（图片版）</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/koupleless-2024-annual-report-2025-planning-vision/">
+		<span class="text">下一篇: </span>
+		<span class="text">Koupleless 2024 年度报告 &amp; 2025 规划展望</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/koupleless-2024-annual-report-2025-planning-vision/">Koupleless 2024 年度报告 &amp; 2025 规划展望</a></li>
+		
+			<li><a href="/sofastack.tech/blog/content/zh/blog/open-source-summer-experience-haring-mosn-community-weixin-doing-what-you-think-is-cool/">Koupleless 2024 年度报告 &amp; 2025 规划展望（图片版）</a></li>
+		
+			<li><a href="/sofastack.tech/blog/koupleless-community-cultivating-an-engineering-mindset-in-open-source/">开源之夏经验分享｜Koupleless 社区黄兴抗：在开源中培养工程思维</a></li>
+		
+			<li><a href="/sofastack.tech/blog/apache-seata-incubating-wins-open-source-project-of-the-year-on-the-2024-open-source-innovation-list/">喜报！Apache Seata (incubating) 荣获 2024 开源创新榜单“年度开源项目”！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/open-source-summer-experience-sharing-layotto-community-ho-ning-cheng-try-and-you-will-be-rewarded/">开源之夏经验分享｜Layotto 社区 郑浩宁：尝试，就会有收获！</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CAFEDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">Seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_qrcode_20241118.png" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>
