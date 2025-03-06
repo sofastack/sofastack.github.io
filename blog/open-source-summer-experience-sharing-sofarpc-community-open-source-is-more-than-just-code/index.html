@@ -3,10 +3,7 @@
 
 <head>
 	<title>
-	
-	
-		博客 · SOFAStack
-	
+	开源之夏经验分享｜SOFARPC 社区郑佳莉：开源的收获不止代码 · SOFAStack
 </title>
 	<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -90,7 +87,7 @@ if (!doNotTrack) {
             </a>
 					
             <a
-              class=" -active"
+              class=""
               href="/sofastack.tech/blog/">
               <span>
                 博客
@@ -126,13 +123,6 @@ if (!doNotTrack) {
             </a>
 					
 					
-            
-              <a href="/sofastack.tech/en/blog/">
-                <span>English</span>
-                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"></use></svg>
-              </a>
-						
-					
 				</nav>
 			</div>
 		</div>
@@ -147,7 +137,7 @@ if (!doNotTrack) {
 					<a class="navbar-item "
 						href="/sofastack.tech/guides/">指南</a>
 				
-					<a class="navbar-item  -active"
+					<a class="navbar-item "
 						href="/sofastack.tech/blog/">博客</a>
 				
 					<a class="navbar-item "
@@ -171,10 +161,6 @@ if (!doNotTrack) {
 				</div>
 				<div class="navbar-item">
 					
-						
-							<a class="translation" href="/sofastack.tech/en/blog/">En</a>
-						
-					
 				</div>
 			</div>
 		</div>
@@ -187,8 +173,6 @@ if (!doNotTrack) {
 	
 
 	
-		<div class="ss-title">博客</div>
-	
 
 	
 
@@ -199,341 +183,196 @@ if (!doNotTrack) {
 
 
 	
-
-<div class="home-background -no-max-width">
-	<img src="/sofastack.tech/img/cover-light.jpg" />
-</div>
 
 <div class="ss-layout-container">
-	<main class="ss-layout-main">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		开源之夏经验分享｜SOFARPC 社区郑佳莉：开源的收获不止代码
+	</h1>
+	<div class="meta">
 		
-			<article class="ss-summary ss-card">
-	
-	
-		
+			2024-02-11 ·
 			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1563868284867-44971797-275e-4d71-a20e-bbdc89cba861.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-dashboard-open-source/'> SOFADashboard 启动开源共建 | SOFAStack 一站式管控平台</a></h2>
-		<div class="meta">
-			2019-05-05 · 卫恒
-		</div>
-		<div class="summary">
+				<a href="https://github.com/sofastack"></a> ·
 			
-				为了建设更完整的 SOFAStack 微服务体系，我们计划发起 SOFADashboard 项目，计划通过社区的方式共建，将其打造为一站式的 SOFAStack 管控平台。欢迎共建~
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofadashboard/" rel="tag">#SOFADashboard</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1564125591450-5a7fb835-0246-4a26-9447-0d79c6e289ab.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/antfin-middleware-open-source-key-figure-luzhi/'> 对话鲁直：蚂蚁金服中间件的开源头羊 | 穿山甲专访</a></h2>
-		<div class="meta">
-			2019-04-30 · 老王
-		</div>
-		<div class="summary">
-			
-				谈话中，鲁直反问的“你为什么不开源？”这句话让我印象深刻。-- 老王
-			
-		</div>
-		<div class="tags">
-			
+			<span class="tags">
 				
 					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
 				
-			
-		</div>
+			</span>
+		
 	</div>
+</div>
+		<article class="typo">
+  <h1 id="开源之夏经验分享-sofarpc-社区郑佳莉-开源的收获不止代码">开源之夏经验分享｜SOFARPC 社区郑佳莉：开源的收获不止代码</h1>
+
+<blockquote>
+<p><strong>文|郑佳莉</strong>
+计算机学院研二在读
+SOFARPC 社区贡献者</p>
+
+<p>就读于国防科技大学计算机学院研二。专注 Java 领域，探索基础架构与中间件技术中。</p>
+
+<p><strong>本文 2476 字，预计阅读 7 分钟</strong></p>
+</blockquote>
+
+<p>今天 SOFAStack 邀请到了开源之夏 2024 SOFARPC 社区的中选学生<strong>郑佳莉</strong>同学！在本项目中，她参与完成了 ​<strong>SOFARPC 动态配置能力完善</strong>​。希望她分享的这段经历，能让更多人了解到 SOFARPC 开源社区，感受开源的魅力～</p>
+
+<p>​<strong>项目链接</strong>​：<a href="https://summer-ospp.ac.cn/org/prodetail/2495a0307">https://summer-ospp.ac.cn/org/prodetail/2495a0307</a></p>
+
+<h2 id="项目信息">项目信息</h2>
+
+<p>​<strong>项目名称</strong>​：SOFARPC 动态配置能力完善</p>
+
+<p>​<strong>项目导师</strong>​：刘建军</p>
+
+<p>​<strong>项目背景</strong>​：</p>
+
+<p>RPC 动态配置能力是指运行时针对 RPC 相关的配置进行修改，使其能够根据需要动态调整行为，而无需重新启动服务或强制更新客户端应用程序。动态配置能力通常包括动态调整负载均衡策略、重试策略、超时设置、限流和熔断策略、序列化和反序列化配置等。
+当前 SOFARPC 简单集成了 Apollo 配置中心，期望梳理出 SOFARPC 相关需要支持的动态配置，完善对应的接口维度的动态配置能力。另外，在此基础之上，期望在 SOFARPC 中集成 Nacos、Zookeeper 等作为配置中心，支持对应的动态配置能力。</p>
+
+<h2 id="项目实现思路">项目实现思路</h2>
+
+<h3 id="方案描述">方案描述</h3>
+
+<p><strong>SOFARPC 原本的配置情况如下：</strong></p>
+
+<p>简单集成了 Apollo 作为配置中心；
+仅支持请求维度的动态配置，需要在调用流程中去主动获取对应的配置，支持的配置项包括超时时间和负载均衡策略。</p>
+
+<p>针对以上两点，改进方案分为以下三部分：</p>
+
+<p><strong>1、进一步集成 Nacos、Zookeeper 作为配置中心，并在此基础上支持请求维度的动态配置</strong></p>
+
+<p>各配置中心内，请求维度配置信息的存储结构设计如下图，其中每个配置节点的数据对应着单个配置项的值：</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i1/O1CN01uam04Y1vr6Xyhl4qr_!!6000000006225-0-tps-1080-654.jpg" alt="图片" /></p>
+
+<p><strong>2、梳理出 SOFARPC 相关需要支持的动态配置选项</strong></p>
+
+<p>动态配置选项如下表所示：</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i3/O1CN01bTopnq1F8U669LruX_!!6000000000442-0-tps-1048-264.jpg" alt="图片" /></p>
+
+<p><strong>3、增加接口维度的动态配置能力</strong></p>
+
+<p>各配置中心内，接口维度配置信息的存储结构设计如下图，其中，每个配置节点中的数据存储格式为 properties，单个配置节点的数据对应着某个接口的多个配置项：</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i4/O1CN01ICkkAC1hBVxddRJ89_!!6000000004239-0-tps-1080-617.jpg" alt="图片" /></p>
+
+<p>动态配置能力通过对配置进行监听来实现，当配置中心中的配置发生变化时，SOFARPC 应自动检测到新的配置并更新到接口配置实例中。</p>
+
+<p>添加接口维度配置监听器的流程如下：</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i3/O1CN01BfI96r1YNZqmoPYHV_!!6000000003047-0-tps-821-320.jpg" alt="图片" /></p>
+
+<p>接口维度配置动态更新流程如下：</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i2/O1CN01kfVMPK20WYrRRGTdr_!!6000000006857-0-tps-760-291.jpg" alt="图片" /></p>
+
+<h2 id="开源之夏个人随访">开源之夏个人随访</h2>
+
+<h3 id="自我介绍">自我介绍</h3>
+
+<p>大家好，我叫郑佳莉，是国防科技大学计算机学院研二的学生。我日常主要使用 Java 进行开发，对基础架构和中间件技术十分感兴趣。</p>
+
+<p>这是我第一次参与开源之夏，通过参与 SOFAStack 社区的项目，我得以深入体验开源社区的工作流程和开发过程。</p>
+
+<h3 id="申请本社区项目的原因">申请本社区项目的原因​</h3>
+
+<p>在之前的学习和实践中，我曾参与过一些分布式系统的开发工作，并且，我在学校的分布式计算课程中实现过一个简易的 RPC 框架。通过这些经历，我对 RPC 框架的工作原理和服务治理的挑战有了较为深入的理解。</p>
+
+<p>SOFARPC 作为一个广泛使用的开源 RPC 框架，吸引了我参与其中，希望能在项目中进一步扩展我的知识和技能。特别是看到 SOFARPC 在动态配置方面的潜力后，我希望能够贡献自己的力量优化系统，帮助开发者更好地管理配置。</p>
+
+<h3 id="如何克服项目过程中的困难与挑战">如何克服项目过程中的困难与挑战？</h3>
+
+<p>在项目过程中，我面临的主要难题是如何在不影响系统现有配置功能的前提下，扩展动态配置功能，尤其是要兼容不同的配置中心。由于不同配置中心的存储结构不同，接口实现和配置更新策略存在较大差异，导致了配置管理类的实现复杂度增加，兼容性问题也相应变得更加突出。</p>
+
+<p>针对这些问题，我提出了以下解决方案：</p>
+
+<p>​<strong>统一存储层次和抽象设计</strong>​：为了更好地兼容不同的配置中心，我设计了统一的存储层次结构，在每个配置中心内部，接口级的配置信息均与应用名相对应。此外，通过 SPI 机制，使用统一的 DynamicConfigManager 接口，不同配置中心的实现方式被抽象为一个统一的层，减少了各配置管理类之间的耦合。</p>
+
+<p>​<strong>监听机制的统一和优化</strong>​：为了实现动态配置的实时生效，需要对配置变更进行事件监听。然而，由于 Apollo、Nacos 和 Zookeeper 的监听机制不同，初期设计的监听器存在重复创建和事件丢失的问题，导致部分配置更新时没有及时生效。为了解决这一问题，我分别为不同配置中心实现了其特定的 Listener 子类，并在 DynamicConfigManager 中引入了统一的监听器管理机制。通过引入 ConfigChangedEvent 事件类，我成功统一了事件的触发和处理逻辑，解决了事件丢失和重复创建的问题。</p>
+
+<p>经过多次实验和调整，并在导师的指导下不断优化，最终我成功实现了负载均衡策略、超时设置等配置项的动态更新，并顺利集成了 Nacos 和 Zookeeper。</p>
+
+<h3 id="导师与社区带来的帮助">导师与社区带来的帮助</h3>
+
+<p>在整个项目过程中，我得到了导师和社区的悉心指导与支持。项目启动之初，导师便帮助我梳理了项目的核心需求和整体的任务安排，在之后的每周，我们都会定期召开会议，汇报进度并商讨进一步的实现思路。在整个项目周期内，导师为我提供了诸多宝贵的技术建议。</p>
+
+<h3 id="社区印象">社区印象</h3>
+
+<p>SOFAStack 社区是一个充满创新精神和协作氛围的开源平台，汇聚了许多技术爱好者和开发者。社区成员不仅拥有丰富的技术背景，也热衷于分享和贡献自己的经验与成果。在这里，每个人都能找到志同道合的伙伴，彼此帮助、共同进步。</p>
+
+<h3 id="有哪些收获">有哪些收获</h3>
+
+<p>我不仅深入理解了 SOFARPC 框架的设计与实现，还学到了如何在大型开源项目中推动功能优化与创新。我学会了如何在扩展功能的同时，平衡系统稳定性与灵活性之间的关系，避免引入不必要的复杂性。这一经验对我未来的技术工作具有深远影响，尤其是在处理复杂系统的设计与优化时，我将更加注重架构的清晰性与可维护性。</p>
+
+<h3 id="对更多开源新人的寄语">对更多开源新人的寄语</h3>
+
+<p>开源之路充满挑战，但也极富回报。勇于尝试，保持对技术的热情，你将在这个过程中不断成长！</p>
+
 </article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-			
-			
-				
-			
-		
-	
 
-	<img class="cover" src="/sofastack.tech/blog/sofa-jraft-deep-dive/cover.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-jraft-deep-dive/'> 蚂蚁金服开源 SOFAJRaft 详解| 生产级高性能 Java 实现</a></h2>
-		<div class="meta">
-			2019-04-25 · 力鲲
-		</div>
-		<div class="summary">
-			
-				本文根据 SOFAChannel#4 直播分享整理，主题：SOFAJRaft 详解。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofajraft/" rel="tag">#SOFAJRaft</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" rel="tag">#剖析 | SOFAJRaft 实现原理</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/sofalab/" rel="tag">#SOFALab</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1563516448245-2113c18e-d1a2-4700-ab03-d7e70a9ec23f.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-registry-introduction/'> 海量数据下的注册中心 - SOFARegistry 架构介绍</a></h2>
-		<div class="meta">
-			2019-04-25 · 琪祥
-		</div>
-		<div class="summary">
-			
-				本文为《剖析 | SOFARegistry 框架》第一篇，本篇作者琪祥。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofaregistry/" rel="tag">#SOFARegistry</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/" rel="tag">#剖析 | SOFARegistry 框架</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/sofalab/" rel="tag">#SOFALab</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1563420366446-245a8ac9-a250-447a-89b0-319c57d88054.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-channel-4-retrospect/'> 分布式事务 Seata TCC 模式深度解析 | SOFAChannel#4 直播整理</a></h2>
-		<div class="meta">
-			2019-04-24 · 觉生
-		</div>
-		<div class="summary">
-			
-				本文根据 SOFAChannel#4 直播分享整理，主题：分布式事务 Seata TCC 模式深度解析。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/seata/" rel="tag">#Seata</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/sofachannel/" rel="tag">#SOFAChannel</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/jpeg/226702/1563455530059-b90e96a5-b1e8-4d0c-b2fe-2f7fba9bd6cf.jpeg" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-channel-5-retrospect/'> 给研发工程师的代码质量利器 | SOFAChannel#5 直播整理</a></h2>
-		<div class="meta">
-			2019-04-24 · 青勤
-		</div>
-		<div class="summary">
-			
-				本文根据 SOFAChannel#5 直播分享整理，主题：给研发工程师的代码质量利器 —— 自动化测试框架 SOFAActs。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofaacts/" rel="tag">#SOFAActs</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/sofachannel/" rel="tag">#SOFAChannel</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1563846224906-a960e797-9dfe-4985-bfdd-b7ef2cd83e6d.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofastack-anniversary-1/'> Hey, SOFAer！有些话想对你说：</a></h2>
-		<div class="meta">
-			2019-04-15 · SOFAStack
-		</div>
-		<div class="summary">
-			
-				这一年，感谢有你。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1564390261585-2797b11c-6652-4102-ac30-b556548be203.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/seata-server-deep-analysis/'> 深度剖析一站式分布式事务方案 Seata-Server</a></h2>
-		<div class="meta">
-			2019-04-09 · 李钊
-		</div>
-		<div class="summary">
-			
-				在这篇文章，将重点介绍 Seata 其中的核心角色 TC，也就是事务协调器。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/seata/" rel="tag">#Seata</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1563881923169-22f4fc8f-c02b-4af1-a7be-2fe800717394.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-meetup-1-seata/'> 蚂蚁金服分布式事务开源以及实践 | SOFA 开源一周年献礼</a></h2>
-		<div class="meta">
-			2019-04-08 · 绍辉
-		</div>
-		<div class="summary">
-			
-				本文根据 SOFAMeetup#1 分享整理，详细讲述了分布式事务在蚂蚁金服的发展。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/seata/" rel="tag">#Seata</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/sofameetup/" rel="tag">#SOFAMeetup</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://cdn.nlark.com/yuque/0/2019/png/226702/1564372307857-2d92fad1-107f-4eef-9967-82785ea01fd5.png" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-meetup-1-jraft/'> 详解蚂蚁金服 SOFAJRaft | 生产级高性能 Java 实现</a></h2>
-		<div class="meta">
-			2019-04-02 · 力鲲
-		</div>
-		<div class="summary">
-			
-				本文根据 SOFA Meetup#1 北京站 现场分享整理，完整的分享视频回顾获取方式见文章底部。
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofajraft/" rel="tag">#SOFAJRaft</a>
-				
-					<a class="tag" href="/sofastack.tech/tags/sofameetup/" rel="tag">#SOFAMeetup</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-
-		
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    
+      
+    
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
 
 
-	<nav class="ss-pagination" 
-		data-total="51" 
-		data-current="45"
-	>
-		
-	</nav>
+		<div class="-show-mobile">
+			
 
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/economical-and-efficient-enhance-the-competitiveness-of-enterprises-sofaserverless-brand-upgraded-to-koupleless-release-version-1.0/">
+		<span class="text">上一篇: </span>
+		<span class="text">成倍降本增效，提升企业竞争力！SOFAServerless 品牌升级为 Koupleless，重磅发布 1.0 版本</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/efficient-cost-reduction-case-study-of-koupleless-practical-application-in-nanjing-f6/">
+		<span class="text">下一篇: </span>
+		<span class="text">高效降本｜深度案例解读 Koupleless 在南京爱福路的落地实践</span>
+	</a>
+</nav>
+
+		</div>
 	</main>
 
 	<aside class="ss-layout-aside">
 		
 		
 
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/economical-and-efficient-enhance-the-competitiveness-of-enterprises-sofaserverless-brand-upgraded-to-koupleless-release-version-1.0/">成倍降本增效，提升企业竞争力！SOFAServerless 品牌升级为 Koupleless，重磅发布 1.0 版本</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ospp-exprience-sharing-keep-enthusiastic-and-all-in/">开源之夏经验分享｜Layotto 社区 陈亦昺：保持热情、全力以赴！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/open-source-together-seata-enters-apache-incubator/">携手开源，共同见证｜Seata 进入 Apache 孵化器</a></li>
+		
+			<li><a href="/sofastack.tech/blog/say-goodbye-to-complexity-easily-tackle-k8s-management-challenges-with-the-right-tools/">告别复杂性！用正确的工具轻松应对 K8s 管理挑战</a></li>
+		
+			<li><a href="/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/">开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力</a></li>
+		
+	</ul>
+	
+</div>
 
 		<div class="ss-aside-tags ss-card">
 	<h2 class="card-title">
