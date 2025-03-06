@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	社区文章｜Koupleless 助力「人力家」实现分布式研发集中式部署，又快又省！ · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		社区文章｜Koupleless 助力「人力家」实现分布式研发集中式部署，又快又省！
+	</h1>
+	<div class="meta">
+		
+			2024-10-29 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <p><strong>原创</strong> <strong>赵云兴、葛志刚</strong></p>
+
+<p>文｜赵云兴，葛志刚</p>
+
+<p>仁励家网络科技（杭州）有限公司架构师
+专注 to B 领域架构</p>
+
+<p><strong>本文 2111 字      阅读 5 分钟</strong></p>
+
+<h1 id="背景">背景</h1>
+
+<p>人力家由阿里钉钉与人力窝共同孵化，致力于为企业提供以薪酬为核心的一体化 HR SaaS 解决方案，加速对中国人力资源服务行业数字化赋能。</p>
+
+<p>人力资源软件通常由<strong>多模块</strong>组成，如人力资源规划、招聘、培训、绩效管理、薪酬福利、劳动关系，以及员工和组织管理等。随着业务发展，部分模块进入稳定期，仅需少量维护投入。例如，一个早期有 20 人研发的项目，现在拆分为 5 个应用。尽管产品成熟，但由于客户需求随竞争、业务和政策变化，仍需每年投入部分精力进行迭代。</p>
+
+<p>长时间以来，我们一直面临着以下问题，而苦于没有解决方案：</p>
+
+<ul>
+<li><strong>系统资源浪费</strong>：5 个应用支撑的业务，我们在生产环境为每个应用部署了 3 台 2C4G 的 Pod，一共是 15 个 Pod 的资源。</li>
+<li><strong>迭代运维成本高</strong>：因为业务的复杂性，经常需要多个应用同时改动，部署等待周期长，单应用部署时间在 6 分钟左右。</li>
+</ul>
+
+<p>在过去，我们已经探索过以下方案：</p>
+
+<ul>
+<li><strong>压缩工程</strong>：通过排除冗余的 jar 依赖，降低镜像大小。但空间有限，整个应用 jar 包只能从 100+M 减少到 80+M，整个镜像依然有 500M，能节省的部署等待时间有限。</li>
+<li><strong>单 ECS 上部署多应用</strong>：我们需要为这个应用做特别的定制，譬如监听端口要支持多个；部署脚本也要特别定制，要支持滚动发布，健康检测不同的端口，一段时间以后运维容易搞不清整个部署方案，容易出现运维事故。</li>
+</ul>
+
+<h1 id="初见成效">初见成效</h1>
+
+<p>直到在某个月不黑风不高的夜晚，我们在最大的程序员交友网站上遇到了 Koupleless 团队。看完框架的介绍，我们立刻明白，Koupleless 就是我们要寻找的解决方案。</p>
+
+<p>经过近两个月的敲敲打打，<strong>模块成功瘦身了，其中最大的模块的 jar 也只有不到 4M</strong>。<strong>应用部署的体积从 500M 一下子降到了 5M 以下</strong>，具体可见下图～</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i3/O1CN01bLsiXt27Y7WHF1G9z_!!6000000007808-0-tps-1080-594.jpg" alt="瘦身以后模块的jar" /></p>
+
+<p>但高兴不过一天，我们在「<strong>如何把 Koupleless 部署到生产环境</strong>」上遇到了难题。因为我们没有专门的运维团队，部署都是开发人员通过阿里云的云效流水线，直接把镜像推送到 K8s 的 Pod。但这样改了以后，我们迎来了一连串待解决的问题……</p>
+
+<ul>
+<li>模块要不要流量，还是直接通过基座处理流量？</li>
+<li>如何在单独部署模块的时候先把基座的流量摘掉？</li>
+<li>发布成功以后如何做健康检查？</li>
+<li>如何重新开放基座流量？</li>
+</ul>
+
+<h1 id="koupleless-的生产环境部署">Koupleless 的生产环境部署</h1>
+
+<p>在这里要特别感谢 Koupleless 团队的伙伴，给了我们很多专业的建议和方案。最终，我们选择了以下部署方案：</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i3/O1CN01kXDBIQ1Vj9f9mimO0_!!6000000002688-2-tps-1080-696.png" alt="图片" /></p>
+
+<p>整体方案是，在基座上增加监听 oss 文件变化自动更新部署模块，卸载老版本模块安装新版模块，所有流量由 nginx 进入，转发到进程 tomcat *(基座和多个模块复用同个 tomcat host)*，并在基座上控制健康检查和流量的开关，主要工作是在基座上扩充一些能力：</p>
+
+<p>1、基座支持配置自身运行的必要条件，譬如需要模块 A、B、C 都安装成功才能放流量进来；</p>
+
+<p>2、检查 oss 目录，自动安装最新的模块版本，并做健康检查；</p>
+
+<p>3、实现 K8s 的 liveness：用来在基座部署的时候判断基座是否成功启动。只要基座启动成功，即返回成功，这样基座可以走后续的安装模块逻辑；</p>
+
+<p>4、实现 K8s 的 readiness：主要控制外部流量是否可以进来。因此这里需要判断所有必须安装的模块是否健康，并且对应的流量文件 A_status 等是否存在 *（该文件是一个空文件，在滚动发布的时候开关流量的时候用）*。</p>
+
+<blockquote>
+<p><strong>小 Tips</strong></p>
+
+<p>目前 Koupleless 优化了静态部署和健康检查能力，能够直接满足我们的需求：</p>
+
+<ul>
+<li><strong>静态部署</strong>：在基座启动成功后，允许用户通过自定义的方式安装模块；</li>
+<li><strong>健康检查</strong>：在基座启动成功且用户自定义安装的模块启动后，Koupleless 框架将原生 SpringBoot 的 readiness 配置为 &lsquo;ACCEPTING_TRAFFIC&rsquo;，用户可以通过探测 readiness 决定是否让流量进入。</li>
+</ul>
+</blockquote>
+
+<p>以下是 K8s 上的配置图：</p>
+
+<ul>
+<li>就绪检查和启动探测：</li>
+</ul>
+
+<p><img src="https://img.alicdn.com/imgextra/i4/O1CN01fNqGKv1GurYD5HDwR_!!6000000000683-0-tps-1080-974.jpg" alt="图片" /></p>
+
+<ul>
+<li>在 Pod 上增加云存储的挂载：</li>
+</ul>
+
+<p><img src="https://img.alicdn.com/imgextra/i4/O1CN01NaBgot1ErzqCYEQgg_!!6000000000406-0-tps-1080-145.jpg" alt="图片" /></p>
+
+<p>模块动态部署时需要考虑两个问题：怎么感知新的模块并部署？在模块部署的前后怎么通过健康检查，控制基座流量？</p>
+
+<p>我们的方案大概如下：</p>
+
+<p>1、模块通过流水线，直接 jar 上传到一个 oss 目录；</p>
+
+<p>2、基座上增加配置，配置基座承接流量的必须安装的模块，以及对应模块的健康检查地址；</p>
+
+<p>3、基座监听 oss 文件夹的变化，来决定是否重新部署模块 *（譬如有更晚的/更大的版本的模块上传到了 oss）*；</p>
+
+<p>4、基座部署模块前，先摘流量 *（可以通过删除一个空文件来实现，结合上一步 K8s 的 readiness 逻辑，空文件删除以后，readiness 检测不通过，流量就不会进来。但模块是存活的，防止有耗时的线程还在运行）*；</p>
+
+<p>5、安装好模块以后，把删除的文件写上，就可以开流量了；</p>
+
+<p>6、集群下，基座通过 redis 来控制 Pod 不会出现并行安装，保证流量不会断；</p>
+
+<p>7、基座提供就绪检查：就绪检查只需要判断基座起来了就可以。</p>
+
+<p>存活检查是比较关键的一步：</p>
+
+<p>a.判断第 4 步的空文件是否存在；</p>
+
+<p>b.需要判断所有必须安装的模块都可以访问。</p>
+
+<blockquote>
+<p><strong>小 Tips</strong></p>
+
+<p>目前 Koupleless 优化了<strong>健康检查能力</strong>，能够在模块动态安装/卸载之前关闭流量，将 readiness 配置为 REFUSING_TRAFFIC，并允许用户配置模块卸载前的静默时长，让流量在静默时期处于关闭状态。在卸载的静默时长结束、旧模块卸载完成、全部模块安装成功后，readiness 才会配置为 ACCEPTING_TRAFFIC 状态。</p>
+</blockquote>
+
+<h1 id="总结">总结</h1>
+
+<p>在以前，单个模块升级发布一次要 6 分多钟。</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i1/O1CN01mlMuVB1d0kBQENPgr_!!6000000003674-0-tps-1080-309.jpg" alt="图片" /></p>
+
+<p>而改造后，升级单个模块只需要把编译后的 jar 上传到 oss 即可。</p>
+
+<p><img src="https://img.alicdn.com/imgextra/i2/O1CN01z8sckO1PVWAuYM2g6_!!6000000001846-0-tps-1080-228.jpg" alt="图片" /></p>
+
+<p>最终的效果，通过一组简单的数字对比就可以看出差异：</p>
+
+<ul>
+<li>在服务器资源上，以前需要 15X2C4G，现在只需要 3X4c8G，<strong>节省了 18C36G 的服务器资源</strong>；</li>
+<li>在单个模块的发布时间上，我们从之前的 6 分钟<strong>降低到了 3 分钟</strong>；</li>
+<li>在单个模块的部署资源上，我们从 500M <strong>降低到了 5M</strong>。</li>
+</ul>
+
+<p>再次感谢 Koupleless 团队伙伴的专业支持，特别是有济、立蓬。当我们在改造过程中遇到一些个性场景的兼容性问题，他们都能快速响应，让我们整个升级改造时间大大缩短。</p>
+
+<p>通过升级 Koupleless 架构，人力家实现了<strong>多应用的合并部署、并行研发、轻量集中部署，大大降低了运维成本。</strong></p>
+
+<p>天下架构，分久必合，合久必分。而 Koupleless，让架构演进（分合）更丝滑🥰</p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    
+      
+    
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/tuya-smart-implements-merged-deployment-with-koupleless-to-achieve-cost-saving-and-profit-increasing-in-cloud-services/">
+		<span class="text">上一篇: </span>
+		<span class="text">涂鸦智能落地 Koupleless 合并部署，实现云服务降本增效</span>
+	</a>
+	
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/tuya-smart-implements-merged-deployment-with-koupleless-to-achieve-cost-saving-and-profit-increasing-in-cloud-services/">涂鸦智能落地 Koupleless 合并部署，实现云服务降本增效</a></li>
+		
+			<li><a href="/sofastack.tech/activities/sofa-6th-anniversary/">SOFA 六周年，Hello SOFA World</a></li>
+		
+			<li><a href="/sofastack.tech/blog/explore-the-workflow-of-mosn-from-an-rpc-request/">从一次 RPC 请求，探索 MOSN 的工作流程</a></li>
+		
+			<li><a href="/sofastack.tech/blog/koupleless-brings-split-plugin-to-help-you-to-improve-the-efficiency-of-collaborative-development/">单体应用协作开发太难？Koupleless 带来拆分插件，帮你抽丝剥茧提高协作开发效率！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/efficient-cost-reduction-case-study-of-koupleless-practical-application-in-nanjing-f6/">高效降本｜深度案例解读 Koupleless 在南京爱福路的落地实践</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">源码解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_qrcode_20241118.png" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>
