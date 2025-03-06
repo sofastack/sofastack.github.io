@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	开源之夏经验分享｜MOSN 社区韦鑫：做自己认为很酷的事 · SOFAStack
+</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications" />
+
+<meta name="generator" content="Hugo 0.55.5" /><link rel="shortcut icon" href=https://img.alicdn.com/imgextra/i3/O1CN019CRHyf1qyMghfS3id_!!6000000005564-2-tps-211-128.png type="image/png">
+
+<link href="https://unpkg.com/purecss@1.0.0/build/base-min.css" rel="stylesheet">
+
+
+
+<link href="/sofastack.tech/css/main.css" rel="stylesheet">
+<link href="/sofastack.tech/css/zoom-image.css" rel="stylesheet">
+
+<script src="/sofastack.tech/js/iconfont.js"></script>
+<script src="/sofastack.tech/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>window.SITE_LANGUAGE = "zh"</script>
+<script src="/sofastack.tech/js/app.js"></script>
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142131411-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</head>
+
+<body>
+	<header class="ss-header">
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="logo-link" href="/sofastack.tech/">
+				<img class="logo" src="/sofastack.tech/img/logo-2024.png">
+			</a>
+			<div class="-show-mobile">
+				<a id="mobile-menu-icon">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-menu"></use>
+					</svg>
+				</a>
+				<nav id="mobile-menu">
+						<div id="js-menu-search-mobile" class="navbar-search-mobile">
+							<input class="input" placeholder="请输入要搜索的关键词">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#icon-search"></use>
+							</svg>
+						</div>
+					
+          
+            <a
+              class=""
+              href="/sofastack.tech/projects/">
+              <span>
+                项目
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/guides/">
+              <span>
+                指南
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/blog/">
+              <span>
+                博客
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/activities/">
+              <span>
+                活动
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/community/">
+              <span>
+                社区
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+            <a
+              class=""
+              href="/sofastack.tech/awesome/">
+              <span>
+                Awesome SOFA
+              </span>
+              <svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"></use></svg>
+            </a>
+					
+					
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-menu -hidden-mobile">
+			<div class="navbar-start">
+				
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/projects/">项目</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/guides/">指南</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/blog/">博客</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/activities/">活动</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/community/">社区</a>
+				
+					<a class="navbar-item "
+						href="/sofastack.tech/awesome/">Awesome SOFA</a>
+				
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div id="js-menu-search" class="navbar-search">
+						<input class="input" placeholder="请输入要搜索的关键词">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-search"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="navbar-item">
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+<div class="ss-layout-container">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		开源之夏经验分享｜MOSN 社区韦鑫：做自己认为很酷的事
+	</h1>
+	<div class="meta">
+		
+			2024-12-10 ·
+			
+				<a href="https://github.com/sofastack"></a> ·
+			
+			<span class="tags">
+				
+					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
+				
+			</span>
+		
+	</div>
+</div>
+		<article class="typo">
+  <h1 id="开源之夏经验分享-mosn-社区韦鑫-做自己认为很酷的事">开源之夏经验分享｜MOSN 社区韦鑫：做自己认为很酷的事</h1>
+
+<p><strong>文|韦鑫</strong>
+计算机科学与技术学院
+HTNN 社区贡献者</p>
+
+<p>就读于南京航空航天大学，是计算机科学与技术学院研三的同学，研究方向是分布式系统。</p>
+
+<p><strong>本文 3756​ 字，预计阅读 7 分钟 ​</strong>
+今天 SOFAStack 邀请到了开源之夏 2024 MOSN 社区的中选学生韦鑫同学！在本项目中，他负责将 Sentinel-golang 流量控制能力集成进 MoE <em>（MOSN on Envoy）</em> 态。希望他分享的这段经历，能让更多人了解到 MOSN 开源社区，感受开源的魅力～</p>
+
+<p>​<strong>项目链接</strong>​：<a href="*https://github.com/mosn/htnn/tree/main/plugins/plugins/sentinel*">https://github.com/mosn/htnn/tree/main/plugins/plugins/sentinel</a></p>
+
+<h2 id="项目信息">项目信息</h2>
+
+<p>​<strong>项目名称</strong>​：将 Sentinel-golang 流量控制能力集成进 MoE*​（MOSN on Envoy）​*生态</p>
+
+<p>​<strong>项目导师</strong>​：付建豪</p>
+
+<p>​<strong>项目描述</strong>​：MoE*​（MOSN on Envoy）​*融合了 MOSN 和 Envoy 生态，打造高性能、高扩展性的数据平面，MOSN 技术团队已经把 MoE 技术贡献到 Envoy 上游，可直接使用 Envoy 最新版本来开发。通过 MoE 技术可以使用全功能的 Golang 编程语言来编写 Envoy 插件，极大提高了业务插件的开发效率。</p>
+
+<p>本次使用 MoE 技术把 Sentinel-golang 项目和 Envoy 相融合，把 Sentinel 生态引入到 MoE 生态中。</p>
+
+<h2 id="项目实现思路">项目实现思路</h2>
+
+<h3 id="概述">概述</h3>
+
+<p>在完成该项目前，HTNN 社区已经提供了<code>limit_count_redis</code> ，<code>limit_req</code> ，<code>local_ratelimit</code> 等限流插件。通过引入 Sentinel-golang，我们可以为用户提供更多的限流选择、提升限流能力。</p>
+
+<h3 id="方案">方案</h3>
+
+<p>当前在 Sentinel-golang 中，拥有以下流量治理能力：</p>
+
+<ul>
+<li>流量控制​*（Flow）*​：通过配置具体规则，对请求流量进行限制；</li>
+<li>热点参数流控​*（HotSpot）*​：统计某些热点数据中访问频次最高的 Top K 数据，并对其访问进行限制；</li>
+<li>熔断降级​*（CircuitBreaker）*​：当系统异常情况发生时，可以自动熔断系统，保证系统的可用性；</li>
+<li>并发隔离控制​*（Isolation）*​：控制对资源访问的最大并发数，避免因为资源的异常导致协程耗尽；</li>
+<li>系统自适应保护​*（System）*​：在系统负载高峰期间，可以限制请求流量，避免系统资源耗尽。</li>
+</ul>
+
+<p>然而经过理论分析与实践得出，以下流控治理能力在本项目插件中并不适用：</p>
+
+<ul>
+<li>Flow 中的基于内存使用水位的流控能力 <em>（Low/HighMemUsageThreshold、MemLow/HighWaterMarkBytes)</em> ，因为它获取到的水位是流控插件，也就是网关的内存信息，并不是后端服务的内存使用情况，因此不符合预期；</li>
+<li>Isolation，插件的 Filter 生命周期为一次请求-响应​ *（如 DecodeHeaders、Onlog 阶段均为单一协程）*，不需考虑多协程 *（goroutine）​*的情况，因此不符合预期；</li>
+<li>System，与 Flow 的内存水位一样，它获取到的系统负载信息是网关的，而不是后端服务的，因此也不符合预期。</li>
+</ul>
+
+<p>因此最终项目实践裁切掉了一部分插件无需实现的 Sentinel-golang 的流控能力，分别实现了 Flow *（部分）*、HotSpot、CircuitBreaker 流控能力。</p>
+
+<h3 id="插件处理流程">插件处理流程</h3>
+
+<h4 id="一次请求-响应流程">一次请求-响应流程</h4>
+
+<p><img src="https://img.alicdn.com/imgextra/i4/O1CN01jGAXCH1hZKYZjoYIk_!!6000000004291-0-tps-1080-1478.jpg" alt="图片" /></p>
+
+<p>可分为以下 3 种规则分别描述该流程：</p>
+
+<ul>
+<li><strong>FLow 规则</strong>
+DecodeHeaders：</li>
+</ul>
+
+<ol>
+<li>首先从请求头部、请求参数获取流控资源名称 res</li>
+<li>以 res 作为入参调用 Sentinel API Entry，得到 entry 和 blockError</li>
+<li>若 blockError 不为空则触发流控规则，根据用户配置的响应信息进行返回</li>
+<li>若 blockError 为空则请求放行，并将 entry 记录到 Filter 上下文中</li>
+</ol>
+
+<p>Onlog：</p>
+
+<ol>
+<li>从 Filter 上下文中取出 entry</li>
+<li>调用 entry.Exit() 完成本次流控记录</li>
+</ol>
+
+<ul>
+<li><strong>HotSpot 规则</strong>
+DecodeHeaders：</li>
+</ul>
+
+<ol>
+<li>首先从请求头部、请求参数获取流控资源名称 res</li>
+<li>以 res、用户配置的 params、attachments 作为入参调用 Sentinel API Entry，得到 entry 和 blockError</li>
+<li>若 blockError 不为空则触发流控规则，根据用户配置的响应信息进行返回</li>
+<li>若 blockError 为空则请求放行，并将 entry 记录到 Filter 上下文中</li>
+</ol>
+
+<p>Onlog：</p>
+
+<ol>
+<li>从 Filter 上下文中取出 entry</li>
+<li>调用 entry.Exit() 完成本次流控记录</li>
+</ol>
+
+<ul>
+<li><strong>CircuitBreaker 规则</strong>
+DecodeHeaders：</li>
+</ul>
+
+<ol>
+<li>首先从请求头部、请求参数获取流控资源名称 res</li>
+<li>以 res 作为入参调用 Sentinel API Entry，得到 entry 和 blockError</li>
+<li>若 blockError 不为空则触发流控规则，根据用户配置的响应信息进行返回</li>
+<li>若 blockError 为空则请求放行，并将 entry 记录到 Filter 上下文中</li>
+</ol>
+
+<p>Onlog：</p>
+
+<ol>
+<li>从 Filter 上下文中取出 entry</li>
+<li>获取后端返回的响应状态码，并与用户配置的失败状态码列表进行匹配</li>
+<li>若匹配上，则以 entry 为入参调用 Sentinel API TraceError 统计错误<em>（当达到用户配置的错误数量时会在下一次调用 Sentinel API Entry 时触发流控，即熔断） ​</em></li>
+<li>调用 entry.Exit() 完成本次流控记录</li>
+</ol>
+
+<h4 id="插件开发过程">插件开发过程</h4>
+
+<p>接下来阐述 Sentinel 插件的开发过程，同时可以给对 HTNN 插件感兴趣的同学提供开发参考路径。</p>
+
+<p>需要添加/修改的文件及目录结构如下：</p>
+
+<pre><code class="language-bash">├── maintainer
+  │   └── feature_maturity_level.yaml # 插件成熟等级
+  ├── plugins
+  │   ├── go.mod
+  │   ├── go.sum
+  │   ├── plugins.go # 引入插件
+  │   ├── plugins
+  │   │   └── sentinel # 插件主体
+  │   │       ├── config.go
+  │   │       ├── config_test.go
+  │   │       ├── filter.go
+  │   │       ├── filter_test.go
+  │   │       └── ...
+  │   └── tests
+  │       └── integration # 集成测试
+  │           ├── sentinel_route.yaml
+  │           └── sentinel_test.go
+  ├── site
+  │   └── content # 中英文档
+  │       ├── en
+  │       │   └── docs
+  │       │       └── reference
+  │       │           └── plugins
+  │       │               └── sentinel.md
+  │       └── zh-hans
+  │           └── docs
+  │               └── reference
+  │                   └── plugins
+  │                       └── sentinel.md
+  └── types
+      └── plugins 
+          ├── plugins.go # 引入插件
+          └──  sentinel  # 插件配置结构
+              ├── config.go
+              ├── config.pb.go
+              ├── config.pb.validate.go
+              └── config.proto
+</code></pre>
+
+<p><strong>插件配置结构</strong>：</p>
+
+<ol>
+<li>进入 <code>&lt;span&gt;types/plugins&lt;/span&gt;</code> 目录，创建插件配置结构目录 <code>&lt;span&gt;sentinel&lt;/span&gt;</code></li>
+<li>在 <code>&lt;span&gt;sentinel/config.proto&lt;/span&gt;</code> 中定义插件模型，即配置结构</li>
+<li>通过根目录的 <code>&lt;span&gt;Makefile&lt;/span&gt;</code>，执行 <code>&lt;span&gt;make gen-proto&lt;/span&gt;</code> 生成插件的 Go 配置结构</li>
+<li>在 <code>&lt;span&gt;sentinel/config.go&lt;/span&gt;</code> 定义插件名称、类型、执行顺序等，并编写 Validate 作为配置校验逻辑</li>
+<li>在 <code>&lt;span&gt;plugins.go&lt;/span&gt;</code> 中添加配置结构 package</li>
+</ol>
+
+<p><strong>插件开发及单元测试：</strong></p>
+
+<ol>
+<li>进入 plugins/plugins 目录，创建插件目录 sentinel</li>
+<li>在 <code>&lt;span&gt;sentinel/config.go&lt;/span&gt;</code> 中编写插件配置解析逻辑</li>
+<li>在 <code>&lt;span&gt;sentinel/filter.go&lt;/span&gt;</code> 中编写插件核心工作逻辑</li>
+<li>在 <code>&lt;span&gt;sentinel/config_test.go&lt;/span&gt;</code> 中编写配置解析的单元测试</li>
+<li>在 <code>&lt;span&gt;sentinel/filter_test.go&lt;/span&gt;</code> 中编写插件工作所依赖方法的单元测试</li>
+</ol>
+
+<p><strong>集成测试：</strong></p>
+
+<ol>
+<li>返回 <code>&lt;span&gt;plugins&lt;/span&gt;</code> 目录</li>
+<li>在 <code>&lt;span&gt;plugins.go&lt;/span&gt;</code> 中添加插件 package</li>
+<li>在 <code>&lt;span&gt;tests/integration/sentinel_test.go&lt;/span&gt;</code> 中编写集成测试</li>
+<li>通过当前目录下的 <code>&lt;span&gt;Makefile&lt;/span&gt;</code>，执行 <code>&lt;span&gt;make bulid_test_so&lt;/span&gt;</code> 得到编译产物，接着进行集成测试，如GreenOpstest -v  ./tests/integration/sentinel_test.go ./tests/integration/suite_test.go</li>
+</ol>
+
+<p><strong>插件文档：</strong></p>
+
+<ol>
+<li>进入 <code>&lt;span&gt;site&lt;/span&gt;</code> 目录</li>
+<li>在如下位置编写中文文档</li>
+</ol>
+
+<p><code>&lt;span&gt;content/zh-hans/docs/reference/plugins/sentinel.md&lt;/span&gt;</code> 中</p>
+
+<ol>
+<li>使用仓库提供的翻译工具得到 <code>&lt;span&gt;prompt：go run cmd/translator/main.go -f .content/zh-hans/docs/reference/plugins/sentinel.md --from zh-Hans | pbcopy&lt;/span&gt;</code></li>
+<li>将粘贴板内容提交到 LLM，如 ChatGPT 中得到英文文档，保存到</li>
+</ol>
+
+<p><code>&lt;span&gt;content/en/docs/reference/plugins/sentinel.md&lt;/span&gt;</code> 中</p>
+
+<p>其他：</p>
+
+<ol>
+<li>在 <code>maintainer/feature_maturity_level.yaml</code> 中添加插件的成熟级别<em>（feature maturity level）  ​</em></li>
+<li>通过根目录的 <code>&lt;span&gt;Makefile&lt;/span&gt;</code>， 执行 make lint，make fmt 等命令做代码提交前的检查</li>
+</ol>
+
+<h3 id="参考">参考</h3>
+
+<ul>
+<li>如何二次开发 HTNN：<a href="*https://github.com/mosn/htnn/blob/main/site/content/zh-hans/docs/developer-guide/get_involved.md*"><em>https://github.com/mosn/htnn/blob/main/site/content/zh-hans/docs/developer-guide/get_involved.md</em></a></li>
+<li>插件开发：<a href="*https://github.com/mosn/htnn/blob/main/site/content/zh-hans/docs/developer-guide/plugin_development.md*"><em>https://github.com/mosn/htnn/blob/main/site/content/zh-hans/docs/developer-guide/plugin_development.md</em></a></li>
+<li>插件集成测试框架：<a href="*https://github.com/mosn/htnn/blob/main/site/content/zh-hans/docs/developer-guide/plugin_integration_test_framework.md*"><em>https://github.com/mosn/htnn/blob/main/site/content/zh-hans/docs/developer-guide/plugin_integration_test_framework.md</em></a></li>
+</ul>
+
+<h2 id="开源之夏个人随访">开源之夏个人随访</h2>
+
+<h3 id="自我介绍">自我介绍</h3>
+
+<p>大家好，我是​<strong>韦鑫</strong>​，目前就读于南京航空航天大学，是计算机科学与技术学院研三的学生，研究方向是分布式系统。</p>
+
+<h3 id="参与该项目的原因">参与该项目的原因​</h3>
+
+<p>在本科期间，我就想要尝试参与开源活动。我认为这是一件很酷、很有趣的事情，但总会认为自己知识储备不足选择望而却步。然而，想到学生时代仍有不过这短短几年，<strong>​与其自我矛盾、踌躇不前，不如先行动起来再说。​</strong>因此在 2023 年，我根据自己的研究方向，第一次参与开源之夏的项目。事实证明，<strong>技术不足并不是妨碍参与开源活动的关键，缺乏热情才是。</strong>在那里，我认识了非常有趣的社区同学，了解了相关行业现状，并在实践中学习，在学习中实践，这种相互交流讨论、学以致用的过程让我很有成就感。</p>
+
+<p>在科研工作中，我了解并学习了需要使用到的 Kubernetes、Istio，进而了解到了 Envoy 及 MOSN。因此在本次开源之夏中，我选择了与自身匹配度较高的、隶属于 MOSN 社区下的 HTNN 子项目。HTNN 社区虽然正处于前期快速迭代阶段，但是综合社区文档代码等方面来看，对我而言仍然是一个非常难得的学习机会。</p>
+
+<h3 id="如何克服项目过程中的困难与挑战">如何克服项目过程中的困难与挑战</h3>
+
+<p>在代码开发过程中碰到问题和挑战是再寻常不过的事情，​<strong>战胜困难的最好方法就是直面困难</strong>​。通常我会先尽自己所能去寻找问题的答案，尽管这样会花费大量的时间，但也会在这个过程中能够收获许多。面临实在无法解决或拿捏不准的问题时，我会将自己的探索过程及想法同步到社区，与社区同学和导师讨论交流、集思广益。</p>
+
+<p>在进行此次项目的过程中，我与社区同学及导师讨论了许多问题。令我印象最深的一个问题是 Sentinel Entry 的 Exit 时机问题。Sentinle Entry 的 Exit 时机不当可能会导致资源泄露、指标统计不准确等问题。最初我选择在 EncodeHeaders 阶段进行 Exit 操作，考量是 CircuitBreaker 熔断策略需要在响应阶段根据响应状态码统计指标。但在与社区同学讨论后得出结论是：客户端可能会在 EncodeHeaders 阶段之前中断请求，此时无法执行其中的 Exit，从而出现上述问题。因此最终决定在客户端中断请求也会被触发的 OnLog 阶段进行 Exit 操作，保证上述边界情况出现时依然能正常释放资源、统计指标。</p>
+
+<p>将代码逻辑从 EncodeHeaders 迁移至 OnLog 衍生出了无法获取到响应头部的问题。这是因为在 Envoy 1.31 中还不支持在 OnLog 中获取头部信息，需要额外执行头部获取操作来缓存该项信息，我也因此提交另外一个 PR。</p>
+
+<h3 id="你对-htnn-的印象">你对 HTNN 的印象</h3>
+
+<p>MOSN 社区的 HTNN 是个非常有趣的项目，是一款基于云原生技术的 L3 &amp; L4 &amp; L7 Cross-Layer 网络全局解决方案产品。我曾有幸参与过 Envoy WASM 的插件开发、维护工作，但受限于 WASM 的成熟度，Golang 生成 WASM 会存在诸多的限制，因此仅仅是能够使用全功能的 Golang 进行插件开发这一点就足以让我眼前一亮，相信这一能力在今后也能够吸引到更多 Gopher，另外 HTNN 还有其他更多宝藏等着我们去发掘。</p>
+
+<p><strong>​麻雀虽小，五脏俱全。​</strong>作为早期快速迭代的开源项目，HTNN 有着相当完备的说明文档、国际化、单元测试、集成测试框架和 CI/CD，同时代码也十分工整优雅。当有问题发 Issue 时，能够很快的得到社区同学的响应和帮助；对于 PR，相关同学也会非常认真负责地进行 Code Review，并给出相当有见解的修改建议。因此我认为这对想要入门学习云原生、服务网格、网关等相关技术的同学而言是一个非常棒且值得考虑的社区。</p>
+
+<p><strong>总而言之，HTNN 是一个开放、热情、有活力且极具有强技术力的开源社区。</strong></p>
+
+<h3 id="有哪些收获">有哪些收获</h3>
+
+<p>在此次项目中，我学会了如何开发 HTNN 插件。它基于 MoE 能力，即 Envoy Golang 扩展机制，使我在服务网格、云原生网关方面的拼图更加完整，这对我今后的开源活动、工作提供了十分宝贵的实践经验。</p>
+
+<p>同时，社区完备的自动化能力让我深刻地意识到​<strong>严格的单元测试、集成测试、CI/CD 对于整个项目的重要性</strong>​。它能够很好地规范代码、减少不必要的错误、提升代码质量、减轻 Reviewer 的心智负担，这也是我今后需要重点关注和学习的方向。</p>
+
+<h3 id="寄语">寄语</h3>
+
+<p>或许我们曾长久仰望，那些看似遥不可及的璀璨星辰；却未曾察觉，在默默耕耘的岁月里，自己正悄然蜕变成那颗最耀眼的星。<strong>相信自己，勇敢地去做自己认为很酷的事！</strong></p>
+
+</article>
+
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    
+      
+    
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
+
+
+		<div class="-show-mobile">
+			
+
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/koupleless-enables-renlijia-to-achieve-centralized-deployment-of-distributed-rdquickly-and-cost-effectivelyindex.md/">
+		<span class="text">上一篇: </span>
+		<span class="text">社区文章｜Koupleless 助力「人力家」实现分布式研发集中式部署，又快又省！</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/open-source-summer-experience-sharing-layotto-community-ho-ning-cheng-try-and-you-will-be-rewarded/">
+		<span class="text">下一篇: </span>
+		<span class="text">开源之夏经验分享｜Layotto 社区 郑浩宁：尝试，就会有收获！</span>
+	</a>
+</nav>
+
+		</div>
+	</main>
+
+	<aside class="ss-layout-aside">
+		
+		
+
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/koupleless-enables-renlijia-to-achieve-centralized-deployment-of-distributed-rdquickly-and-cost-effectivelyindex.md/">社区文章｜Koupleless 助力「人力家」实现分布式研发集中式部署，又快又省！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/tuya-smart-implements-merged-deployment-with-koupleless-to-achieve-cost-saving-and-profit-increasing-in-cloud-services/">涂鸦智能落地 Koupleless 合并部署，实现云服务降本增效</a></li>
+		
+			<li><a href="/sofastack.tech/activities/sofa-6th-anniversary/">SOFA 六周年，Hello SOFA World</a></li>
+		
+			<li><a href="/sofastack.tech/blog/explore-the-workflow-of-mosn-from-an-rpc-request/">从一次 RPC 请求，探索 MOSN 的工作流程</a></li>
+		
+			<li><a href="/sofastack.tech/blog/koupleless-brings-split-plugin-to-help-you-to-improve-the-efficiency-of-collaborative-development/">单体应用协作开发太难？Koupleless 带来拆分插件，帮你抽丝剥茧提高协作开发效率！</a></li>
+		
+	</ul>
+	
+</div>
+
+		<div class="ss-aside-tags ss-card">
+	<h2 class="card-title">
+		标签
+		<span class="card-extra"></span>
+	</h2>
+	<ul class="tag-list">
+		
+			<li class="tag"><a href="/sofastack.tech/tags/1024/">1024</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/api-gateway/">API Gateway </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cafedeployment/">CafeDeployment</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cloud-native/">Cloud Native</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/cncf/">CNCF</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/db-mesh/">DB Mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/dragonfly/">Dragonfly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/elasticdl/">ElasticDL</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/3/">HTTP/3</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/http/quic/">HTTP/QUIC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-container/">Kata Container</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kata-containers/">Kata Containers</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/knative/">Knative</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubecon/">KubeCon</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/kubernetes/">Kubernetes</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/meetup/">Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/mosn/">MOSN</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/nydus/">Nydus</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/occlum/">Occlum</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/rpc-%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E8%80%83%E5%92%8C%E9%87%8F/">RPC 框架设计的考和量</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/seata/">seata</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverless/">Serverless</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/serverlesstask/">ServerlessTask</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh/">Service mesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-meetup/">Service Mesh Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-virtual-meetup/">Service Mesh Virtual Meetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-webinar/">Service Mesh Webinar</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/service-mesh-%E8%90%BD%E5%9C%B0%E5%AE%9E%E8%B7%B5/">Service Mesh 落地实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/">Sidecar 容器</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa/">SOFA</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofa-weekly/">SOFA Weekly</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaacts/">SOFAActs</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaark/">SOFAArk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaarklab/">SOFAArkLab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofabolt/">SOFABolt</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaboot/">SOFABoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofachannel/">SOFAChannel</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofadashboard/">SOFADashboard</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaenclave/">SOFAEnclave</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft/">SOFAJRaft</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofajraft-%E7%89%B9%E6%80%A7%E8%A7%A3%E6%9E%90/">SOFAJRaft 特性解析</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalab/">SOFALab</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofalookout/">SOFALookout</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofameetup/">SOFAMeetup</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofamesh/">SOFAMesh</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofaregistry/">SOFARegistry</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofarpc/">SOFARPC</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack/">SOFAStack</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastack-%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">SOFAStack 开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofastak/">SOFAStak</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatalk/">SOFATalk</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sofatracer/">SOFATracer</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/springboot/">SpringBoot</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/sqlflow/">SQLFlow</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/summer-2021/">Summer 2021</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/workshop/">Workshop</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/zsearch/">ZSearch</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/">云原生</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/">任务调度</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">你的开源入门指南</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84/">分布式架构</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaark-%E6%BA%90%E7%A0%81/">剖析 | SOFAArk 源码 </a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofabolt-%E6%A1%86%E6%9E%B6/">剖析 | SOFABolt 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaboot-%E6%A1%86%E6%9E%B6/">剖析 | SOFABoot 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">剖析 | SOFAJRaft 实现原理</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofaregistry-%E6%A1%86%E6%9E%B6/">剖析 | SOFARegistry 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofarpc-%E6%A1%86%E6%9E%B6/">剖析 | SOFARPC 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofatracer-%E6%A1%86%E6%9E%B6/">剖析 | SOFATracer 框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%AE%9E%E8%B7%B5/">实践</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90/">开源</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%B9%8B%E5%A4%8F/">开源之夏</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E4%BA%94%E5%91%A8%E5%B9%B4/">开源五周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%85%AD%E5%91%A8%E5%B9%B4/">开源六周年</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%BC%94%E8%BF%9B%E4%B8%8E%E6%9C%AA%E6%9D%A5/">开源容器镜像加速服务的演进与未来</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9/">弹性伸缩</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%96%87%E4%BB%B6%E5%92%8C%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E7%B3%BB%E7%BB%9F/">文件和镜像加速系统</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E7%9B%91%E6%8E%A7/">智能监控</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/">智能运维</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E5%88%9B%E4%BC%9A/">源创会</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">“源码解析”</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E7%B1%BB%E9%9A%94%E7%A6%BB%E6%A1%86%E6%9E%B6/">类隔离框架</a></li>
+		
+			<li class="tag"><a href="/sofastack.tech/tags/%E9%95%9C%E5%83%8F/">镜像</a></li>
+		
+	</ul>
+</div>
+	</aside>
+</div>
+
+
+
+	
+
+
+<footer class="ss-footer">
+	<div class="container">
+		<div class="links">
+			
+				<div class="cate">
+					<h2 class="cate-title">资源</h2>
+					
+						<a class="link" href="https://github.com/sofastack">Github</a>
+					
+						<a class="link" href="https://gitee.com/sofastack/">Gitee</a>
+					
+						<a class="link" href="https://github.com/sofastack-guides">示例</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">社交媒体</h2>
+					
+						<a class="link" href="https://zhuanlan.zhihu.com/sofastack">知乎专栏</a>
+					
+						<a class="link" href="https://weibo.com/sofastack">新浪微博</a>
+					
+						<a class="link" href="https://twitter.com/sofastack_io">Twitter</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">参与进来</h2>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/issues/new">反馈</a>
+					
+						<a class="link" href="https://github.com/sofastack/community">社区</a>
+					
+						<a class="link" href="https://github.com/sofastack/sofastack.tech/wiki">Wiki</a>
+					
+						<a class="link" href="mailto:sofa@alipay.cloud.com">Email</a>
+					
+						<a class="link" href="/hr/">加入我们</a>
+					
+				</div>
+			
+				<div class="cate">
+					<h2 class="cate-title">蚂蚁集团开源项目</h2>
+					
+						<a class="link" href="https://ant.design/">Ant Design</a>
+					
+						<a class="link" href="https://eggjs.org/">Egg </a>
+					
+						<a class="link" href="https://sqlflow.org">SQLFlow</a>
+					
+						<a class="link" href="https://tech.antfin.com/open-source">更多</a>
+					
+				</div>
+			
+		</div>
+		<div class="qrcode">
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_video_2024.jpg" />
+					<p class="qrcode-desc">微信视频号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/qrcode_1_2024.jpg" />
+					<p class="qrcode-desc">微信公众号</p>
+				</div>
+			
+				<div>
+					<img class="qrcode-img" src="/sofastack.tech/img/qrcode/dingtalk_qrcode_20241118.png" />
+					<p class="qrcode-desc">钉钉群</p>
+				</div>
+			
+		</div>
+	</div>
+	<div class="copyright">
+		<p>
+			© 2018 - 2022  The SOFAStack Authors
+			<a href="http://beian.miit.gov.cn/">浙 ICP 备 16045294 号-3</a>
+		</p>
+	</div>
+</footer>
+
+</body>
+
+</html>
