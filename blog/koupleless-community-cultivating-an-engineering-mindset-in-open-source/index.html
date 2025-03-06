@@ -3,10 +3,7 @@
 
 <head>
 	<title>
-	
-	
-		博客 · SOFAStack
-	
+	开源之夏经验分享｜Koupleless 社区黄兴抗：在开源中培养工程思维 · SOFAStack
 </title>
 	<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -90,7 +87,7 @@ if (!doNotTrack) {
             </a>
 					
             <a
-              class=" -active"
+              class=""
               href="/sofastack.tech/blog/">
               <span>
                 博客
@@ -126,13 +123,6 @@ if (!doNotTrack) {
             </a>
 					
 					
-            
-              <a href="/sofastack.tech/en/blog/">
-                <span>English</span>
-                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"></use></svg>
-              </a>
-						
-					
 				</nav>
 			</div>
 		</div>
@@ -147,7 +137,7 @@ if (!doNotTrack) {
 					<a class="navbar-item "
 						href="/sofastack.tech/guides/">指南</a>
 				
-					<a class="navbar-item  -active"
+					<a class="navbar-item "
 						href="/sofastack.tech/blog/">博客</a>
 				
 					<a class="navbar-item "
@@ -171,10 +161,6 @@ if (!doNotTrack) {
 				</div>
 				<div class="navbar-item">
 					
-						
-							<a class="translation" href="/sofastack.tech/en/blog/">En</a>
-						
-					
 				</div>
 			</div>
 		</div>
@@ -187,8 +173,6 @@ if (!doNotTrack) {
 	
 
 	
-		<div class="ss-title">博客</div>
-	
 
 	
 
@@ -199,321 +183,241 @@ if (!doNotTrack) {
 
 
 	
-
-<div class="home-background -no-max-width">
-	<img src="/sofastack.tech/img/cover-light.jpg" />
-</div>
 
 <div class="ss-layout-container">
-	<main class="ss-layout-main">
+	<main class="ss-layout-main -card">
+		<div class="ss-meta">
+	<h1 class="title">
+		开源之夏经验分享｜Koupleless 社区黄兴抗：在开源中培养工程思维
+	</h1>
+	<div class="meta">
 		
-			<article class="ss-summary ss-card">
-	
-	
-		
+			2024-12-31 ·
 			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*ddoFRafqrvkAAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/ospp-exprience-sharing-keep-enthusiastic-and-all-in/'> 开源之夏经验分享｜Layotto 社区 陈亦昺：保持热情、全力以赴！</a></h2>
-		<div class="meta">
-			2023-11-21 · 
-		</div>
-		<div class="summary">
+				<a href="https://github.com/sofastack"></a> ·
 			
-				开源之夏经验分享｜Layotto 社区 陈亦昺：保持热情、全力以赴！
-			
-		</div>
-		<div class="tags">
-			
+			<span class="tags">
 				
 					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
 				
-			
-		</div>
+			</span>
+		
 	</div>
+</div>
+		<article class="typo">
+  <h1 id="开源之夏经验分享-koupleless-社区黄兴抗-在开源中培养工程思维">开源之夏经验分享｜Koupleless 社区黄兴抗：在开源中培养工程思维</h1>
+
+<p><strong>文|黄兴抗</strong>
+电子信息工程专业
+Koupleless 社区贡献者</p>
+
+<p>就读于南昌师范学院，电子信息工程专业的大三学生。</p>
+
+<p><strong>本文 2634 字，预计阅读 7​ 分钟​</strong></p>
+
+<p>今天 SOFAStack 邀请到了开源之夏 2024 Koupleless 社区的中选学生<strong>黄兴抗</strong>同学！在本项目中，他参与完成了​<strong>存量应用自动改造成模块</strong>​。希望他分享的这段经历，能让更多人了解到 Koupleless 开源社区，感受开源的魅力～</p>
+
+<p>​<strong>项目链接</strong>​：<a href="https://summer-ospp.ac.cn/org/prodetail/2495a0376?lang=zh&amp;list=pro">https://summer-ospp.ac.cn/org/prodetail/2495a0376?lang=zh&amp;list=pro</a></p>
+
+<h2 id="项目信息">项目信息</h2>
+
+<p>​<strong>项目名称</strong>​：存量应用自动改造成模块</p>
+
+<p>​<strong>项目导师</strong>​：赵真灵</p>
+
+<p>​<strong>项目背景</strong>​：在参与 Koupleless 社区项目之前，我就在社区文章中了解到，当前企业在向云原生转型的过程中往往面临着一个重要痛点——​<strong>存量应用改造成本高</strong>​。特别是对于大量已经运行的 SpringBoot/SOFABoot 应用，「如何低成本地实现模块化改造」成为一个急需解决的问题。</p>
+
+<p>​<strong>项目目的</strong>​：本项目的核心目标是建设存量应用的自动化模块改造工具，使得应用能够实现传统应用向模块化的低成本升级，兼顾代码兼容性，同时支持独立启动与合并部署。</p>
+
+<h2 id="技术方案设计">技术方案设计</h2>
+
+<p><strong>​ 整体架构</strong></p>
+
+<p>为了实现目标，我们通过 <code>&lt;span&gt;arkctl&lt;/span&gt;</code> 命令行工具提供简单易用的入口，将核心逻辑封装在一个包含以下 4 个主要组件的 JAR 包中：</p>
+
+<ol>
+<li>Launcher—作为整个工具的统一入口</li>
+<li>ApplicationPropertiesModifier—用于扫描并修改应用配置</li>
+<li>SlimmingConfiguration—负责模块瘦身和依赖管理</li>
+<li>PomModifier—专门处理 Maven 配置相关的逻辑</li>
+</ol>
+
+<h3 id="关键技术点">​ 关键技术点</h3>
+
+<p><strong>1. 配置文件自动化处理</strong></p>
+
+<p>自动扫描和修改配置文件，支持多环境配置合并，确保改造过程安全、可回滚。</p>
+
+<p><strong>2. POM 文件智能改造​</strong></p>
+
+<p>自动添加必要的依赖和插件，实现版本兼容检测和适配。</p>
+
+<p><strong>3. 模块瘦身方案</strong></p>
+
+<p>实现依赖隔离，优化模块体积，保证改造后的应用在运行时的兼容性。</p>
+
+<h3 id="模块改造的核心要素">模块改造的核心要素​</h3>
+
+<p><strong>1. 模块打包插件的引入</strong>
+POM 文件中的关键配置如下：</p>
+
+<pre><code class="language-bash">&lt;plugin&gt;
+&lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+&lt;artifactId&gt;sofa-ark-maven-plugin&lt;/artifactId&gt;
+&lt;configuration&gt;
+&lt;skipArkExecutable&gt;true&lt;/skipArkExecutable&gt;
+&lt;declaredMode&gt;true&lt;/declaredMode&gt;
+&lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<blockquote>
+<p><strong>Q：为什么需要引入模块打包插件？</strong>
+传统的 Spring Boot 应用打包后是一个可独立运行的 JAR，sofa-ark-maven-plugin 能够将应用打包成符合模块规范的格式，模块化部署需要特殊的类加载隔离机制，通过 declaredMode 实现精确的类隔离，避免多模块间的冲突。</p>
+</blockquote>
+
+<p><strong>2. 模块瘦身的必要性</strong>
+模块瘦身配置示例：</p>
+
+<pre><code class="language-bash">slimming.excludeGroupIds=org.springframework,org.apache.commons
+slimming.excludeArtifactIds=commons-lang,commons-io
+</code></pre>
+
+<blockquote>
+<p><strong>Q：为什么需要模块瘦身？</strong>
+基座已包含大量公共依赖，模块无需重复打包。重复依赖会导致类加载冲突，模块体积过大影响启动性能和资源利用，通过瘦身可以优化模块大小，提高部署效率。</p>
+</blockquote>
+
+<p><strong>3. 配置文件改造的意义</strong>
+配置文件处理的核心逻辑如下：</p>
+
+<pre><code class="language-bash">public static void modifyApplicationProperties(String directoryPath, String applicationName) {
+Properties props = new Properties();
+props.setProperty(&quot;spring.application.name&quot;, applicationName);
+}
+</code></pre>
+
+<blockquote>
+<p><strong>Q：为什么需要改造配置文件？</strong>
+模块需要独立的应用名称和上下文路径，避免多模块间的配置冲突，确保模块能够在合并部署环境中正确运行，支持模块的动态部署和热更新。</p>
+</blockquote>
+
+<h2 id="项目实现思路">项目实现思路</h2>
+
+<p>针对传统的存量应用手动改造成模块的方式，对其相关步骤进行拆解和分析后，可感知到三个挑战：配置文件改造、依赖管理和构建适配。</p>
+
+<ul>
+<li><strong>配置文件改造​</strong>方面，挑战主要在于配置文件分散在不同目录、多环境*（如开发、测试、生产）*配置的复杂性，以及可能存在的配置冲突。为了解决这些问题，我们通过递归扫描定位所有配置文件，利用 Java Properties API 确保读写的安全性，同时采用追加写入的方式，避免覆盖已有配置内容。</li>
+<li><strong>依赖管理</strong>方面，我们需要处理模块与基座依赖的重复问题、版本冲突的风险，以及模块体积过大导致加载性能下降的情况。针对这些问题，我们设计了预设排除规则，精确分析依赖关系，添加必要依赖，并将有冲突的模块默认调整为经过测试的稳定版本。此外，我们在配置文件中增加了黑白名单规则，以实现模块瘦身。</li>
+<li><strong>构建适配</strong>方面，主要难点在于多模块项目复杂的依赖关系以及构建效率的优化。我们通过 <code>&lt;span&gt;declaredMode&lt;/span&gt;</code> 实现类加载隔离，统一管理版本号，并合理配置构建参数，优化插件的执行顺序，减少了不必要的构建步骤。</li>
+</ul>
+
+<h2 id="开源之夏个人随访">开源之夏个人随访</h2>
+
+<h3 id="自我介绍">​ 自我介绍</h3>
+
+<p>大家好，我是​<strong>黄兴抗</strong>​，目前就读于南昌师范学院电子信息工程专业，大三学生。虽然我的专业和计算机软件领域并不完全对口，但我对软件开发也颇感兴趣，因此也十分向往接触云原生技术、微服务架构等前沿技术领域。接触开源是大二下学期时开始，自那之后我就经常关注开源社区的技术动态。</p>
+
+<h3 id="参与该项目的原因">参与该项目的原因​</h3>
+
+<p>选择 SOFAStack 社区主要有基于以下几点的考虑：</p>
+
+<p><strong>1. 技术积累</strong></p>
+
+<p>SOFAStack 作为蚂蚁集团开源的金融级云原生架构，拥有丰富的企业级实践经验。社区项目涵盖了微服务、云原生等热门技术领域，与我未来想从事的就业发展方向高度契合。</p>
+
+<p><strong>2. 社区氛围</strong></p>
+
+<p>SOFAStack 社区有着完善的新人引导机制,仓库所有者也会为新人提供适合入手的 issue 作为开始。使得我在相关课题正式开发之前，就可以对其中的模块瘦身白名单实现的相关 issue 做一定贡献，让我能够切身感受到解决问题过程中完善的反馈机制。同时社区维护者积极响应，使我能够及时获得技术指导。</p>
+
+<p><strong>3. 项目价值</strong></p>
+
+<p>Koupleless 项目致力于解决企业实际痛点，具有明确的商业价值。自动化改造工具的开发也能够帮助我积累工程化经验。此外，项目涉及多个技术领域，有助于拓展技术视野。</p>
+
+<h3 id="如何克服项目过程中的困难与挑战">​如何克服项目过程中的困难与挑战</h3>
+
+<p>在开发过程中少不了各种大大小小的困难与挑战，其中不仅有代码实现部分，也有许多非代码要求的项目流程，如文档编写、工作流的设计、测试用例等工作。这些实际面向企业的开发流程规范，让尚未就业的我时常感到困惑和阻碍。在这一情况下，导师给到我很多指导和建议，如参考一些优秀的活跃社区，这让我收获颇多。</p>
+
+<p>在项目开发的初期阶段，导师会细心引导我深入了解项目的愿景、业务背景以及代码的整体架构，帮助我整体紧抓课题的方向，为后续开发奠定了坚实的基础。</p>
+
+<p>在实际开发过程中，每当我遇到困难或卡点时，导师总是耐心地为我提供具体的建议和可行的改进方向，帮助我快速找到解决问题的思路。此外，社区还定期举办双周例会，大家在会上同步开发进展、交流心得，针对开发中遇到的难题展开讨论，并集思广益寻找高效的解决方案。这种机制不仅增强了团队协作，也让我更好地在学习中成长。</p>
+
+<p>最让我印象深刻的挑战之一，是如何处理各种不同项目的<strong>配置文件差异</strong>和<strong>版本兼容性</strong>问题。针对前者，我采用了递归扫描的方式，并实现了智能合并策略，确保改造过程不会破坏原有配置。针对后者，面对不同版本的 Spring Boot 和 SOFABoot 应用，需要确保工具的通用性，最终通过实现版本检测和适配机制解决了这个问题。</p>
+
+<h3 id="有哪些收获">有哪些收获</h3>
+
+<p><strong>1. 技术积累</strong></p>
+
+<p>通过这个项目，我锻炼了编码能力，更重要的是学会了如何设计一个自动化工具来解决实际问题。尤其是在处理配置文件、管理依赖等方面积累了宝贵经验。</p>
+
+<p><strong>2. 开源精神</strong></p>
+
+<p>参与社区让我深刻体会到开源的协作精神。从社区成员的热情帮助到积极的反馈机制，都让我在解决问题的同时感受到了团队合作的力量。</p>
+
+<p><strong>3. 工程思维</strong></p>
+
+<p>项目让我开始从更全面的角度看问题：功能的实现只是第一步，如何保证工具的可维护性、扩展性，甚至用户体验，都是需要考虑的重要因素。</p>
+
 </article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
 
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*PH0mSqHeR_IAAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/open-source-together-seata-enters-apache-incubator/'> 携手开源，共同见证｜Seata 进入 Apache 孵化器</a></h2>
-		<div class="meta">
-			2023-11-16 · 
-		</div>
-		<div class="summary">
-			
-				携手开源，共同见证｜Seata 进入 Apache 孵化器
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*1pwwS6iXw38AAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/say-goodbye-to-complexity-easily-tackle-k8s-management-challenges-with-the-right-tools/'> 告别复杂性！用正确的工具轻松应对 K8s 管理挑战</a></h2>
-		<div class="meta">
-			2023-11-14 · 
-		</div>
-		<div class="summary">
-			
-				告别复杂性！用正确的工具轻松应对 K8s 管理挑战
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*ddoFRafqrvkAAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/ospp-experience-sharing-community-contribution-is-a-kind-of-influence/'> 开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力</a></h2>
-		<div class="meta">
-			2023-11-07 · 
-		</div>
-		<div class="summary">
-			
-				开源之夏经验分享｜Dragonfly 社区 李从旺：社区贡献也是一种影响力
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*J6s1RpIvMfwAAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/lunettes-makes-kubernetes-service-operations-easier/'> Lunettes - 让 Kubernetes 服务运营更简单</a></h2>
-		<div class="meta">
-			2023-10-31 · 
-		</div>
-		<div class="summary">
-			
-				Lunettes - 让 Kubernetes 服务运营更简单
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://gw.alipayobjects.com/mdn/sofastack/afts/img/A*NAHaRrQqGzAAAAAAAAAAAAAAARQnAQ" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-weekly-1006/'> SOFA Weekly｜SOFA 聊天室、issue 精选</a></h2>
-		<div class="meta">
-			2023-10-06 · 
-		</div>
-		<div class="summary">
-			
-				SOFA 聊天室、issue 精选
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofa-weekly/" rel="tag">#SOFA Weekly</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*byB8Q68O4HoAAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/vldb2023-fanglue-an-interactive-rule-development-system/'> VLDB2023｜方略：一个交互式的规则研发系统</a></h2>
-		<div class="meta">
-			2023-10-03 · 
-		</div>
-		<div class="summary">
-			
-				VLDB2023｜方略：一个交互式的规则研发系统
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://gw.alipayobjects.com/mdn/sofastack/afts/img/A*NAHaRrQqGzAAAAAAAAAAAAAAARQnAQ" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/sofa-weekly-20230929/'> SOFA Weekly｜SOFAServerless 社区会议回顾、社区本周贡献、SOFA 亚运特辑</a></h2>
-		<div class="meta">
-			2023-09-29 · 
-		</div>
-		<div class="summary">
-			
-				SOFAServerless 社区会议回顾、社区本周贡献、SOFA 亚运特辑
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofa-weekly/" rel="tag">#SOFA Weekly</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*iJG-TaOH9Z0AAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/cncf-foundation-announced-kcl-as-a-sandbox-project/'> 喜报！CNCF 基金会宣布 KCL 成为沙盒项目！</a></h2>
-		<div class="meta">
-			2023-09-26 · 
-		</div>
-		<div class="summary">
-			
-				喜报！CNCF 基金会宣布 KCL 成为沙盒项目！
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-			<article class="ss-summary ss-card">
-	
-	
-		
-			
-		
-	
-
-	<img class="cover" src="https://mdn.alipayobjects.com/huamei_soxoym/afts/img/A*tgriQrW1muUAAAAAAAAAAAAADrGAAQ/original" />
-	<div class="container">
-		<h2 class="title"><a href='/sofastack.tech/blog/dragonfly-based-kubernetes-multi-cluster-image-distribution-for-docker-environments/'> Docker 环境基于 Dragonfly 的 Kubernetes 多集群镜像分发实践</a></h2>
-		<div class="meta">
-			2023-09-19 · 
-		</div>
-		<div class="summary">
-			
-				Docker 环境基于 Dragonfly 的 Kubernetes 多集群镜像分发实践
-			
-		</div>
-		<div class="tags">
-			
-				
-					<a class="tag" href="/sofastack.tech/tags/sofastack/" rel="tag">#SOFAStack</a>
-				
-			
-		</div>
-	</div>
-</article>
-		
-
-		
+<script>
+  const article = document.querySelector('article.typo')
+  
+  const imgElements = article.querySelectorAll('img');
+  
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    
+    
+      
+    
+    img.setAttribute('referrerpolicy', 'no-referrer');
+  });
+</script>
 
 
-	<nav class="ss-pagination" 
-		data-total="51" 
-		data-current="2"
-	>
-		
-	</nav>
+		<div class="-show-mobile">
+			
 
+<nav class="ss-pagination-next">
+	<a class="link-prev" href="https://sofastack.github.io/sofastack.tech/blog/apache-seata-incubating-wins-open-source-project-of-the-year-on-the-2024-open-source-innovation-list/">
+		<span class="text">上一篇: </span>
+		<span class="text">喜报！Apache Seata (incubating) 荣获 2024 开源创新榜单“年度开源项目”！</span>
+	</a>
+	<a class="link-next" href="https://sofastack.github.io/sofastack.tech/blog/content/zh/blog/open-source-summer-experience-haring-mosn-community-weixin-doing-what-you-think-is-cool/">
+		<span class="text">下一篇: </span>
+		<span class="text">Koupleless 2024 年度报告 &amp; 2025 规划展望（图片版）</span>
+	</a>
+</nav>
+
+		</div>
 	</main>
 
 	<aside class="ss-layout-aside">
 		
 		
 
+
+<div class="ss-card">
+	<h2 class="card-title">
+		相关推荐
+	</h2>
+	
+	<ul class="ss-aside-related">
+		
+			<li><a href="/sofastack.tech/blog/apache-seata-incubating-wins-open-source-project-of-the-year-on-the-2024-open-source-innovation-list/">喜报！Apache Seata (incubating) 荣获 2024 开源创新榜单“年度开源项目”！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/koupleless-enables-renlijia-to-achieve-centralized-deployment-of-distributed-rdquickly-and-cost-effectivelyindex.md/">社区文章｜Koupleless 助力「人力家」实现分布式研发集中式部署，又快又省！</a></li>
+		
+			<li><a href="/sofastack.tech/blog/tuya-smart-implements-merged-deployment-with-koupleless-to-achieve-cost-saving-and-profit-increasing-in-cloud-services/">涂鸦智能落地 Koupleless 合并部署，实现云服务降本增效</a></li>
+		
+			<li><a href="/sofastack.tech/activities/sofa-6th-anniversary/">SOFA 六周年，Hello SOFA World</a></li>
+		
+			<li><a href="/sofastack.tech/blog/explore-the-workflow-of-mosn-from-an-rpc-request/">从一次 RPC 请求，探索 MOSN 的工作流程</a></li>
+		
+	</ul>
+	
+</div>
 
 		<div class="ss-aside-tags ss-card">
 	<h2 class="card-title">
