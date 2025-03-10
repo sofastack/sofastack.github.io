@@ -74,6 +74,15 @@
     </item>
     
     <item>
+      <title>社区文章｜HTNN 如何斟酌出更好的插件扩展机制</title>
+      <link>https://sofastack.github.io/sofastack.tech/blog/htnn-how-to-deliberate-on-a-better-plugin-extension-mechanism/</link>
+      <pubDate>Tue, 05 Nov 2024 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/blog/htnn-how-to-deliberate-on-a-better-plugin-extension-mechanism/</guid>
+      <description>HTNN 如何斟酌出更好的插件扩展机制 在设计插件扩展机制时，HTNN 关注两点： 扩展性尽可能强。扩展能力是插件的根基。如果一个插件机制一无所长、处处碰</description>
+    </item>
+    
+    <item>
       <title>社区文章｜Koupleless 助力「人力家」实现分布式研发集中式部署，又快又省！</title>
       <link>https://sofastack.github.io/sofastack.tech/blog/koupleless-enables-renlijia-to-achieve-centralized-deployment-of-distributed-rdquickly-and-cost-effectivelyindex.md/</link>
       <pubDate>Tue, 29 Oct 2024 15:00:00 +0800</pubDate>
