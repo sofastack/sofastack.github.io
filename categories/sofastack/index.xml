@@ -6,10 +6,19 @@
     <description>Recent content on SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 18 Feb 2025 15:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 22 Apr 2025 15:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/sofastack/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SOFAStack 开源七周年活动预告</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/sofastack-open-source-7th-anniversary-upcoming-events/</link>
+      <pubDate>Tue, 22 Apr 2025 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/sofastack-open-source-7th-anniversary-upcoming-events/</guid>
+      <description>SOFAStack 开源七周年活动预告 明天就是 SOFAStack 的七岁生日啦！ 自 2018 年 4 月 19 日起，七年的时间，无数 SOFAer 怀揣着对技术的热忱，用一行行代码、一次次贡献，让 SOFAStack 从一颗小小</description>
+    </item>
     
     <item>
       <title>Koupleless 2024 年度报告 &amp; 2025 规划展望</title>
