@@ -6,10 +6,19 @@
     <description>Recent content on SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 22 Apr 2025 15:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 03 Jun 2025 15:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/sofastack/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2025 开源之夏 | 快来 Pick 你心仪的项目，开启你的开源之旅吧！</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/2025-summer-of-open-source-pick-your-favorite-project-and-start-your-open-source-journey/</link>
+      <pubDate>Tue, 03 Jun 2025 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/2025-summer-of-open-source-pick-your-favorite-project-and-start-your-open-source-journey/</guid>
+      <description>2025 开源之夏 | 快来 Pick 你心仪的项目，开启你的开源之旅吧！ 🌊这个暑期，SOFAStack 和 MOSN 社区再度启航开源之夏，4 个项目任务已发布，就等热爱开源</description>
+    </item>
     
     <item>
       <title>SOFAStack 开源七周年「七年同行，依然热爱」</title>
