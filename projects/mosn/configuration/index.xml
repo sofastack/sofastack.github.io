@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SOFAStack</title>
+    <title>蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/projects/mosn/configuration/</link>
-    <description>Recent content on SOFAStack</description>
+    <description>Recent content on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nydus on SOFAStack</title>
+    <title>Nydus on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/nydus/</link>
-    <description>Recent content in Nydus on SOFAStack</description>
+    <description>Recent content in Nydus on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 03 Nov 2022 15:00:00 +0800</lastBuildDate>

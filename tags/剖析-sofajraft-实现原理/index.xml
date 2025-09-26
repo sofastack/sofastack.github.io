@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>剖析 | SOFAJRaft 实现原理 on SOFAStack</title>
+    <title>剖析 | SOFAJRaft 实现原理 on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/%E5%89%96%E6%9E%90-sofajraft-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</link>
-    <description>Recent content in 剖析 | SOFAJRaft 实现原理 on SOFAStack</description>
+    <description>Recent content in 剖析 | SOFAJRaft 实现原理 on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 23 Sep 2019 18:00:00 +0800</lastBuildDate>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SOFABolt on SOFAStack</title>
+    <title>SOFABolt on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/sofabolt/</link>
-    <description>Recent content in SOFABolt on SOFAStack</description>
+    <description>Recent content in SOFABolt on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 02 Jul 2020 21:00:00 +0800</lastBuildDate>

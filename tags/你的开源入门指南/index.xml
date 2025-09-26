@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>你的开源入门指南 on SOFAStack</title>
+    <title>你的开源入门指南 on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/%E4%BD%A0%E7%9A%84%E5%BC%80%E6%BA%90%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</link>
-    <description>Recent content in 你的开源入门指南 on SOFAStack</description>
+    <description>Recent content in 你的开源入门指南 on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 16 Feb 2023 15:00:00 +0800</lastBuildDate>

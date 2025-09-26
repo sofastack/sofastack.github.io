@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>云原生 on SOFAStack</title>
+    <title>云原生 on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/%E4%BA%91%E5%8E%9F%E7%94%9F/</link>
-    <description>Recent content in 云原生 on SOFAStack</description>
+    <description>Recent content in 云原生 on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 17 Feb 2021 16:00:00 +0800</lastBuildDate>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>HTTP/3 on SOFAStack</title>
+    <title>HTTP/3 on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/http/3/</link>
-    <description>Recent content in HTTP/3 on SOFAStack</description>
+    <description>Recent content in HTTP/3 on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 10 Nov 2021 15:00:00 +0800</lastBuildDate>

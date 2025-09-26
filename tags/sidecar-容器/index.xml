@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sidecar 容器 on SOFAStack</title>
+    <title>Sidecar 容器 on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/sidecar-%E5%AE%B9%E5%99%A8/</link>
-    <description>Recent content in Sidecar 容器 on SOFAStack</description>
+    <description>Recent content in Sidecar 容器 on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 24 Dec 2019 20:00:00 +0800</lastBuildDate>

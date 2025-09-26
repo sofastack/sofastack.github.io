@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kubernetes on SOFAStack</title>
+    <title>Kubernetes on 蚂蚁云原生架构SOFAStack</title>
     <link>https://sofastack.github.io/sofastack.tech/tags/kubernetes/</link>
-    <description>Recent content in Kubernetes on SOFAStack</description>
+    <description>Recent content in Kubernetes on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 19 Aug 2020 15:00:00 +0800</lastBuildDate>
