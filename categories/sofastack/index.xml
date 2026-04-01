@@ -6,10 +6,19 @@
     <description>Recent content in SOFAStack on 蚂蚁云原生架构SOFAStack</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 03 Jun 2025 15:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Apr 2026 15:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sofastack.github.io/sofastack.tech/categories/sofastack/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>🦐 不办 Meetup，开挑战赛！SOFAStack PR Challenge | SOFAStack 8 周年</title>
+      <link>https://sofastack.github.io/sofastack.tech/activities/8th-anniversary-pr-challenge/</link>
+      <pubDate>Wed, 01 Apr 2026 15:00:00 +0800</pubDate>
+      
+      <guid>https://sofastack.github.io/sofastack.tech/activities/8th-anniversary-pr-challenge/</guid>
+      <description>用 AI 搞定真实 Issue，成为 AI 时代的开源贡献者 SOFAStack 8 周年， 我们决定玩点不一样的 不办 Meetup，开挑战赛！ 🦐 养虾修代码 —— SOFAStack PR Challenge 我们相信：AI</description>
+    </item>
     
     <item>
       <title>2025 开源之夏 | 快来 Pick 你心仪的项目，开启你的开源之旅吧！</title>
