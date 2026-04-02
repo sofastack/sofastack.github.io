@@ -363,22 +363,6 @@
   </url>
   
   <url>
-    <loc>https://sofastack.github.io/sofastack.tech/en/categories/sofastack/</loc>
-    <lastmod>2026-04-01T19:15:10+08:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://sofastack.github.io/sofastack.tech/categories/sofastack/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://sofastack.github.io/sofastack.tech/en/categories/sofastack/"
-                />
-  </url>
-  
-  <url>
     <loc>https://sofastack.github.io/sofastack.tech/en/tags/sofastack/</loc>
     <lastmod>2026-04-01T19:15:10+08:00</lastmod>
     <priority>0</priority>
@@ -391,6 +375,22 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://sofastack.github.io/sofastack.tech/en/tags/sofastack/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sofastack.github.io/sofastack.tech/en/categories/sofastack/</loc>
+    <lastmod>2026-04-01T19:15:10+08:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://sofastack.github.io/sofastack.tech/categories/sofastack/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sofastack.github.io/sofastack.tech/en/categories/sofastack/"
                 />
   </url>
   
