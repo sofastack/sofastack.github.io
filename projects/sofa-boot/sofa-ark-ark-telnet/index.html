@@ -1829,7 +1829,7 @@ if (!doNotTrack) {
 		>编辑</a>
 	</div>
 	<div class="meta">
-		更新时间: 2026-07-03 
+		更新时间: 2026-07-13 
 		
 			
 		
@@ -1839,9 +1839,24 @@ if (!doNotTrack) {
 		<article class="typo">
   <p>SOFAArk 容器提供了一个简单的 telnet 服务端小工具，用于运行时查看容器状态，目前支持查看 Plugin 和 Biz 相关信息。</p>
 
+<h3 id="配置参数">配置参数</h3>
+
+<p>SOFAArk Telnet 服务端支持通过 JVM 参数（<code>-D</code>）或 <code>bootstrap.properties</code> 配置以下参数：</p>
+
+<ul>
+<li><p>sofa.ark.telnet.server.enable
+&gt; 是否启用 Telnet 服务端，默认为 <code>true</code>。生产环境若无需运行时查看，建议设为 <code>false</code> 直接关闭，避免暴露运行时入口。</p></li>
+
+<li><p>sofa.ark.telnet.port
+&gt; Telnet 监听端口，默认为 <code>1234</code>。未指定时会在以 <code>1234</code> 起始的端口范围内自动选择可用端口（最多尝试 100 个）。</p></li>
+
+<li><p>sofa.ark.telnet.security.enable
+&gt; 是否开启安全模式，默认为 <code>false</code>。开启后将进行两重限制：仅允许 <code>localhost</code> 来源的连接，并禁用 <code>biz -i</code>（install）、<code>biz -u</code>（uninstall）等写操作命令。生产环境建议开启。</p></li>
+</ul>
+
 <h3 id="使用方式">使用方式</h3>
 
-<p>使用 telnet 连接服务端，端口号为 1234， 例如：</p>
+<p>使用 telnet 连接服务端，默认端口为 1234（可通过 <code>sofa.ark.telnet.port</code> 修改），例如：</p>
 
 <blockquote>
 <p>telnet localhost 1234</p>
