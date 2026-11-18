@@ -219,8 +219,6 @@ if (!doNotTrack) {
 
 <p>SOFATracer 也是基于 <a href="https://github.com/LMAX-Exchange/disruptor">Disruptor</a> 高性能无锁循环队列来提供异步打印日志到本地磁盘能力的，SOFATracer 提供两种类似的日志打印类型即摘要日志和统计日志，摘要日志：每一次调用均会落地磁盘的日志；统计日志：每隔一定时间间隔进行统计输出的日志；无论是哪种日志的输出，对于 SOFATracer 来说都需要保证较高的性能，以降低对于业务整体流程耗时的影响。</p>
 
-<p>关于 Disruptor 的 一些原理分析可以参考：<a href="https://ifeve.com/disruptor/">Disruptor</a> 。</p>
-
 <blockquote>
 <p>A High Performance Inter-Thread Messaging Library 高性能的线程间消息传递库</p>
 </blockquote>
